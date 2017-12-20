@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Arches - Elfland Glider</title>
+    <meta name="description" content="Collect stars, and don't crash.">
+    <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+</head>
+<body>
+<a-scene>
+    <a-assets>
+        <a-asset-item id="stabbur" src="../assets/stabbur/scene.gltf"></a-asset-item>
+    </a-assets>
+
+    <a-entity environment="preset: arches;"></a-entity>
+    <a-gltf-model position="0 0 10" src="#stabbur" scale="2 2 2"></a-gltf-model>
+
+    <!-- <a-entity laser-controls="hand: right"></a-entity> -->
+    <a-entity camera look-controls wasd-controls position="-30 15 30" rotation="0 -45 0"></a-entity>
+</a-scene>
+</body>
+</html>

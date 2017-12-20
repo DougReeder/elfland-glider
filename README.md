@@ -1,43 +1,22 @@
-# A-Frame Boilerplate
+# Elfland Glider
 
-Boilerplate for creating WebVR scenes with [A-Frame](https://aframe.io).
+Using your wings, help the merry and mischievous light elves, 
+and avoid the surly and mischievous dark elves.
 
-Alternatively, check out the [A-Frame Starter on
-glitch.com](https://glitch.com/~aframe) for a more interactive way on getting
-started.
+Tilt left to turn left, tilt right to turn right. 
+Tilt up to ascend, trading speed for altitude.
+Tilt down to dive, trading altitude for speed.
 
-## Getting Started
+A web app for VR and mobile using [WebVR](https://webvr.info/) and [A-Frame](https://aframe.io).
 
-There are two easy options for obtaining this A-Frame scene. It's then up to you to make it your own!
+## Developing
+For now, there is no build step.
 
-### <sup>Option 1:</sup> Download the ZIP kit 📦
+`npm install && npm start`
 
-[<img src="http://i.imgur.com/UVPZoM0.png" width="200">](https://github.com/aframevr/aframe-boilerplate/archive/master.zip)
+`open http://localhost:3000/`
 
-After you have __[downloaded and extracted this `.zip` file](https://github.com/aframevr/aframe-boilerplate/archive/master.zip)__ containing the contents of this repo, open the resulting directory, and you'll be have your scene ready in these few steps:
-
-    npm install && npm start
-    open http://localhost:3000/
-
-<hr>
-
-### <small><sup>Option 2:</sup> Fork this Git repo 🍴🐙
-
-Alternatively, you can __[fork this repo](https://github.com/aframevr/aframe-boilerplate/fork)__ to get started, if you'd like to maintain a Git workflow.
-
-After you have __[forked this repo](https://github.com/aframevr/aframe-boilerplate/fork)__, clone a copy of your fork locally and you'll be have your scene ready in these few steps:
-
-    git clone https://github.com/aframevr/aframe-boilerplate.git
-    cd aframe-boilerplate && rm -rf .git && npm install && npm start
-    open http://localhost:3000/
-
-> :iphone: **Mobile pro tip:** Upon starting the development server, the URL will be logged to the console. Load that URL from a browser on your mobile device. (If your mobile phone and computer are not on the same LAN, consider using [ngrok](https://ngrok.com/) for local development and testing. [Browsersync](https://www.browsersync.io/) is also worth a gander.)
-
-<hr>
-
-### <small><sup>Option 3:</sup> Fork this CodePen example 🍴💾✒️
-
-Or, you can simply __[fork this CodePen example](http://codepen.io/team/mozvr/pen/BjygdO?editors=100)__ to dive right in. Enjoy!
+***
 
 
 ## Publishing your scene
