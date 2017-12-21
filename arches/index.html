@@ -1,22 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Arches - Elfland Glider</title>
     <meta name="description" content="Collect stars, and don't crash.">
     <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-state-component/dist/aframe-state-component.min.js"></script>
+    <script src="../assets/state.js"></script>
+    <script>
+        // temporary hack
+        AFRAME.registerComponent('add-star-on-click', {
+            init: function () {
+                var data = this.data;
+                var el = this.el;
+                el.addEventListener('click', function () {
+                    AFRAME.scenes[0].emit('increaseStars', {points: 3});
+                });
+            }
+        });
+    </script>
 </head>
 <body>
-<a-scene>
+<a-scene cursor="rayOrigin: mouse">
     <a-assets>
         <a-asset-item id="stabbur" src="../assets/stabbur/scene.gltf"></a-asset-item>
     </a-assets>
 
     <a-entity environment="preset: arches;"></a-entity>
-    <a-gltf-model position="0 0 10" src="#stabbur" scale="2 2 2"></a-gltf-model>
+    <a-gltf-model position="0 0 10" src="#stabbur" scale="2 2 2" add-star-on-click></a-gltf-model>
 
-    <!-- <a-entity laser-controls="hand: right"></a-entity> -->
+    <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0" link="href:../yggdrasil; title: Next Quest" bind="visible: questComplete"></a-entity>
+
+    <a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="center" value="Message" geometry="primitive:plane; width:10; height:1.4;"
+            material="color: gray" bind="text.value: stars"></a-text>
+
+    <a-entity laser-controls="hand: right"></a-entity>
     <a-entity camera look-controls wasd-controls position="-30 15 30" rotation="0 -45 0"></a-entity>
+    <!-- bind__position="enemyPosition" -->
 </a-scene>
 </body>
 </html>

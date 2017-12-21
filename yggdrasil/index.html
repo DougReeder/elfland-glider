@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Yggdrasil - Elfland Glider</title>
+    <meta name="description" content="Travel to any of the Worlds">
+    <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
+    <script src="https://unpkg.com/aframe-state-component/dist/aframe-state-component.min.js"></script>
+    <script src="../assets/state.js"></script>
+    <script src="../assets/sky.js"></script>
+</head>
+<body>
+<a-scene cursor="rayOrigin: mouse">
+    <a-assets>
+        <img id="woodTexture" src="../assets/stabbur/textures/Stabbur_diffuse.png">
+    </a-assets>
+
+    <a-entity id="sky" geometry="primitive: sphere; radius: 5000;"
+              material="shader: sky; side: back" sun-position-setter>
+        <a-entity id="orbit">
+            <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="600000"
+                         repeat="indefinite" easing="linear"></a-animation>
+        </a-entity>
+    </a-entity>
+
+    <a-cylinder id="yggdrasil" radius="10" height="5000" open-ended="true" src="#woodTexture"></a-cylinder>
+
+    <a-entity id="archesPortal" position="100 0 0" rotation="0 -90 0" scale="5 5 0" link="href:../arches; title: Arches"></a-entity>
+
+    <a-entity laser-controls="hand: right"></a-entity>
+    <a-entity camera look-controls wasd-controls position="-30 5 30" rotation="0 -45 0"></a-entity>
+    <!-- bind__position="enemyPosition" -->
+</a-scene>
+</body>
+</html>
