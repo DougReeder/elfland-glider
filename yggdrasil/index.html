@@ -23,12 +23,13 @@
         </a-entity>
     </a-entity>
 
-    <a-cylinder id="yggdrasil" radius="10" height="5000" open-ended="true" src="#woodTexture"></a-cylinder>
+    <a-torus-knot  scale="0.3 10 0.4" radius="100" p="2" q="21" radius-tubular="4" src="#woodTexture"></a-torus-knot>
+    <!--<a-cylinder id="yggdrasil" radius="10" height="5000" open-ended="true" src="#woodTexture"></a-cylinder>-->
 
     <a-entity id="archesPortal" position="100 0 0" rotation="0 -90 0" scale="5 5 0" link="href:../arches; title: Arches"></a-entity>
 
     <a-entity laser-controls="hand: right"></a-entity>
-    <a-entity camera look-controls wasd-controls position="-30 5 30" rotation="0 -45 0"></a-entity>
+    <a-entity camera look-controls wasd-controls position="-60 5 60" rotation="0 -45 0"></a-entity>
     <!-- bind__position="enemyPosition" -->
 </a-scene>
 </body>

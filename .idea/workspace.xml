@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84f7a41a-f51d-4a5b-a27e-29de66f2ce4a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/sky.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/state.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/yggdrasil/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arches/index.html" afterPath="$PROJECT_DIR$/arches/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yggdrasil/index.html" afterPath="$PROJECT_DIR$/yggdrasil/index.html" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -33,8 +29,8 @@
           <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/yggdrasil/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="17" column="61" lean-forward="false" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
+                <state relative-caret-position="285">
+                  <caret line="19" column="29" lean-forward="true" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
                   <folding />
                 </state>
               </provider>
@@ -100,8 +96,8 @@
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/assets/state.js" />
         <option value="$PROJECT_DIR$/assets/sky.js" />
-        <option value="$PROJECT_DIR$/yggdrasil/index.html" />
         <option value="$PROJECT_DIR$/arches/index.html" />
+        <option value="$PROJECT_DIR$/yggdrasil/index.html" />
       </list>
     </option>
   </component>
@@ -255,12 +251,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1513695201842</updated>
-      <workItem from="1513695203641" duration="16776000" />
+      <workItem from="1513695203641" duration="17796000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16776000" />
+    <option name="totallyTimeSpent" value="17796000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="0" />
@@ -376,8 +372,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/yggdrasil/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="61" lean-forward="false" selection-start-line="17" selection-start-column="61" selection-end-line="17" selection-end-column="61" />
+        <state relative-caret-position="285">
+          <caret line="19" column="29" lean-forward="true" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
           <folding />
         </state>
       </provider>
