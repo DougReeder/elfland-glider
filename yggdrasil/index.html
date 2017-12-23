@@ -28,9 +28,10 @@
 
     <a-entity id="archesPortal" position="100 0 0" rotation="0 -90 0" scale="5 5 0" link="href:../arches; title: Arches"></a-entity>
 
-    <a-entity laser-controls="hand: right"></a-entity>
-    <a-entity camera look-controls wasd-controls position="-60 5 60" rotation="0 -45 0"></a-entity>
-    <!-- bind__position="enemyPosition" -->
+    <a-entity id="glider" bind__position="gliderPosition" bind__rotation="gliderRotation" glider-tick-state>
+        <a-entity camera look-controls wasd-controls rotation="0 0 10"></a-entity>
+        <a-entity laser-controls="hand: right"></a-entity>
+    </a-entity>
 </a-scene>
 </body>
 </html>
