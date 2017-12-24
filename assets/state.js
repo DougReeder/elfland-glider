@@ -24,6 +24,30 @@ AFRAME.registerState({
         setGliderEl: function (state, gliderEl) {
             state.gliderEl = gliderEl;
             state.cameraEl = gliderEl.querySelector('[camera]');
+
+            // state doesn't have an init, so we'll register this here.
+            document.addEventListener('keydown', function(evt) {
+                console.log('keydown:', evt.code);
+                var cameraRotation = state.cameraEl.getAttribute('rotation');
+                switch (evt.code) {
+                    case 'KeyA':
+                    case 'ArrowLeft':
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z+1});
+                        break;
+                    case 'KeyD':
+                    case 'ArrowRight':
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z-1});
+                        break;
+                    case 'KeyW':
+                    case 'ArrowUp':
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x+1, y: cameraRotation.y, z: cameraRotation.z});
+                        break;
+                    case 'KeyS':
+                    case 'ArrowDown':
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x-1, y: cameraRotation.y, z: cameraRotation.z});
+                        break;
+                }
+            }, false);
         },
 
         iterate: function (state, action) {
