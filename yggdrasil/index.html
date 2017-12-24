@@ -29,6 +29,12 @@
     <a-entity id="archesPortal" position="100 0 0" rotation="0 -90 0" scale="5 5 0" link="href:../arches; title: Arches"></a-entity>
 
     <a-entity id="glider" bind__position="gliderPosition" bind__rotation="gliderRotation" glider-tick-state>
+        <a-entity id="headingTriangleOutline" position="0 1.47 0"
+                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                  material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>
+        <a-entity id="headingTriangle" position="0 1.5 0"
+                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                  material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
         <a-entity camera look-controls wasd-controls rotation="0 0 10"></a-entity>
         <a-entity laser-controls="hand: right"></a-entity>
     </a-entity>

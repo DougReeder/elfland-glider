@@ -35,8 +35,9 @@ AFRAME.registerState({
                 // console.log("cameraRotation.z", cameraRotation.z, deltaHeading, state.gliderRotation.y);
 
                 let distance = state.gliderSpeed * action.timeDelta / 1000;
-                state.gliderPosition.x += distance * Math.cos(state.gliderRotation.y/180*Math.PI);
-                state.gliderPosition.z -= distance * Math.sin(state.gliderRotation.y/180*Math.PI);
+                let angle = (state.gliderRotation.y + 90)/180*Math.PI;
+                state.gliderPosition.x += distance * Math.cos(angle);
+                state.gliderPosition.z -= distance * Math.sin(angle);
             //     console.log(action.timeDelta, state.gliderPosition.x, deltaX);
             }
         },
