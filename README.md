@@ -47,8 +47,13 @@ Worlds are fantastic, with geography impossible in our world - but self-consiste
 A river could flow in a closed loop.
 Islands can float in the sky.
 Trees can be miles tall.
-Houses might be too small to live in or too large to be practical.
-Days may consist of half-dozen minutes of light, followed by a minute of twilight.
+Houses might be too small to live in or absurdly large.
+Days may consist of a half-dozen minutes of light, followed by a minute of twilight.
+Ocean waves could be 100 m tall.
+Elfland Glider is *not* cutsey nor childish.
+Humor should not disrupt the flow of the game -
+you can have a light elf warn the player not to taunt the Gazebo or seek the "scarlet emerald"
+or create "Gauntlets of Ogre Intelligence" for the player to equip.
 
 Perhaps the best description of elves, light or dark, is if they came across you, treed by a bear, 
 they would weave a daisy-chain and set it around the bear's neck, so your tale wasn't tragic.

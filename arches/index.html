@@ -33,7 +33,7 @@
     <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0" link="href:../yggdrasil; title: Next Quest" bind="visible: questComplete"></a-entity>
 
     <a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="left" value="Message" geometry="primitive:plane; width:10; height:1.4;"
-            material="color: gray" bind="text.value: gliderRotation.y"></a-text>
+            material="color: gray" bind="text.value: gliderRotation.x"></a-text>
 
     <a-entity id="glider" bind__position="gliderPosition" bind__rotation="gliderRotation" glider-tick-state>
         <a-entity id="headingTriangleOutline" position="0 1.47 0"
@@ -42,7 +42,11 @@
         <a-entity id="headingTriangle" position="0 1.5 0"
                   geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
                   material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
-        <a-entity camera look-controls></a-entity>
+        <a-entity camera look-controls>
+            <a-text id="hud" position="0.2 0.4 -0.75" rotation="30 0 0" width="2" align="center" value="HUD"
+                    geometry="primitive:plane; width:0.4; height:0.1;"
+                    material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
+        </a-entity>
         <a-entity laser-controls="hand: right"></a-entity>
     </a-entity>
 </a-scene>

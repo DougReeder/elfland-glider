@@ -17,7 +17,10 @@ AFRAME.registerState({
         isFlying: true,
         gliderSpeed: 5,
         stars: 0,
-        questComplete: false
+        questComplete: false,
+        inventory: {},   // keyed by object ID
+        hudVisible: false,
+        hudText: ""
     },
 
     handlers: {
@@ -46,23 +49,44 @@ AFRAME.registerState({
                     case 'ArrowDown':
                         state.cameraEl.setAttribute('rotation', {x: cameraRotation.x-1, y: cameraRotation.y, z: cameraRotation.z});
                         break;
+                    case 'Space':
+                        state.isFlying = ! state.isFlying;
+                        break;
+                    case 'Enter':
+                        state.hudVisible = ! state.hudVisible;
+                        break;
                 }
             }, false);
         },
 
         iterate: function (state, action) {
             state.time = action.time;
-            if (state.isFlying) {
-                let cameraRotation = state.cameraEl.getAttribute('rotation');
+            let cameraRotation = state.cameraEl.getAttribute('rotation');
+            if (state.isFlying && cameraRotation) {
+                let xDiff = cameraRotation.x - state.gliderRotation.x;
+                let xChange = (xDiff + Math.sign(xDiff)*15) * (action.timeDelta / 1000);
+                if (Math.abs(xChange) > Math.abs(xDiff)) {
+                    xChange = xDiff;
+                }
+                let newXrot = state.gliderRotation.x + xChange;
+                newXrot = Math.max(newXrot, -60);
+                newXrot = Math.min(newXrot, 60);
+                state.gliderRotation.x = newXrot;
+
                 let deltaHeading = cameraRotation.z * action.timeDelta / 1000;
-                state.gliderRotation.y = (state.gliderRotation.y + deltaHeading + 360) % 360;
-                // console.log("cameraRotation.z", cameraRotation.z, deltaHeading, state.gliderRotation.y);
+                state.gliderRotation.y = (state.gliderRotation.y + deltaHeading + 180) % 360 - 180;
 
                 let distance = state.gliderSpeed * action.timeDelta / 1000;
-                let angle = (state.gliderRotation.y + 90)/180*Math.PI;
-                state.gliderPosition.x += distance * Math.cos(angle);
-                state.gliderPosition.z -= distance * Math.sin(angle);
-            //     console.log(action.timeDelta, state.gliderPosition.x, deltaX);
+
+                let verticalAngleRad = state.gliderRotation.x/180*Math.PI;
+                state.gliderPosition.y += distance * Math.sin(verticalAngleRad);
+
+                let horizontalDistance = distance * Math.cos(verticalAngleRad);
+                let horizontalAngleRad = (state.gliderRotation.y + 90)/180*Math.PI;
+                state.gliderPosition.x += horizontalDistance * Math.cos(horizontalAngleRad);
+                state.gliderPosition.z -= horizontalDistance * Math.sin(horizontalAngleRad);
+
+                state.hudText = (distance * Math.sin(verticalAngleRad)).toFixed(2) + "   " + horizontalDistance.toFixed(2);
             }
         },
 
