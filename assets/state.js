@@ -6,6 +6,7 @@
 //     <a-entity laser-controls="hand: right"></a-entity>
 // </a-entity>
 
+const GRAVITY = 9.807;   // m/s^2
 
 AFRAME.registerState({
     initialState: {
@@ -19,7 +20,7 @@ AFRAME.registerState({
         stars: 0,
         questComplete: false,
         inventory: {},   // keyed by object ID
-        hudVisible: false,
+        hudVisible: true,
         hudText: ""
     },
 
@@ -79,14 +80,19 @@ AFRAME.registerState({
                 let distance = state.gliderSpeed * action.timeDelta / 1000;
 
                 let verticalAngleRad = state.gliderRotation.x/180*Math.PI;
-                state.gliderPosition.y += distance * Math.sin(verticalAngleRad);
+                let altitudeChange = distance * Math.sin(verticalAngleRad);
+                state.gliderPosition.y += altitudeChange;
 
                 let horizontalDistance = distance * Math.cos(verticalAngleRad);
                 let horizontalAngleRad = (state.gliderRotation.y + 90)/180*Math.PI;
                 state.gliderPosition.x += horizontalDistance * Math.cos(horizontalAngleRad);
                 state.gliderPosition.z -= horizontalDistance * Math.sin(horizontalAngleRad);
 
-                state.hudText = (distance * Math.sin(verticalAngleRad)).toFixed(2) + "   " + horizontalDistance.toFixed(2);
+                let speedChange = -Math.sign(altitudeChange) * Math.sqrt(2 * GRAVITY * Math.abs(altitudeChange)) * action.timeDelta / 1000;
+                state.gliderSpeed = Math.max(state.gliderSpeed + speedChange, 0.1);
+                state.gliderSpeed = Math.min(state.gliderSpeed, 100);
+
+                state.hudText = (state.gliderSpeed).toFixed(1);
             }
         },
 
