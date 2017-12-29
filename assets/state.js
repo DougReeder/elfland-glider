@@ -1,10 +1,6 @@
 // state.js - state model for Elfland Glider
 // Copyright © 2017 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
-// <a-entity id="glider" bind__position="gliderPosition" bind__rotation="gliderRotation" glider-tick-state>
-//     <a-entity camera look-controls wasd-controls></a-entity>
-//     <a-entity laser-controls="hand: right"></a-entity>
-// </a-entity>
 
 const GRAVITY = 9.807;   // m/s^2
 

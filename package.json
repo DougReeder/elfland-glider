@@ -1,10 +1,11 @@
 {
-  "name": "aframe-hello-world-boilerplate",
-  "description": "Boilerplate with A-Frame's 'Hello, World!' of WebVR.",
-  "version": "0.3.0",
+  "name": "elfland-glider",
+  "description": "Fly through fantastic worlds, help the merry and mischievous light elves, and avoid the surly and mischievous dark elves.  A tranquil action puzzle game for VR and mobile",
+  "version": "0.3.1",
   "license": "GPL-3.0",
   "scripts": {
     "start": "budo --live --verbose --port 3000 --open",
+    "test": "open jasmine/SpecRunner.html   # on OSes other than OS X, load SpecRunner.html in a browser",
     "deploy": "ghpages",
     "ghpages": "ghpages"
   },
