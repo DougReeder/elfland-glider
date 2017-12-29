@@ -11,7 +11,9 @@ Tilt left to turn left, tilt right to turn right.
 Tilt up to ascend, trading speed for altitude.
 Tilt down to dive, trading altitude for speed.
 Ride a thermal to gain altitude.
-Press any controller button to take a context-specific action.
+Press any controller button to take a (context-specific) action.
+
+[Play on-line](https://dougreeder.github.io/elfland-glider/arches/index.html)
 
 ## Gameplay
 Gliding is controlled by headset tilt. 
