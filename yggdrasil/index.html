@@ -30,11 +30,11 @@
 
     <a-entity id="argonPortal" position="0 0 100" rotation="0 -180 0" scale="5 5 0" link="href:http://ansible.uk/misc/eyeargon.html; title: Eye of Argon"></a-entity>
 
-    <a-entity id="glider" bind__position="gliderPosition" bind__rotation="gliderRotation" glider-tick-state>
-        <a-entity id="headingTriangleOutline" position="0 1.47 0"
+    <a-entity id="armature" bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state>
+        <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
                   geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
                   material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>
-        <a-entity id="headingTriangle" position="0 1.5 0"
+        <a-entity id="headingTriangle" position="0 1.5 0" bind__rotation.x="gliderRotationX"
                   geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
                   material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
         <a-entity camera="userHeight: 0" look-controls>

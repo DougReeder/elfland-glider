@@ -33,13 +33,13 @@
     <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0" link="href:../yggdrasil; title: Next Quest" bind="visible: questComplete"></a-entity>
 
     <a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="left" value="Message" geometry="primitive:plane; width:10; height:1.4;"
-            material="color: gray" bind="text.value: gliderRotation.x"></a-text>
+            material="color: gray" bind="text.value: gliderRotationX"></a-text>
 
-    <a-entity id="glider" bind__position="gliderPosition" bind__rotation="gliderRotation" glider-tick-state>
-        <a-entity id="headingTriangleOutline" position="0 1.47 0"
+    <a-entity id="armature" bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state>
+        <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
                   geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
                   material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>
-        <a-entity id="headingTriangle" position="0 1.5 0"
+        <a-entity id="headingTriangle" position="0 1.5 0" bind__rotation.x="gliderRotationX"
                   geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
                   material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
         <a-entity camera="userHeight: 0" look-controls>

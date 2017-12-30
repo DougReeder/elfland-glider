@@ -9,7 +9,8 @@ describe("state", function () {
         state = {
             cameraEl: new MockElement({rotation: {x: 0, y: 0, z: 0}}),
             gliderPosition: {x: 0, y: 10, z: 10},
-            gliderRotation: {x: 0, y: 0, z: 0},
+            gliderRotationX: 0,
+            gliderRotationY: 0,
             isFlying: true,
             gliderSpeed: 1
         };
@@ -18,9 +19,8 @@ describe("state", function () {
     it("should fly a straight & level course along the z-axis", function () {
         stateParam.handlers.iterate(state, action);
 
-        expect(state.gliderRotation.x).toBeCloseTo(0, 3);
-        expect(state.gliderRotation.y).toBeCloseTo(0, 3);
-        expect(state.gliderRotation.z).toBeCloseTo(0, 3);
+        expect(state.gliderRotationX).toBeCloseTo(0, 3);
+        expect(state.gliderRotationY).toBeCloseTo(0, 3);
 
         expect(state.gliderPosition.x).toBeCloseTo(0, 5);
         expect(state.gliderPosition.y).toBeCloseTo(10, 5);
@@ -30,11 +30,12 @@ describe("state", function () {
     });
 
     it("should fly a straight & level course diagonally", function () {
-        state.gliderRotation.y = -45;
+        state.gliderRotationY = -45;
 
         stateParam.handlers.iterate(state, action);
 
-        expect(state.gliderRotation).toEqual({x: 0, y: -45, z: 0});
+        expect(state.gliderRotationX).toBeCloseTo(0, 3);
+        expect(state.gliderRotationY).toBeCloseTo(-45, 3);
 
         expect(state.gliderPosition.x).toBeCloseTo(0.00707106781186548, 5);
         expect(state.gliderPosition.y).toBeCloseTo(10, 5);
@@ -44,12 +45,13 @@ describe("state", function () {
     });
 
     it("should climb in a straight line and decelerate", function () {
-        state.gliderRotation.x = 30;
+        state.gliderRotationX = 30;
         state.cameraEl.setAttribute('rotation', {x: 30, y: 0, z: 0});
 
         stateParam.handlers.iterate(state, action);
 
-        expect(state.gliderRotation).toEqual({x: 30, y: 0, z: 0});
+        expect(state.gliderRotationX).toBeCloseTo(30, 3);
+        expect(state.gliderRotationY).toBeCloseTo(0, 3);
 
         expect(state.gliderPosition.x).toBeCloseTo(0, 5);
         expect(state.gliderPosition.y).toBeCloseTo(10.005, 5);
@@ -59,14 +61,12 @@ describe("state", function () {
     });
 
     it("should turn according to head tilt", function () {
-        state.gliderRotation.z = 0;
         state.cameraEl.setAttribute('rotation', {x: 0, y: 0, z: 30});
 
         stateParam.handlers.iterate(state, action);
 
-        expect(state.gliderRotation.x).toBeCloseTo(0, 3);
-        expect(state.gliderRotation.y).toBeCloseTo(0.3, 3);
-        expect(state.gliderRotation.z).toBeCloseTo(0, 3);
+        expect(state.gliderRotationX).toBeCloseTo(0, 3);
+        expect(state.gliderRotationY).toBeCloseTo(0.3, 3);
 
         expect(state.gliderPosition.x).toBeCloseTo(0, 3);
         expect(state.gliderPosition.y).toBeCloseTo(10, 5);
@@ -76,14 +76,13 @@ describe("state", function () {
     });
 
     it("should adjust glider pitch according to head pitch", function () {
-        state.gliderRotation.x = 0;
+        state.gliderRotationX = 0;
         state.cameraEl.setAttribute('rotation', {x: 30, y: 0, z: 0});
 
         stateParam.handlers.iterate(state, action);
 
-        expect(state.gliderRotation.x).toBeCloseTo(0.45, 3);   // 30+15 degrees * 0.01
-        expect(state.gliderRotation.y).toBeCloseTo(0, 3);
-        expect(state.gliderRotation.z).toBeCloseTo(0, 3);
+        expect(state.gliderRotationX).toBeCloseTo(0.45, 3);   // 30+15 degrees * 0.01
+        expect(state.gliderRotationY).toBeCloseTo(0, 3);
 
         expect(state.gliderPosition.x).toBeCloseTo(0, 3);
         expect(state.gliderPosition.y).toBeCloseTo(10, 3);   // will be slightly higher
@@ -93,22 +92,21 @@ describe("state", function () {
     });
 
     it("should adjust glider pitch to match head pitch in about a second", function () {
-        state.gliderRotation.x = 0;
+        state.gliderRotationX = 0;
         state.cameraEl.setAttribute('rotation', {x: 30, y: 0, z: 0});
 
         for (i=0; i<90; ++i) {
             stateParam.handlers.iterate(state, action);
         }
 
-        expect(state.gliderRotation.x).toBeLessThan(29);
+        expect(state.gliderRotationX).toBeLessThan(29);
 
         for (i=0; i<20; ++i) {
             stateParam.handlers.iterate(state, action);
         }
 
-        expect(state.gliderRotation.x).toBeCloseTo(30, 3);
-        expect(state.gliderRotation.y).toBeCloseTo(0, 3);
-        expect(state.gliderRotation.z).toBeCloseTo(0, 3);
+        expect(state.gliderRotationX).toBeCloseTo(30, 3);
+        expect(state.gliderRotationY).toBeCloseTo(0, 3);
 
         expect(state.gliderPosition.x).toBeCloseTo(0, 3);
         expect(state.gliderPosition.y).toBeGreaterThan(10);
