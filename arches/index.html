@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>Arches - Elfland Glider</title>
     <meta name="description" content="Collect stars, and don't crash.">
+    <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-01-24" content="AovVA07QFSW+Uv9P21bHlGcmAB8KgyIHPZYYk/blRsflwksY2naSIAGoq3ufrERLN+t81hjV4YaxxxAqeZiLkQMAAABZeyJvcmlnaW4iOiJodHRwczovL2RvdWdyZWVkZXIuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUxNjgwMTQyNH0=">
     <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-state-component/dist/aframe-state-component.min.js"></script>
     <script src="../assets/state.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component/dist/aframe-aabb-collider-component.min.js"></script>
     <script>
         // temporary hack
         AFRAME.registerComponent('add-star-on-click', {
@@ -30,12 +32,28 @@
     <a-entity environment="preset: arches;"></a-entity>
     <a-gltf-model position="0 0 10" src="#stabbur" scale="2 2 2" add-star-on-click></a-gltf-model>
 
-    <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0" link="href:../yggdrasil; title: Next Quest" bind="visible: questComplete"></a-entity>
+    <a-icosahedron class="star" position="0 15 0" radius="1" color="#f2cf00" metalness="0.333333"
+                   sound="src: url(../assets/393633__daronoxus__ding.mp3); on: hitstart"></a-icosahedron>
+    <a-icosahedron class="star" position="-30 5 30" radius="1" color="#f2cf00" metalness="0.333333"
+                   sound="src: url(../assets/393633__daronoxus__ding.mp3); on: hitstart"></a-icosahedron>
+    <a-icosahedron class="star" position="-87.3 7 78" radius="1" color="#f2cf00" metalness="0.333333"
+                   sound="src: url(../assets/393633__daronoxus__ding.mp3); on: hitstart"></a-icosahedron>
+    <a-icosahedron class="star" position="41 5 -41" radius="1" color="#f2cf00" metalness="0.333333"
+                   sound="src: url(../assets/393633__daronoxus__ding.mp3); on: hitstart"></a-icosahedron>
+    <a-icosahedron class="star" position="22 10 28" radius="1" color="#f2cf00" metalness="0.333333"
+                   sound="src: url(../assets/393633__daronoxus__ding.mp3); on: hitstart"></a-icosahedron>
+    <a-icosahedron class="star" position="-40 4 -40" radius="1" color="#f2cf00" metalness="0.333333"
+                   sound="src: url(../assets/393633__daronoxus__ding.mp3); on: hitstart"></a-icosahedron>
+
+    <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0"
+              link="href:../yggdrasil; title: Next Quest; on:hitstart" bind="visible: questComplete"></a-entity>
 
     <a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="left" value="Message" geometry="primitive:plane; width:10; height:1.4;"
-            material="color: gray" bind="text.value: gliderRotationX"></a-text>
+            material="color: gray" bind="text.value: stars"></a-text>
 
-    <a-entity id="armature" bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state>
+    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
+              bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
+              aabb-collider="objects:.star,[link]" >
         <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
                   geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
                   material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>

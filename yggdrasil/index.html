@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>Yggdrasil - Elfland Glider</title>
     <meta name="description" content="Travel to any of the Worlds">
+    <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-01-24" content="AovVA07QFSW+Uv9P21bHlGcmAB8KgyIHPZYYk/blRsflwksY2naSIAGoq3ufrERLN+t81hjV4YaxxxAqeZiLkQMAAABZeyJvcmlnaW4iOiJodHRwczovL2RvdWdyZWVkZXIuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUxNjgwMTQyNH0=">
     <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
     <script src="https://unpkg.com/aframe-state-component/dist/aframe-state-component.min.js"></script>
     <script src="../assets/state.js"></script>
     <script src="../assets/sky.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component/dist/aframe-aabb-collider-component.min.js"></script>
 </head>
 <body>
 <a-scene cursor="rayOrigin: mouse">
@@ -26,11 +28,15 @@
     <a-torus-knot  scale="0.3 10 0.4" radius="100" p="2" q="21" radius-tubular="4" src="#woodTexture"></a-torus-knot>
     <!--<a-cylinder id="yggdrasil" radius="10" height="5000" open-ended="true" src="#woodTexture"></a-cylinder>-->
 
-    <a-entity id="archesPortal" position="100 0 0" rotation="0 -90 0" scale="5 5 0" link="href:../arches; title: Arches"></a-entity>
+    <a-entity id="archesPortal" position="100 0 0" rotation="0 -90 0" scale="5 5 0"
+              link="href:../arches; title: Arches; on:hitstart"></a-entity>
 
-    <a-entity id="argonPortal" position="0 0 100" rotation="0 -180 0" scale="5 5 0" link="href:http://ansible.uk/misc/eyeargon.html; title: Eye of Argon"></a-entity>
+    <a-entity id="argonPortal" position="0 0 100" rotation="0 -180 0" scale="5 5 0"
+              link="href:http://ansible.uk/misc/eyeargon.html; title: Eye of Argon; on:hitstart"></a-entity>
 
-    <a-entity id="armature" bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state>
+    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
+              bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
+              aabb-collider="objects:[link]" >
         <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
                   geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
                   material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>

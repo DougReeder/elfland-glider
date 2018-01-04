@@ -23,8 +23,22 @@ AFRAME.registerState({
 
     handlers: {
         setArmatureEl: function (state, armatureEl) {
+            console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
+
             state.armatureEl = armatureEl;
             state.cameraEl = armatureEl.querySelector('[camera]');
+
+            armatureEl.addEventListener('hitstart', function (evt) {
+                // console.log('hitstart armature:', evt.detail.intersectedEls);
+                evt.detail.intersectedEls.forEach(function (el) {
+                   if (el.classList.contains('star')) {
+                       console.log("collected star");
+                       ++state.stars;
+                   } else if (el.components.link) {
+                       console.log("hit link");
+                   }
+                });
+            });
 
             // state doesn't have an init, so we'll register this here.
             document.addEventListener('keydown', function(evt) {
@@ -33,11 +47,11 @@ AFRAME.registerState({
                 switch (evt.code) {
                     case 'KeyA':
                     case 'ArrowLeft':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z+1});
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z+2});
                         break;
                     case 'KeyD':
                     case 'ArrowRight':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z-1});
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z-2});
                         break;
                     case 'KeyW':
                     case 'ArrowUp':
