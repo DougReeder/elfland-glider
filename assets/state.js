@@ -14,6 +14,7 @@ AFRAME.registerState({
         gliderRotationY: -45,
         isFlying: true,
         gliderSpeed: 5,
+        numYellowStars: Math.POSITIVE_INFINITY,
         stars: 0,
         questComplete: false,
         inventory: {},   // keyed by object ID
@@ -28,12 +29,16 @@ AFRAME.registerState({
             state.armatureEl = armatureEl;
             state.cameraEl = armatureEl.querySelector('[camera]');
 
+            state.numYellowStars = AFRAME.scenes[0].querySelectorAll('.star').length;
+
             armatureEl.addEventListener('hitstart', function (evt) {
                 // console.log('hitstart armature:', evt.detail.intersectedEls);
                 evt.detail.intersectedEls.forEach(function (el) {
                    if (el.classList.contains('star')) {
                        console.log("collected star");
                        ++state.stars;
+                       el.setAttribute('visible', 'false');
+                       setTimeout(() => el.parentNode.removeChild(el), 2000);   // allow sound to finish
                    } else if (el.components.link) {
                        console.log("hit link");
                    }
@@ -107,16 +112,10 @@ AFRAME.registerState({
             }
         },
 
-        decreaseStars: function (state, action) {
-            state.stars -= action.points;
-        },
-        increaseStars: function (state, action) {
-            state.stars += action.points;
-        }
     },
 
     computeState: function (newState, payload) {
-        newState.questComplete = newState.stars >= 6;
+        newState.questComplete = newState.stars >= newState.numYellowStars;
     }
 });
 
