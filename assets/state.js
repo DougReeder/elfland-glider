@@ -116,7 +116,7 @@ AFRAME.registerState({
     },
 
     computeState: function (newState, payload) {
-        newState.questComplete = newState.stars >= 10;
+        newState.questComplete = newState.stars >= 6;
     }
 });
 
