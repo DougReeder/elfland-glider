@@ -30,6 +30,10 @@ AFRAME.registerState({
             state.cameraEl = armatureEl.querySelector('[camera]');
 
             state.numYellowStars = AFRAME.scenes[0].querySelectorAll('.star').length;
+            AFRAME.scenes[0].querySelectorAll('.star').forEach(star => {
+                // outer entity is just to size collision box
+                star.getObject3D('mesh').visible = false;
+            });
 
             armatureEl.addEventListener('hitstart', function (evt) {
                 // console.log('hitstart armature:', evt.detail.intersectedEls);
