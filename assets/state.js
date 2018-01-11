@@ -12,7 +12,7 @@ AFRAME.registerState({
         gliderPosition: {x:-30, y:15, z:30},
         gliderRotationX: 0,
         gliderRotationY: -45,
-        isFlying: true,
+        isFlying: false,
         gliderSpeed: 5,
         numYellowStars: Math.POSITIVE_INFINITY,
         stars: 0,
@@ -50,8 +50,9 @@ AFRAME.registerState({
             });
 
             // state doesn't have an init, so we'll register this here.
+            // desktop controls
             document.addEventListener('keydown', function(evt) {
-                console.log('keydown:', evt.code);
+                // console.log('keydown:', evt.code);
                 var cameraRotation = state.cameraEl.getAttribute('rotation');
                 switch (evt.code) {
                     case 'KeyA':
@@ -71,13 +72,53 @@ AFRAME.registerState({
                         state.cameraEl.setAttribute('rotation', {x: cameraRotation.x-1, y: cameraRotation.y, z: cameraRotation.z});
                         break;
                     case 'Space':
-                        state.isFlying = ! state.isFlying;
+                        if (!state.isFlying) {
+                            AFRAME.scenes[0].emit('launch', evt);
+                        } else {
+                            AFRAME.scenes[0].emit('hover', evt);
+                        }
                         break;
                     case 'Enter':
                         state.hudVisible = ! state.hudVisible;
                         break;
                 }
             }, false);
+
+            // mobile and Cardboard controls
+            AFRAME.scenes[0].addEventListener('touchstart', function(evt) {
+                // console.log('scene touchstart:', evt);
+                if (evt.target.classList.contains('a-enter-vr-button')) {
+                    return;
+                }
+
+                if (!state.isFlying) {
+                    AFRAME.scenes[0].emit('launch', evt);
+                } else {
+                    AFRAME.scenes[0].emit('hover', evt);
+                }
+            });
+        },
+
+        // all VR controllers
+        buttonchanged: function (state, action) {
+            // console.log("buttonchanged:", action);
+
+            if (!state.isFlying) {
+                AFRAME.scenes[0].emit('launch', action);
+            } else {
+                AFRAME.scenes[0].emit('hover', action);
+            }
+        },
+
+        launch: function (state, action) {
+            console.log("launch", action);
+
+            state.isFlying = true;
+        },
+        hover: function (state, action) {
+            console.log("hover", action);
+
+            state.isFlying = false;
         },
 
         iterate: function (state, action) {
@@ -115,7 +156,6 @@ AFRAME.registerState({
                 state.hudText = (state.gliderSpeed).toFixed(1);
             }
         },
-
     },
 
     computeState: function (newState, payload) {
