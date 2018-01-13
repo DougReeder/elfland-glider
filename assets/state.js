@@ -124,20 +124,24 @@ AFRAME.registerState({
         iterate: function (state, action) {
             state.time = action.time;
             let cameraRotation = state.cameraEl.getAttribute('rotation');
-            if (state.isFlying && cameraRotation) {
-                let xDiff = cameraRotation.x - state.gliderRotationX;
-                let xChange = (xDiff + Math.sign(xDiff)*15) * (action.timeDelta / 1000);
-                if (Math.abs(xChange) > Math.abs(xDiff)) {
-                    xChange = xDiff;
-                }
-                let newXrot = state.gliderRotationX + xChange;
-                newXrot = Math.max(newXrot, -89);
-                newXrot = Math.min(newXrot, 89);
-                state.gliderRotationX = newXrot;
+            if (!cameraRotation) {
+                console.warn("camera rotation not available");
+                return;
+            }
+            let xDiff = cameraRotation.x - state.gliderRotationX;
+            let xChange = (xDiff + Math.sign(xDiff)*15) * (action.timeDelta / 1000);
+            if (Math.abs(xChange) > Math.abs(xDiff)) {
+                xChange = xDiff;
+            }
+            let newXrot = state.gliderRotationX + xChange;
+            newXrot = Math.max(newXrot, -89);
+            newXrot = Math.min(newXrot, 89);
+            state.gliderRotationX = newXrot;
 
-                let deltaHeading = cameraRotation.z * action.timeDelta / 1000;
-                state.gliderRotationY = (state.gliderRotationY + deltaHeading + 180) % 360 - 180;
+            let deltaHeading = cameraRotation.z * action.timeDelta / 1000;
+            state.gliderRotationY = (state.gliderRotationY + deltaHeading + 180) % 360 - 180;
 
+            if (state.isFlying) {
                 let distance = state.gliderSpeed * action.timeDelta / 1000;
 
                 let verticalAngleRad = state.gliderRotationX/180*Math.PI;
