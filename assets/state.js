@@ -114,6 +114,11 @@ AFRAME.registerState({
             console.log("launch", action);
 
             state.isFlying = true;
+
+            let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
+            if (prelaunchHelp) {
+                prelaunchHelp.parentNode.removeChild(prelaunchHelp);
+            }
         },
         hover: function (state, action) {
             console.log("hover", action);
