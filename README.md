@@ -29,7 +29,7 @@ Then a portal to the next quest (or set of quests) opens.
 
 There is no health nor lives, and no leveling up. 
 A normal landing or crash should just move the player back to a launch point, as if he/she had walked and/or swum there.
-A high-velocity crash or landing on lava could send the player to a dreary world, 
+A high-velocity crash or landing on lava could send the player to dreary Ginnungagap, 
 to fly through mists for a minute or two, before a portal appears to take him/her back.
 
 Tools are usually not retained for future quests, and may or may not be useful (or required) later.
@@ -38,6 +38,7 @@ Constraints and difficulties are almost entirely integrated into the worlds, not
 The landscape forms an obstacle course for the player to slalom through.
 Time constraints can come from a gate that opens and closes on a schedule,
 or from a course than can only be navigated during daylight, and daylight only lasting a few minutes.
+Rain and fog can obscure passages or tools.
 A few clues should only be visible when the player looks to the side.
 
 Quests may be implicit in the arrangement of objects, 
@@ -54,7 +55,8 @@ Trees can be miles tall.
 Houses might be too small to live in or absurdly large.
 Days may consist of a half-dozen minutes of light, followed by a minute of twilight.
 Ocean waves could be 100 m tall.
-Elfland Glider is *not* cutsey nor childish.
+Elfland Glider is *not* cutsey nor childish,
+but omit anything inappropriate for children.
 Humor should not disrupt the flow of the game -
 you can have a light elf warn the player not to taunt the Gazebo or seek the "scarlet emerald".
 The player might find the tool "Gauntlets of Ogre Intelligence".

@@ -115,4 +115,26 @@ describe("state", function () {
         expect(state.gliderSpeed).toBeCloseTo(1, 0);
     });
 
+    it("should place elements direcly in the path of the glider", function () {
+        let thingEl = new MockElement({position: {x: Infinity, y: Infinity, z: Infinity}});
+
+        stateParam.handlers.placeInGliderPath(state, {el: thingEl, distance: 99, variation: 0});
+
+        let position = thingEl.getAttribute('position');
+        expect(position.x).toBeCloseTo(0);
+        expect(position.y).toBeCloseTo(10);
+        expect(position.z).toBeCloseTo(-89);
+    });
+
+    it("should place elements near the path of the glider", function () {
+        let thingEl = new MockElement({position: {x: Infinity, y: Infinity, z: Infinity}});
+
+        stateParam.handlers.placeInGliderPath(state, {el: thingEl, distance: 99, variation: 80});
+
+        let position = thingEl.getAttribute('position');
+        expect(Math.abs(position.x - 0)).toBeLessThan(80);
+        expect(Math.abs(position.y - 10)).toBeLessThan(80);
+        expect(Math.abs(position.z + 89)).toBeGreaterThan(-35);
+        expect(Math.abs(position.z + 89)).toBeLessThan(35);
+    });
 });

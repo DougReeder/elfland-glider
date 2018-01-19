@@ -1,7 +1,11 @@
+assets/aframe-master*
+
+
 # IDEs
 .idea/workspace.xml
 
 
+.gitignore~
 .DS_Store
 *.sw[mnop]
 

@@ -25,6 +25,7 @@ AFRAME.registerState({
     handlers: {
         setArmatureEl: function (state, armatureEl) {
             console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
+            console.log("isMobile:", AFRAME.utils.device.isMobile());
 
             state.armatureEl = armatureEl;
             state.cameraEl = armatureEl.querySelector('[camera]');
@@ -149,14 +150,11 @@ AFRAME.registerState({
             if (state.isFlying) {
                 let distance = state.gliderSpeed * action.timeDelta / 1000;
 
-                let verticalAngleRad = state.gliderRotationX/180*Math.PI;
-                let altitudeChange = distance * Math.sin(verticalAngleRad);
+                let posChange = this.calcPosChange(state, distance);
+                let altitudeChange = posChange.y;
+                state.gliderPosition.x += posChange.x;
                 state.gliderPosition.y += altitudeChange;
-
-                let horizontalDistance = distance * Math.cos(verticalAngleRad);
-                let horizontalAngleRad = (state.gliderRotationY + 90)/180*Math.PI;
-                state.gliderPosition.x += horizontalDistance * Math.cos(horizontalAngleRad);
-                state.gliderPosition.z -= horizontalDistance * Math.sin(horizontalAngleRad);
+                state.gliderPosition.z += posChange.z;
 
                 let speedChange = -Math.sign(altitudeChange) * Math.sqrt(2 * GRAVITY * Math.abs(altitudeChange)) * action.timeDelta / 1000;
                 state.gliderSpeed = Math.max(state.gliderSpeed + speedChange, 0.1);
@@ -164,6 +162,27 @@ AFRAME.registerState({
 
                 state.hudText = (state.gliderSpeed).toFixed(1);
             }
+        },
+
+        placeInGliderPath: function (state, action) {
+            // console.log("placeInGliderPath:", action);
+            let posChange = this.calcPosChange(state, action.distance, action.variation);
+            let newPos = {x: state.gliderPosition.x + posChange.x,
+                y: state.gliderPosition.y + posChange.y,
+                z: state.gliderPosition.z + posChange.z};
+            action.el.setAttribute('position', newPos);
+            action.el.setAttribute('rotation', 'y', state.gliderRotationY);
+        },
+
+        calcPosChange: function (state, distance, variation=0) {
+            let verticalAngleRad = (state.gliderRotationX + (Math.random()-0.5) * variation)/180*Math.PI;
+            let altitudeChange = distance * Math.sin(verticalAngleRad);
+
+            let horizontalDistance = distance * Math.cos(verticalAngleRad);
+            let horizontalAngleRad = (state.gliderRotationY + 90 + (Math.random()-0.5) * variation)/180*Math.PI;
+            return {x: horizontalDistance * Math.cos(horizontalAngleRad),
+                y: altitudeChange,
+                z: -horizontalDistance * Math.sin(horizontalAngleRad)};
         },
     },
 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ginnungagap - Elfland Glider</title>
+    <meta name="description" content="Reflect on the choices that led you here">
+    <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-03-01" content="Ag5RrvKc1rmx277ducbsCE7rpZKVSaQK5Cvg2LkMntEfEngAAaJ66+khUOlma3PkZEtTHgCenOPd0ib5mO2aogcAAABZeyJvcmlnaW4iOiJodHRwczovL2RvdWdyZWVkZXIuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUxOTkxOTAwMX0=">
+    <!--<script src="../assets/aframe-master.min.js"></script>-->
+    <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
+    <script src="https://unpkg.com/aframe-state-component/dist/aframe-state-component.min.js"></script>
+    <script src="../assets/state.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component/dist/aframe-aabb-collider-component.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.primitives.min.js"></script>
+    <script>
+        AFRAME.registerComponent('ginnungagap', {
+            init: function () {
+                let sceneEl = this.el;
+
+                // rain is too resource-intensive for mobile
+                if (! AFRAME.utils.device.isMobile()) {
+                    let rain = document.createElement('a-entity');
+                    rain.setAttribute('particle-system', {preset: 'rain', particleCount: 500});
+                    rain.setAttribute('bind__position', 'gliderPosition');
+                    sceneEl.appendChild(rain);
+                }
+
+                let clouds = [];
+                setTimeout(() => {
+                    for (let i=0; i<1; ++i) {
+                        placeCloud(i*100+75);
+                    }
+                }, 4);
+                setInterval(placeCloud, 10000);
+                function placeCloud(distance=200) {
+                    if (clouds.length >= 10) {
+                        sceneEl.components.pool__clouds.returnEntity(clouds.shift());
+                    }
+
+                    let cloudEl = sceneEl.components.pool__clouds.requestEntity(true);
+                    let opacity=0;
+                    cloudEl.setAttribute('material', 'opacity', opacity);
+                    let intervalID = setInterval( () => {
+                        opacity += 0.5 / 120;
+                        cloudEl.setAttribute('material', 'opacity', opacity);
+                        if (opacity >= 0.5) {
+                            clearInterval(intervalID);
+                        }
+                    }, 16);
+                    AFRAME.scenes[0].emit('placeInGliderPath', {el: cloudEl, distance: distance, variation:80});
+                    clouds.push(cloudEl);
+                }
+
+                setInterval( () => {
+                    let returnPortalEl = document.getElementById('returnPortal');
+                    returnPortalEl.setAttribute('visible', 'true');
+                    AFRAME.scenes[0].emit('placeInGliderPath', {el: returnPortalEl, distance: 100, variation:45});
+                }, 60000);
+            }
+        });
+    </script>
+</head>
+<body>
+<a-scene cursor="rayOrigin: mouse" ginnungagap pool__clouds="mixin:cloud; size:10; dynamic:true">
+    <a-assets>
+        <img id="cloudImg" crossorigin="anonymous"
+             src="https://cdn.rawgit.com/IdeaSpaceVR/aframe-particle-system-component/master/dist/images/cloud.png">
+        <a-mixin id="cloud" rotation="0 -45 0" geometry="primitive:plane; height:20; width:20"
+                 material="side: double; shader:flat; transparent:true; alphaTest:0.0001; src:#cloudImg" scale="10 10 1"></a-mixin>
+    </a-assets>
+
+    <a-sky color="#616279"></a-sky>
+
+    <a-entity id="returnPortal" position="0 15 -80" scale="5 5 0"
+              link="href:../yggdrasil; on:hitstart; title:return;" visible="false"></a-entity>
+
+    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
+              bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
+              aabb-collider="objects:[link]" >
+        <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
+                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                  material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>
+        <a-entity id="headingTriangle" position="0 1.5 0" bind__rotation.x="gliderRotationX"
+                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                  material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
+        <a-entity camera="userHeight: 0" look-controls>
+            <a-text id="hud" position="0.2 0.4 -0.75" rotation="30 0 0" width="2" align="center" value="HUD"
+                    geometry="primitive:plane; width:0.4; height:0.1;"
+                    material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
+        </a-entity>
+        <a-entity laser-controls="hand: right"></a-entity>
+    </a-entity>
+</a-scene>
+<!-- Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
+</body>
+</html>
