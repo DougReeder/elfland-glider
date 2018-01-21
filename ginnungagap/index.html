@@ -57,6 +57,10 @@
                     returnPortalEl.setAttribute('visible', 'true');
                     AFRAME.scenes[0].emit('placeInGliderPath', {el: returnPortalEl, distance: 100, variation:45});
                 }, 60000);
+            },
+
+            play: function () {
+                this.el.emit('launch', "ginnungagap play");
             }
         });
     </script>
