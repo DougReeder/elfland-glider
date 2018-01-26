@@ -120,11 +120,21 @@ AFRAME.registerState({
             if (prelaunchHelp) {
                 prelaunchHelp.parentNode.removeChild(prelaunchHelp);
             }
+
+            let environmentalSound = AFRAME.scenes[0].querySelector('#environmentalSound');
+            if (environmentalSound) {
+                environmentalSound.components.sound.playSound();
+            }
         },
         hover: function (state, action) {
             console.log("hover", action);
 
             state.isFlying = false;
+
+            let environmentalSound = AFRAME.scenes[0].querySelector('#environmentalSound');
+            if (environmentalSound) {
+                environmentalSound.components.sound.pauseSound();
+            }
         },
 
         iterate: function (state, action) {
