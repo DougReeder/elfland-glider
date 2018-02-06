@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Canyon - Elfland Glider</title>
+    <meta name="description" content="Maneuver in cramped spaces">
+    <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-03-01" content="Ag5RrvKc1rmx277ducbsCE7rpZKVSaQK5Cvg2LkMntEfEngAAaJ66+khUOlma3PkZEtTHgCenOPd0ib5mO2aogcAAABZeyJvcmlnaW4iOiJodHRwczovL2RvdWdyZWVkZXIuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUxOTkxOTAwMX0=">
+    <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
+    <script src="https://unpkg.com/aframe-state-component/dist/aframe-state-component.min.js"></script>
+    <script src="../assets/state.js"></script>
+    <script src="../assets/sky.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component/dist/aframe-aabb-collider-component.min.js"></script>
+    <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
+    <script src="https://rawgit.com/andreasplesch/aframe-heightgrid-component/master/dist/aframe-heightgrid-component.min.js"></script>
+    <script src="../assets/land-shader.js"></script>
+    <script>
+        AFRAME.registerComponent('load-terrain', {
+           init: function () {
+               let terrainEl = document.getElementById('terrain');
+
+               fetch('terrain-heights.txt').then((response) => {
+//                   console.log("terrain-heights.txt:", response);
+                   if (response.ok) {
+                       return response.text();
+                   } else {
+                       console.error("terrain-heights:", response);
+                       return '0 2 1'
+                   }
+               }).then((text) => {
+//                   console.log("text:", text);
+                   terrainEl.setAttribute('heightgrid', 'heights', text );
+               });
+
+           }
+        });
+    </script>
+</head>
+<body>
+<a-scene load-terrain cursor="rayOrigin: mouse">
+    <a-assets>
+    </a-assets>
+
+    <a-entity id="sky" geometry="primitive: sphere; radius: 5000;"
+              material="shader: sky; side: back" sun-position-setter>
+        <a-entity id="orbit">
+            <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="600000"
+                         repeat="indefinite" easing="linear"></a-animation>
+        </a-entity>
+    </a-entity>
+
+    <a-entity id="terrain" material="shader:land; color:#63574d"
+              heightgrid="origin:-600 0 -600; xdimension:13; zdimension:13; xspacing:100; zspacing:100;"></a-entity>
+
+    <a-entity geometry="primitive:triangle; vertexA:-600 0 -600; vertexB:10000 0 -600; vertexC:-600 0 -10000"
+              material="shader:land; color:#63574d"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:600 0 -600; vertexB:600 0 10000; vertexC:10000 0 -600"
+              material="shader:land; color:#63574d"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:600 0 600; vertexB:-10000 0 600; vertexC:600 0 10000"
+              material="shader:land; color:#63574d"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:-600 0 600; vertexB:-600 0 -10000; vertexC:-10000 0 600"
+              material="shader:land; color:#63574d"></a-entity>
+
+    <!--<a-entity position="-24 15 26" rotation="0 -45 0"-->
+              <!--geometry="primitive:triangle; vertexA:0 0 0; vertexB:10 0 0; vertexC:0 10 0"-->
+              <!--material="shader:land; color:#63574d"></a-entity>-->
+
+
+    <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0"
+              link="href:../yggdrasil; title: Next Quest; on:hitstart" bind="visible: questComplete"></a-entity>
+
+    <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" value="Don't Crash!" visible="false"></a-text>
+
+    <!--<a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="left" value="Message" geometry="primitive:plane; width:10; height:1.4;"-->
+            <!--material="color: gray" bind="text.value: stars"></a-text>-->
+
+    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
+              bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
+              aabb-collider="objects:.star,[link]" >
+        <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
+                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                  material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>
+        <a-entity id="headingTriangle" position="0 1.5 0" bind__rotation.x="gliderRotationX"
+                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                  material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
+        <a-entity camera="userHeight: 0" look-controls>
+            <a-text id="hud" position="0.2 0.4 -0.75" rotation="30 0 0" width="2" align="center" value="HUD"
+                    geometry="primitive:plane; width:0.4; height:0.1;"
+                    material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
+        </a-entity>
+        <a-entity laser-controls="hand: right"></a-entity>
+    </a-entity>
+</a-scene>
+</body>
+</html>
+<!-- Copyright © 2018 by P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
