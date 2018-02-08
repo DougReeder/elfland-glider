@@ -91,7 +91,7 @@ float snoise(vec3 v){
 }
 
 void main() {
-    float rand = 0.4 + snoise(pos*0.3) * 0.2;
+    float rand = 0.4 + 0.1 * (snoise(pos*0.16) + snoise(pos*0.4) + snoise(pos));
     gl_FragColor = mix(
         vec4(rand*0.469, rand*0.316, rand*0.156, 1.0),   // dirt brown
         vec4(color, 1.0),
