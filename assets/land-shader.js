@@ -2,18 +2,32 @@
 // Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
 // The produced texture is a mix of the specified color and dirt brown.
+// Faces will be 50% brighter in direct sun and 50% darker when facing away from the sun.
 // Example: material="shader:land; color:#63574d"
 
 const vertexShader = `
+precision mediump float;
+
+uniform vec3 sunNormal;
+
 varying vec3 pos;
+varying float sunFactor;
+
 void main() {
   pos = position;
+    
+  sunFactor = 0.5 + max(dot(normal, sunNormal), 0.0);
+   
   gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 }`;
 
 const fragmentShader = `
-varying vec3 pos;
+precision mediump float;
+
 uniform vec3 color;
+
+varying vec3 pos;
+varying float sunFactor;
 
 //	Simplex 3D Noise
 //	by Ian McEwan, Ashima Arts
@@ -91,29 +105,32 @@ float snoise(vec3 v){
 }
 
 void main() {
-    float rand = 0.4 + 0.1 * (snoise(pos*0.16) + snoise(pos*0.4) + snoise(pos));
-    gl_FragColor = mix(
-        vec4(rand*0.469, rand*0.316, rand*0.156, 1.0),   // dirt brown
-        vec4(color, 1.0),
+    float rand = 0.4 + 0.2 * (snoise(pos*0.4) );
+    vec3 inherent = mix(
+        vec3(rand*0.469, rand*0.316, rand*0.156),   // dirt brown
+        color,
         0.5
     );
+    gl_FragColor = vec4(inherent * sunFactor, 1.0);
 }
 `;
 
 
 AFRAME.registerShader('land', {
     schema: {
-        color: {type: 'color', default: '#785128'}   // dirt brown
+        color: {type: 'color', default: '#785128'},   // dirt brown
+        sunPosition: {type: 'vec3', default: {x:-1, y:1, z:-1}}
     },
 
     /**
      * `init` used to initialize material. Called once.
      */
     init: function (data) {
-        // const data = this.data;
+        let sunPos = new THREE.Vector3(data.sunPosition.x, data.sunPosition.y, data.sunPosition.z);
         this.material = new THREE.ShaderMaterial({
             uniforms: {
-                color: { value: new THREE.Color(data.color) }
+                color: { value: new THREE.Color(data.color) },
+                sunNormal: {value: sunPos.normalize()}
             },
             vertexShader,
             fragmentShader

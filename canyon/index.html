@@ -13,6 +13,7 @@
     <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
     <script src="https://rawgit.com/andreasplesch/aframe-heightgrid-component/master/dist/aframe-heightgrid-component.min.js"></script>
     <script src="../assets/land-shader.js"></script>
+    <!--<script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>-->
     <script>
         AFRAME.registerComponent('load-terrain', {
            init: function () {
@@ -43,12 +44,12 @@
     <a-entity id="sky" geometry="primitive: sphere; radius: 5000;"
               material="shader: sky; side: back" sun-position-setter>
         <a-entity id="orbit">
-            <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="600000"
+            <a-animation attribute="rotation" from="0 45 0" to="0 45 0" dur="600000"
                          repeat="indefinite" easing="linear"></a-animation>
         </a-entity>
     </a-entity>
 
-    <a-entity id="terrain" material="shader:land; color:#63574d"
+    <a-entity id="terrain" material="shader:land; color:#63574d;"
               heightgrid="origin:-600 0 -600; xdimension:13; zdimension:13; xspacing:100; zspacing:100;"></a-entity>
 
     <a-entity geometry="primitive:triangle; vertexA:-600 0 -600; vertexB:10000 0 -600; vertexC:-600 0 -10000"
@@ -62,7 +63,7 @@
 
     <!--<a-entity position="-24 15 26" rotation="0 -45 0"-->
               <!--geometry="primitive:triangle; vertexA:0 0 0; vertexB:10 0 0; vertexC:0 10 0"-->
-              <!--material="shader:land; color:#63574d"></a-entity>-->
+              <!--material="shader:land; color:#63574d; sunPosition:-1 1 1;"></a-entity>-->
 
 
     <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0"
@@ -71,6 +72,7 @@
 
     <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" value="Don't Crash!" visible="false"></a-text>
 
+    <!--<a-entity fps-counter></a-entity>-->
     <!--<a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="left" value="Message" geometry="primitive:plane; width:10; height:1.4;"-->
             <!--material="color: gray" bind="text.value: stars"></a-text>-->
 
