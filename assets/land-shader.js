@@ -1,9 +1,9 @@
 // land-shader.js - vaguely natural-looking material for A-Frame
 // Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
-// The produced texture is a mix of the specified color and dirt brown.
+// The produced texture is a mix of the specified colors (default gray brown and dirt brown).
 // Faces will be 50% brighter in direct sun and 50% darker when facing away from the sun.
-// Example: material="shader:land; color:#63574d"
+// Example: material="shader:land; colorYin:#63574d"
 
 const vertexShader = `
 precision mediump float;
@@ -21,10 +21,12 @@ void main() {
   gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 }`;
 
+
 const fragmentShader = `
 precision mediump float;
 
-uniform vec3 color;
+uniform vec3 colorYin;
+uniform vec3 colorYang;
 
 varying vec3 pos;
 varying float sunFactor;
@@ -105,11 +107,10 @@ float snoise(vec3 v){
 }
 
 void main() {
-    float rand = 0.4 + 0.2 * (snoise(pos*0.4) );
     vec3 inherent = mix(
-        vec3(rand*0.469, rand*0.316, rand*0.156),   // dirt brown
-        color,
-        0.5
+        colorYin,
+        colorYang,
+        0.5 * (1.0 + snoise(pos*0.4))
     );
     gl_FragColor = vec4(inherent * sunFactor, 1.0);
 }
@@ -118,8 +119,9 @@ void main() {
 
 AFRAME.registerShader('land', {
     schema: {
-        color: {type: 'color', default: '#785128'},   // dirt brown
-        sunPosition: {type: 'vec3', default: {x:-1, y:1, z:-1}}
+        colorYin: {type: 'color', default: '#63574d'},   // gray brown
+        colorYang: {type: 'color', default: '#553c29'},   // dirt brown
+        sunPosition: {type: 'vec3', default: {x:-1.0, y:1.0, z:-1.0}}
     },
 
     /**
@@ -129,7 +131,8 @@ AFRAME.registerShader('land', {
         let sunPos = new THREE.Vector3(data.sunPosition.x, data.sunPosition.y, data.sunPosition.z);
         this.material = new THREE.ShaderMaterial({
             uniforms: {
-                color: { value: new THREE.Color(data.color) },
+                colorYin: {value: new THREE.Color(data.colorYin)},
+                colorYang: {value: new THREE.Color(data.colorYang)},
                 sunNormal: {value: sunPos.normalize()}
             },
             vertexShader,
@@ -140,6 +143,10 @@ AFRAME.registerShader('land', {
      * `update` used to update the material. Called on initialization and when data updates.
      */
     update: function (data) {
-        this.material.uniforms.color.value.set(data.color);
+        this.material.uniforms.colorYin.value.set(data.colorYin);
+        this.material.uniforms.colorYang.value.set(data.colorYang);
+        let sunPos = new THREE.Vector3(data.sunPosition.x, data.sunPosition.y, data.sunPosition.z);
+        this.material.uniforms.sunNormal.value = sunPos.normalize();
+        // this.material.uniforms.sunNormal.value.set(sunPos.normalize());
     },
 });
