@@ -42,7 +42,7 @@ Rain and fog can obscure passages or tools.
 A few clues should only be visible when the player looks to the side.
 
 Quests may be implicit in the arrangement of objects, 
-or can be explicitly spelled out by text floating in nothing.
+or can be explicitly spelled out by text floating in air.
 Favor showing over telling, but a well-chosen sentence can be worth a dozen pictures.
 For example: “Collect all the stars and don't crash”.
 You can label landmarks, tools, and other plot elements, if needed, but avoid expository lumps.
@@ -80,7 +80,30 @@ Normally, the player should avoid them.
 If the player must "borrow" an object of theirs, they will give chase,
 launching attacks which hinder the player.
 
+## Aesthetic Design
 
+Main levels must run at 60 fps on average smartphones, and there is not yet much support for progressive enhancement.
+So, realistic rendering is not possible, in general.
+
+Space and motion are key themes. Draw inspiration from nature, Alexander Calder mobiles, and modern dance.
+
+Players are moving around at speed, thus almost any object may be viewed from near or far - 
+but only briefly. Visual design should favor *legibility* over realism or involved detail.
+The player must be able to see at a glance that a boulder is made of *ice*, and so infer that it will *float*.
+It must be obvious that a river is *lava*, and so infer that *ice will melt near it*.
+Favor compound curves over angular or blocky shapes, and especially avoid pixellation and voxellation.
+Smooth noise and fractal designs are good for this - they shows detail up close and do not repeat over large areas.
+If the sun does not move, bake the effect of sunlight into the color of objects. 
+
+Repetitive animations are boring.
+Put effort into making motion interesting. 
+Make orbits non-circular, use Brownian motion, flocking behavior,
+or use a dynamic model using the player's location.
+
+Every world should have sound, if only a global background of wind or water flowing.
+Take advantage of spatial audio. A waterfall which roars when you're near can get by with less animation. 
+
+Check out  [Where can I find assets?](https://aframe.io/docs/0.7.0/introduction/faq.html#where-can-i-find-assets)
 
 
 ## Developing
