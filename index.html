@@ -25,7 +25,7 @@
   <body>
     <h1 style="text-align:center;">Elfland Glider</h1>
     <div class="wrapper">
-      <div>
+      <div id="overview">
         <p>
         Fly through fantastic worlds,
         help the merry and mischievous light elves,
@@ -53,6 +53,7 @@
     <script>
         console.log("checkHeadsetConnected:", AFRAME.utils.device.checkHeadsetConnected());
         console.log("isMobile:", AFRAME.utils.device.isMobile());
+        console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
         if (! AFRAME.utils.device.checkHeadsetConnected() && ! AFRAME.utils.device.isMobile()) {
             var wrapper = document.querySelector('.wrapper');
 
@@ -71,6 +72,11 @@
                 '</table>';
 
             wrapper.replaceChild(keyboardControls, vrControls);
+        }
+
+        if (! window.hasNativeWebVRImplementation) {
+            var overview = document.getElementById('overview');
+            overview.insertAdjacentHTML('afterend', '<div><p>This browser lacks native WebVR, so don\'t complain about performance.</p></div>')
         }
     </script>
   </body>
