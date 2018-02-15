@@ -4,11 +4,75 @@
     <meta charset="utf-8">
     <title>Start - Elfland Glider</title>
     <meta name="description" content="Entry point to Elfland Glider">
-    <meta http-equiv="refresh" content="0;URL='arches/index.html'" />
+    <meta name="viewport" content="width=320, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
+    <style>
+      html {
+        font: 1.5rem Niconne, "Goudy Old Style", Papyrus, serif;
+        background-image: url("cloud-background.png");
+        background-position: bottom right;
+        background-color: #eeeeee;
+      }
+      .wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      }
+      .wrapper > * {
+        padding: 1em;
+      }
+    </style>
   </head>
   <body>
+    <h1 style="text-align:center;">Elfland Glider</h1>
+    <div class="wrapper">
+      <div>
+        <p>
+        Fly through fantastic worlds,
+        help the merry and mischievous light elves,
+        and avoid the surly and mischievous dark elves.
+        </p><p>
+        A tranquil action puzzle game for VR and mobile
+        using <a href="https://webvr.info/">WebVR</a> and <a href="https://aframe.io">A-Frame</a>.
+        </p>
+      </div>
+      <table id="vrControls">
+        <tr><td><b>Tilt</b> your head left to turn your glider left</td><td><img src="assets/head-tilt-left.png"></td></tr>
+        <tr><td><b>Tilt</b> your head right to turn your glider right</td><td><img src="assets/head-tilt-right.png"></td></tr>
+        <tr><td><b>Turn</b> your head left or right to look around without turning glider</td></tr>
+        <tr><td><b>Tilt</b> your head up to climb (and <b>slow down</b>)</td></tr>
+        <tr><td><b>Tilt</b> your head down to descend (and <b>speed up</b>)</td></tr>
+        <tr><td><b>Press</b> a controller button (or tap the screen) to launch</td></tr>
+      </table>
+      <div style="text-align:center;">
+        <a href="arches/index.html"><span style="font-size: xx-large"> Fly! </span></a>
+      </div>
+    </div>
     <!-- When there's actually something for the user to configure or select, before starting, he/she will do it
     on this page -->
-    <!-- Copyright © 2017 P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
+    <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
+    <script>
+        console.log("checkHeadsetConnected:", AFRAME.utils.device.checkHeadsetConnected());
+        console.log("isMobile:", AFRAME.utils.device.isMobile());
+        if (! AFRAME.utils.device.checkHeadsetConnected() && ! AFRAME.utils.device.isMobile()) {
+            var wrapper = document.querySelector('.wrapper');
+
+            var vrControls = document.getElementById('vrControls');
+
+            var keyboardControls = document.createElement('div');
+            keyboardControls.innerHTML =
+                '<p>Elfland Glider is designed for VR or mobile, but if you want to try it here:</p>' +
+                '<table style="width:100%">' +
+                '<tr><td>A or left-arrow</td><td>turn glider left</td></tr>' +
+                '<tr><td>D or right-arrow</td><td>turn glider right</td></tr>' +
+                '<tr><td>W, up-arrow or drag up</td><td>climb (and <i>slow down</i>)</td></tr>' +
+                '<tr><td>S, down-arrow or drag down</td><td>descend (and <i>speed up</i>)</td></tr>' +
+                '<tr><td>space bar</td><td>launch</td></tr>' +
+                '<tr><td>drag left or right</td><td>look around without turning glider</td></tr>' +
+                '</table>';
+
+            wrapper.replaceChild(keyboardControls, vrControls);
+        }
+    </script>
   </body>
 </html>
+<!-- Copyright © 2017-2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
