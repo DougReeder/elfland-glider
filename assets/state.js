@@ -23,6 +23,15 @@ AFRAME.registerState({
     },
 
     handlers: {
+        setState: function (state, values) {
+            for (pName in values) {
+                if (pName !== 'target') {
+                    console.log("setting", pName, values[pName]);
+                    state[pName] = values[pName];
+                }
+            }
+        },
+
         setArmatureEl: function (state, armatureEl) {
             console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
             console.log("isMobile:", AFRAME.utils.device.isMobile());

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Island - Elfland Glider</title>
+    <meta name="description" content="combines mountain and ocean">
+    <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-03-01" content="Ag5RrvKc1rmx277ducbsCE7rpZKVSaQK5Cvg2LkMntEfEngAAaJ66+khUOlma3PkZEtTHgCenOPd0ib5mO2aogcAAABZeyJvcmlnaW4iOiJodHRwczovL2RvdWdyZWVkZXIuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUxOTkxOTAwMX0=">
+    <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
+    <script src="https://unpkg.com/aframe-state-component/dist/aframe-state-component.min.js"></script>
+    <script src="../assets/state.js"></script>
+    <script src="../assets/sky.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component/dist/aframe-aabb-collider-component.min.js"></script>
+
+    <script src="../assets/ImprovedNoise.js"></script>
+    <script src="../assets/aframe-mountain-component.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.primitives.min.js"></script>
+    <script>
+        AFRAME.registerComponent('island', {
+            init: function () {
+                let sceneEl = this.el;
+                sceneEl.emit('setState', {gliderPosition: {x:-550, y:100, z:550}});
+            }
+        });
+    </script>
+
+    <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
+</head>
+<body>
+<a-scene island cursor="rayOrigin: mouse">
+    <a-assets>
+    </a-assets>
+
+    <a-entity id="sky" geometry="primitive: sphere; radius: 5000;"
+              material="shader: sky; side: back; sunPosition:1 1 1" >
+        <!--<a-entity id="orbit">-->
+            <!--<a-animation attribute="rotation" from="0 45 0" to="0 180 0" dur="600000"-->
+                         <!--repeat="indefinite" easing="linear"></a-animation>-->
+        <!--</a-entity>-->
+    </a-entity>
+
+    <a-mountain position="0 0 0" scale="1 1 1" world-depth="64" world-width="64" sun-position="1 1 1" color="#4DBD33" shadow-color="#395D33"></a-mountain>
+
+    <a-grid position="0 -1 0" scale="20 20 20"></a-grid>
+
+    <!--<a-entity geometry="primitive:triangle; vertexA:-1875 0 -1875; vertexB:10000 0 -1875; vertexC:-1875 0 -10000"-->
+    <!--material="color:#4350c9;"></a-entity>-->
+    <!--<a-entity geometry="primitive:triangle; vertexA:1875 0 -1875; vertexB:1875 0 10000; vertexC:10000 0 -1875"-->
+    <!--material="color:#4350c9;"></a-entity>-->
+    <!--<a-entity geometry="primitive:triangle; vertexA:1875 0 1875; vertexB:-10000 0 1875; vertexC:1875 0 10000"-->
+    <!--material="color:#4350c9;"></a-entity>-->
+    <!--<a-entity geometry="primitive:triangle; vertexA:-1875 0 1875; vertexB:-1875 0 -10000; vertexC:-10000 0 1875"-->
+    <!--material="color:#4350c9;"></a-entity>-->
+
+
+    <a-entity id="nextQuestPortal" position="0 15 -500" scale="5 5 0"
+              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot-yggdrasil.png; on:hitstart"
+              bind="visible: questComplete"></a-entity>
+
+    <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="mozillavr" value="Don't Crash!" visible="false"></a-text>
+
+    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
+              bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
+              aabb-collider="objects:.star,[link]" >
+        <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
+                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                  material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>
+        <a-entity id="headingTriangle" position="0 1.5 0" bind__rotation.x="gliderRotationX"
+                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                  material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
+        <a-entity camera="userHeight: 0" look-controls>
+            <a-text id="hud" position="0.2 0.4 -0.75" rotation="30 0 0" width="2" align="center" value="HUD"
+                    geometry="primitive:plane; width:0.4; height:0.1;"
+                    material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
+        </a-entity>
+        <a-entity laser-controls="hand: right"></a-entity>
+    </a-entity>
+
+    <a-entity fps-counter></a-entity>
+</a-scene>
+</body>
+</html>
+<!-- Copyright © 2018 by P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
