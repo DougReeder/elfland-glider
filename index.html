@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Start - Elfland Glider</title>
-    <meta name="description" content="Entry point to Elfland Glider">
+    <meta name="description" content="Introduction to Elfland Glider">
     <meta name="viewport" content="width=320, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <style>
@@ -12,6 +12,9 @@
         background-image: url("cloud-background.png");
         background-position: bottom right;
         background-color: #eeeeee;
+      }
+      .subtitle {
+        font-size: 1rem;
       }
       .wrapper {
         display: grid;
@@ -23,16 +26,13 @@
     </style>
   </head>
   <body>
-    <h1 style="text-align:center;">Elfland Glider</h1>
+    <h1 style="text-align:center;">Elfland Glider<br><span class="subtitle">A tranquil action puzzle game for VR&nbsp;and&nbsp;mobile</span></h1>
     <div class="wrapper">
       <div id="overview">
         <p>
         Fly through fantastic worlds,
         help the merry and mischievous light elves,
         and avoid the surly and mischievous dark elves.
-        </p><p>
-        A tranquil action puzzle game for VR and mobile
-        using <a href="https://webvr.info/">WebVR</a> and <a href="https://aframe.io"><nobr>A-Frame</nobr></a>.
         </p>
       </div>
       <table id="vrControls">
@@ -45,6 +45,11 @@
       </table>
       <div style="text-align:center;">
         <a href="arches/index.html"><span style="font-size: xx-large"> Fly! </span></a>
+        <p>(On world pages, tap goggle button to enter VR mode)</p>
+      </div>
+      <div style="font-family:serif; font-size:smaller;">
+        <p>Uses <a href="https://webvr.info/">WebVR</a> and <a href="https://aframe.io"><nobr>A-Frame</nobr></a>.</p>
+        <p>Copyright © 2017-2018 by Doug Reeder; Licensed under the GNU GPL-3.0</p>
       </div>
     </div>
     <!-- When there's actually something for the user to configure or select, before starting, he/she will do it
@@ -81,4 +86,4 @@
     </script>
   </body>
 </html>
-<!-- Copyright © 2017-2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
+<!-- Copyright © 2017-2018 by Doug Reeder; Licensed under the GNU GPL-3.0 -->
