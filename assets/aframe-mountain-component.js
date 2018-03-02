@@ -7,6 +7,7 @@ AFRAME.registerComponent('mountain', {
     schema: {
         color: {default: 'rgb(92, 32, 0)'},
         shadowColor: {default: 'rgb(128, 96, 96)'},
+        seaColor: {default: 'rgb(0, 105, 148)'},
         sunPosition: {type: 'vec3', default: {x: 1, y: 1, z: 1}},
         worldDepth: {default: 256},
         worldWidth: {default: 256}
@@ -24,7 +25,7 @@ AFRAME.registerComponent('mountain', {
         // Texture.
         var canvas = generateTexture(
             terrainData, worldWidth, worldDepth, new THREE.Color(data.color),
-            new THREE.Color(data.shadowColor), data.sunPosition);
+            new THREE.Color(data.shadowColor), new THREE.Color(data.seaColor), data.sunPosition);
         var texture = new THREE.CanvasTexture(canvas);
         texture.wrapS = THREE.ClampToEdgeWrapping;
         texture.wrapT = THREE.ClampToEdgeWrapping;
@@ -48,7 +49,7 @@ AFRAME.registerComponent('mountain', {
 
 function generateHeight(width, height) {
     let size = width * height;
-    let plateauEdge = Math.min(width, height) / 8;
+    let plateauEdge = Math.max(width, height) / 8;
     let data = new Uint8Array(size);
     let perlin = new ImprovedNoise();
     let z = Math.random() * 100;
@@ -77,7 +78,7 @@ function generateHeight(width, height) {
     return data;
 }
 
-function generateTexture(terrainData, width, height, color, colorShadow, sunPos) {
+function generateTexture(terrainData, width, height, color, colorShadow, colorSea, sunPos) {
     var sun = new THREE.Vector3(sunPos.x, sunPos.y, sunPos.z);
     sun.normalize();
 
@@ -99,18 +100,29 @@ function generateTexture(terrainData, width, height, color, colorShadow, sunPos)
     var redShadow = colorShadow.r * 256;
     var greenShadow = colorShadow.g * 256;
     var blueShadow = colorShadow.b * 256;
+    let redSea = colorSea.r * 256;
+    let greenSea = colorSea.g * 256;
+    let blueSea = colorSea.b * 256;
 
     var shade;
     var vector3 = new THREE.Vector3(0, 0, 0);
     for (var i = 0, j = 0, l = imageData.length; i < l; i += 4, j++) {
-        vector3.x = terrainData[j - 2] - terrainData[j + 2];
-        vector3.y = 2;
-        vector3.z = terrainData[j - width * 2] - terrainData[j + width * 2];
-        vector3.normalize();
-        shade = vector3.dot(sun);
-        imageData[i] = (red + shade * redShadow) * (0.5 + terrainData[j] * 0.007);
-        imageData[i + 1] = (green + shade * blueShadow) * (0.5 + terrainData[j] * 0.007);
-        imageData[i + 2] = (blue + shade * greenShadow) * (0.5 + terrainData[j] * 0.007);
+        if (terrainData[j-1] || terrainData[j] || terrainData[j+1] ||
+                terrainData[j-width-1] || terrainData[j-width] || terrainData[j-width+1] ||
+                terrainData[j+width-1] || terrainData[j+width] || terrainData[j+width+1]) {
+            vector3.x = terrainData[j - 2] - terrainData[j + 2];
+            vector3.y = 2;
+            vector3.z = terrainData[j - width * 2] - terrainData[j + width * 2];
+            vector3.normalize();
+            shade = vector3.dot(sun);
+            imageData[i] = (red + shade * redShadow) * (0.5 + terrainData[j] * 0.007);
+            imageData[i + 1] = (green + shade * blueShadow) * (0.5 + terrainData[j] * 0.007);
+            imageData[i + 2] = (blue + shade * greenShadow) * (0.5 + terrainData[j] * 0.007);
+        } else {
+            imageData[i] = redSea;
+            imageData[i+1] = greenSea;
+            imageData[i+2] = blueSea;
+        }
     }
 
     context.putImageData(image, 0, 0);
@@ -128,7 +140,7 @@ function generateTexture(terrainData, width, height, color, colorShadow, sunPos)
     imageData = image.data;
 
     for (var i = 0, l = imageData.length; i < l; i += 4) {
-        var v = ~~(Math.random() * 5);
+        var v = ~~(Math.random() * 4 - 2);
         imageData[i] += v;
         imageData[i + 1] += v;
         imageData[i + 2] += v;
@@ -149,6 +161,7 @@ AFRAME.registerPrimitive('a-mountain', {
     mappings: {
         color: 'mountain.color',
         'shadow-color': 'mountain.shadowColor',
+        'sea-color': 'mountain.seaColor',
         'sun-position': 'mountain.sunPosition',
         'world-depth': 'mountain.worldDepth',
         'world-width': 'mountain.worldWidth'

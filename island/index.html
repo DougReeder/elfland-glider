@@ -13,7 +13,6 @@
 
     <script src="../assets/ImprovedNoise.js"></script>
     <script src="../assets/aframe-mountain-component.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.primitives.min.js"></script>
     <script>
         AFRAME.registerComponent('island', {
             init: function () {
@@ -38,18 +37,17 @@
         <!--</a-entity>-->
     </a-entity>
 
-    <a-mountain position="0 0 0" scale="1 1 1" world-depth="64" world-width="64" sun-position="1 1 1" color="#4DBD33" shadow-color="#395D33"></a-mountain>
+    <a-mountain position="0 0 0" scale="1 1 1" world-depth="64" world-width="64" sun-position="1 1 1"
+                color="#4DBD33" shadow-color="#395D33" sea-color="#006994"></a-mountain>
 
-    <a-grid position="0 -1 0" scale="20 20 20"></a-grid>
-
-    <!--<a-entity geometry="primitive:triangle; vertexA:-1875 0 -1875; vertexB:10000 0 -1875; vertexC:-1875 0 -10000"-->
-    <!--material="color:#4350c9;"></a-entity>-->
-    <!--<a-entity geometry="primitive:triangle; vertexA:1875 0 -1875; vertexB:1875 0 10000; vertexC:10000 0 -1875"-->
-    <!--material="color:#4350c9;"></a-entity>-->
-    <!--<a-entity geometry="primitive:triangle; vertexA:1875 0 1875; vertexB:-10000 0 1875; vertexC:1875 0 10000"-->
-    <!--material="color:#4350c9;"></a-entity>-->
-    <!--<a-entity geometry="primitive:triangle; vertexA:-1875 0 1875; vertexB:-1875 0 -10000; vertexC:-10000 0 1875"-->
-    <!--material="color:#4350c9;"></a-entity>-->
+    <a-entity geometry="primitive:triangle; vertexA:-500 0 -500; vertexB:10000 0 -500; vertexC:-500 0 -10000"
+    material="shader: flat; color:#006994;"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:500 0 -500; vertexB:500 0 10000; vertexC:10000 0 -500"
+    material="shader: flat; color:#006994;"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:500 0 500; vertexB:-10000 0 500; vertexC:500 0 10000"
+    material="shader: flat; color:#006994;"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:-500 0 500; vertexB:-500 0 -10000; vertexC:-10000 0 500"
+    material="shader: flat; color:#006994;"></a-entity>
 
 
     <a-entity id="nextQuestPortal" position="0 15 -500" scale="5 5 0"
