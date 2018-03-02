@@ -110,9 +110,9 @@ function generateTexture(terrainData, width, height, color, colorShadow, colorSe
         if (terrainData[j-1] || terrainData[j] || terrainData[j+1] ||
                 terrainData[j-width-1] || terrainData[j-width] || terrainData[j-width+1] ||
                 terrainData[j+width-1] || terrainData[j+width] || terrainData[j+width+1]) {
-            vector3.x = terrainData[j - 2] - terrainData[j + 2];
+            vector3.x = (terrainData[j-2] || 0) - (terrainData[j+2] || 0);
             vector3.y = 2;
-            vector3.z = terrainData[j - width * 2] - terrainData[j + width * 2];
+            vector3.z = (terrainData[j-width*2] || 0) - (terrainData[j+width*2] || 0);
             vector3.normalize();
             shade = vector3.dot(sun);
             imageData[i] = (red + shade * redShadow) * (0.5 + terrainData[j] * 0.007);
