@@ -177,9 +177,13 @@ AFRAME.registerState({
 
                 let speedChange = -Math.sign(altitudeChange) * Math.sqrt(2 * GRAVITY * Math.abs(altitudeChange)) * action.timeDelta / 1000;
                 state.gliderSpeed = Math.max(state.gliderSpeed + speedChange, 0.1);
-                state.gliderSpeed = Math.min(state.gliderSpeed, 100);
+                state.gliderSpeed = Math.min(state.gliderSpeed, 99.4);
 
-                state.hudText = (state.gliderSpeed).toFixed(1);
+                if (state.gliderSpeed < 9.95) {
+                    state.hudText = (state.gliderSpeed).toFixed(1);
+                } else {
+                    state.hudText = (state.gliderSpeed).toFixed(0);
+                }
             }
         },
 
