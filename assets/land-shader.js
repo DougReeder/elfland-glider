@@ -5,7 +5,14 @@
 // Faces will be 50% brighter in direct sun and 50% darker when facing away from the sun.
 // Example: material="shader:land; colorYin:#63574d"
 
-const vertexShader = `
+AFRAME.registerShader('land', {
+    schema: {
+        colorYin: {type: 'color', default: '#63574d'},   // gray brown
+        colorYang: {type: 'color', default: '#553c29'},   // dirt brown
+        sunPosition: {type: 'vec3', default: {x:-1.0, y:1.0, z:-1.0}}
+    },
+
+    vertexShader: `
 precision mediump float;
 
 uniform vec3 sunNormal;
@@ -19,10 +26,9 @@ void main() {
   sunFactor = 0.5 + max(dot(normal, sunNormal), 0.0);
    
   gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-}`;
+}`,
 
-
-const fragmentShader = `
+    fragmentShader: `
 precision mediump float;
 
 uniform vec3 colorYin;
@@ -114,15 +120,7 @@ void main() {
     );
     gl_FragColor = vec4(inherent * sunFactor, 1.0);
 }
-`;
-
-
-AFRAME.registerShader('land', {
-    schema: {
-        colorYin: {type: 'color', default: '#63574d'},   // gray brown
-        colorYang: {type: 'color', default: '#553c29'},   // dirt brown
-        sunPosition: {type: 'vec3', default: {x:-1.0, y:1.0, z:-1.0}}
-    },
+`,
 
     /**
      * `init` used to initialize material. Called once.
@@ -135,8 +133,8 @@ AFRAME.registerShader('land', {
                 colorYang: {value: new THREE.Color(data.colorYang)},
                 sunNormal: {value: sunPos.normalize()}
             },
-            vertexShader,
-            fragmentShader
+            vertexShader: this.vertexShader,
+            fragmentShader: this.fragmentShader
         });
     },
     /**

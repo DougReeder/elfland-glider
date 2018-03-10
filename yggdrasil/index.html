@@ -8,7 +8,7 @@
     <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
     <script src="https://unpkg.com/aframe-state-component/dist/aframe-state-component.min.js"></script>
     <script src="../assets/state.js"></script>
-    <script src="../assets/sky.js"></script>
+    <script src="https://cdn.rawgit.com/DougReeder/aframe-simple-sun-sky/6cff915e/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component/dist/aframe-aabb-collider-component.min.js"></script>
 </head>
 <body>
@@ -17,13 +17,10 @@
         <img id="woodTexture" src="../assets/stabbur/textures/Stabbur_diffuse.png">
     </a-assets>
 
-    <a-entity id="sky" geometry="primitive: sphere; radius: 5000;"
-              material="shader: sky; side: back" sun-position-setter>
-        <a-entity id="orbit">
-            <a-animation attribute="rotation" from="0 0 0" to="0 360 0" dur="600000"
-                         repeat="indefinite" easing="linear"></a-animation>
-        </a-entity>
-    </a-entity>
+    <a-simple-sun-sky sun-position="1 1 1">
+        <a-animation attribute="simpleSunSky.sunPosition" from="-1 1 -1" to="1 -1 1" dur="5000" repeat="indefinite"></a-animation>
+    </a-simple-sun-sky>
+
 
     <a-torus-knot  scale="0.3 10 0.4" radius="100" p="2" q="21" radius-tubular="4" src="#woodTexture" roughness="1" metalness="0"></a-torus-knot>
     <!--<a-cylinder id="yggdrasil" radius="10" height="5000" open-ended="true" src="#woodTexture"></a-cylinder>-->
@@ -60,7 +57,7 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity laser-controls="hand: right"></a-entity>
-        <a-entity id="environmentalSound" position="0 0 0" sound="src: url(Swell2b-64k.mp3); volume:0.5; loop:true; autoplay:false"></a-entity>
+        <a-entity id="environmentalSound" position="0 0 0" sound="src: url(Swell2b-64k.mp3); volume:0.3; loop:true; autoplay:false"></a-entity>
     </a-entity>
 </a-scene>
 <!-- Copyright © 2017-2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->

@@ -8,7 +8,7 @@
     <script src="https://rawgit.com/aframevr/aframe/6019885/dist/aframe-master.min.js"></script>
     <script src="https://unpkg.com/aframe-state-component/dist/aframe-state-component.min.js"></script>
     <script src="../assets/state.js"></script>
-    <script src="../assets/sky.js"></script>
+    <script src="https://cdn.rawgit.com/DougReeder/aframe-simple-sun-sky/6cff915e/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component/dist/aframe-aabb-collider-component.min.js"></script>
 
     <script src="../assets/ImprovedNoise.js"></script>
@@ -29,24 +29,19 @@
     <a-assets>
     </a-assets>
 
-    <a-entity id="sky" geometry="primitive: sphere; radius: 5000;"
-              material="shader: sky; side: back; sunPosition:1 1 1" >
-        <!--<a-entity id="orbit">-->
-            <!--<a-animation attribute="rotation" from="0 45 0" to="0 180 0" dur="600000"-->
-                         <!--repeat="indefinite" easing="linear"></a-animation>-->
-        <!--</a-entity>-->
-    </a-entity>
+    <a-simple-sun-sky sun-position="1 1 1" dark-color="#0b486b"></a-simple-sun-sky>
+
 
     <a-mountain position="0 0 0" scale="1 1 1" world-depth="64" world-width="64" sun-position="1 1 1"
                 color="#4DBD33" shadow-color="#395D33" sea-color="#006994"></a-mountain>
 
-    <a-entity geometry="primitive:triangle; vertexA:-500 0 -500; vertexB:10000 0 -500; vertexC:-500 0 -10000"
+    <a-entity geometry="primitive:triangle; vertexA:-500 0 -500; vertexB:7483 0 -500; vertexC:-500 0 -7483"
     material="shader: flat; color:#006994;"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:500 0 -500; vertexB:500 0 10000; vertexC:10000 0 -500"
+    <a-entity geometry="primitive:triangle; vertexA:500 0 -500; vertexB:500 0 7483; vertexC:7483 0 -500"
     material="shader: flat; color:#006994;"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:500 0 500; vertexB:-10000 0 500; vertexC:500 0 10000"
+    <a-entity geometry="primitive:triangle; vertexA:500 0 500; vertexB:-7483 0 500; vertexC:500 0 7483"
     material="shader: flat; color:#006994;"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:-500 0 500; vertexB:-500 0 -10000; vertexC:-10000 0 500"
+    <a-entity geometry="primitive:triangle; vertexA:-500 0 500; vertexB:-500 0 -7483; vertexC:-7483 0 500"
     material="shader: flat; color:#006994;"></a-entity>
 
 
