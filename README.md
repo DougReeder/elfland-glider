@@ -34,6 +34,9 @@ to fly through mists for a minute or two, before a portal appears to take him/he
 
 Tools are usually not retained for future quests, and may or may not be useful (or required) later.
 
+Favor engagement over realism.  It should be rewarding to fly around and explore.
+Game objectives should just be the icing on the cake.
+
 Constraints and difficulties are almost entirely integrated into the worlds, not pasted atop them.
 The landscape forms an obstacle course for the player to slalom through.
 Time constraints can come from a gate that opens and closes on a schedule,
@@ -44,8 +47,11 @@ A few clues should only be visible when the player looks to the side.
 Quests may be implicit in the arrangement of objects, 
 or can be explicitly spelled out by text floating in air.
 Favor showing over telling, but a well-chosen sentence can be worth a dozen pictures.
-For example: “Collect all the stars and don't crash”.
+For example: “Collect all the stars”.
 You can label landmarks, tools, and other plot elements, if needed, but avoid expository lumps.
+
+Levels should be playable on mobile, but butter in VR.
+
 
 ## Theme
 Worlds are fantastic, with geography impossible in our world - but self-consistent.
@@ -54,6 +60,7 @@ Islands can float in the sky.
 Trees can be miles tall.
 Houses might be too small to live in or absurdly large.
 Days may consist of a half-dozen minutes of light, followed by a minute of twilight.
+Or, the sun might traverse a figure-8 in the sky.
 Ocean waves could be 100 m tall.
 Elfland Glider is *not* cutsey nor childish,
 but omit anything inappropriate for children.
@@ -82,7 +89,7 @@ launching attacks which hinder the player.
 
 ## Aesthetic Design
 
-Main levels must run at 60 fps on average smartphones, and there is not yet much support for progressive enhancement.
+Main levels must run at 60 fps on smartphones such as the Galaxy S6, and there is not yet much support for progressive enhancement.
 So, realistic rendering is not possible, in general.
 
 Space and motion are key themes. Draw inspiration from nature, Alexander Calder mobiles, and modern dance.
@@ -92,8 +99,13 @@ but only briefly. Visual design should favor *legibility* over realism or involv
 The player must be able to see at a glance that a boulder is made of *ice*, and so infer that it will *float*.
 It must be obvious that a river is *lava*, and so infer that *ice will melt near it*.
 Favor compound curves over angular or blocky shapes, and especially avoid pixellation and voxellation.
-Smooth noise and fractal designs are good for this - they shows detail up close and do not repeat over large areas.
+Smooth noise is good for this - it shows detail up close and does not repeat.
+Generate landscape and the location of plot tokens proceedurally, if you can.
+That enhances replay value.
 If the sun does not move, bake the effect of sunlight into the color of objects. 
+
+Shadows and post-effects shouldn't be necessary.
+Take advantage of cheap graphics processor effects like particles and UV scrolling.
 
 Repetitive animations are boring.
 Put effort into making motion interesting. 
