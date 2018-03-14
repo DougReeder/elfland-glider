@@ -11,13 +11,45 @@
     <script src="https://cdn.rawgit.com/DougReeder/aframe-simple-sun-sky/6cff915e/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component/dist/aframe-aabb-collider-component.min.js"></script>
 
+    <script src="../assets/stella-octangula.js"></script>
+    <script src="https://unpkg.com/aframe-glow@^1.0.1/dist/aframe-glow-component.min.js"></script>
     <script src="../assets/ImprovedNoise.js"></script>
     <script src="../assets/aframe-mountain-component.js"></script>
     <script>
         AFRAME.registerComponent('island', {
             init: function () {
                 let sceneEl = this.el;
-                sceneEl.emit('setState', {gliderPosition: {x:-550, y:100, z:550}});
+                sceneEl.emit('setState', {gliderPosition: {x:-500, y:100, z:500}});
+
+                let mountainEl = sceneEl.querySelector('a-mountain');
+                let mountainComp = mountainEl.components.mountain
+
+                let totalStars = AFRAME.utils.device.isMobile() ? 50 : 100;
+                for (let s=0; s<totalStars; ++s) {
+                    let dispersion = s < 3 ? 1750 : 1000;
+                    let x, y, z;
+                    do {
+                        x = (Math.random() - 0.5) * dispersion;
+                        z = (Math.random() - 0.5) * dispersion;
+                        y = mountainComp.height(x, z) + 12;
+                    } while (y > 105);
+
+                    let starEl = document.createElement('a-entity');
+                    starEl.setAttribute('class', 'star');
+                    starEl.setAttribute('position', x + ' ' + y + ' ' + z);
+                    starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
+                    starEl.setAttribute('material', {visible:false});
+                    starEl.setAttribute('sound', {src:'url(../assets/393633__daronoxus__ding.mp3)', on:'hitstart'});
+
+                    let starInnerEl = document.createElement('a-entity');
+                    starInnerEl.setAttribute('rotation', '45 0 45');
+                    starInnerEl.setAttribute('geometry', {primitive: 'stella-octangula'});
+                    starInnerEl.setAttribute('material', {color:'#ffce00'});
+                    starInnerEl.setAttribute('glow', {c: '0.2', color: '#feca05', scale:'3.5'});
+
+                    starEl.appendChild(starInnerEl);
+                    sceneEl.appendChild(starEl);
+                }
             }
         });
     </script>

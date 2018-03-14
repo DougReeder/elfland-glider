@@ -13,6 +13,24 @@ AFRAME.registerComponent('mountain', {
         worldWidth: {default: 256}
     },
 
+    terrainData: null,
+
+    height: function(x, z) {
+        if (x <= -500 || x >= 500 || z <= -500 || z >= 500) {
+            return 0;
+        } else {
+            const width = this.data.worldWidth;
+            const depth = this.data.worldDepth;
+            let i = Math.floor((x + 500) / 1000 * width);
+            let j = Math.floor((z + 500) / 1000 * depth);
+            let height = Math.max(this.terrainData[i+j*width],
+                this.terrainData[(i+1)+j*width] || 0,
+                this.terrainData[i+(j+1)*width] || 0,
+                this.terrainData[(i+1)+(j+1)*width] || 0);
+            return height*10;
+        }
+    },
+
     update: function () {
         var data = this.data;
 
@@ -20,11 +38,11 @@ AFRAME.registerComponent('mountain', {
         var worldWidth = data.worldWidth;
 
         // Generate heightmap.
-        var terrainData = generateHeight(worldWidth, worldDepth);
+        this.terrainData = generateHeight(worldWidth, worldDepth);
 
         // Texture.
         var canvas = generateTexture(
-            terrainData, worldWidth, worldDepth, new THREE.Color(data.color),
+            this.terrainData, worldWidth, worldDepth, new THREE.Color(data.color),
             new THREE.Color(data.shadowColor), new THREE.Color(data.seaColor), data.sunPosition);
         var texture = new THREE.CanvasTexture(canvas);
         texture.wrapS = THREE.ClampToEdgeWrapping;
@@ -35,7 +53,7 @@ AFRAME.registerComponent('mountain', {
         geometry.rotateX(-Math.PI / 2);
         var vertices = geometry.attributes.position.array;
         for (var i = 0, j = 0, l = vertices.length; i < l; i++, j += 3) {
-            vertices[j + 1] = terrainData[i] * 10;
+            vertices[j + 1] = this.terrainData[i] * 10;
         }
 
         // Create material.
