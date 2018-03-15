@@ -39,18 +39,12 @@ AFRAME.registerState({
             state.armatureEl = armatureEl;
             state.cameraEl = armatureEl.querySelector('[camera]');
 
-            state.numYellowStars = AFRAME.scenes[0].querySelectorAll('.star').length;
-            AFRAME.scenes[0].querySelectorAll('.star').forEach(star => {
-                // outer entity is just to size collision box
-                star.getObject3D('mesh').visible = false;
-            });
-
             armatureEl.addEventListener('hitstart', function (evt) {
                 // console.log('hitstart armature:', evt.detail.intersectedEls);
                 evt.detail.intersectedEls.forEach(function (el) {
                    if (el.classList.contains('star')) {
-                       console.log("collected star");
                        ++state.stars;
+                       console.log("collected star", state.stars, "of", state.numYellowStars);
                        el.setAttribute('visible', 'false');
                        setTimeout(() => el.parentNode.removeChild(el), 2000);   // allow sound to finish
                    } else if (el.components.link) {
@@ -118,6 +112,11 @@ AFRAME.registerState({
             } else {
                 AFRAME.scenes[0].emit('hover', action);
             }
+        },
+
+        countYellowStars: function (state, action) {
+            state.numYellowStars = AFRAME.scenes[0].querySelectorAll('.star').length;
+            console.log("numYellowStars:", state.numYellowStars);
         },
 
         launch: function (state, action) {

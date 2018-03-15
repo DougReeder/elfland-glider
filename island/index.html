@@ -22,21 +22,14 @@
                 sceneEl.emit('setState', {gliderPosition: {x:-500, y:100, z:500}});
 
                 let mountainEl = sceneEl.querySelector('a-mountain');
-                let mountainComp = mountainEl.components.mountain
+                let mountainComp = mountainEl.components.mountain;
 
-                let totalStars = AFRAME.utils.device.isMobile() ? 50 : 100;
+                let totalStars = AFRAME.utils.device.isMobile() ? 50 : 75;
                 for (let s=0; s<totalStars; ++s) {
-                    let dispersion = s < 3 ? 1750 : 1000;
-                    let x, y, z;
-                    do {
-                        x = (Math.random() - 0.5) * dispersion;
-                        z = (Math.random() - 0.5) * dispersion;
-                        y = mountainComp.height(x, z) + 12;
-                    } while (y > 102);
-
                     let starEl = document.createElement('a-entity');
                     starEl.setAttribute('class', 'star');
-                    starEl.setAttribute('position', x + ' ' + y + ' ' + z);
+                    let dispersion = s < 3 ? 1750 : 1000;   // place a couple stars away from the island
+                    starEl.setAttribute('position', this.randomPosition(mountainComp, dispersion));
                     starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
                     starEl.setAttribute('material', {visible:false});
                     starEl.setAttribute('sound', {src:'url(../assets/393633__daronoxus__ding.mp3)', on:'hitstart'});
@@ -50,6 +43,21 @@
                     starEl.appendChild(starInnerEl);
                     sceneEl.appendChild(starEl);
                 }
+
+                sceneEl.emit('countYellowStars', {});
+
+                let portalEl = document.getElementById('nextQuestPortal');
+                portalEl.setAttribute('position', this.randomPosition(mountainComp, 1000));
+            },
+
+            randomPosition: function (mountainComp, dispersion) {
+                let x, y, z;
+                do {
+                    x = (Math.random() - 0.5) * dispersion;
+                    z = (Math.random() - 0.5) * dispersion;
+                    y = mountainComp.height(x, z) + 12;
+                } while (y > 100);
+                return x + ' ' + y + ' ' + z;
             }
         });
     </script>
