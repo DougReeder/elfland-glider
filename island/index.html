@@ -56,13 +56,13 @@
                     x = (Math.random() - 0.5) * dispersion;
                     z = (Math.random() - 0.5) * dispersion;
                     y = mountainComp.height(x, z) + 12;
-                } while (y > 100);
+                } while (y > 90);   // leave some headroom, because of numerical issues
                 return x + ' ' + y + ' ' + z;
             }
         });
     </script>
 
-    <script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>
+    <!--<script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>-->
 </head>
 <body>
 <a-scene island cursor="rayOrigin: mouse">
@@ -89,7 +89,6 @@
               link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot-yggdrasil.png; on:hitstart"
               bind="visible: questComplete"></a-entity>
 
-    <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="mozillavr" value="Don't Crash!" visible="false"></a-text>
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
@@ -106,9 +105,10 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity laser-controls="hand: right"></a-entity>
+        <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="mozillavr" value="The fairies have\nmislaid their stars.\nCollect them all!" visible="true"></a-text>
     </a-entity>
 
-    <a-entity fps-counter></a-entity>
+    <!--<a-entity fps-counter></a-entity>-->
 </a-scene>
 </body>
 </html>
