@@ -39,6 +39,20 @@ var AFRAME = {
     }
 };
 
+var THREE = {
+    Color: function () {},
+    Vector3: function () {},
+    CanvasTexture: function () {},
+    PlaneBufferGeometry: function () {
+        this.attributes = {position: {array: []}};
+    },
+    MeshBasicMaterial: function () {},
+    Mesh: function () {}
+};
+THREE.Vector3.prototype.normalize = function () {};
+THREE.Vector3.prototype.dot = function (other) {return this;};
+THREE.PlaneBufferGeometry.prototype.rotateX = function () {};
+
 class MockElement {
     constructor(attributes) {
         if (attributes instanceof Object) {
@@ -54,5 +68,8 @@ class MockElement {
 
     getAttribute(name) {
         return this._attributes[name];
+    }
+
+    setObject3D() {
     }
 }
