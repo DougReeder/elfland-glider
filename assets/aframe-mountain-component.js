@@ -21,14 +21,36 @@ AFRAME.registerComponent('mountain', {
         } else {
             const width = this.data.worldWidth;
             const depth = this.data.worldDepth;
-            let i = Math.floor((x + 500) / 1000 * width);
-            let j = Math.floor((z + 500) / 1000 * depth);
-            let height = Math.max(this.terrainData[i+j*width],
+            let i = Math.floor((x + 500) / 1000 * (width-1));
+            let j = Math.floor((z + 500) / 1000 * (depth-1));
+            let h = Math.max(this.terrainData[i+j*width],
                 this.terrainData[(i+1)+j*width] || 0,
                 this.terrainData[i+(j+1)*width] || 0,
                 this.terrainData[(i+1)+(j+1)*width] || 0);
-            return height*10;
+            return h*10;
         }
+    },
+
+    /** flat area not at sea level */
+    buildingPosition: function () {
+        const width = this.data.worldWidth;
+        const depth = this.data.worldDepth;
+        let i, j, h1, h2, h3, h4;
+        do {
+            i = Math.floor(Math.random() * (width-3)) + 1;   // edge squares can't qualify
+            j = Math.floor(Math.random() * (depth-3)) + 1;
+            h1 = this.terrainData[i + j * width] || 0;
+            h2 = this.terrainData[(i + 1) + j * width] || 0;
+            h3 = this.terrainData[i + (j + 1) * width] || 0;
+            h4 = this.terrainData[(i + 1) + (j + 1) * width] || 0;
+            // console.log("buildingPosition heights:", h1, h2, h3, h4);
+        } while (h1 === 0 || h1 !== h2 || h2 !== h3 || h3 !== h4 )
+
+        let x = ((i+0.5)/(width-1) * 1000) - 500;
+        let z = ((j+0.5)/(depth-1) * 1000) - 500;
+        let y = h1 * 10;
+
+        return x + ' ' + y + ' ' + z;
     },
 
     update: function () {
