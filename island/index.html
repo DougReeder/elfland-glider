@@ -49,8 +49,14 @@
                 let portalEl = document.getElementById('nextQuestPortal');
                 portalEl.setAttribute('position', this.randomPosition(mountainComp, 1000));
 
-                let buildingEl = document.getElementById('building');
-                buildingEl.setAttribute('position', mountainComp.buildingPosition());
+                if (!AFRAME.utils.device.isMobile()) {
+                    // This decoration does not need to be pre-loaded via the asset mgr
+                    let buildingEl = document.createElement('a-gltf-model');
+                    buildingEl.setAttribute('position', mountainComp.buildingPosition());
+                    buildingEl.setAttribute('src', '../assets/stabbur/scene.gltf');
+                    buildingEl.setAttribute('scale', '3 3 3');
+                    sceneEl.appendChild(buildingEl);
+                }
             },
 
             randomPosition: function (mountainComp, dispersion) {
@@ -70,7 +76,6 @@
 <body>
 <a-scene island cursor="rayOrigin: mouse">
     <a-assets>
-        <a-asset-item id="stabbur" src="../assets/stabbur/scene.gltf"></a-asset-item>
     </a-assets>
 
     <a-simple-sun-sky sun-position="1 1 1" dark-color="#0b486b"></a-simple-sun-sky>
@@ -87,8 +92,6 @@
     material="shader: flat; color:#006994;"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:-500 0 500; vertexB:-500 0 -7483; vertexC:-7483 0 500"
     material="shader: flat; color:#006994;"></a-entity>
-
-    <a-gltf-model id="building" position="500 0 -500" src="#stabbur" scale="3 3 3"></a-gltf-model>
 
     <a-entity id="nextQuestPortal" position="0 15 -500" scale="5 5 0"
               link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot-yggdrasil.png; on:hitstart"
