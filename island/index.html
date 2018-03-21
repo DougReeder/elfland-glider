@@ -32,7 +32,7 @@
                     starEl.setAttribute('position', this.randomPosition(mountainComp, dispersion));
                     starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
                     starEl.setAttribute('material', {visible:false});
-                    starEl.setAttribute('sound', {src:'url(../assets/393633__daronoxus__ding.mp3)', on:'hitstart'});
+                    starEl.setAttribute('sound', {src:'#ding', on:'hitstart'});
 
                     let starInnerEl = document.createElement('a-entity');
                     starInnerEl.setAttribute('rotation', '45 0 45');
@@ -76,6 +76,7 @@
 <body>
 <a-scene island cursor="rayOrigin: mouse">
     <a-assets>
+        <audio id="ding" src="../assets/393633__daronoxus__ding.mp3"></audio>
     </a-assets>
 
     <a-simple-sun-sky sun-position="1 1 1" dark-color="#0b486b"></a-simple-sun-sky>
