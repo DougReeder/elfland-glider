@@ -29,7 +29,7 @@
                     let starEl = document.createElement('a-entity');
                     starEl.setAttribute('class', 'star');
                     let dispersion = s < 3 ? 1750 : 1000;   // place a couple stars away from the island
-                    starEl.setAttribute('position', this.randomPosition(mountainComp, dispersion));
+                    starEl.setAttribute('position', this.randomPosition(mountainComp, dispersion, 12));
                     starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
                     starEl.setAttribute('material', {visible:false});
                     starEl.setAttribute('sound', {src:'#ding', on:'hitstart'});
@@ -47,10 +47,22 @@
                 sceneEl.emit('countYellowStars', {});
 
                 let portalEl = document.getElementById('nextQuestPortal');
-                portalEl.setAttribute('position', this.randomPosition(mountainComp, 1000));
+                portalEl.setAttribute('position', this.randomPosition(mountainComp, 1000, 12));
+
+                let fairiesEl = document.createElement('a-gltf-model');
+                fairiesEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50));
+                fairiesEl.setAttribute('src', '#fairies');
+                fairiesEl.setAttribute('scale', '0.5 0.5 0.5');
+                sceneEl.appendChild(fairiesEl);
 
                 if (!AFRAME.utils.device.isMobile()) {
-                    // This decoration does not need to be pre-loaded via the asset mgr
+                    // These decorations do not need to be pre-loaded via the asset mgr
+                    let floatingEl = document.createElement('a-gltf-model');
+                    floatingEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50));
+                    floatingEl.setAttribute('src', '../assets/hermit_s_windmill/scene.gltf');
+                    floatingEl.setAttribute('scale', '0.01 0.01 0.01');
+                    sceneEl.appendChild(floatingEl);
+
                     let buildingEl = document.createElement('a-gltf-model');
                     buildingEl.setAttribute('position', mountainComp.buildingPosition());
                     buildingEl.setAttribute('src', '../assets/stabbur/scene.gltf');
@@ -59,12 +71,12 @@
                 }
             },
 
-            randomPosition: function (mountainComp, dispersion) {
+            randomPosition: function (mountainComp, dispersion, verticalOffset) {
                 let x, y, z;
                 do {
                     x = (Math.random() - 0.5) * dispersion;
                     z = (Math.random() - 0.5) * dispersion;
-                    y = mountainComp.height(x, z) + 12;
+                    y = mountainComp.height(x, z) + verticalOffset;
                 } while (y > 90);   // leave some headroom, because of numerical issues
                 return x + ' ' + y + ' ' + z;
             }
@@ -77,6 +89,7 @@
 <a-scene island cursor="rayOrigin: mouse">
     <a-assets>
         <audio id="ding" src="../assets/393633__daronoxus__ding.mp3"></audio>
+        <a-asset-item id="fairies" src="../assets/bucket_with_fairies/scene.gltf"></a-asset-item>
     </a-assets>
 
     <a-simple-sun-sky sun-position="1 1 1" dark-color="#0b486b"></a-simple-sun-sky>
@@ -114,7 +127,7 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity laser-controls="hand: right"></a-entity>
-        <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="mozillavr" value="The fairies have\nmislaid their stars.\nCollect them all!" visible="true"></a-text>
+        <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="mozillavr" value="Help the fairies\ncollect all their stars!" visible="true"></a-text>
     </a-entity>
 
     <!--<a-entity fps-counter></a-entity>-->

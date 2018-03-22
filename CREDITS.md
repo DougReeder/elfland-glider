@@ -10,8 +10,13 @@ Simplex 3D noise by Ian McEwan, Ashima Arts
 ## Models
 
 Stabbur (https://sketchfab.com/models/d13301cc019345589af8a415feebc985)
-by Shorty5600 (https://sketchfab.com/Shorty5600) is licensed under Creative Commons Attribution License
+by "Shorty5600" (https://sketchfab.com/Shorty5600) is licensed under Creative Commons Attribution
 
+Bucket With Fairies (https://sketchfab.com/models/99c4ec82b5d948a6be139e99acd57d28)
+by "7718" (https://sketchfab.com/7718) is licensed under Creative Commons Attribution
+
+Hermit's Windmill (https://sketchfab.com/models/f7f354caaf50408fa3f3525eec716d7b)
+by "doop" (https://sketchfab.com/doop) is licensed under Creative Commons Attribution
 
 ## Textures
 
