@@ -38,7 +38,10 @@
         AFRAME.registerComponent('canyon', {
             init: function () {
                 let sceneEl = this.el;
+                sceneEl.emit('setState', {gliderPositionStart: {x:150, y:-5, z:150}});
                 sceneEl.emit('setState', {gliderPosition: {x:150, y:-5, z:150}});
+
+                sceneEl.emit('countYellowStars', {});
             }
         });
     </script>
@@ -52,16 +55,17 @@
 
 
     <a-entity id="terrain" material="shader:land; sunPosition:-1 1 -1"
-              heightgrid="origin:-600 0 -600; xdimension:13; zdimension:13; xspacing:100; zspacing:100;"></a-entity>
+              heightgrid="origin:-600 0 -600; xdimension:13; zdimension:13; xspacing:100; zspacing:100;"
+              class="landscape"></a-entity>
 
     <a-entity geometry="primitive:triangle; vertexA:-600 0 -600; vertexB:7483 0 -600; vertexC:-600 0 -7483"
-              material="shader:land;"></a-entity>
+              material="shader:land;" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:600 0 -600; vertexB:600 0 7483; vertexC:7483 0 -600"
-              material="shader:land;"></a-entity>
+              material="shader:land;" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:600 0 600; vertexB:-7483 0 600; vertexC:600 0 7483"
-              material="shader:land;"></a-entity>
+              material="shader:land;" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:-600 0 600; vertexB:-600 0 -7483; vertexC:-7483 0 600"
-              material="shader:land;"></a-entity>
+              material="shader:land;" class="landscape"></a-entity>
 
     <!--<a-entity position="-24 15 26" rotation="0 -45 0"-->
               <!--geometry="primitive:triangle; vertexA:0 0 0; vertexB:10 0 0; vertexC:0 10 0"-->
@@ -81,12 +85,12 @@
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
               aabb-collider="objects:.star,[link]" >
-        <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
-                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
-                  material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>
-        <a-entity id="headingTriangle" position="0 1.5 0" bind__rotation.x="gliderRotationX"
-                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
-                  material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
+        <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
+                  raycaster="objects:.landscape; far:0.5;">
+            <a-entity id="headingTriangle" position="0 1.5 0"
+                      geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                      material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
+        </a-entity>
         <a-entity camera="userHeight: 0" look-controls>
             <a-text id="hud" position="0.2 0.42 -0.75" rotation="30 -20 0" width="2" align="center" value="HUD"
                     geometry="primitive:plane; width:0.14; height:0.1;"

@@ -83,12 +83,12 @@
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
               aabb-collider="objects:[link]" >
-        <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
-                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
-                  material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>
-        <a-entity id="headingTriangle" position="0 1.5 0" bind__rotation.x="gliderRotationX"
-                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
-                  material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
+        <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
+                  raycaster="objects:.landscape; far:0.5;">
+            <a-entity id="headingTriangle" position="0 1.5 0"
+                      geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                      material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
+        </a-entity>
         <a-entity camera="userHeight: 0" look-controls>
             <a-text id="hud" position="0.2 0.42 -0.75" rotation="30 -20 0" width="2" align="center" value="HUD"
                     geometry="primitive:plane; width:0.14; height:0.1;"

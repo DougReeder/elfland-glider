@@ -26,10 +26,13 @@ by "doop" (https://sketchfab.com/doop) is licensed under Creative Commons Attrib
 Swell2 is by Randolph Johnson & Doug Reeder
 
 ding (https://freesound.org/people/Daronoxus/sounds/393633/) 
-by Daronoxus (https://freesound.org/people/Daronoxus/) has been released to the public domain
+by Daronoxus (https://freesound.org/people/Daronoxus/) has been released to the public domain.
+
+Off stage crash (https://freesound.org/people/bone666138/sounds/198876/)
+by "bone666138" (https://freesound.org/people/bone666138/) is licensed under Creative Commons Attribution.
 
 Light Rain in Forest (https://freesound.org/people/jakobthiesen/sounds/100495/) 
-by Jakob Thiesen (https://freesound.org/people/jakobthiesen/) is licensed under Creative Commons Attribution License.
+by Jakob Thiesen (https://freesound.org/people/jakobthiesen/) is licensed under Creative Commons Attribution.
 
 
 ## Licenses

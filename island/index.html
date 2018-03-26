@@ -19,6 +19,7 @@
         AFRAME.registerComponent('island', {
             init: function () {
                 let sceneEl = this.el;
+                sceneEl.emit('setState', {gliderPositionStart: {x:-500, y:100, z:500}});
                 sceneEl.emit('setState', {gliderPosition: {x:-500, y:100, z:500}});
 
                 let mountainEl = sceneEl.querySelector('a-mountain');
@@ -67,6 +68,7 @@
                     buildingEl.setAttribute('position', mountainComp.buildingPosition());
                     buildingEl.setAttribute('src', '../assets/stabbur/scene.gltf');
                     buildingEl.setAttribute('scale', '3 3 3');
+                    buildingEl.setAttribute('class', 'landscape');
                     sceneEl.appendChild(buildingEl);
                 }
             },
@@ -96,16 +98,16 @@
 
 
     <a-mountain position="0 0 0" scale="1 1 1" world-depth="64" world-width="64" sun-position="1 1 1"
-                color="#4DBD33" shadow-color="#395D33" sea-color="#006994"></a-mountain>
+                color="#4DBD33" shadow-color="#395D33" sea-color="#006994" class="landscape"></a-mountain>
 
     <a-entity geometry="primitive:triangle; vertexA:-500 0 -500; vertexB:7483 0 -500; vertexC:-500 0 -7483"
-    material="shader: flat; color:#006994;"></a-entity>
+            material="shader: flat; color:#006994;" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:500 0 -500; vertexB:500 0 7483; vertexC:7483 0 -500"
-    material="shader: flat; color:#006994;"></a-entity>
+            material="shader: flat; color:#006994;" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:500 0 500; vertexB:-7483 0 500; vertexC:500 0 7483"
-    material="shader: flat; color:#006994;"></a-entity>
+            material="shader: flat; color:#006994;" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:-500 0 500; vertexB:-500 0 -7483; vertexC:-7483 0 500"
-    material="shader: flat; color:#006994;"></a-entity>
+            material="shader: flat; color:#006994;" class="landscape"></a-entity>
 
     <a-entity id="nextQuestPortal" position="0 15 -500" scale="5 5 0"
               link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot-yggdrasil.png; on:hitstart"
@@ -115,12 +117,12 @@
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
               aabb-collider="objects:.star,[link]" >
-        <a-entity id="headingTriangleOutline" position="0 1.47 0" bind__rotation.x="gliderRotationX"
-                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
-                  material="color:white; wireframe:true; wireframeLinewidth: 3"></a-entity>
-        <a-entity id="headingTriangle" position="0 1.5 0" bind__rotation.x="gliderRotationX"
-                  geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
-                  material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
+        <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
+                  raycaster="objects:.landscape; far:0.5;">
+            <a-entity id="headingTriangle" position="0 1.5 0"
+                      geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:1 0 4.25; vertexC:-1 0 4.25;"
+                      material="shader: flat; transparent:true; opacity:0.2; color:black;"></a-entity>
+        </a-entity>
         <a-entity camera="userHeight: 0" look-controls>
             <a-text id="hud" position="0.2 0.42 -0.75" rotation="30 -20 0" width="2" align="center" value="HUD"
                     geometry="primitive:plane; width:0.14; height:0.1;"

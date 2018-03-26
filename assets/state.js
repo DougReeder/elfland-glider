@@ -7,9 +7,11 @@ const GRAVITY = 9.807;   // m/s^2
 AFRAME.registerState({
     initialState: {
         armatureEl: null,
+        gliderEl: null,
         cameraEl: null,
         time: 0,
         gliderPosition: {x:-30, y:15, z:30},
+        gliderPositionStart: {x:-30, y:15, z:30},
         gliderRotationX: 0,
         gliderRotationY: -45,
         isFlying: false,
@@ -37,7 +39,32 @@ AFRAME.registerState({
             console.log("isMobile:", AFRAME.utils.device.isMobile());
 
             state.armatureEl = armatureEl;
+            state.gliderEl = armatureEl.querySelector('#glider');
             state.cameraEl = armatureEl.querySelector('[camera]');
+
+            state.gliderEl.addEventListener('raycaster-intersection', function (evt) {
+                // Intersection w/ distance 0 is sometimes sent immediately
+                if (evt.detail.intersections.length > 0 && evt.detail.intersections[0].distance > 0) {
+                    console.log("CRASH!", evt.detail.els[0].tagName, evt.detail.els[0].components.sound,
+                        evt.detail.intersections[0].distance,
+                        state.gliderEl.getAttribute('raycaster').far, state.gliderSpeed / 10);
+                    AFRAME.scenes[0].emit('hover', {});
+                    // The sound component wasn't working, and I couldn't figure out why.
+                    var snd = new Audio("../assets/198876__bone666138__crash.mp3"); // buffers automatically when created
+                    snd.play();
+
+                    setTimeout(function () {
+                        // console.log("setting start position");
+                        state.gliderPosition.x = state.gliderPositionStart.x;
+                        state.gliderPosition.y = state.gliderPositionStart.y;
+                        state.gliderPosition.z = state.gliderPositionStart.z;
+                        state.gliderRotationX = 0;
+                        state.gliderRotationY = -45;
+                        state.gliderSpeed = 5;
+                        state.hudText = "";
+                    }, 3000)
+                }
+            });
 
             armatureEl.addEventListener('hitstart', function (evt) {
                 // console.log('hitstart armature:', evt.detail.intersectedEls);
@@ -183,6 +210,8 @@ AFRAME.registerState({
                 } else {
                     state.hudText = (state.gliderSpeed).toFixed(0);
                 }
+
+                state.gliderEl.setAttribute('raycaster', 'far', state.gliderSpeed/10);
             }
         },
 

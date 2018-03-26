@@ -7,6 +7,7 @@ describe("state", function () {
 
     beforeEach(function() {
         state = {
+            gliderEl: new MockElement({rotation: {x: 0, y: 0, z: 0}}),
             cameraEl: new MockElement({rotation: {x: 0, y: 0, z: 0}}),
             gliderPosition: {x: 0, y: 10, z: 10},
             gliderRotationX: 0,
