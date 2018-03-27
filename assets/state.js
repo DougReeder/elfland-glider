@@ -69,7 +69,10 @@ AFRAME.registerState({
             armatureEl.addEventListener('hitstart', function (evt) {
                 // console.log('hitstart armature:', evt.detail.intersectedEls);
                 evt.detail.intersectedEls.forEach(function (el) {
-                   if (el.classList.contains('star')) {
+                    if (el.classList.contains('powerup')) {
+                        console.log("powerup");
+                        state.gliderSpeed += 12;
+                    } else if (el.classList.contains('star')) {
                        ++state.stars;
                        console.log("collected star", state.stars, "of", state.numYellowStars);
                        el.setAttribute('visible', 'false');
@@ -201,7 +204,9 @@ AFRAME.registerState({
                 state.gliderPosition.y += altitudeChange;
                 state.gliderPosition.z += posChange.z;
 
-                let speedChange = -Math.sign(altitudeChange) * Math.sqrt(2 * GRAVITY * Math.abs(altitudeChange)) * action.timeDelta / 1000;
+                let speedChange = (-Math.sign(altitudeChange) * Math.sqrt(2 * GRAVITY * Math.abs(altitudeChange)) -
+                                0.0005 * state.gliderSpeed * state.gliderSpeed)
+                        * action.timeDelta / 1000;
                 state.gliderSpeed = Math.max(state.gliderSpeed + speedChange, 0.1);
                 state.gliderSpeed = Math.min(state.gliderSpeed, 99.4);
 

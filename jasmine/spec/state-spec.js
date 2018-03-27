@@ -27,7 +27,8 @@ describe("state", function () {
         expect(state.gliderPosition.y).toBeCloseTo(10, 5);
         expect(state.gliderPosition.z).toBeCloseTo(9.99, 5);
 
-        expect(state.gliderSpeed).toEqual(1);
+        expect(state.gliderSpeed).toBeGreaterThan(0.99999);
+        expect(state.gliderSpeed).toBeLessThan(1.0);
     });
 
     it("should fly a straight & level course diagonally", function () {
@@ -42,7 +43,8 @@ describe("state", function () {
         expect(state.gliderPosition.y).toBeCloseTo(10, 5);
         expect(state.gliderPosition.z).toBeCloseTo(9.99292893218813, 5);
 
-        expect(state.gliderSpeed).toEqual(1);
+        expect(state.gliderSpeed).toBeGreaterThan(0.99999);
+        expect(state.gliderSpeed).toBeLessThan(1.0);
     });
 
     it("should climb in a straight line and decelerate", function () {

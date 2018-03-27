@@ -25,12 +25,31 @@
                 let mountainEl = sceneEl.querySelector('a-mountain');
                 let mountainComp = mountainEl.components.mountain;
 
+                for (let p=0; p<6; ++p) {
+                    let powerupEl = document.createElement('a-entity');
+                    powerupEl.setAttribute('class', 'powerup');
+                    let dispersion = 1000;
+                    let ceiling = p < 1 ? 15 : 100;   // keep one powerup low
+                    powerupEl.setAttribute('position', this.randomPosition(mountainComp, dispersion, 9, ceiling));
+                    powerupEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
+                    powerupEl.setAttribute('material', {visible:false});
+                    powerupEl.setAttribute('sound', {src:'#powerup', volume:'4.0', on:'hitstart'});
+
+                    let powerupInnerEl = document.createElement('a-icosahedron');
+                    powerupInnerEl.setAttribute('material', {color:'#ff0000'});
+                    powerupInnerEl.setAttribute('glow', {c: '0.2', color: '#ff0000', scale:'3.5'});
+
+                    powerupEl.appendChild(powerupInnerEl);
+                    sceneEl.appendChild(powerupEl);
+                }
+
+
                 let totalStars = AFRAME.utils.device.isMobile() ? 50 : 75;
                 for (let s=0; s<totalStars; ++s) {
                     let starEl = document.createElement('a-entity');
                     starEl.setAttribute('class', 'star');
                     let dispersion = s < 3 ? 1750 : 1000;   // place a couple stars away from the island
-                    starEl.setAttribute('position', this.randomPosition(mountainComp, dispersion, 12));
+                    starEl.setAttribute('position', this.randomPosition(mountainComp, dispersion, 12, 150));
                     starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
                     starEl.setAttribute('material', {visible:false});
                     starEl.setAttribute('sound', {src:'#ding', on:'hitstart'});
@@ -48,10 +67,10 @@
                 sceneEl.emit('countYellowStars', {});
 
                 let portalEl = document.getElementById('nextQuestPortal');
-                portalEl.setAttribute('position', this.randomPosition(mountainComp, 1000, 12));
+                portalEl.setAttribute('position', this.randomPosition(mountainComp, 1000, 12, 100));
 
                 let fairiesEl = document.createElement('a-gltf-model');
-                fairiesEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50));
+                fairiesEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50, 100));
                 fairiesEl.setAttribute('src', '#fairies');
                 fairiesEl.setAttribute('scale', '0.5 0.5 0.5');
                 sceneEl.appendChild(fairiesEl);
@@ -59,7 +78,7 @@
                 if (!AFRAME.utils.device.isMobile()) {
                     // These decorations do not need to be pre-loaded via the asset mgr
                     let floatingEl = document.createElement('a-gltf-model');
-                    floatingEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50));
+                    floatingEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50, 100));
                     floatingEl.setAttribute('src', '../assets/hermit_s_windmill/scene.gltf');
                     floatingEl.setAttribute('scale', '0.01 0.01 0.01');
                     sceneEl.appendChild(floatingEl);
@@ -73,13 +92,13 @@
                 }
             },
 
-            randomPosition: function (mountainComp, dispersion, verticalOffset) {
+            randomPosition: function (mountainComp, dispersion, verticalOffset, ceiling) {
                 let x, y, z;
                 do {
                     x = (Math.random() - 0.5) * dispersion;
                     z = (Math.random() - 0.5) * dispersion;
                     y = mountainComp.height(x, z) + verticalOffset;
-                } while (y > 90);   // leave some headroom, because of numerical issues
+                } while (y > ceiling);
                 return x + ' ' + y + ' ' + z;
             }
         });
@@ -91,6 +110,7 @@
 <a-scene island cursor="rayOrigin: mouse">
     <a-assets>
         <audio id="ding" src="../assets/393633__daronoxus__ding.mp3"></audio>
+        <audio id="powerup" src="../assets/411460__inspectorj__power-up-bright-a.mp3"></audio>
         <a-asset-item id="fairies" src="../assets/bucket_with_fairies/scene.gltf"></a-asset-item>
     </a-assets>
 
@@ -116,7 +136,7 @@
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
-              aabb-collider="objects:.star,[link]" >
+              aabb-collider="objects:.powerup,.star,[link]" >
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
                   raycaster="objects:.landscape; far:0.5;">
             <a-entity id="headingTriangle" position="0 1.5 0"
