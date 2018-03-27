@@ -23,7 +23,9 @@ by "doop" (https://sketchfab.com/doop) is licensed under Creative Commons Attrib
 
 ## Sounds
 
-Swell2 is by Randolph Johnson & Doug Reeder
+Minimalist from _SelectCam Buddha Machine_ is by Olaf Post
+
+Swell2 from _SelectCam Buddha Machine_ is by Randolph Johnson & P. Douglas Reeder
 
 ding (https://freesound.org/people/Daronoxus/sounds/393633/) 
 by Daronoxus (https://freesound.org/people/Daronoxus/) has been released to the public domain.
