@@ -39,4 +39,6 @@ by Jakob Thiesen (https://freesound.org/people/jakobthiesen/) is licensed under 
 
 ## Licenses
 
-Creative Commons Attribution: http://creativecommons.org/licenses/by/4.0/
+GNU GPL-3.0: https://www.gnu.org/licenses/gpl-3.0.en.html
+
+Creative Commons Attribution: https://creativecommons.org/licenses/by/4.0/
