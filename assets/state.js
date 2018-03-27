@@ -91,19 +91,19 @@ AFRAME.registerState({
                 switch (evt.code) {
                     case 'KeyA':
                     case 'ArrowLeft':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z+2});
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z+4});
                         break;
                     case 'KeyD':
                     case 'ArrowRight':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z-2});
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z-4});
                         break;
                     case 'KeyW':
                     case 'ArrowUp':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x+1, y: cameraRotation.y, z: cameraRotation.z});
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x+2, y: cameraRotation.y, z: cameraRotation.z});
                         break;
                     case 'KeyS':
                     case 'ArrowDown':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x-1, y: cameraRotation.y, z: cameraRotation.z});
+                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x-2, y: cameraRotation.y, z: cameraRotation.z});
                         break;
                     case 'Space':
                         if (!state.isFlying) {
