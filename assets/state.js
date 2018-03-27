@@ -21,7 +21,8 @@ AFRAME.registerState({
         questComplete: false,
         inventory: {},   // keyed by object ID
         hudVisible: true,
-        hudText: ""
+        hudText: "",
+        debug: false   // no way to enable this yet
     },
 
     handlers: {
@@ -109,7 +110,9 @@ AFRAME.registerState({
                         if (!state.isFlying) {
                             AFRAME.scenes[0].emit('launch', evt);
                         } else {
-                            AFRAME.scenes[0].emit('hover', evt);
+                            if (state.debug) {
+                                AFRAME.scenes[0].emit('hover', evt);
+                            }
                         }
                         break;
                     case 'Enter':
@@ -128,7 +131,9 @@ AFRAME.registerState({
                 if (!state.isFlying) {
                     AFRAME.scenes[0].emit('launch', evt);
                 } else {
-                    AFRAME.scenes[0].emit('hover', evt);
+                    if (state.debug) {
+                        AFRAME.scenes[0].emit('hover', evt);
+                    }
                 }
             });
         },
@@ -140,7 +145,9 @@ AFRAME.registerState({
             if (!state.isFlying) {
                 AFRAME.scenes[0].emit('launch', action);
             } else {
-                AFRAME.scenes[0].emit('hover', action);
+                if (state.debug) {
+                    AFRAME.scenes[0].emit('hover', action);
+                }
             }
         },
 
