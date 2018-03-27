@@ -1,5 +1,5 @@
 // state.js - state model for Elfland Glider
-// Copyright © 2017 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017-2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
 
 const GRAVITY = 9.807;   // m/s^2
@@ -183,7 +183,9 @@ AFRAME.registerState({
         },
 
         iterate: function (state, action) {
-            state.time = action.time;
+            // A pause in the action is better than flying blind
+            action.timeDelta = Math.min(action.timeDelta, 100);
+            state.time += action.timeDelta;
             let cameraRotation = state.cameraEl.getAttribute('rotation');
             if (!cameraRotation) {
                 console.warn("camera rotation not available");
