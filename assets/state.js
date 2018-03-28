@@ -252,7 +252,12 @@ AFRAME.registerState({
     },
 
     computeState: function (newState, payload) {
+        let oldQuestComplete = newState.questComplete;
         newState.questComplete = newState.stars >= newState.numYellowStars;
+        if (newState.questComplete && ! oldQuestComplete) {
+            let snd = new Audio("../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3");
+            snd.play();
+        }
     }
 });
 

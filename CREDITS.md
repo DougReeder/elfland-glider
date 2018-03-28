@@ -30,6 +30,9 @@ Swell2 from _SelectCam Buddha Machine_ is by Randolph Johnson & P. Douglas Reede
 ding (https://freesound.org/people/Daronoxus/sounds/393633/) 
 by Daronoxus (https://freesound.org/people/Daronoxus/) has been released to the public domain.
 
+opening fanfare to Strauss' First Horn Concerto in E-flat (https://freesound.org/people/TaranP/sounds/361684/)
+recorded by "TaranP" (https://freesound.org/people/TaranP/) is licensed under Creative Commons Attribution.
+
 Off stage crash (https://freesound.org/people/bone666138/sounds/198876/)
 by "bone666138" (https://freesound.org/people/bone666138/) is licensed under Creative Commons Attribution.
 
