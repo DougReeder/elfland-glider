@@ -120,28 +120,11 @@ AFRAME.registerState({
                         break;
                 }
             }, false);
-
-            // mobile and Cardboard controls
-            AFRAME.scenes[0].addEventListener('touchstart', function(evt) {
-                // console.log('scene touchstart:', evt);
-                if (evt.target.classList.contains('a-enter-vr-button')) {
-                    return;
-                }
-
-                if (!state.isFlying) {
-                    AFRAME.scenes[0].emit('launch', evt);
-                } else {
-                    if (state.debug) {
-                        AFRAME.scenes[0].emit('hover', evt);
-                    }
-                }
-            });
         },
 
-        // all VR controllers
-        buttonchanged: function (state, action) {
-            // console.log("buttonchanged:", action);
-
+        // aframe-button-controls: any controller button, or scene touch
+        buttondown: function (state, action) {
+            // console.log("buttondown", action);
             if (!state.isFlying) {
                 AFRAME.scenes[0].emit('launch', action);
             } else {
