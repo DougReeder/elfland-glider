@@ -14,9 +14,11 @@
     "ghpages": "0.0.3"
   },
   "keywords": [
+    "fly",
+    "glide",
+    "glider",
+    "game",
     "aframe",
-    "aframe-example",
-    "aframe-boilerplate",
     "aframe-scene",
     "webvr",
     "vr"
