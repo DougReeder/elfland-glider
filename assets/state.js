@@ -43,6 +43,16 @@ AFRAME.registerState({
             state.gliderEl = armatureEl.querySelector('#glider');
             state.cameraEl = armatureEl.querySelector('[camera]');
 
+            let headingTriangleEl = state.gliderEl.querySelector('#headingTriangle');
+            let hudEl = armatureEl.querySelector('#hud');
+            this.adjustForMagicWindow(headingTriangleEl, hudEl);
+            AFRAME.scenes[0].addEventListener('enter-vr', (event) => {
+                this.adjustForMagicWindow(headingTriangleEl, hudEl);
+            });
+            AFRAME.scenes[0].addEventListener('exit-vr', (event) => {
+                this.adjustForMagicWindow(headingTriangleEl, hudEl);
+            });
+
             state.gliderEl.addEventListener('raycaster-intersection', function (evt) {
                 // Intersection w/ distance 0 is sometimes sent immediately
                 if (evt.detail.intersections.length > 0 && evt.detail.intersections[0].distance > 0) {
@@ -174,7 +184,8 @@ AFRAME.registerState({
                 console.warn("camera rotation not available");
                 return;
             }
-            let xDiff = cameraRotation.x - state.gliderRotationX;
+            let cameraRotX = this.isMagicWindow() ? cameraRotation.x + 20 : cameraRotation.x;
+            let xDiff = cameraRotX - state.gliderRotationX;
             let xChange = (xDiff + Math.sign(xDiff)*15) * (action.timeDelta / 1000);
             if (Math.abs(xChange) > Math.abs(xDiff)) {
                 xChange = xDiff;
@@ -232,6 +243,32 @@ AFRAME.registerState({
                 y: altitudeChange,
                 z: -horizontalDistance * Math.sin(horizontalAngleRad)};
         },
+
+        adjustForMagicWindow: function (headingTriangleEl, hudEl) {
+            if (! this.isMagicWindow()) {
+                headingTriangleEl.object3D.rotation.x = 0;
+            } else {
+                headingTriangleEl.object3D.rotation.x = THREE.Math.degToRad(-10.0);
+            }
+
+            if (AFRAME.scenes[0].is("vr-mode")) {
+                hudEl.object3D.position.x = 0.2;
+                hudEl.object3D.position.y = 0.42;
+                hudEl.object3D.rotation.x = THREE.Math.degToRad(30.0);
+                hudEl.object3D.rotation.y = THREE.Math.degToRad(-20.0);
+            } else {
+                hudEl.object3D.position.x = 0.85;
+                hudEl.object3D.position.y = 0.5;
+                hudEl.object3D.rotation.x = 0.0;
+                hudEl.object3D.rotation.y = 0.0;
+            }
+        },
+
+        isMagicWindow: function () {
+            return AFRAME.utils.device.isMobile () &&
+                ! AFRAME.utils.device.isGearVR() &&
+                ! AFRAME.scenes[0].is("vr-mode")
+        }
     },
 
     computeState: function (newState, payload) {

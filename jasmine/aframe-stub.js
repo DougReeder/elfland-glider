@@ -1,5 +1,5 @@
 // aframe-stub.js - allows testing app code that uses A-Frame
-// Copyright © 2017 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017-2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 var elementParam = {};   // keyed by name
 
@@ -36,6 +36,13 @@ var AFRAME = {
 
     registerState: function(param) {
         stateParam = param;
+    },
+
+    utils: {
+        device: {
+            isMobile: function () {return true;},
+            isGearVR: function () {return true;}
+        }
     }
 };
 
