@@ -175,6 +175,22 @@ AFRAME.registerState({
             }
         },
 
+        loaded: function (state, action) {
+            // console.log("loaded", state, action);
+            setTimeout(() => {
+                let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
+                if (prelaunchHelp) {
+                    if (AFRAME.scenes[0].is("vr-mode") || AFRAME.utils.device.isGearVR()) {
+                        prelaunchHelp.setAttribute('value', "Press a button\nto launch");
+                    } else if (AFRAME.utils.device.isMobile ()) {
+                        prelaunchHelp.setAttribute('value', "Tap screen\nto launch");
+                    } else {
+                        prelaunchHelp.setAttribute('value', "Press space bar\nto launch");
+                    }
+                }
+            }, 7000);
+        },
+
         iterate: function (state, action) {
             // A pause in the action is better than flying blind
             action.timeDelta = Math.min(action.timeDelta, 100);
@@ -272,11 +288,15 @@ AFRAME.registerState({
     },
 
     computeState: function (newState, payload) {
-        let oldQuestComplete = newState.questComplete;
-        newState.questComplete = newState.stars >= newState.numYellowStars;
-        if (newState.questComplete && ! oldQuestComplete) {
-            let snd = new Audio("../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3");
-            snd.play();
+        try {
+            let oldQuestComplete = newState.questComplete;
+            newState.questComplete = newState.stars >= newState.numYellowStars;
+            if (newState.questComplete && ! oldQuestComplete) {
+                let snd = new Audio("../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3");
+                snd.play();
+            }
+        } catch (err) {
+            console.error(err);
         }
     }
 });

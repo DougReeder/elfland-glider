@@ -77,8 +77,6 @@
               link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot-yggdrasil.png; on:hitstart"
               bind="visible: questComplete"></a-entity>
 
-    <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="mozillavr" value="Don't Crash!" visible="false"></a-text>
-
     <!--<a-entity fps-counter></a-entity>-->
     <!--<a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="left" value="Message" geometry="primitive:plane; width:10; height:1.4;"-->
             <!--material="color: gray" bind="text.value: stars"></a-text>-->
@@ -98,6 +96,7 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity button-controls></a-entity>
+        <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="mozillavr" value="" visible="true"></a-text>
     </a-entity>
 </a-scene>
 </body>
