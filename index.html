@@ -23,6 +23,21 @@
       .wrapper > * {
         padding: 1em;
       }
+
+      .portraitOnly {
+        display: none;
+      }
+      .landscapeOnly {
+        display: block;
+      }
+      @media only screen and (orientation: portrait) {
+        .portraitOnly {
+          display: block;
+        }
+        .landscapeOnly {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -45,8 +60,10 @@
         <tr><td><b>Tap</b> goggle button to enter VR mode</td>
           <td><span class="a-enter-vr-button" style="position:static; width:50px; display:inline-block; vertical-align:top; cursor:default"></span></td></tr>
       </table>
-      <div style="text-align:center;">
-        <a href="island/index.html"><span style="font-size: xx-large"> Start! </span></a>
+      <div id="start" style="text-align:center; font-size: xx-large">
+        <div>
+          <a href="island/">Start!</a>
+        </div>
       </div>
       <div style="font-family:serif; font-size:smaller;">
         <p><a href="CREDITS.md">Credits</a></p>
@@ -83,8 +100,15 @@
             wrapper.replaceChild(keyboardControls, vrControls);
         }
 
+        if (AFRAME.utils.device.isMobile() && ! AFRAME.utils.device.isGearVR() && ! (AFRAME.scenes[0] && AFRAME.scenes[0].is("vr-mode"))) {
+            let start = document.getElementById('start');
+            let linkHolder = start.firstElementChild;
+            linkHolder.classList.add('landscapeOnly');
+            start.insertAdjacentHTML('beforeend', '<div class="portraitOnly" style="color:red">Please rotate your device to landscape mode. &#x21B6;</div>');
+        }
+
         if (! window.hasNativeWebVRImplementation) {
-            var overview = document.getElementById('overview');
+            let overview = document.getElementById('overview');
             overview.insertAdjacentHTML('afterend', '<div><p>This browser lacks native WebVR, so don\'t complain about performance.</p></div>')
         }
     </script>
