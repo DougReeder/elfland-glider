@@ -106,6 +106,12 @@
             linkHolder.classList.add('landscapeOnly');
             start.insertAdjacentHTML('beforeend', '<div class="portraitOnly" style="color:red">Please rotate your device to landscape mode. &#x21B6;</div>');
         }
+        let couldSwitchToGearVr = /\(Linux; [^)]*Android [^)]* (SM-N920|SM-N950|SM-G920|SM-G925|SM-G928|SM-G930|SM-G935|SM-G950|SM-G955|SM-G960|SM-G965)/.test(navigator.userAgent)
+            && ! AFRAME.utils.device.isGearVR();
+        if (couldSwitchToGearVr) {
+            let start = document.getElementById('start');
+            start.insertAdjacentHTML('beforeend', '<div>or</div><a href="' + "ovrweb:" + window.location + "island/" + '">Start in Gear VR!</a>');
+        }
 
         if (! window.hasNativeWebVRImplementation) {
             let overview = document.getElementById('overview');
