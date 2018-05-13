@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Intro - Elfland Glider</title>
     <meta name="description" content="A tranquil action puzzle game for VR and mobile">
-    <meta name="viewport" content="width=320, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <style>
       html {
@@ -13,15 +13,26 @@
         background-position: bottom right;
         background-color: #eeeeee;
       }
-      .subtitle {
-        font-size: 1rem;
+      h1 {
+        margin: 0.5em;
       }
+
       .wrapper {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          margin: 1em;
       }
       .wrapper > * {
-        padding: 1em;
+          margin: 1em;
+      }
+      @supports (display: grid) {
+          .wrapper {
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+              grid-gap: 1em;
+              gap: 1em;
+          }
+          .wrapper > * {
+              margin: 0;
+          }
       }
 
       .portraitOnly {
@@ -41,14 +52,17 @@
     </style>
   </head>
   <body>
-    <h1 style="text-align:center;">Elfland Glider<br><span class="subtitle">A tranquil action puzzle game for VR&nbsp;and&nbsp;mobile</span></h1>
+    <h1 style="text-align:center;">Elfland Glider</h1>
     <div class="wrapper">
       <div id="overview">
-        <p>
         Fly through fantastic worlds,
         help the merry and mischievous light elves,
         & avoid the surly and mischievous dark elves.
-        </p>
+      </div>
+      <div id="start" style="text-align:center; font-size: xx-large">
+        <div>
+          <a href="island/">Start!</a>
+        </div>
       </div>
       <table id="vrControls">
         <tr><td><b>Tilt</b> your head left to turn your glider left</td><td><img src="assets/head-tilt-left.png"></td></tr>
@@ -60,15 +74,10 @@
         <tr><td><b>Tap</b> goggle button to enter VR mode</td>
           <td><span class="a-enter-vr-button" style="position:static; width:50px; display:inline-block; vertical-align:top; cursor:default"></span></td></tr>
       </table>
-      <div id="start" style="text-align:center; font-size: xx-large">
-        <div>
-          <a href="island/">Start!</a>
-        </div>
-      </div>
       <div style="font-family:serif; font-size:smaller;">
-        <p><a href="CREDITS.md">Credits</a></p>
-        <p>Uses <a href="https://webvr.info/">WebVR</a> and <a href="https://aframe.io"><nobr>A-Frame</nobr></a>.</p>
-        <p>Copyright © 2017-2018 by P. Douglas Reeder; Licensed under the GNU GPL-3.0</p>
+        <div><a href="CREDITS.md">Credits</a></div>
+        <div>Uses <a href="https://webvr.info/">WebVR</a> and <a href="https://aframe.io"><nobr>A-Frame</nobr></a>.</div>
+        <div>Copyright © 2017-2018 by P. Douglas Reeder; Licensed under the GNU GPL-3.0</div>
       </div>
     </div>
     <!-- When there's actually something for the user to configure or select, before starting, he/she will do it
@@ -85,7 +94,7 @@
 
             var keyboardControls = document.createElement('div');
             keyboardControls.innerHTML =
-                '<p>Elfland Glider is designed for VR or mobile, but if you want to try it here:</p>' +
+                '<div>Elfland Glider is designed for VR or mobile, but if you want to try it here:</div>' +
                 '<table style="width:100%">' +
                 '<tr><td>A or left-arrow</td><td>turn glider left</td></tr>' +
                 '<tr><td>D or right-arrow</td><td>turn glider right</td></tr>' +
@@ -106,16 +115,11 @@
             linkHolder.classList.add('landscapeOnly');
             start.insertAdjacentHTML('beforeend', '<div class="portraitOnly" style="color:red">Please rotate your device to landscape mode. &#x21B6;</div>');
         }
-        let couldSwitchToGearVr = /\(Linux; [^)]*Android [^)]* (SM-N920|SM-N950|SM-G920|SM-G925|SM-G928|SM-G930|SM-G935|SM-G950|SM-G955|SM-G960|SM-G965)/.test(navigator.userAgent)
-            && ! AFRAME.utils.device.isGearVR();
-        if (couldSwitchToGearVr) {
-            let start = document.getElementById('start');
-            start.insertAdjacentHTML('beforeend', '<div>or</div><a href="' + "ovrweb:" + window.location + "island/" + '">Start in Gear VR!</a>');
-        }
 
         if (! window.hasNativeWebVRImplementation) {
             let overview = document.getElementById('overview');
-            overview.insertAdjacentHTML('afterend', '<div><p>This browser lacks native WebVR, so don\'t complain about performance.</p></div>')
+            overview.insertAdjacentHTML('afterend', '<div>This browser lacks <a href="https://webvr.info/">native WebVR</a>,' +
+                ' so don\'t complain about performance. </div>')
         }
     </script>
   </body>
