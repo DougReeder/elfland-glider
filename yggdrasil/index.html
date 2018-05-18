@@ -49,7 +49,7 @@
 
     <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="../assets/mozillavr.fnt" value="Congratulations!\nYou've completed the main quests.\nExplore all the worlds!"></a-text>
 
-    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
+    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
               aabb-collider="objects:[link]" >
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"

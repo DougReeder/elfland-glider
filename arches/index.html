@@ -90,7 +90,7 @@
     <a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="left" value="Message" geometry="primitive:plane; width:10; height:1.4;"
             material="color: gray" bind="text.value: stars"></a-text>
 
-    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
+    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
               aabb-collider="objects:.star,[link]" >
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"

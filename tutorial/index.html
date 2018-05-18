@@ -64,7 +64,7 @@
               link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot-yggdrasil.png; on:hitstart"
               bind="visible: questComplete"></a-entity>
 
-    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2"
+    <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
               aabb-collider="objects:.star,[link]" >
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
