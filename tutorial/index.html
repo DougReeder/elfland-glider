@@ -25,11 +25,13 @@
                 for (let x= -2000; x<=2000; x+=500) {
                     for (let z= -2000; z<=2000; z+=500) {
                         if (x===0 && z===0) {
-                            continue;
+                            continue;   // no buoy at column location
                         }
                         for (let y=0; y<=500; y+=500) {
                             let buoyEl = document.createElement('a-entity');
-                            buoyEl.setAttribute('position', x + ' ' + y + ' ' + z);
+                            buoyEl.object3D.position.x = x;
+                            buoyEl.object3D.position.y = y;
+                            buoyEl.object3D.position.z = z;
                             buoyEl.setAttribute('mixin', "tetra");
                             if ((x + z + y) % 1000 === 0) {
                                 buoyEl.setAttribute('material', 'color:red');
