@@ -43,15 +43,23 @@ AFRAME.registerState({
             state.gliderEl = armatureEl.querySelector('#glider');
             state.cameraEl = armatureEl.querySelector('[camera]');
 
+            let bodyEl = state.armatureEl.querySelector('#body');
             let headingTriangleEl = state.gliderEl.querySelector('#headingTriangle');
             let hudEl = armatureEl.querySelector('#hud');
             this.adjustForMagicWindow(headingTriangleEl, hudEl);
             AFRAME.scenes[0].addEventListener('enter-vr', (event) => {
+                bodyEl.object3D.position.y = -1.6;
                 this.adjustForMagicWindow(headingTriangleEl, hudEl);
             });
             AFRAME.scenes[0].addEventListener('exit-vr', (event) => {
+                bodyEl.object3D.position.y = 0;
                 this.adjustForMagicWindow(headingTriangleEl, hudEl);
             });
+
+            if (!AFRAME.utils.device.isMobile() && !AFRAME.utils.device.checkHeadsetConnected()) {
+                console.log("destop w/o headset; disabling look-fly-controls so keyboard controls can function");
+                state.cameraEl.setAttribute('look-fly-controls', 'enabled', 'false');
+            }
 
             state.gliderEl.addEventListener('raycaster-intersection', function (evt) {
                 // Intersection w/ distance 0 is sometimes sent immediately
@@ -102,19 +110,19 @@ AFRAME.registerState({
                 switch (evt.code) {
                     case 'KeyA':
                     case 'ArrowLeft':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z+4});
+                        state.cameraEl.object3D.rotation.z += 0.07;
                         break;
                     case 'KeyD':
                     case 'ArrowRight':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x, y: cameraRotation.y, z: cameraRotation.z-4});
+                        state.cameraEl.object3D.rotation.z -= 0.07;
                         break;
                     case 'KeyW':
                     case 'ArrowUp':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x+2, y: cameraRotation.y, z: cameraRotation.z});
+                        state.cameraEl.object3D.rotation.x += 0.045;
                         break;
                     case 'KeyS':
                     case 'ArrowDown':
-                        state.cameraEl.setAttribute('rotation', {x: cameraRotation.x-2, y: cameraRotation.y, z: cameraRotation.z});
+                        state.cameraEl.object3D.rotation.x -= 0.045;
                         break;
                     case 'Space':
                         if (!state.isFlying) {
