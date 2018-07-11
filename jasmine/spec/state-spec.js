@@ -10,6 +10,7 @@ describe("state", function () {
             gliderEl: new MockElement({rotation: {x: 0, y: 0, z: 0}}),
             cameraEl: new MockElement({rotation: {x: 0, y: 0, z: 0}}),
             time: 5000,
+            difficulty: 0.5,
             gliderPosition: {x: 0, y: 10, z: 10},
             gliderRotationX: 0,
             gliderRotationY: 0,
@@ -21,12 +22,12 @@ describe("state", function () {
 
     it("should allow timeDelta up to 0.1 sec", function () {
         stateParam.handlers.iterate(state, {time: 5100, timeDelta: 100});
-        expect(state.time).toEqual(5100);
+        expect(state.time).toEqual(5050);
     });
 
     it("should cap timeDelta at 0.1 sec", function () {
         stateParam.handlers.iterate(state, {time: 5101, timeDelta: 101});
-        expect(state.time).toEqual(5100);
+        expect(state.time).toEqual(5050);
     });
 
 
