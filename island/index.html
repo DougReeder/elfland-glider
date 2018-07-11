@@ -49,6 +49,7 @@
                 }
 
 
+                let starScale = AFRAME.utils.device.isMobile() || AFRAME.utils.device.checkHeadsetConnected() ? 1.0 : 2.0;
                 let totalStars = AFRAME.utils.device.isMobile() ? 50 : 75;
                 for (let s=0; s<totalStars; ++s) {
                     let starEl = document.createElement('a-entity');
@@ -58,6 +59,7 @@
                     starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
                     starEl.setAttribute('material', {visible:false});
                     starEl.setAttribute('sound', {src:'#ding', on:'hitstart'});
+                    starEl.object3D.scale.set(starScale, starScale, starScale);
 
                     let starInnerEl = document.createElement('a-entity');
                     starInnerEl.setAttribute('rotation', '45 0 45');
