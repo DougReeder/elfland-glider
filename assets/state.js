@@ -47,13 +47,22 @@ AFRAME.registerState({
             let headingTriangleEl = state.gliderEl.querySelector('#headingTriangle');
             let hudEl = armatureEl.querySelector('#hud');
             this.adjustForMagicWindow(headingTriangleEl, hudEl);
+            if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected()) {
+                this.adjustHudForVR(hudEl);
+            } else {
+                this.adjustHudForFlat(hudEl);
+            }
             AFRAME.scenes[0].addEventListener('enter-vr', (event) => {
-                bodyEl.object3D.position.y = -1.6;
-                this.adjustForMagicWindow(headingTriangleEl, hudEl);
+                if (AFRAME.utils.device.checkHeadsetConnected()) {
+                    bodyEl.object3D.position.y = -1.6;
+                    this.adjustHudForVR(hudEl);
+                    this.adjustForMagicWindow(headingTriangleEl);
+                }
             });
             AFRAME.scenes[0].addEventListener('exit-vr', (event) => {
-                bodyEl.object3D.position.y = 0;
-                this.adjustForMagicWindow(headingTriangleEl, hudEl);
+                // bodyEl.object3D.position.y = 0;   // Why is this unnecessary?
+                this.adjustHudForFlat(hudEl);
+                this.adjustForMagicWindow(headingTriangleEl);
             });
 
             if (!AFRAME.utils.device.isMobile() && !AFRAME.utils.device.checkHeadsetConnected()) {
@@ -268,23 +277,11 @@ AFRAME.registerState({
                 z: -horizontalDistance * Math.sin(horizontalAngleRad)};
         },
 
-        adjustForMagicWindow: function (headingTriangleEl, hudEl) {
+        adjustForMagicWindow: function (headingTriangleEl) {
             if (! this.isMagicWindow()) {
                 headingTriangleEl.object3D.rotation.x = 0;
             } else {
                 headingTriangleEl.object3D.rotation.x = THREE.Math.degToRad(-10.0);
-            }
-
-            if (AFRAME.scenes[0].is("vr-mode")) {
-                hudEl.object3D.position.x = 0.2;
-                hudEl.object3D.position.y = 0.42;
-                hudEl.object3D.rotation.x = THREE.Math.degToRad(30.0);
-                hudEl.object3D.rotation.y = THREE.Math.degToRad(-20.0);
-            } else {
-                hudEl.object3D.position.x = 0.85;
-                hudEl.object3D.position.y = 0.5;
-                hudEl.object3D.rotation.x = 0.0;
-                hudEl.object3D.rotation.y = 0.0;
             }
         },
 
@@ -292,6 +289,20 @@ AFRAME.registerState({
             return AFRAME.utils.device.isMobile () &&
                 ! AFRAME.utils.device.isGearVR() &&
                 ! AFRAME.scenes[0].is("vr-mode")
+        },
+
+        adjustHudForVR: function (hudEl) {
+            hudEl.object3D.position.x = 0.2;
+            hudEl.object3D.position.y = 0.42;
+            hudEl.object3D.rotation.x = THREE.Math.degToRad(30.0);
+            hudEl.object3D.rotation.y = THREE.Math.degToRad(-20.0);
+        },
+
+        adjustHudForFlat: function (hudEl) {
+            hudEl.object3D.position.x = 0.85;
+            hudEl.object3D.position.y = 0.5;
+            hudEl.object3D.rotation.x = 0.0;
+            hudEl.object3D.rotation.y = 0.0;
         }
     },
 
