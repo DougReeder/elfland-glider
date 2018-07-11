@@ -3,6 +3,9 @@
 //
 
 const GRAVITY = 9.807;   // m/s^2
+const DIFFICULTY_VR = 0.75;
+const DIFFICULTY_MAGIC_WINDOW = 0.6;
+const DIFFICULTY_KEYBOARD = 0.5;
 
 AFRAME.registerState({
     initialState: {
@@ -10,6 +13,7 @@ AFRAME.registerState({
         gliderEl: null,
         cameraEl: null,
         time: 0,
+        difficulty: DIFFICULTY_MAGIC_WINDOW,
         gliderPosition: {x:-30, y:15, z:30},
         gliderPositionStart: {x:-30, y:15, z:30},
         gliderRotationX: 0,
@@ -49,20 +53,32 @@ AFRAME.registerState({
             this.adjustForMagicWindow(headingTriangleEl, hudEl);
             if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected()) {
                 this.adjustHudForVR(hudEl);
+                state.difficulty = DIFFICULTY_VR;
             } else {
                 this.adjustHudForFlat(hudEl);
+                if (AFRAME.utils.device.isMobile()) {
+                    state.difficulty = DIFFICULTY_MAGIC_WINDOW;
+                } else {
+                    state.difficulty = DIFFICULTY_KEYBOARD;
+                }
             }
             AFRAME.scenes[0].addEventListener('enter-vr', (event) => {
                 if (AFRAME.utils.device.checkHeadsetConnected()) {
                     bodyEl.object3D.position.y = -1.6;
                     this.adjustHudForVR(hudEl);
                     this.adjustForMagicWindow(headingTriangleEl);
+                    state.difficulty = DIFFICULTY_VR;
                 }
             });
             AFRAME.scenes[0].addEventListener('exit-vr', (event) => {
                 // bodyEl.object3D.position.y = 0;   // Why is this unnecessary?
                 this.adjustHudForFlat(hudEl);
                 this.adjustForMagicWindow(headingTriangleEl);
+                if (AFRAME.utils.device.isMobile()) {
+                    state.difficulty = DIFFICULTY_MAGIC_WINDOW;
+                } else {
+                    state.difficulty = DIFFICULTY_KEYBOARD;
+                }
             });
 
             if (!AFRAME.utils.device.isMobile() && !AFRAME.utils.device.checkHeadsetConnected()) {
@@ -197,9 +213,9 @@ AFRAME.registerState({
             setTimeout(() => {
                 let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
                 if (prelaunchHelp) {
-                    if (AFRAME.scenes[0].is("vr-mode") || AFRAME.utils.device.isGearVR()) {
+                    if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isGearVR()) {
                         prelaunchHelp.setAttribute('value', "Press a button\nto launch");
-                    } else if (AFRAME.utils.device.isMobile ()) {
+                    } else if (AFRAME.utils.device.isMobile()) {
                         prelaunchHelp.setAttribute('value', "Tap screen\nto launch");
                     } else {
                         prelaunchHelp.setAttribute('value', "Press space bar\nto launch");
@@ -211,7 +227,7 @@ AFRAME.registerState({
         iterate: function (state, action) {
             // A pause in the action is better than flying blind
             action.timeDelta = Math.min(action.timeDelta, 100);
-            state.time += action.timeDelta;
+            state.time += action.timeDelta * state.difficulty;
             let cameraRotation = state.cameraEl.getAttribute('rotation');
             if (!cameraRotation) {
                 console.warn("camera rotation not available");
