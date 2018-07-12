@@ -6,6 +6,7 @@ const GRAVITY = 9.807;   // m/s^2
 const DIFFICULTY_VR = 0.75;
 const DIFFICULTY_MAGIC_WINDOW = 0.6;
 const DIFFICULTY_KEYBOARD = 0.5;
+const POWERUP_BOOST = 16;
 
 AFRAME.registerState({
     initialState: {
@@ -115,7 +116,7 @@ AFRAME.registerState({
                 evt.detail.intersectedEls.forEach(function (el) {
                     if (el.classList.contains('powerup')) {
                         console.log("powerup");
-                        state.gliderSpeed += 12;
+                        state.gliderSpeed += POWERUP_BOOST;
                     } else if (el.classList.contains('star')) {
                        ++state.stars;
                        console.log("collected star", state.stars, "of", state.numYellowStars);
