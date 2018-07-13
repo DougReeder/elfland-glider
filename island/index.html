@@ -6,6 +6,7 @@
     <meta name="description" content="Help the fairies collect all their stars!">
     <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-06-20" content="AumwglYoLOmVMRC0kZEM0cBxsm6mKsLApNWTV6vt7MKepWAfnBWh9dQNlNxVCrdpFwH7OB2aSZJjpcrFhtYp+QMAAABZeyJvcmlnaW4iOiJodHRwczovL2RvdWdyZWVkZXIuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUyOTQ2NjIwOH0=">
     <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-06-20" content="As9ETIc1e/OiSU8Ep7yF+k7s76kvumDKhG0A04zELfVXRb9A6sUejwmepb5QvzIRMJNILZstcXhwCtGhsR6lDAQAAABceyJvcmlnaW4iOiJodHRwczovL2VsZmxhbmQtZ2xpZGVyLnN1cmdlLnNoOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUyOTQ2NjIwOH0=">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
     <script src="https://rawgit.com/aframevr/aframe/a1a142f/dist/aframe-master.min.js"></script>
     <!--<script src="../assets/aframe-master.min.js"></script>-->
     <!--<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>-->
@@ -23,6 +24,13 @@
     <script>
         AFRAME.registerComponent('island', {
             init: function () {
+                this.minimalist = new Howl({
+                    src: ['../assets/Olaf%20Minimalist.mp3'],
+                    autoplay: true,
+                    loop: true,
+                    volume: 0.2
+                });
+
                 let sceneEl = this.el;
                 sceneEl.emit('setState', {gliderPositionStart: {x:-500, y:100, z:500}});
                 sceneEl.emit('setState', {gliderPosition: {x:-500, y:100, z:500}});
@@ -38,7 +46,6 @@
                     powerupEl.setAttribute('position', this.randomPosition(mountainComp, dispersion, 9, ceiling));
                     powerupEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
                     powerupEl.setAttribute('material', {visible:false});
-                    powerupEl.setAttribute('sound', {src:'#powerup', volume:'4.0', on:'hitstart'});
 
                     let powerupInnerEl = document.createElement('a-icosahedron');
                     powerupInnerEl.setAttribute('material', {color:'#ff0000'});
@@ -58,7 +65,6 @@
                     starEl.setAttribute('position', this.randomPosition(mountainComp, dispersion, 12, 150));
                     starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
                     starEl.setAttribute('material', {visible:false});
-                    starEl.setAttribute('sound', {src:'#ding', on:'hitstart'});
                     starEl.object3D.scale.set(starScale, starScale, starScale);
 
                     let starInnerEl = document.createElement('a-entity');
@@ -117,8 +123,6 @@
 <body>
 <a-scene island cursor="rayOrigin: mouse">
     <a-assets>
-        <audio id="ding" src="../assets/393633__daronoxus__ding.mp3"></audio>
-        <audio id="powerup" src="../assets/411460__inspectorj__power-up-bright-a.mp3"></audio>
         <audio id="minimalist" src="../assets/Olaf%20Minimalist.mp3"></audio>
         <a-asset-item id="fairies" src="../assets/bucket_with_fairies/scene.gltf"></a-asset-item>
     </a-assets>
@@ -161,7 +165,6 @@
         </a-entity>
         <a-entity button-controls></a-entity>
         <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="mozillavr" value="Help the fairies\ncollect all their stars!" visible="true"></a-text>
-        <a-sound id="environmentalSound" src="#minimalist" loop="true" volume="0.2"></a-sound>
     </a-entity>
 
     <!--<a-entity fps-counter></a-entity>-->

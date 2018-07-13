@@ -41,6 +41,8 @@ AFRAME.registerState({
         },
 
         setArmatureEl: function (state, armatureEl) {
+            this.powerup = new Howl({src: ['../assets/411460__inspectorj__power-up-bright-a.mp3']});
+
             console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
             console.log("isMobile:", AFRAME.utils.device.isMobile());
 
@@ -83,20 +85,19 @@ AFRAME.registerState({
             });
 
             if (!AFRAME.utils.device.isMobile() && !AFRAME.utils.device.checkHeadsetConnected()) {
-                console.log("destop w/o headset; disabling look-fly-controls so keyboard controls can function");
+                console.log("desktop w/o headset; disabling look-fly-controls so keyboard controls can function");
                 state.cameraEl.setAttribute('look-fly-controls', 'enabled', 'false');
             }
 
-            state.gliderEl.addEventListener('raycaster-intersection', function (evt) {
+            state.gliderEl.addEventListener('raycaster-intersection', (evt) => {
                 // Intersection w/ distance 0 is sometimes sent immediately
                 if (evt.detail.intersections.length > 0 && evt.detail.intersections[0].distance > 0) {
-                    console.log("CRASH!", evt.detail.els[0].tagName, evt.detail.els[0].components.sound,
+                    console.log("CRASH!", evt.detail.els[0].tagName,
                         evt.detail.intersections[0].distance,
                         state.gliderEl.getAttribute('raycaster').far, state.gliderSpeed / 10);
                     AFRAME.scenes[0].emit('hover', {});
-                    // The sound component wasn't working, and I couldn't figure out why.
-                    var snd = new Audio("../assets/198876__bone666138__crash.mp3"); // buffers automatically when created
-                    snd.play();
+                    let crash = new Howl({src: ['../assets/198876__bone666138__crash.mp3']});
+                    crash.play();
 
                     setTimeout(function () {
                         // console.log("setting start position");
@@ -111,17 +112,18 @@ AFRAME.registerState({
                 }
             });
 
-            armatureEl.addEventListener('hitstart', function (evt) {
+            armatureEl.addEventListener('hitstart', (evt) => {
                 // console.log('hitstart armature:', evt.detail.intersectedEls);
-                evt.detail.intersectedEls.forEach(function (el) {
+                evt.detail.intersectedEls.forEach( (el) => {
                     if (el.classList.contains('powerup')) {
                         console.log("powerup");
                         state.gliderSpeed += POWERUP_BOOST;
+                        this.powerup.play();
                     } else if (el.classList.contains('star')) {
                        ++state.stars;
                        console.log("collected star", state.stars, "of", state.numYellowStars);
-                       el.setAttribute('visible', 'false');
-                       setTimeout(() => el.parentNode.removeChild(el), 2000);   // allow sound to finish
+                        el.parentNode.removeChild(el);
+                       this.ding.play();
                    } else if (el.components.link) {
                        console.log("hit link");
                    }
@@ -181,6 +183,9 @@ AFRAME.registerState({
         countYellowStars: function (state, action) {
             state.numYellowStars = AFRAME.scenes[0].querySelectorAll('.star').length;
             console.log("numYellowStars:", state.numYellowStars);
+            if (state.numYellowStars) {
+                this.ding = new Howl({src: ['../assets/393633__daronoxus__ding.mp3']});
+            }
         },
 
         launch: function (state, action) {
@@ -192,21 +197,11 @@ AFRAME.registerState({
             if (prelaunchHelp) {
                 prelaunchHelp.parentNode.removeChild(prelaunchHelp);
             }
-
-            let environmentalSound = AFRAME.scenes[0].querySelector('#environmentalSound');
-            if (environmentalSound) {
-                environmentalSound.components.sound.playSound();
-            }
         },
         hover: function (state, action) {
             console.log("hover", action);
 
             state.isFlying = false;
-
-            let environmentalSound = AFRAME.scenes[0].querySelector('#environmentalSound');
-            if (environmentalSound) {
-                environmentalSound.components.sound.pauseSound();
-            }
         },
 
         loaded: function (state, action) {
@@ -328,8 +323,8 @@ AFRAME.registerState({
             let oldQuestComplete = newState.questComplete;
             newState.questComplete = newState.stars >= newState.numYellowStars;
             if (newState.questComplete && ! oldQuestComplete) {
-                let snd = new Audio("../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3");
-                snd.play();
+                let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
+                horncall.play();
             }
         } catch (err) {
             console.error(err);

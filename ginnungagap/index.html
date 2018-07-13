@@ -6,6 +6,7 @@
     <meta name="description" content="Reflect on the choices that led you here">
     <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-06-20" content="AumwglYoLOmVMRC0kZEM0cBxsm6mKsLApNWTV6vt7MKepWAfnBWh9dQNlNxVCrdpFwH7OB2aSZJjpcrFhtYp+QMAAABZeyJvcmlnaW4iOiJodHRwczovL2RvdWdyZWVkZXIuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUyOTQ2NjIwOH0=">
     <meta http-equiv="origin-trial" data-feature="WebVR (For Chrome M62+)" data-expires="2018-06-20" content="As9ETIc1e/OiSU8Ep7yF+k7s76kvumDKhG0A04zELfVXRb9A6sUejwmepb5QvzIRMJNILZstcXhwCtGhsR6lDAQAAABceyJvcmlnaW4iOiJodHRwczovL2VsZmxhbmQtZ2xpZGVyLnN1cmdlLnNoOjQ0MyIsImZlYXR1cmUiOiJXZWJWUjEuMU02MiIsImV4cGlyeSI6MTUyOTQ2NjIwOH0=">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
     <!--<script src="../assets/aframe-master.min.js"></script>-->
     <script src="https://rawgit.com/aframevr/aframe/a1a142f/dist/aframe-master.min.js"></script>
     <script src="../assets/look-fly-controls.js"></script>
@@ -21,7 +22,13 @@
             init: function () {
                 let sceneEl = this.el;
 
-                // rain is too resource-intensive for mobile
+                this.rain = new Howl({
+                    src: ['100495__jakobthiesen__light-rain-in-forest.ogg'],
+                    autoplay: true,
+                    loop: true,
+                    volume: 1.0
+                });
+                // rain visual is too resource-intensive for mobile
                 if (! AFRAME.utils.device.isMobile()) {
                     let rain = document.createElement('a-entity');
                     rain.setAttribute('particle-system', {preset: 'rain', particleCount: 500});
@@ -100,7 +107,6 @@
             </a-entity>
         </a-entity>
         <a-entity button-controls></a-entity>
-        <a-entity id="environmentalSound" position="0 0 0" sound="src: url(100495__jakobthiesen__light-rain-in-forest.ogg); volume:1.0; loop:true; autoplay:false"></a-entity>
     </a-entity>
 </a-scene>
 <!-- Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
