@@ -108,6 +108,9 @@ AFRAME.registerState({
                         state.gliderRotationY = -45;
                         state.gliderSpeed = 5;
                         state.hudText = "";
+                        state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-fly-controls disabled
+                        state.cameraEl.object3D.rotation.y = 0;
+                        state.cameraEl.object3D.rotation.z = 0;
                     }, 3000)
                 }
             });
