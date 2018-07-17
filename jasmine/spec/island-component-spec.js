@@ -79,4 +79,50 @@ describe("island-component", function () {
         let largestNearHeight = componentParam.mountain.height(x, z);
         expect(largestNearHeight).toEqual(y);
     });
+
+
+    it("should calculate a position at level of glider", function () {
+        let randomSpy = spyOn(Math, 'random').and.returnValues(0, 0.5);
+
+        let mountainDouble = {
+            height: function () {}
+        };
+        let heightSpy = spyOn(mountainDouble, 'height').and.returnValues(0);
+
+        fairiesPos = componentParam.island.belowGliderPathAboveMountain(mountainDouble);
+
+        expect(fairiesPos.x).toBeCloseTo(-429.289,3);
+        expect(fairiesPos.z).toBeCloseTo(429.289,3);
+        expect(fairiesPos.y).toEqual(100);
+        expect(heightSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it("should calculate a position below glider but above mountain", function () {
+        let randomSpy = spyOn(Math, 'random').and.returnValues(0.9999, 0);
+
+        let mountainDouble = {
+            height: function () {}
+        };
+        let heightSpy = spyOn(mountainDouble, 'height').and.returnValues(0);
+
+        fairiesPos = componentParam.island.belowGliderPathAboveMountain(mountainDouble);
+
+        expect(fairiesPos.x).toBeCloseTo(-416, 0);
+        expect(fairiesPos.z).toBeCloseTo(452, 0);
+        expect(fairiesPos.y).toBeCloseTo(74.118, 2);
+        expect(heightSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it("should shorten the distance if the mountains are too high", function () {
+        let randomSpy = spyOn(Math, 'random').and.returnValue(0);
+
+        let mountainDouble = {
+            height: function () {}
+        };
+        let heightSpy = spyOn(mountainDouble, 'height').and.returnValues(95, 90, 85);
+
+        fairiesPos = componentParam.island.belowGliderPathAboveMountain(mountainDouble);
+
+        expect(heightSpy).toHaveBeenCalledTimes(3);
+    });
 });
