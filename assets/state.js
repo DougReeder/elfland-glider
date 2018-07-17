@@ -100,7 +100,7 @@ AFRAME.registerState({
                     crash.play();
 
                     setTimeout(function () {
-                        // console.log("setting start position");
+                        // console.log("setting start position", state.gliderPositionStart);
                         state.gliderPosition.x = state.gliderPositionStart.x;
                         state.gliderPosition.y = state.gliderPositionStart.y;
                         state.gliderPosition.z = state.gliderPositionStart.z;
@@ -249,7 +249,7 @@ AFRAME.registerState({
             if (state.isFlying) {
                 let distance = state.gliderSpeed * action.timeDelta / 1000;
 
-                let posChange = this.calcPosChange(state, distance);
+                let posChange = calcPosChange(state.gliderRotationX, state.gliderRotationY+90, distance);
                 let altitudeChange = posChange.y;
                 state.gliderPosition.x += posChange.x;
                 state.gliderPosition.y += altitudeChange;
@@ -273,23 +273,14 @@ AFRAME.registerState({
 
         placeInGliderPath: function (state, action) {
             // console.log("placeInGliderPath:", action);
-            let posChange = this.calcPosChange(state, action.distance, action.variation);
+            let verticalAngleDeg = state.gliderRotationX + (Math.random()-0.5) * action.variation;
+            let horizontalAngleDeg = state.gliderRotationY + 90 + (Math.random()-0.5) * action.variation;
+            let posChange = calcPosChange(verticalAngleDeg, horizontalAngleDeg, action.distance);
             let newPos = {x: state.gliderPosition.x + posChange.x,
                 y: state.gliderPosition.y + posChange.y,
                 z: state.gliderPosition.z + posChange.z};
             action.el.setAttribute('position', newPos);
             action.el.setAttribute('rotation', 'y', state.gliderRotationY);
-        },
-
-        calcPosChange: function (state, distance, variation=0) {
-            let verticalAngleRad = (state.gliderRotationX + (Math.random()-0.5) * variation)/180*Math.PI;
-            let altitudeChange = distance * Math.sin(verticalAngleRad);
-
-            let horizontalDistance = distance * Math.cos(verticalAngleRad);
-            let horizontalAngleRad = (state.gliderRotationY + 90 + (Math.random()-0.5) * variation)/180*Math.PI;
-            return {x: horizontalDistance * Math.cos(horizontalAngleRad),
-                y: altitudeChange,
-                z: -horizontalDistance * Math.sin(horizontalAngleRad)};
         },
 
         adjustForMagicWindow: function (headingTriangleEl) {

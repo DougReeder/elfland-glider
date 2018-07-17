@@ -12,6 +12,7 @@
     <!--<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>-->
     <script src="../assets/look-fly-controls.js"></script>
     <script src="https://cdn.rawgit.com/DougReeder/aframe-button-controls/v1.0.0/aframe-button-controls.js"></script>
+    <script src="../assets/elfland-utils.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^3.2.4/dist/aframe-state-component.js"></script>
     <script src="../assets/state.js"></script>
     <script src="https://cdn.rawgit.com/DougReeder/aframe-simple-sun-sky/v1.1.0/simple-sun-sky.js"></script>
@@ -22,6 +23,9 @@
     <script src="../assets/ImprovedNoise.js"></script>
     <script src="../assets/aframe-mountain-component.js"></script>
     <script>
+        const INITIAL_POSITION = {x:-500, y:100, z:500};
+        const INITIAL_ROTATION_X = 0;
+        const INITIAL_ROTATION_Y = -45;
         AFRAME.registerComponent('island', {
             init: function () {
                 this.minimalist = new Howl({
@@ -32,8 +36,12 @@
                 });
 
                 let sceneEl = this.el;
-                sceneEl.emit('setState', {gliderPositionStart: {x:-500, y:100, z:500}});
-                sceneEl.emit('setState', {gliderPosition: {x:-500, y:100, z:500}});
+                sceneEl.emit('setState', {
+                    gliderPositionStart: INITIAL_POSITION,
+                    gliderPosition: {x: INITIAL_POSITION.x, y: INITIAL_POSITION.y, z: INITIAL_POSITION.z},
+                    gliderRotationX: INITIAL_ROTATION_X,
+                    gliderRotationY: INITIAL_ROTATION_Y
+                });
 
                 let mountainEl = sceneEl.querySelector('a-mountain');
                 let mountainComp = mountainEl.components.mountain;
@@ -83,7 +91,7 @@
                 portalEl.setAttribute('position', this.randomPosition(mountainComp, 1000, 12, 100));
 
                 let fairiesEl = document.createElement('a-gltf-model');
-                fairiesEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50, 100));
+                fairiesEl.setAttribute('position', this.belowGliderPathAboveMountain(mountainComp));
                 fairiesEl.setAttribute('src', '#fairies');
                 fairiesEl.setAttribute('scale', '0.5 0.5 0.5');
                 sceneEl.appendChild(fairiesEl);
@@ -114,6 +122,25 @@
                     y = mountainComp.height(x, z) + verticalOffset;
                 } while (y > ceiling);
                 return x + ' ' + y + ' ' + z;
+            },
+
+            belowGliderPathAboveMountain: function (mountainComp) {
+                let pos;
+                let distance = 100;
+                do {
+                    let verticalAngleDeg = INITIAL_ROTATION_X - Math.random() * 15;
+                    let horizontalAngleDeg = INITIAL_ROTATION_Y + 90 + (Math.random()-0.5) * 30;
+                    let posChange = calcPosChange(verticalAngleDeg, horizontalAngleDeg, distance);
+
+                    pos = {x: INITIAL_POSITION.x + posChange.x,
+                        y: INITIAL_POSITION.y + posChange.y,
+                        z: INITIAL_POSITION.z + posChange.z};
+
+//                    console.log("altitudes:", pos.y, mountainComp.height(pos.x, pos.z), distance);
+                    distance -= 2;   // if altitude is too low, reduce distance
+                } while (pos.y - mountainComp.height(pos.x, pos.z) < 12);
+
+                return pos;
             }
         });
     </script>
