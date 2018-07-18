@@ -10,10 +10,11 @@ using [WebVR](https://webvr.info/) and [A-Frame](https://aframe.io).
 Tilt left to turn left, tilt right to turn right. 
 Tilt up to ascend, trading speed for altitude.
 Tilt down to dive, trading altitude for speed.
-Ride a thermal to gain altitude.
-Press any controller button to take a (context-specific) action.
+Collect a powerup to gain speed.
+~~Ride a thermal to gain altitude.~~
+Press trigger or thumbpad to take a (context-specific) action, such as launching.
 
-[Play on-line](https://dougreeder.github.io/elfland-glider/arches/index.html)
+[Play on-line](https://elfland-glider.surge.sh/)
 
 ## Gameplay
 Gliding is controlled by headset tilt. 
@@ -40,7 +41,7 @@ Game objectives should just be the icing on the cake.
 Constraints and difficulties are almost entirely integrated into the worlds, not pasted atop them.
 The landscape forms an obstacle course for the player to slalom through.
 Time constraints can come from a gate that opens and closes on a schedule,
-or from a course than can only be navigated during daylight, and daylight only lasting a few minutes.
+or from a course than can only be navigated during daylight, with daylight only lasting a few minutes.
 Rain and fog can obscure passages or tools.
 A few clues should only be visible when the player looks to the side.
 
@@ -50,7 +51,8 @@ Favor showing over telling, but a well-chosen sentence can be worth a dozen pict
 For example: “Collect all the stars”.
 You can label landmarks, tools, and other plot elements, if needed, but avoid expository lumps.
 
-Levels should be playable on mobile, but butter in VR.
+Levels should be playable on mobile, but better in VR.
+They should be runnable on a desktop without VR, but the quests need not be completable using only keyboard controls.
 
 
 ## Theme
@@ -115,7 +117,7 @@ or use a dynamic model using the player's location.
 Every world should have sound, if only a global background of wind or water flowing.
 Take advantage of spatial audio. A waterfall which roars when you're near can get by with less animation. 
 
-Check out  [Where can I find assets?](https://aframe.io/docs/0.7.0/introduction/faq.html#where-can-i-find-assets)
+Check out  [Where can I find assets?](https://aframe.io/docs/0.8.0/introduction/faq.html#where-can-i-find-assets)
 
 
 ## Developing
