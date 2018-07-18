@@ -99,7 +99,7 @@ AFRAME.registerState({
                     let crash = new Howl({src: ['../assets/198876__bone666138__crash.mp3']});
                     crash.play();
 
-                    setTimeout(function () {
+                    setTimeout(() => {
                         // console.log("setting start position", state.gliderPositionStart);
                         state.gliderPosition.x = state.gliderPositionStart.x;
                         state.gliderPosition.y = state.gliderPositionStart.y;
@@ -111,6 +111,7 @@ AFRAME.registerState({
                         state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-fly-controls disabled
                         state.cameraEl.object3D.rotation.y = 0;
                         state.cameraEl.object3D.rotation.z = 0;
+                        setTimeout(this.showPrelaunchHelp.bind(this, state), 3000);
                     }, 3000)
                 }
             });
@@ -207,7 +208,7 @@ AFRAME.registerState({
 
             let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
             if (prelaunchHelp) {
-                prelaunchHelp.parentNode.removeChild(prelaunchHelp);
+                prelaunchHelp.setAttribute('value', "");
             }
         },
         hover: function (state, action) {
@@ -218,18 +219,20 @@ AFRAME.registerState({
 
         loaded: function (state, action) {
             // console.log("loaded", state, action);
-            setTimeout(() => {
-                let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
-                if (prelaunchHelp) {
-                    if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isGearVR()) {
-                        prelaunchHelp.setAttribute('value', "Press a button\nto launch");
-                    } else if (AFRAME.utils.device.isMobile()) {
-                        prelaunchHelp.setAttribute('value', "Tap screen\nto launch");
-                    } else {
-                        prelaunchHelp.setAttribute('value', "Press space bar\nto launch");
-                    }
+            setTimeout(this.showPrelaunchHelp.bind(this, state), 7000);
+        },
+
+        showPrelaunchHelp: function (state) {
+            let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
+            if (prelaunchHelp && !state.isFlying) {
+                if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isGearVR()) {
+                    prelaunchHelp.setAttribute('value', "Tilt your head left: turn left\nTilt your head right: turn right\nTrigger or thumbpad: launch");
+                } else if (AFRAME.utils.device.isMobile()) {
+                    prelaunchHelp.setAttribute('value', "Roll your device left: turn left\nRoll your device right: turn right\nTap screen: launch");
+                } else {
+                    prelaunchHelp.setAttribute('value', "A: turn left\nD: turn right\nW: climb (& slow down)\nS: descend (& speed up)\nSpace bar: launch");
                 }
-            }, 7000);
+            }
         },
 
         iterate: function (state, action) {
