@@ -88,14 +88,16 @@ AFRAME.registerComponent('island', {
             floatingEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50, 100));
             floatingEl.setAttribute('src', '../assets/hermit_s_windmill/scene.gltf');
             floatingEl.setAttribute('scale', '0.01 0.01 0.01');
+            floatingEl.setAttribute('class', 'proximityText');
+            floatingEl.setAttribute('data-text', "Look out!");
             sceneEl.appendChild(floatingEl);
 
-            let buildingEl = document.createElement('a-gltf-model');
-            buildingEl.setAttribute('position', mountainComp.buildingPosition());
-            buildingEl.setAttribute('src', '../assets/stabbur/scene.gltf');
-            buildingEl.setAttribute('scale', '3 3 3');
-            buildingEl.setAttribute('class', 'landscape');
-            sceneEl.appendChild(buildingEl);
+            // let buildingEl = document.createElement('a-gltf-model');
+            // buildingEl.setAttribute('position', mountainComp.buildingPosition());
+            // buildingEl.setAttribute('src', '../assets/stabbur/scene.gltf');
+            // buildingEl.setAttribute('scale', '3 3 3');
+            // buildingEl.setAttribute('class', 'landscape');
+            // sceneEl.appendChild(buildingEl);
         }
 
     },
