@@ -11,7 +11,7 @@ AFRAME.registerComponent('island', {
             src: ['../assets/Olaf%20Minimalist.mp3'],
             autoplay: true,
             loop: true,
-            volume: 0.2
+            volume: 0.1
         });
 
         let sceneEl = this.el;
@@ -69,10 +69,17 @@ AFRAME.registerComponent('island', {
         let portalEl = document.getElementById('nextQuestPortal');
         portalEl.setAttribute('position', this.randomPosition(mountainComp, 1000, 12, 100));
 
-        let fairiesEl = document.createElement('a-gltf-model');
+        let fairiesEl = document.createElement('a-entity');
         fairiesEl.setAttribute('position', this.belowGliderPathAboveMountain(mountainComp));
-        fairiesEl.setAttribute('src', '#fairies');
-        fairiesEl.setAttribute('scale', '0.5 0.5 0.5');
+        fairiesEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-15 -15 -15', vertexB:'15 -15 15', vertexC:'15 15 -15'});
+        fairiesEl.setAttribute('material', {visible:false});
+        fairiesEl.setAttribute('class', 'proximityText');
+        fairiesEl.setAttribute('data-text', "Please help collect stars!");
+        let fairiesInnerEl = document.createElement('a-gltf-model');
+        fairiesInnerEl.setAttribute('position', '0 -6 0');
+        fairiesInnerEl.setAttribute('src', '#fairies');
+        fairiesInnerEl.setAttribute('scale', '0.5 0.5 0.5');
+        fairiesEl.appendChild(fairiesInnerEl);
         sceneEl.appendChild(fairiesEl);
 
         if (!AFRAME.utils.device.isMobile()) {

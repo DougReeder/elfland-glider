@@ -127,6 +127,15 @@ AFRAME.registerState({
                        console.log("collected star", state.stars, "of", state.numYellowStars);
                         el.parentNode.removeChild(el);
                        this.ding.play();
+                    } else if (el.classList.contains('proximityText')) {
+                        let text = el.getAttribute('data-text');
+                        let subtitle = AFRAME.scenes[0].querySelector('#subtitle');
+                        if (text && subtitle) {
+                            subtitle.setAttribute('value', text);
+                            setTimeout(() => {
+                                subtitle.setAttribute('value', "");
+                            }, 5000);
+                        }
                    } else if (el.components.link) {
                        console.log("hit link");
                    }
