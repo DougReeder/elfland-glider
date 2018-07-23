@@ -226,7 +226,7 @@ AFRAME.registerState({
             let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
             if (prelaunchHelp && !state.isFlying) {
                 if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isGearVR()) {
-                    prelaunchHelp.setAttribute('value', "Tilt your head left: turn left\nTilt your head right: turn right\nTrigger or thumbpad: launch");
+                    prelaunchHelp.setAttribute('value', "Tilt your head left: turn left\nTilt your head right: turn right\nTrigger or touchpad: launch");
                 } else if (AFRAME.utils.device.isMobile()) {
                     prelaunchHelp.setAttribute('value', "Roll your device left: turn left\nRoll your device right: turn right\nTap screen: launch");
                 } else {

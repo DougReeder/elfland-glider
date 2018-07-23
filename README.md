@@ -12,7 +12,7 @@ Tilt up to ascend, trading speed for altitude.
 Tilt down to dive, trading altitude for speed.
 Collect a powerup to gain speed.
 ~~Ride a thermal to gain altitude.~~
-Press trigger or thumbpad to take a (context-specific) action, such as launching.
+Press trigger or touchpad to take a (context-specific) action, such as launching.
 
 [Play on-line](https://elfland-glider.surge.sh/)
 
