@@ -50,6 +50,13 @@ AFRAME.registerState({
             state.gliderEl = armatureEl.querySelector('#glider');
             state.cameraEl = armatureEl.querySelector('[camera]');
 
+            let dustEl = AFRAME.scenes[0].querySelector('a-dust');
+            if (dustEl) {
+                requestIdleCallback(() => {   // delays setup until there's some slack time
+                    dustEl.components.dust.setCamera(state.armatureEl);
+                });
+            }
+
             let bodyEl = state.armatureEl.querySelector('#body');
             let headingTriangleEl = state.gliderEl.querySelector('#headingTriangle');
             let hudEl = armatureEl.querySelector('#hud');

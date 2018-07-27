@@ -14,6 +14,7 @@
     <script src="https://unpkg.com/aframe-state-component@^3.2.4/dist/aframe-state-component.min.js"></script>
     <script src="../assets/state.js"></script>
     <script src="https://cdn.rawgit.com/DougReeder/aframe-simple-sun-sky/v1.1.0/simple-sun-sky.js"></script>
+    <script src="https://unpkg.com/aframe-dust-component@^1.0.0/aframe-dust-component.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
     <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
     <script src="https://rawgit.com/andreasplesch/aframe-heightgrid-component/master/dist/aframe-heightgrid-component.min.js"></script>
@@ -76,6 +77,7 @@
               <!--geometry="primitive:triangle; vertexA:0 0 0; vertexB:10 0 0; vertexC:0 10 0"-->
               <!--material="shader:land; colorYin:#63574d; sunPosition:-1 1 1;"></a-entity>-->
 
+    <a-dust num-points="128" dispersion="100" color="white" point-size="2"></a-dust>
 
     <a-entity id="nextQuestPortal" position="0 -5 -500" scale="5 5 0"
               link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot-yggdrasil.png; on:hitstart"
