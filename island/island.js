@@ -7,7 +7,7 @@ const INITIAL_ROTATION_X = 0;
 const INITIAL_ROTATION_Y = -45;
 AFRAME.registerComponent('island', {
     init: function () {
-        setEnvironmentalSound('../assets/Olaf%20Minimalist.mp3', 0.1);
+        setEnvironmentalSound('Olaf%20Minimalist.mp3', 0.1);
 
         let sceneEl = this.el;
         sceneEl.emit('setState', {
@@ -69,7 +69,7 @@ AFRAME.registerComponent('island', {
         fairiesEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-15 -15 -15', vertexB:'15 -15 15', vertexC:'15 15 -15'});
         fairiesEl.setAttribute('material', {visible:false});
         fairiesEl.setAttribute('class', 'proximitySound');
-        fairiesEl.setAttribute('data-sound-url', '../assets/please help collect stars.ogg');
+        fairiesEl.setAttribute('data-sound-url', 'please help collect stars.ogg');
         fairiesEl.setAttribute('data-text', "Please help collect stars!");
         let fairiesInnerEl = document.createElement('a-gltf-model');
         fairiesInnerEl.setAttribute('position', '0 -6 0');
