@@ -19,12 +19,7 @@
     <script>
         AFRAME.registerComponent('yggdrasil', {
             init: function () {
-                this.swell = new Howl({
-                    src: ['Swell2b-64k.mp3'],
-                    autoplay: true,
-                    loop: true,
-                    volume: 0.3
-                });
+                setEnvironmentalSound('Swell2b-64k.mp3', 0.3);
             },
         })
     </script>

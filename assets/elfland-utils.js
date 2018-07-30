@@ -13,3 +13,32 @@ function calcPosChange(verticalAngleDeg, horizontalAngleDeg, distance) {
         y: altitudeChange,
         z: -horizontalDistance * Math.sin(horizontalAngleRad)};
 }
+
+
+var environmentalSound = null;
+
+/**
+ * Sets the background sound for a world. It is paused when the tab is hidden.
+ * @param url string or Array of strings
+ * @param volume number between 0.0 and 1.0
+ */
+function setEnvironmentalSound(url, volume) {
+    environmentalSound = new Howl({
+        src: url,
+        autoplay: true,
+        loop: true,
+        volume: volume || 1.0,
+        html5: ! AFRAME.utils.device.isGearVR()   // avoids wait for full download
+    });
+
+}
+
+document.addEventListener('visibilitychange', () => {
+    if (environmentalSound) {
+        if (document.hidden) {
+            environmentalSound.pause();
+        } else {
+            environmentalSound.play();
+        }
+    }
+}, false);

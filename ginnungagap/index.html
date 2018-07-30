@@ -23,12 +23,7 @@
             init: function () {
                 let sceneEl = this.el;
 
-                this.rain = new Howl({
-                    src: ['100495__jakobthiesen__light-rain-in-forest.ogg'],
-                    autoplay: true,
-                    loop: true,
-                    volume: 1.0
-                });
+                setEnvironmentalSound('100495__jakobthiesen__light-rain-in-forest.ogg', 1.0);
                 // rain visual is too resource-intensive for mobile
                 if (! AFRAME.utils.device.isMobile()) {
                     let rain = document.createElement('a-entity');

@@ -7,12 +7,7 @@ const INITIAL_ROTATION_X = 0;
 const INITIAL_ROTATION_Y = -45;
 AFRAME.registerComponent('island', {
     init: function () {
-        this.minimalist = new Howl({
-            src: ['../assets/Olaf%20Minimalist.mp3'],
-            autoplay: true,
-            loop: true,
-            volume: 0.1
-        });
+        setEnvironmentalSound('../assets/Olaf%20Minimalist.mp3', 0.1);
 
         let sceneEl = this.el;
         sceneEl.emit('setState', {
