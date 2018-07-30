@@ -73,7 +73,8 @@ AFRAME.registerComponent('island', {
         fairiesEl.setAttribute('position', this.belowGliderPathAboveMountain(mountainComp));
         fairiesEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-15 -15 -15', vertexB:'15 -15 15', vertexC:'15 15 -15'});
         fairiesEl.setAttribute('material', {visible:false});
-        fairiesEl.setAttribute('class', 'proximityText');
+        fairiesEl.setAttribute('class', 'proximitySound');
+        fairiesEl.setAttribute('data-sound-url', '../assets/please help collect stars.ogg');
         fairiesEl.setAttribute('data-text', "Please help collect stars!");
         let fairiesInnerEl = document.createElement('a-gltf-model');
         fairiesInnerEl.setAttribute('position', '0 -6 0');
@@ -88,7 +89,9 @@ AFRAME.registerComponent('island', {
             floatingEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50, 100));
             floatingEl.setAttribute('src', '../assets/hermit_s_windmill/scene.gltf');
             floatingEl.setAttribute('scale', '0.01 0.01 0.01');
-            floatingEl.setAttribute('class', 'proximityText');
+            floatingEl.setAttribute('class', 'proximitySound');
+            floatingEl.setAttribute('data-sound-url', '../assets/look out.ogg');
+            floatingEl.setAttribute('data-sound-volume', 1.0);
             floatingEl.setAttribute('data-text', "Look out!");
             sceneEl.appendChild(floatingEl);
 

@@ -135,7 +135,12 @@ AFRAME.registerState({
                        console.log("collected star", state.stars, "of", state.numYellowStars);
                         el.parentNode.removeChild(el);
                        this.ding.play();
-                    } else if (el.classList.contains('proximityText')) {
+                    } else if (el.classList.contains('proximitySound')) {
+                        let url = el.getAttribute('data-sound-url');
+                        let volume = el.getAttribute('data-sound-volume') || 1.0;
+                        if (url) {
+                            new Howl({src: url, volume: volume, autoplay: true});
+                        }
                         let text = el.getAttribute('data-text');
                         let subtitle = AFRAME.scenes[0].querySelector('#subtitle');
                         if (text && subtitle) {
