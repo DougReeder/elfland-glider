@@ -28,7 +28,7 @@ function setEnvironmentalSound(url, volume) {
         autoplay: true,
         loop: true,
         volume: volume || 1.0,
-        html5: ! AFRAME.utils.device.isGearVR()   // avoids wait for full download
+        html5: ! AFRAME.utils.device.isMobile()   // on desktop, avoids wait for full download
     });
 
 }
