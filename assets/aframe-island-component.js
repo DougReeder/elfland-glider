@@ -1,9 +1,9 @@
 // var ImprovedNoise = require('./lib/ImprovedNoise.js');
 
 /**
- * Mountain component.
+ * Creates an island, with elevation 0 at the edge.
  */
-AFRAME.registerComponent('mountain', {
+AFRAME.registerComponent('island', {
     schema: {
         color: {default: 'rgb(92, 32, 0)'},
         shadowColor: {default: 'rgb(128, 96, 96)'},
@@ -191,19 +191,19 @@ function generateTexture(terrainData, width, height, color, colorShadow, colorSe
 }
 
 /**
- * <a-mountain>
+ * <a-island>
  */
-AFRAME.registerPrimitive('a-mountain', {
+AFRAME.registerPrimitive('a-island', {
     defaultComponents: {
-        mountain: {}
+        island: {}
     },
 
     mappings: {
-        color: 'mountain.color',
-        'shadow-color': 'mountain.shadowColor',
-        'sea-color': 'mountain.seaColor',
-        'sun-position': 'mountain.sunPosition',
-        'world-depth': 'mountain.worldDepth',
-        'world-width': 'mountain.worldWidth'
+        color: 'island.color',
+        'shadow-color': 'island.shadowColor',
+        'sea-color': 'island.seaColor',
+        'sun-position': 'island.sunPosition',
+        'world-depth': 'island.worldDepth',
+        'world-width': 'island.worldWidth'
     }
 });

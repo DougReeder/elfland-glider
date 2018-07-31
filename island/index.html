@@ -22,13 +22,13 @@
     <script src="../assets/stella-octangula.js"></script>
     <script src="https://unpkg.com/aframe-glow@^1.0.1/dist/aframe-glow-component.min.js"></script>
     <script src="../assets/ImprovedNoise.js"></script>
-    <script src="../assets/aframe-mountain-component.js"></script>
+    <script src="../assets/aframe-island-component.js"></script>
     <script src="island.js"></script>
 
     <!--<script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>-->
 </head>
 <body>
-<a-scene island cursor="rayOrigin: mouse">
+<a-scene island-world cursor="rayOrigin: mouse">
     <a-assets>
         <a-asset-item id="fairies" src="../assets/bucket_with_fairies/scene.gltf"></a-asset-item>
     </a-assets>
@@ -36,8 +36,8 @@
     <a-simple-sun-sky sun-position="1 1 1" dark-color="#0b486b"></a-simple-sun-sky>
 
 
-    <a-mountain position="0 0 0" scale="1 1 1" world-depth="64" world-width="64" sun-position="1 1 1"
-                color="#4DBD33" shadow-color="#395D33" sea-color="#006994" class="landscape"></a-mountain>
+    <a-island position="0 0 0" scale="1 1 1" world-depth="64" world-width="64" sun-position="1 1 1"
+                color="#4DBD33" shadow-color="#395D33" sea-color="#006994" class="landscape"></a-island>
 
     <a-entity geometry="primitive:triangle; vertexA:-500 0 -500; vertexB:7483 0 -500; vertexC:-500 0 -7483"
             material="shader: flat; color:#006994;" class="landscape"></a-entity>

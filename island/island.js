@@ -5,7 +5,7 @@
 const INITIAL_POSITION = {x:-500, y:100, z:500};
 const INITIAL_ROTATION_X = 0;
 const INITIAL_ROTATION_Y = -45;
-AFRAME.registerComponent('island', {
+AFRAME.registerComponent('island-world', {
     init: function () {
         setEnvironmentalSound('Olaf%20Minimalist.mp3', 0.1);
 
@@ -17,15 +17,15 @@ AFRAME.registerComponent('island', {
             gliderRotationY: INITIAL_ROTATION_Y
         });
 
-        let mountainEl = sceneEl.querySelector('a-mountain');
-        let mountainComp = mountainEl.components.mountain;
+        let islandEl = sceneEl.querySelector('a-island');
+        let islandComp = islandEl.components.island;
 
         for (let p=0; p<6; ++p) {
             let powerupEl = document.createElement('a-entity');
             powerupEl.setAttribute('class', 'powerup');
             let dispersion = 1000;
             let ceiling = p < 1 ? 15 : 100;   // keep one powerup low
-            powerupEl.setAttribute('position', this.randomPosition(mountainComp, dispersion, 9, ceiling));
+            powerupEl.setAttribute('position', this.randomPosition(islandComp, dispersion, 9, ceiling));
             powerupEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
             powerupEl.setAttribute('material', {visible:false});
 
@@ -44,7 +44,7 @@ AFRAME.registerComponent('island', {
             let starEl = document.createElement('a-entity');
             starEl.setAttribute('class', 'star');
             let dispersion = s < 3 ? 1750 : 1000;   // place a couple stars away from the island
-            starEl.setAttribute('position', this.randomPosition(mountainComp, dispersion, 12, 150));
+            starEl.setAttribute('position', this.randomPosition(islandComp, dispersion, 12, 150));
             starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
             starEl.setAttribute('material', {visible:false});
             starEl.object3D.scale.set(starScale, starScale, starScale);
@@ -62,10 +62,10 @@ AFRAME.registerComponent('island', {
         sceneEl.emit('countYellowStars', {});
 
         let portalEl = document.getElementById('nextQuestPortal');
-        portalEl.setAttribute('position', this.randomPosition(mountainComp, 1000, 12, 100));
+        portalEl.setAttribute('position', this.randomPosition(islandComp, 1000, 12, 100));
 
         let fairiesEl = document.createElement('a-entity');
-        fairiesEl.setAttribute('position', this.belowGliderPathAboveMountain(mountainComp));
+        fairiesEl.setAttribute('position', this.belowGliderPathAboveIsland(islandComp));
         fairiesEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-15 -15 -15', vertexB:'15 -15 15', vertexC:'15 15 -15'});
         fairiesEl.setAttribute('material', {visible:false});
         fairiesEl.setAttribute('class', 'proximitySound');
@@ -81,7 +81,7 @@ AFRAME.registerComponent('island', {
         if (!AFRAME.utils.device.isMobile()) {
             // These decorations do not need to be pre-loaded via the asset mgr
             let floatingEl = document.createElement('a-gltf-model');
-            floatingEl.setAttribute('position', this.randomPosition(mountainComp, 750, 50, 100));
+            floatingEl.setAttribute('position', this.randomPosition(islandComp, 750, 50, 100));
             floatingEl.setAttribute('src', '../assets/hermit_s_windmill/scene.gltf');
             floatingEl.setAttribute('scale', '0.01 0.01 0.01');
             floatingEl.setAttribute('class', 'proximitySound');
@@ -91,7 +91,7 @@ AFRAME.registerComponent('island', {
             sceneEl.appendChild(floatingEl);
 
             // let buildingEl = document.createElement('a-gltf-model');
-            // buildingEl.setAttribute('position', mountainComp.buildingPosition());
+            // buildingEl.setAttribute('position', islandComp.buildingPosition());
             // buildingEl.setAttribute('src', '../assets/stabbur/scene.gltf');
             // buildingEl.setAttribute('scale', '3 3 3');
             // buildingEl.setAttribute('class', 'landscape');
@@ -100,17 +100,17 @@ AFRAME.registerComponent('island', {
 
     },
 
-    randomPosition: function (mountainComp, dispersion, verticalOffset, ceiling) {
+    randomPosition: function (islandComp, dispersion, verticalOffset, ceiling) {
         let x, y, z;
         do {
             x = (Math.random() - 0.5) * dispersion;
             z = (Math.random() - 0.5) * dispersion;
-            y = mountainComp.height(x, z) + verticalOffset;
+            y = islandComp.height(x, z) + verticalOffset;
         } while (y > ceiling);
         return x + ' ' + y + ' ' + z;
     },
 
-    belowGliderPathAboveMountain: function (mountainComp) {
+    belowGliderPathAboveIsland: function (islandComp) {
         let pos;
         let distance = 100;
         do {
@@ -122,9 +122,9 @@ AFRAME.registerComponent('island', {
                 y: INITIAL_POSITION.y + posChange.y,
                 z: INITIAL_POSITION.z + posChange.z};
 
-//                    console.log("altitudes:", pos.y, mountainComp.height(pos.x, pos.z), distance);
+//                    console.log("altitudes:", pos.y, islandComp.height(pos.x, pos.z), distance);
             distance -= 2;   // if altitude is too low, reduce distance
-        } while (pos.y - mountainComp.height(pos.x, pos.z) < 12);
+        } while (pos.y - islandComp.height(pos.x, pos.z) < 12);
 
         return pos;
     }
