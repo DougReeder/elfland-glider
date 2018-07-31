@@ -155,13 +155,13 @@ function generateTexture(terrainData, width, height, color, colorShadow, colorSe
             vector3.z = (terrainData[j-width*2] || 0) - (terrainData[j+width*2] || 0);
             vector3.normalize();
             shade = vector3.dot(sun);
-            imageData[i] = (red + shade * redShadow) * (0.5 + terrainData[j] * 0.007);
-            imageData[i + 1] = (green + shade * blueShadow) * (0.5 + terrainData[j] * 0.007);
-            imageData[i + 2] = (blue + shade * greenShadow) * (0.5 + terrainData[j] * 0.007);
+            imageData[i] = (red + shade * redShadow) * (0.5 + terrainData[j] * 0.007) + ~~(Math.random() * 17 - 8);
+            imageData[i+1] = (green + shade * blueShadow) * (0.5 + terrainData[j] * 0.007) + ~~(Math.random() * 17 - 8);
+            imageData[i+2] = (blue + shade * greenShadow) * (0.5 + terrainData[j] * 0.007) + ~~(Math.random() * 17 - 8);
         } else {
-            imageData[i] = redSea;
-            imageData[i+1] = greenSea;
-            imageData[i+2] = blueSea;
+            imageData[i] = redSea + ~~(Math.random() * 5 - 2);
+            imageData[i+1] = greenSea + ~~(Math.random() * 5 - 2);
+            imageData[i+2] = blueSea + ~~(Math.random() * 5 - 2);
         }
     }
 
@@ -172,21 +172,10 @@ function generateTexture(terrainData, width, height, color, colorShadow, colorSe
     canvasScaled.width = width * 4;
     canvasScaled.height = height * 4;
 
-    context = canvasScaled.getContext('2d');
-    context.scale(4, 4);
-    context.drawImage(canvas, 0, 0);
+    let contextScaled = canvasScaled.getContext('2d');
+    contextScaled.scale(4, 4);
+    contextScaled.drawImage(canvas, 0, 0);
 
-    image = context.getImageData(0, 0, canvasScaled.width, canvasScaled.height);
-    imageData = image.data;
-
-    for (var i = 0, l = imageData.length; i < l; i += 4) {
-        var v = ~~(Math.random() * 4 - 2);
-        imageData[i] += v;
-        imageData[i + 1] += v;
-        imageData[i + 2] += v;
-    }
-
-    context.putImageData(image, 0, 0);
     return canvasScaled;
 }
 
