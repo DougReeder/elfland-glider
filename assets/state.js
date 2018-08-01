@@ -19,6 +19,7 @@ AFRAME.registerState({
         gliderPositionStart: {x:-30, y:15, z:30},
         gliderRotationX: 0,
         gliderRotationY: -45,
+        gliderRotationYStart: -45,
         isFlying: false,
         gliderSpeed: 5,
         numYellowStars: Math.POSITIVE_INFINITY,
@@ -112,7 +113,7 @@ AFRAME.registerState({
                         state.gliderPosition.y = state.gliderPositionStart.y;
                         state.gliderPosition.z = state.gliderPositionStart.z;
                         state.gliderRotationX = 0;
-                        state.gliderRotationY = -45;
+                        state.gliderRotationY = state.gliderRotationYStart;
                         state.gliderSpeed = 5;
                         state.hudText = "";
                         state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-fly-controls disabled

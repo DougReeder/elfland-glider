@@ -2,9 +2,9 @@
 // Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 
-const INITIAL_POSITION = {x:-500, y:100, z:500};
+const INITIAL_POSITION = {x:0, y:100, z:500};
 const INITIAL_ROTATION_X = 0;
-const INITIAL_ROTATION_Y = -45;
+const INITIAL_ROTATION_Y = 0;
 AFRAME.registerComponent('island-world', {
     init: function () {
         setEnvironmentalSound('Olaf%20Minimalist.mp3', 0.1);
@@ -14,7 +14,8 @@ AFRAME.registerComponent('island-world', {
             gliderPositionStart: INITIAL_POSITION,
             gliderPosition: {x: INITIAL_POSITION.x, y: INITIAL_POSITION.y, z: INITIAL_POSITION.z},
             gliderRotationX: INITIAL_ROTATION_X,
-            gliderRotationY: INITIAL_ROTATION_Y
+            gliderRotationY: INITIAL_ROTATION_Y,
+            gliderRotationYStart: INITIAL_ROTATION_Y
         });
 
         let islandEl = sceneEl.querySelector('a-island');

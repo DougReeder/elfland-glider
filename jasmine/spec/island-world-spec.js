@@ -12,8 +12,8 @@ describe("island-world", function () {
 
         fairiesPos = componentParam['island-world'].belowGliderPathAboveIsland(islandDouble);
 
-        expect(fairiesPos.x).toBeCloseTo(-429.289,3);
-        expect(fairiesPos.z).toBeCloseTo(429.289,3);
+        expect(fairiesPos.x).toBeCloseTo(0, 3);
+        expect(fairiesPos.z).toBeCloseTo(400, 3);
         expect(fairiesPos.y).toEqual(100);
         expect(heightSpy).toHaveBeenCalledTimes(1);
     });
@@ -28,8 +28,8 @@ describe("island-world", function () {
 
         fairiesPos = componentParam['island-world'].belowGliderPathAboveIsland(islandDouble);
 
-        expect(fairiesPos.x).toBeCloseTo(-416, 0);
-        expect(fairiesPos.z).toBeCloseTo(452, 0);
+        expect(fairiesPos.x).toBeCloseTo(25, 0);
+        expect(fairiesPos.z).toBeCloseTo(407, 0);
         expect(fairiesPos.y).toBeCloseTo(74.118, 2);
         expect(heightSpy).toHaveBeenCalledTimes(1);
     });
