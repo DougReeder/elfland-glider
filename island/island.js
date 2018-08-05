@@ -80,6 +80,13 @@ AFRAME.registerComponent('island-world', {
         sceneEl.appendChild(fairiesEl);
 
         if (!AFRAME.utils.device.isMobile()) {
+            sceneEl.setAttribute('fog', {
+                type: 'linear',
+                color: '#2a6799',
+                near: 10,
+                far: 1000
+            });
+
             // These decorations do not need to be pre-loaded via the asset mgr
             let floatingEl = document.createElement('a-gltf-model');
             floatingEl.setAttribute('position', this.randomPosition(islandComp, 750, 50, 100));

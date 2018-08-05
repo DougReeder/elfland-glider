@@ -14,22 +14,22 @@
     <script src="https://unpkg.com/aframe-state-component@^3.2.4/dist/aframe-state-component.min.js"></script>
     <script src="../assets/state.js"></script>
 
-    <script src="https://cdn.rawgit.com/DougReeder/aframe-simple-sun-sky/v1.1.0/simple-sun-sky.js"></script>
+    <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.0/simple-sun-sky.js"></script>
     <script src="../assets/land-shader.js"></script>
 
     <script>
         AFRAME.registerComponent('tutorial', {
             init: function () {
                 let sceneEl = this.el;
-                sceneEl.emit('setState', {gliderPositionStart: {x:0, y:501, z:0}});
-                sceneEl.emit('setState', {gliderPosition: {x:0, y:501, z:0}});
+                sceneEl.emit('setState', {gliderPositionStart: {x: 0, y: 501, z: 0}});
+                sceneEl.emit('setState', {gliderPosition: {x: 0, y: 501, z: 0}});
 
-                for (let x= -2000; x<=2000; x+=500) {
-                    for (let z= -2000; z<=2000; z+=500) {
-                        if (x===0 && z===0) {
+                for (let x = -2000; x <= 2000; x += 500) {
+                    for (let z = -2000; z <= 2000; z += 500) {
+                        if (x === 0 && z === 0) {
                             continue;   // no buoy at column location
                         }
-                        for (let y=0; y<=500; y+=500) {
+                        for (let y = 0; y <= 500; y += 500) {
                             let buoyEl = document.createElement('a-entity');
                             buoyEl.object3D.position.x = x;
                             buoyEl.object3D.position.y = y;
@@ -43,6 +43,15 @@
                             sceneEl.appendChild(buoyEl);
                         }
                     }
+                }
+
+                if (!AFRAME.utils.device.isMobile()) {
+                    sceneEl.setAttribute('fog', {
+                        type: 'linear',
+                        color: '#4f81a2',
+                        near: 100,
+                        far: 10000
+                    });
                 }
             }
         });
@@ -59,7 +68,7 @@
         <img id="grass" src="../assets/stabbur/textures/Grass1_diffuse.png">
     </a-assets>
 
-    <a-simple-sun-sky sun-position="-1 1 1.8" dark-color="#0b486b" radius="30000"></a-simple-sun-sky>
+    <a-simple-sun-sky sun-position="-1 1 1.8" dark-color="#0b486b" fog-color="#4f81a2" radius="30000"></a-simple-sun-sky>
 
     <a-plane class="landscape" position="0 -500 0" src="#ground" height="32000" width="32000" rotation="-90 0 0"></a-plane>
 
