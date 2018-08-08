@@ -20,7 +20,21 @@
         AFRAME.registerComponent('yggdrasil', {
             init: function () {
                 setEnvironmentalSound('Swell2b-64k.mp3', 0.3);
+
+                this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);
+                this.position = new THREE.Vector3();
+                this.sss = document.querySelector('a-simple-sun-sky');
+                this.directional = document.getElementById('directional');
             },
+
+            tick: function (time) {
+                this.positionSph.phi = Math.PI * 0.5 + Math.sin(time / 120000 * 2 * Math.PI) * 0.8;
+                this.positionSph.theta = Math.PI * 0.25 + Math.sin(time / 240000 * 2 * Math.PI) * 1;
+                this.position.setFromSpherical(this.positionSph);
+                let positionStr = this.position.x + ' ' + this.position.y + ' ' + this.position.z;
+                this.sss.setAttribute('sun-position', positionStr);
+                this.directional.setAttribute('position', positionStr);
+            }
         })
     </script>
 </head>
@@ -30,9 +44,9 @@
         <img id="woodTexture" src="../assets/stabbur/textures/Stabbur_diffuse.png">
     </a-assets>
 
-    <a-simple-sun-sky sun-position="1 1 1" fog-color="none">
-        <!--<a-animation attribute="simpleSunSky.sunPosition" from="-1 1 -1" to="1 -1 1" dur="5000" repeat="indefinite"></a-animation>-->
-    </a-simple-sun-sky>
+    <a-simple-sun-sky sun-position="1 1 1" fog-color="none"></a-simple-sun-sky>
+    <a-entity light="type: ambient; color: #fff; intensity: 0.5"></a-entity>
+    <a-entity id="directional" light="type: directional; color: #FFF; intensity: 1.0" position="0.7 0.4 -1"></a-entity>
 
     <a-dust num-points="1024" dispersion="100" color="white" point-size="2"></a-dust>
 

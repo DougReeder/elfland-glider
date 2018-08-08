@@ -48,6 +48,20 @@
                 sceneEl.emit('setState', {gliderPosition: {x:150, y:-5, z:150}});
 
                 sceneEl.emit('countYellowStars', {});
+
+                this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);
+                this.position = new THREE.Vector3();
+                this.sss = document.querySelector('a-simple-sun-sky');
+                this.terrainEl = document.getElementById('terrain');
+            },
+
+            tick: function (time) {
+                this.positionSph.phi = Math.PI * (0.25 + 0.2 * Math.sin(Math.PI * (time / 120000 - 0.5)));
+                this.positionSph.theta = Math.PI * time / 120000;
+                this.position.setFromSpherical(this.positionSph);
+                let positionStr = this.position.x + ' ' + this.position.y + ' ' + this.position.z;
+                this.sss.setAttribute('sun-position', positionStr);
+                this.terrainEl.setAttribute('material', 'sunPosition', positionStr);
             }
         });
     </script>
