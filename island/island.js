@@ -40,7 +40,7 @@ AFRAME.registerComponent('island-world', {
 
 
         let starScale = AFRAME.utils.device.isMobile() || AFRAME.utils.device.checkHeadsetConnected() ? 1.0 : 2.0;
-        let totalStars = AFRAME.utils.device.isMobile() ? 50 : 75;
+        let totalStars = AFRAME.utils.device.isMobile() ? 25 : 30;
         for (let s=0; s<totalStars; ++s) {
             let starEl = document.createElement('a-entity');
             starEl.setAttribute('class', 'star');
