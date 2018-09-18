@@ -4,10 +4,10 @@ Fly through fantastic worlds,
 help the merry and mischievous light elves, 
 and avoid the surly and mischievous dark elves.
 
-A tranquil action puzzle game for VR and mobile 
+A tranquil action game for VR and mobile 
 using [WebVR](https://webvr.info/) and [A-Frame](https://aframe.io).
 
-Tilt left to turn left, tilt right to turn right. 
+Roll left to turn left, Roll right to turn right. 
 Tilt up to ascend, trading speed for altitude.
 Tilt down to dive, trading altitude for speed.
 Collect a powerup to gain speed.
@@ -17,7 +17,7 @@ Press trigger or touchpad to take a (context-specific) action, such as launching
 [Play on-line](https://elfland-glider.surge.sh/)
 
 ## Gameplay
-Gliding is controlled by headset tilt. 
+Gliding is controlled by headset orientation. 
 Yawing the head left or right does *not* control the glider,
 so the player can look other directions than the direction of travel.
 
