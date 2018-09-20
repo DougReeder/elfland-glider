@@ -19,6 +19,8 @@
     <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
     <script src="https://rawgit.com/andreasplesch/aframe-heightgrid-component/master/dist/aframe-heightgrid-component.min.js"></script>
     <script src="../assets/land-shader.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
+    <script src="../assets/intro.js"></script>
     <!--<script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>-->
     <script>
         AFRAME.registerComponent('load-terrain', {
@@ -118,7 +120,7 @@
             </a-entity>
         </a-entity>
         <a-entity button-controls></a-entity>
-        <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="mozillavr" value="" visible="true"></a-text>
+        <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="../assets/mozillavr.fnt" value="" visible="true"></a-text>
     </a-entity>
 </a-scene>
 </body>

@@ -1,0 +1,83 @@
+/** intro.css - styling for intro dialog of Elfland Glider
+  * Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+  */
+
+
+html {
+    font: 1.5rem Niconne, "Goudy Old Style", Papyrus, serif;
+}
+
+h1 {
+    margin: 0.5em;
+}
+
+.wrapper {
+    margin: 1em;
+}
+.wrapper > * {
+    margin: 1em;
+}
+@supports (display: grid) {
+    .wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        grid-gap: 1em;
+        gap: 1em;
+    }
+    .wrapper > * {
+        margin: 0;
+    }
+}
+
+.portraitOnly {
+    display: none;
+}
+.landscapeOnly {
+    display: block;
+}
+@media only screen and (orientation: portrait) {
+    .portraitOnly {
+        display: block;
+    }
+    .landscapeOnly {
+        display: none;
+    }
+}
+
+
+.closeBtnRed {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    width: 32px;
+    height: 32px;
+    background-image: url(../assets/close-button-red32.png);
+    z-index: 1;
+}
+
+
+
+/* forces scrollbar to be visible in webkit browsers */
+::-webkit-scrollbar {
+    width:9px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    background:rgba(0,0,0,0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    background:rgba(0,0,0,0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background:rgba(0,0,0,0.4);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background:rgba(0,0,0,0.05);
+}
