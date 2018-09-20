@@ -2,7 +2,8 @@
  * Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
  */
 
-if (true) {
+console.log("previousWorld:", sessionStorage.getItem('previousWorld'), Boolean(sessionStorage.getItem('previousWorld')));
+if (! sessionStorage.getItem('previousWorld')) {
     document.addEventListener("DOMContentLoaded", function (details) {
 
         let styleLinkEl = document.createElement('link');

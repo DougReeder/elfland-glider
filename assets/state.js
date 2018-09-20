@@ -153,6 +153,7 @@ AFRAME.registerState({
                         }
                    } else if (el.components.link) {
                        console.log("hit link");
+                       sessionStorage.setItem('previousWorld', location.pathname);
                    }
                 });
             });

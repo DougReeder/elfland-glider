@@ -16,6 +16,8 @@
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.0/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-dust-component@^1.0.0/aframe-dust-component.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
+    <script src="../assets/intro.js"></script>
     <script>
         AFRAME.registerComponent('yggdrasil', {
             init: function () {
@@ -25,6 +27,11 @@
                 this.position = new THREE.Vector3();
                 this.sss = document.querySelector('a-simple-sun-sky');
                 this.directional = document.getElementById('directional');
+
+                if (sessionStorage.getItem('previousWorld') === '/island/') {
+                    let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
+                    prelaunchHelp.setAttribute('value', "Congratulations!\\nYou've completed the main quests.\\nExplore all the worlds!");
+                }
             },
 
             tick: function (time) {
@@ -73,7 +80,7 @@
     <!--<a-entity id="argonPortal" position="0 -20 125" rotation="0 -180 0" scale="5 5 0"-->
               <!--link="href:http://ansible.uk/misc/eyeargon.html; title: Eye of Argon; on:hitstart"></a-entity>-->
 
-    <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="../assets/mozillavr.fnt" value="Congratulations!\nYou've completed the main quests.\nExplore all the worlds!"></a-text>
+    <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="../assets/mozillavr.fnt" value=""></a-text>
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
