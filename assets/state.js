@@ -28,6 +28,7 @@ AFRAME.registerState({
         inventory: {},   // keyed by object ID
         hudVisible: true,
         hudText: "",
+        controlsReminderDisplayed: false,
         debug: false   // no way to enable this yet
     },
 
@@ -119,7 +120,7 @@ AFRAME.registerState({
                         state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-fly-controls disabled
                         state.cameraEl.object3D.rotation.y = 0;
                         state.cameraEl.object3D.rotation.z = 0;
-                        setTimeout(this.showPrelaunchHelp.bind(this, state), 3000);
+                        setTimeout(this.showControlsReminder.bind(this, state), 3000);
                     }, 3000)
                 }
             });
@@ -219,6 +220,7 @@ AFRAME.registerState({
 
             state.isFlying = true;
 
+            state.controlsReminderDisplayed = false;
             let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
             if (prelaunchHelp) {
                 prelaunchHelp.setAttribute('value', "");
@@ -232,18 +234,45 @@ AFRAME.registerState({
 
         loaded: function (state, action) {
             // console.log("loaded", state, action);
-            setTimeout(this.showPrelaunchHelp.bind(this, state), 7000);
+            let intro = document.getElementById('intro');
+            if (!intro) {
+                this.startInteraction(state);
+            }
         },
 
-        showPrelaunchHelp: function (state) {
+        'enter-vr': function (state) {
+            // console.log("enter-vr");
+            this.startInteraction(state);
+        },
+        'exit-vr': function (state, action) {
+            // console.log("exit-vr", action);
+            if (state.controlsReminderDisplayed) {
+                this.showControlsReminder(state);   // updates list of controls for flat screen
+            }
+
+            let intro = document.getElementById('intro');
+            if (intro) {
+                AFRAME.scenes[0].emit('hover', action);
+            }
+        },
+        startInteraction: function (state) {
+            if (state.controlsReminderDisplayed) {
+                this.showControlsReminder(state);   // updates list of controls
+            } else {
+                setTimeout(this.showControlsReminder.bind(this, state), 6000);
+            }
+        },
+        showControlsReminder: function (state) {
             let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
-            if (prelaunchHelp && !state.isFlying) {
+            let intro = document.getElementById('intro');
+            if (prelaunchHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
+                state.controlsReminderDisplayed = true;
                 if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isGearVR()) {
-                    prelaunchHelp.setAttribute('value', "Tilt your head left: turn left\nTilt your head right: turn right\nTrigger or touchpad: launch");
+                    prelaunchHelp.setAttribute('value', "The triangle above you\npoints where you're flying.\n\nTilt your head left: turn left\nTilt your head right: turn right\nTrigger or touchpad: launch");
                 } else if (AFRAME.utils.device.isMobile()) {
-                    prelaunchHelp.setAttribute('value', "Roll your device left: turn left\nRoll your device right: turn right\nTap screen: launch");
+                    prelaunchHelp.setAttribute('value', "The triangle above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTap screen: launch");
                 } else {
-                    prelaunchHelp.setAttribute('value', "A: turn left\nD: turn right\nW: climb (& slow down)\nS: descend (& speed up)\nSpace bar: launch");
+                    prelaunchHelp.setAttribute('value', "The triangle above you\npoints where you're flying.\n\nA: turn left\nD: turn right\nW: climb (& slow down)\nS: descend (& speed up)\nSpace bar: launch");
                 }
             }
         },
