@@ -66,12 +66,15 @@ AFRAME.registerState({
             if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected()) {
                 this.adjustHudForVR(hudEl);
                 state.difficulty = DIFFICULTY_VR;
+                headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -4.25');
             } else {
                 this.adjustHudForFlat(hudEl);
                 if (AFRAME.utils.device.isMobile()) {
                     state.difficulty = DIFFICULTY_MAGIC_WINDOW;
+                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -9');
                 } else {
                     state.difficulty = DIFFICULTY_KEYBOARD;
+                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -4.25');
                 }
             }
             AFRAME.scenes[0].addEventListener('enter-vr', (event) => {
@@ -80,6 +83,7 @@ AFRAME.registerState({
                     this.adjustHudForVR(hudEl);
                     this.adjustForMagicWindow(headingTriangleEl);
                     state.difficulty = DIFFICULTY_VR;
+                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -4.25');
                 }
             });
             AFRAME.scenes[0].addEventListener('exit-vr', (event) => {
@@ -88,8 +92,10 @@ AFRAME.registerState({
                 this.adjustForMagicWindow(headingTriangleEl);
                 if (AFRAME.utils.device.isMobile()) {
                     state.difficulty = DIFFICULTY_MAGIC_WINDOW;
+                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -9');
                 } else {
                     state.difficulty = DIFFICULTY_KEYBOARD;
+                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -4.25');
                 }
             });
 
