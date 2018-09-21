@@ -80,8 +80,8 @@ ${closeBtnHtml}
         Fly through fantastic worlds,
         help the merry and mischievous light elves,
         & avoid the surly and mischievous dark elves.
-        ${nativeVrHtml}
         ${rotateHtml}
+        ${nativeVrHtml}
       </div>
       ${controlsHtml}
       <div style="font-family:serif; font-size: 0.75rem">
@@ -95,7 +95,7 @@ ${closeBtnHtml}
 
         let introEl = document.createElement('div');
         introEl.setAttribute('id', 'intro');
-        introEl.setAttribute('style', `position:fixed; top:35px; bottom:35px; left:35px; right:35px;
+        introEl.setAttribute('style', `position:fixed; top:0; bottom:0; left:0; right:0;
                 background: rgba(255,255,255,0.75);
                 overflow-y: scroll`);
 
