@@ -72,6 +72,10 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
 `;
         }
 
+        let mt = atob("ZS1tYWlsOiA8YSBocmVmPSJtYWlsdG86dnJAaG9taW5pZHNvZnR3YXJlLmNvbT9zdWJqZWN0PUVsZmxhbmQlMjBHbGlkZXImYm9keT0=") +
+            encodeURIComponent("\n\n\n" + navigator.userAgent + "\n\n\n") +
+            atob("Ij52ckBob21pbmlkc29mdHdhcmUuY29tPC9hPg==");
+
         let html = `
 ${closeBtnHtml}
 <h1 style="text-align:center;">Elfland Glider</h1>
@@ -85,6 +89,7 @@ ${closeBtnHtml}
       </div>
       ${controlsHtml}
       <div style="font-family:serif; font-size: 0.75rem">
+        <div>${mt}</div>
         <div><a href="../CREDITS.md">Credits</a></div>
         <div>Uses <a href="https://webvr.info/">WebVR</a> and <a href="https://aframe.io"><nobr>A-Frame</nobr></a>.</div>
         <div>Copyright © 2017-2018 by P. Douglas Reeder; Licensed under the GNU GPL-3.0</div>
