@@ -54,7 +54,9 @@ AFRAME.registerComponent('island-world', {
             starInnerEl.setAttribute('rotation', '45 0 45');
             starInnerEl.setAttribute('geometry', {primitive: 'stella-octangula'});
             starInnerEl.setAttribute('material', {color:'#ffce00'});
-            starInnerEl.setAttribute('glow', {c: '0.2', color: '#feca05', scale:'3.5'});
+            if (! /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent)) {   // not Mobile Safari
+                starInnerEl.setAttribute('glow', {c: '0.2', color: '#feca05', scale:'3.5'});
+            }
 
             starEl.appendChild(starInnerEl);
             sceneEl.appendChild(starEl);
