@@ -29,8 +29,8 @@ One or more challenges arise, which the player must solve using adroit flying an
 Then a portal to the next quest (or set of quests) opens.
 
 There is no health nor lives, and no leveling up. 
-A normal landing or crash should just move the player back to a launch point, as if he/she had walked and/or swum there.
-A high-velocity crash or landing on lava could send the player to dreary Ginnungagap, 
+A normal landing or crash just moves the player back to the launch point, as if he/she had walked and/or swum there.
+A high-velocity crash or landing on lava sends the player to dreary Ginnungagap,
 to fly through mists for a minute or two, before a portal appears to take him/her back.
 
 Tools are usually not retained for future quests, and may or may not be useful (or required) later.

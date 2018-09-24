@@ -115,19 +115,24 @@ AFRAME.registerState({
                     crash.play();
 
                     setTimeout(() => {
-                        // console.log("setting start position", state.gliderPositionStart);
-                        state.gliderPosition.x = state.gliderPositionStart.x;
-                        state.gliderPosition.y = state.gliderPositionStart.y;
-                        state.gliderPosition.z = state.gliderPositionStart.z;
-                        state.gliderRotationX = 0;
-                        state.gliderRotationY = state.gliderRotationYStart;
-                        state.gliderSpeed = 5;
-                        state.hudText = "";
-                        state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-fly-controls disabled
-                        state.cameraEl.object3D.rotation.y = 0;
-                        state.cameraEl.object3D.rotation.z = 0;
-                        setTimeout(this.showControlsReminder.bind(this, state), 3000);
-                    }, 3000)
+                        if (state.gliderSpeed >= 30) {
+                            sessionStorage.setItem('returnWorld', location.pathname);
+                            location.pathname = '/ginnungagap/'
+                        } else {
+                            // console.log("setting start position", state.gliderPositionStart);
+                            state.gliderPosition.x = state.gliderPositionStart.x;
+                            state.gliderPosition.y = state.gliderPositionStart.y;
+                            state.gliderPosition.z = state.gliderPositionStart.z;
+                            state.gliderRotationX = 0;
+                            state.gliderRotationY = state.gliderRotationYStart;
+                            state.gliderSpeed = 5;
+                            state.hudText = "";
+                            state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-fly-controls disabled
+                            state.cameraEl.object3D.rotation.y = 0;
+                            state.cameraEl.object3D.rotation.z = 0;
+                            setTimeout(this.showControlsReminder.bind(this, state), 3000);
+                        }
+                    }, 2000)
                 }
             });
 
@@ -159,7 +164,9 @@ AFRAME.registerState({
                         }
                    } else if (el.components.link) {
                        console.log("hit link");
-                       sessionStorage.setItem('previousWorld', location.pathname);
+                       if (location.pathname !== '/ginnungagap/') {
+                           sessionStorage.setItem('previousWorld', location.pathname);
+                       }
                    }
                 });
             });

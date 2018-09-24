@@ -57,6 +57,13 @@
                     clouds.push(cloudEl);
                 }
 
+                var returnPath = sessionStorage.getItem('returnWorld');
+                if (returnPath) {
+                    var returnPortal = document.getElementById('returnPortal');
+                    returnPortal.setAttribute('link','href', returnPath);
+                    returnPortal.setAttribute('link','image', returnPath + 'screenshot.png');
+                }
+
                 setInterval( () => {
                     let returnPortalEl = document.getElementById('returnPortal');
                     returnPortalEl.setAttribute('visible', 'true');
@@ -82,7 +89,7 @@
     <a-sky color="#616279"></a-sky>
 
     <a-entity id="returnPortal" position="0 15 -80" scale="5 5 0"
-              link="href:../yggdrasil; on:hitstart; title:return; image:../yggdrasil/screenshot-yggdrasil.png;"
+              link="href:../yggdrasil; on:hitstart; title:return; image:../yggdrasil/screenshot.png;"
               visible="false"></a-entity>
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"

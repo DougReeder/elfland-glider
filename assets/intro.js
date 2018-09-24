@@ -2,7 +2,7 @@
  * Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
  */
 
-console.log("previousWorld:", sessionStorage.getItem('previousWorld'), Boolean(sessionStorage.getItem('previousWorld')));
+console.log("previousWorld:", sessionStorage.getItem('previousWorld'));
 if (! sessionStorage.getItem('previousWorld')) {
     document.addEventListener("DOMContentLoaded", function (details) {
 
