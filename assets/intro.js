@@ -30,7 +30,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
         closeBtnHtml = '';
         let controlsHtml = `
 <table id="vrControls">
-    <tr><td colspan="2">The gray triangle above you points the direction you're flying</td></tr>
+    <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>
     <tr><td colspan="2"><b>Tap</b> headset button ➘ to enter VR mode</td></tr>
     <tr><td><b>Tilt</b> your head left to turn glider left</td><td><img src="../assets/head-tilt-left.png"></td></tr>
     <tr><td><b>Tilt</b> your head right to turn glider right</td><td><img src="../assets/head-tilt-right.png"></td></tr>
@@ -44,7 +44,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
             closeBtnHtml = `<div class="closeBtnRed landscapeOnly"></div>`;
             controlsHtml = `
 <table class="landscapeOnly" style="width:100%">
-    <tr><td colspan="2">The gray triangle above you points the direction you're flying</td></tr>
+    <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>
     <tr><td colspan="2"><b>Tap</b> the close button ➚ to play in magic window mode, or <b>Tap</b> headset button ➘ and place phone in headset to enter VR mode</td></tr>
     <tr><td><b>Roll</b> your device left to turn glider left</td>
         <td><img src="../assets/device-rotate-ccw.png"></td></tr>
@@ -61,7 +61,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
             controlsHtml = `
 <table style="width:100%">
     <tr><td colspan="2">Elfland Glider is designed for VR or mobile, but if you want to try it here:</td></tr>
-    <tr><td colspan="2">The gray triangle above you points the direction you're flying</td></tr>
+    <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>
     <tr><td>A or left-arrow</td><td>turn glider left</td></tr>
     <tr><td>D or right-arrow</td><td>turn glider right</td></tr>
     <tr><td>W or up-arrow</td><td>climb (&amp; <b>slow down</b>)</td></tr>

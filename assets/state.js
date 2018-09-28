@@ -19,6 +19,7 @@ AFRAME.registerState({
         gliderPositionStart: {x:-30, y:15, z:30},
         gliderRotationX: 0,
         gliderRotationY: -45,
+        gliderRotationZ: 0,
         gliderRotationYStart: -45,
         isFlying: false,
         gliderSpeed: 5,
@@ -60,42 +61,36 @@ AFRAME.registerState({
             }
 
             let bodyEl = state.armatureEl.querySelector('#body');
-            let headingTriangleEl = state.gliderEl.querySelector('#headingTriangle');
+            let wingEl = state.gliderEl.querySelector('#wing');
             let hudEl = armatureEl.querySelector('#hud');
-            this.adjustForMagicWindow(headingTriangleEl, hudEl);
+            this.adjustForMagicWindow(wingEl);
             if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected()) {
                 this.adjustHudForVR(hudEl);
                 state.difficulty = DIFFICULTY_VR;
-                headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -4.25');
             } else {
                 this.adjustHudForFlat(hudEl);
                 if (AFRAME.utils.device.isMobile()) {
                     state.difficulty = DIFFICULTY_MAGIC_WINDOW;
-                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -9');
                 } else {
                     state.difficulty = DIFFICULTY_KEYBOARD;
-                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -4.25');
                 }
             }
             AFRAME.scenes[0].addEventListener('enter-vr', (event) => {
                 if (AFRAME.utils.device.checkHeadsetConnected()) {
                     bodyEl.object3D.position.y = -1.6;
                     this.adjustHudForVR(hudEl);
-                    this.adjustForMagicWindow(headingTriangleEl);
+                    this.adjustForMagicWindow(wingEl);
                     state.difficulty = DIFFICULTY_VR;
-                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -4.25');
                 }
             });
             AFRAME.scenes[0].addEventListener('exit-vr', (event) => {
                 // bodyEl.object3D.position.y = 0;   // Why is this unnecessary?
                 this.adjustHudForFlat(hudEl);
-                this.adjustForMagicWindow(headingTriangleEl);
+                this.adjustForMagicWindow(wingEl);
                 if (AFRAME.utils.device.isMobile()) {
                     state.difficulty = DIFFICULTY_MAGIC_WINDOW;
-                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -9');
                 } else {
                     state.difficulty = DIFFICULTY_KEYBOARD;
-                    headingTriangleEl.setAttribute('geometry', 'vertexA', '0 0 -4.25');
                 }
             });
 
@@ -282,11 +277,11 @@ AFRAME.registerState({
             if (prelaunchHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
                 state.controlsReminderDisplayed = true;
                 if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isGearVR()) {
-                    prelaunchHelp.setAttribute('value', "The triangle above you\npoints where you're flying.\n\nTilt your head left: turn left\nTilt your head right: turn right\nTrigger or touchpad: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt your head left: turn left\nTilt your head right: turn right\nTrigger or touchpad: launch");
                 } else if (AFRAME.utils.device.isMobile()) {
-                    prelaunchHelp.setAttribute('value', "The triangle above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTap screen: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTap screen: launch");
                 } else {
-                    prelaunchHelp.setAttribute('value', "The triangle above you\npoints where you're flying.\n\nA: turn left\nD: turn right\nW: climb (& slow down)\nS: descend (& speed up)\nSpace bar: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nA: turn left\nD: turn right\nW: climb (& slow down)\nS: descend (& speed up)\nSpace bar: launch");
                 }
             }
         },
@@ -311,7 +306,9 @@ AFRAME.registerState({
             newXrot = Math.min(newXrot, 89);
             state.gliderRotationX = newXrot;
 
-            let deltaHeading = cameraRotation.z * action.timeDelta / 1000;
+            state.gliderRotationZ = cameraRotation.z;
+
+            let deltaHeading = state.gliderRotationZ * action.timeDelta / 1000;
             state.gliderRotationY = (state.gliderRotationY + deltaHeading + 180) % 360 - 180;
 
             if (state.isFlying) {
@@ -351,11 +348,13 @@ AFRAME.registerState({
             action.el.setAttribute('rotation', 'y', state.gliderRotationY);
         },
 
-        adjustForMagicWindow: function (headingTriangleEl) {
+        adjustForMagicWindow: function (wingEl) {
             if (! this.isMagicWindow()) {
-                headingTriangleEl.object3D.rotation.x = 0;
+                wingEl.object3D.rotation.x = 0;
+                wingEl.object3D.scale.set(1, 1, 1);
             } else {
-                headingTriangleEl.object3D.rotation.x = THREE.Math.degToRad(-10.0);
+                wingEl.object3D.rotation.x = THREE.Math.degToRad(-30.0);
+                wingEl.object3D.scale.set(1, 1, 3);
             }
         },
 
