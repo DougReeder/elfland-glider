@@ -14,6 +14,7 @@ describe("state", function () {
             gliderPosition: {x: 0, y: 10, z: 10},
             gliderRotationX: 0,
             gliderRotationY: 0,
+            gliderRotationZ: 0,
             isFlying: true,
             gliderSpeed: 1
         };
@@ -77,7 +78,24 @@ describe("state", function () {
         expect(state.gliderSpeed).toBeCloseTo(0.99686838699709, 3);
     });
 
-    it("should turn according to head tilt", function () {
+    it("should roll glider to match head tilt, when diff is small", function () {
+        state.cameraEl.setAttribute('rotation', {x: 0, y: 0, z: 0.15});
+
+        stateParam.handlers.iterate(state, action);
+
+        expect(state.gliderRotationZ).toBeCloseTo(0.15, 3);   // (15° + Δ)/s
+    });
+
+    it("should roll glider toward head tilt, when diff is large", function () {
+        state.cameraEl.setAttribute('rotation', {x: 0, y: 0, z: 30});
+
+        stateParam.handlers.iterate(state, action);
+
+        expect(state.gliderRotationZ).toBeCloseTo(0.45, 3);   // (15° + Δ)/s
+    });
+
+    it("should turn according to glider roll", function () {
+        state.gliderRotationZ = 30;
         state.cameraEl.setAttribute('rotation', {x: 0, y: 0, z: 30});
 
         stateParam.handlers.iterate(state, action);

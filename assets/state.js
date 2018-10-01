@@ -306,7 +306,15 @@ AFRAME.registerState({
             newXrot = Math.min(newXrot, 89);
             state.gliderRotationX = newXrot;
 
-            state.gliderRotationZ = cameraRotation.z;
+            let zDiff = cameraRotation.z - state.gliderRotationZ;
+            let zChange = (zDiff + Math.sign(zDiff)*15) * (action.timeDelta / 1000);
+            if (Math.abs(zChange) > Math.abs(zDiff)) {
+                zChange = zDiff;
+            }
+            let newZrot = state.gliderRotationZ + zChange;
+            newZrot = Math.max(newZrot, -89);
+            newZrot = Math.min(newZrot, 89);
+            state.gliderRotationZ = newZrot;
 
             let deltaHeading = state.gliderRotationZ * action.timeDelta / 1000;
             state.gliderRotationY = (state.gliderRotationY + deltaHeading + 180) % 360 - 180;
