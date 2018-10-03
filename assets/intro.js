@@ -120,6 +120,8 @@ ${closeBtnHtml}
             closeBtn.removeEventListener('click', handleCloseClick);
 
             AFRAME && AFRAME.scenes[0] && AFRAME.scenes[0].emit('startInteraction');
+
+            goFullscreenLandscape();
         }
     });
 }

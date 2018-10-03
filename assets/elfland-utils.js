@@ -3,6 +3,44 @@
 // We don't yet use a preprocessor nor modules, so for now, these are global functions.
 
 
+function goFullscreenLandscape() {
+    // desktop is fine without fullscreen (which can be enabled via headset button, anyway)
+    if (!isMagicWindow()) {return;}
+
+    let canvasEl = document.querySelector('canvas.a-canvas');
+    let requestFullscreen =
+        canvasEl.requestFullscreen ||
+        canvasEl.webkitRequestFullscreen ||
+        canvasEl.mozRequestFullScreen ||  // The capitalized `S` is not a typo.
+        canvasEl.msRequestFullscreen;
+    let promise;
+    if (requestFullscreen) {
+        promise = requestFullscreen.apply(canvasEl);
+    }
+    if (!(promise && promise.then)) {
+        promise = Promise.resolve();
+    }
+    promise.then(lockLandscapeOrientation, lockLandscapeOrientation);
+}
+
+function lockLandscapeOrientation() {
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock("landscape").then(response => {
+            console.log("screen orientation locked:", response);
+        }).catch(err => {
+            console.warn("screen orientation didn't lock:", err);
+        });
+    }
+}
+
+
+function isMagicWindow() {
+    return AFRAME.utils.device.isMobile () &&
+        ! AFRAME.utils.device.isGearVR() &&
+        ! AFRAME.scenes[0].is("vr-mode")
+}
+
+
 function calcPosChange(verticalAngleDeg, horizontalAngleDeg, distance) {
     let verticalAngleRad = verticalAngleDeg/180*Math.PI;
     let altitudeChange = distance * Math.sin(verticalAngleRad);

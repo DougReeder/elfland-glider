@@ -234,6 +234,7 @@ AFRAME.registerState({
             if (prelaunchHelp) {
                 prelaunchHelp.setAttribute('value', "");
             }
+            goFullscreenLandscape();
         },
         hover: function (state, action) {
             console.log("hover", action);
@@ -295,7 +296,7 @@ AFRAME.registerState({
                 console.warn("camera rotation not available");
                 return;
             }
-            let cameraRotX = this.isMagicWindow() ? cameraRotation.x + 20 : cameraRotation.x;
+            let cameraRotX = isMagicWindow() ? cameraRotation.x + 20 : cameraRotation.x;
             let xDiff = cameraRotX - state.gliderRotationX;
             let xChange = (xDiff + Math.sign(xDiff)*15) * (action.timeDelta / 1000);
             if (Math.abs(xChange) > Math.abs(xDiff)) {
@@ -357,19 +358,13 @@ AFRAME.registerState({
         },
 
         adjustForMagicWindow: function (wingEl) {
-            if (! this.isMagicWindow()) {
+            if (! isMagicWindow()) {
                 wingEl.object3D.rotation.x = 0;
                 wingEl.object3D.scale.set(1, 1, 1);
             } else {
                 wingEl.object3D.rotation.x = THREE.Math.degToRad(-30.0);
                 wingEl.object3D.scale.set(1, 1, 3);
             }
-        },
-
-        isMagicWindow: function () {
-            return AFRAME.utils.device.isMobile () &&
-                ! AFRAME.utils.device.isGearVR() &&
-                ! AFRAME.scenes[0].is("vr-mode")
         },
 
         adjustHudForVR: function (hudEl) {
