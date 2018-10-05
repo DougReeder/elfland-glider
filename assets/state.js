@@ -95,8 +95,8 @@ AFRAME.registerState({
             });
 
             if (!AFRAME.utils.device.isMobile() && !AFRAME.utils.device.checkHeadsetConnected()) {
-                console.log("desktop w/o headset; disabling look-fly-controls so keyboard controls can function");
-                state.cameraEl.setAttribute('look-fly-controls', 'enabled', 'false');
+                console.log("desktop w/o headset; disabling look-controls-z so keyboard controls can function");
+                state.cameraEl.setAttribute('look-controls-z', 'enabled', 'false');
             }
 
             state.gliderEl.addEventListener('raycaster-intersection', (evt) => {
@@ -122,7 +122,7 @@ AFRAME.registerState({
                             state.gliderRotationY = state.gliderRotationYStart;
                             state.gliderSpeed = 5;
                             state.hudText = "";
-                            state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-fly-controls disabled
+                            state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-controls-z disabled
                             state.cameraEl.object3D.rotation.y = 0;
                             state.cameraEl.object3D.rotation.z = 0;
                             setTimeout(this.showControlsReminder.bind(this, state), 3000);
