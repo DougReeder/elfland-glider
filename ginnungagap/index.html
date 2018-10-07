@@ -16,7 +16,6 @@
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
 
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.primitives.min.js"></script>
     <script>
         AFRAME.registerComponent('ginnungagap', {
             init: function () {
@@ -78,15 +77,13 @@
     </script>
 </head>
 <body>
-<a-scene cursor="rayOrigin: mouse" ginnungagap pool__clouds="mixin:cloud; size:10; dynamic:true">
+<a-scene background="color:#616279" cursor="rayOrigin: mouse" ginnungagap pool__clouds="mixin:cloud; size:10; dynamic:true">
     <a-assets>
         <img id="cloudImg" crossorigin="anonymous"
              src="https://cdn.rawgit.com/IdeaSpaceVR/aframe-particle-system-component/master/dist/images/cloud.png">
         <a-mixin id="cloud" rotation="0 -45 0" geometry="primitive:plane; height:20; width:20"
                  material="side: double; shader:flat; transparent:true; alphaTest:0.0001; src:#cloudImg" scale="10 10 1"></a-mixin>
     </a-assets>
-
-    <a-sky color="#616279"></a-sky>
 
     <a-entity id="returnPortal" position="0 15 -80" scale="5 5 0"
               link="href:../yggdrasil; on:hitstart; title:return; image:../yggdrasil/screenshot.png;"
