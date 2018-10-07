@@ -30,15 +30,16 @@
                     sceneEl.appendChild(rain);
                 }
 
-                let clouds = [];
+                this.clouds = [];
+                let clouds = this.clouds;
                 setTimeout(() => {
-                    for (let i=0; i<1; ++i) {
-                        placeCloud(i*100+75);
+                    for (let i=0; i<=80; ++i) {
+                        placeCloud(875-i*10, 270);
                     }
                 }, 4);
-                setInterval(placeCloud, 10000);
-                function placeCloud(distance=200) {
-                    if (clouds.length >= 10) {
+                setInterval(placeCloud, 5000);
+                function placeCloud(distance=1000, variation=80) {
+                    if (clouds.length >= 100) {
                         sceneEl.components.pool__clouds.returnEntity(clouds.shift());
                     }
 
@@ -46,15 +47,18 @@
                     let opacity=0;
                     cloudEl.setAttribute('material', 'opacity', opacity);
                     let intervalID = setInterval( () => {
-                        opacity += 0.5 / 120;
+                        opacity += 0.1 / 120;
                         cloudEl.setAttribute('material', 'opacity', opacity);
                         if (opacity >= 0.5) {
                             clearInterval(intervalID);
                         }
                     }, 16);
-                    AFRAME.scenes[0].emit('placeInGliderPath', {el: cloudEl, distance: distance, variation:80});
+                    AFRAME.scenes[0].emit('placeInGliderPath', {el: cloudEl, distance: distance, variation:variation});
                     clouds.push(cloudEl);
                 }
+
+                this.armaturePosition = document.getElementById('armature').object3D.position;
+
 
                 var returnPath = sessionStorage.getItem('returnWorld');
                 if (returnPath) {
@@ -72,12 +76,20 @@
 
             play: function () {
                 this.el.emit('launch', "ginnungagap play");
+            },
+
+            tick: function () {
+                this.clouds.forEach(cloud => {
+                    if (this.armaturePosition.distanceTo(cloud.object3D.position) > 100) {
+                        cloud.object3D.lookAt(this.armaturePosition);
+                    }
+                });
             }
         });
     </script>
 </head>
 <body>
-<a-scene background="color:#616279" cursor="rayOrigin: mouse" ginnungagap pool__clouds="mixin:cloud; size:10; dynamic:true">
+<a-scene background="color:#616279" cursor="rayOrigin: mouse" ginnungagap pool__clouds="mixin:cloud; size:100; dynamic:true">
     <a-assets>
         <img id="cloudImg" crossorigin="anonymous"
              src="https://cdn.rawgit.com/IdeaSpaceVR/aframe-particle-system-component/master/dist/images/cloud.png">
