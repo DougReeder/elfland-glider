@@ -20,6 +20,8 @@ by "doop" (https://sketchfab.com/doop) is licensed under Creative Commons Attrib
 
 ## Textures
 
+Nimbostratus_Cloud_PNG_Clipart-875.png is in the public domain
+
 
 ## Sounds
 

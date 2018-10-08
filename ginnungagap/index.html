@@ -38,7 +38,7 @@
                     }
                 }, 4);
                 setInterval(placeCloud, 5000);
-                function placeCloud(distance=1000, variation=80) {
+                function placeCloud(distance=500, variation=80) {
                     if (clouds.length >= 100) {
                         sceneEl.components.pool__clouds.returnEntity(clouds.shift());
                     }
@@ -54,6 +54,8 @@
                         }
                     }, 16);
                     AFRAME.scenes[0].emit('placeInGliderPath', {el: cloudEl, distance: distance, variation:variation});
+                     // cloudEl.object3D.rotation.z = Math.floor(Math.random()*2) * Math.PI + (Math.random()-0.5) * 0.75;
+                    cloudEl.object3D.rotation.z = Math.random()*2*Math.PI;
                     clouds.push(cloudEl);
                 }
 
@@ -81,7 +83,9 @@
             tick: function () {
                 this.clouds.forEach(cloud => {
                     if (this.armaturePosition.distanceTo(cloud.object3D.position) > 100) {
+                        let rotationZ = cloud.object3D.rotation.z;
                         cloud.object3D.lookAt(this.armaturePosition);
+                        cloud.object3D.rotation.z = rotationZ;
                     }
                 });
             }
@@ -92,7 +96,7 @@
 <a-scene background="color:#616279" cursor="rayOrigin: mouse" ginnungagap pool__clouds="mixin:cloud; size:100; dynamic:true">
     <a-assets>
         <img id="cloudImg" crossorigin="anonymous"
-             src="https://cdn.rawgit.com/IdeaSpaceVR/aframe-particle-system-component/master/dist/images/cloud.png">
+             src="../assets/Nimbostratus_Cloud_PNG_Clipart-875.png">
         <a-mixin id="cloud" rotation="0 -45 0" geometry="primitive:plane; height:20; width:20"
                  material="side: double; shader:flat; transparent:true; alphaTest:0.0001; src:#cloudImg" scale="10 10 1"></a-mixin>
     </a-assets>
