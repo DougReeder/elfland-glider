@@ -10,8 +10,8 @@
     "ghpages": "ghpages"
   },
   "devDependencies": {
-    "budo": "^10.0.4",
-    "ghpages": "0.0.3"
+    "budo": "^11.5.0",
+    "ghpages": "0.0.10"
   },
   "keywords": [
     "fly",
