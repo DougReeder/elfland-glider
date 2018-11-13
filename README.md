@@ -22,7 +22,7 @@ Yawing the head left or right does *not* control the glider,
 so the player can look other directions than the direction of travel.
 
 Most quests are playable without a controller.
-Some later quests require a “magic wand” (3-DOF controller).
+~~Some later quests require a “magic wand” (3-DOF controller).~~
 
 A typical quest has the player glide around, exploring the world and possibly acquiring a tool or two.
 One or more challenges arise, which the player must solve using adroit flying and possibly tools.
@@ -51,8 +51,8 @@ Favor showing over telling, but a well-chosen sentence can be worth a dozen pict
 For example: “Collect all the stars”.
 You can label landmarks, tools, and other plot elements, if needed, but avoid expository lumps.
 
-Levels should be playable on mobile, but better in VR.
-They should be runnable on a desktop without VR, but the quests need not be completable using only keyboard controls.
+Worlds should be designed for VR, but playable on mobile.
+They should be runnable on a desktop without VR, but it's okay if the quests are not be completable using only keyboard controls.
 
 
 ## Theme
@@ -91,7 +91,7 @@ launching attacks which hinder the player.
 
 ## Aesthetic Design
 
-Main levels must run at 60 fps on smartphones such as the Galaxy S6, and there is not yet much support for progressive enhancement.
+Main levels must run at 60 fps on smartphones such as the Galaxy S7, and there is not yet much support for progressive enhancement.
 So, realistic rendering is not possible, in general.
 
 Space and motion are key themes. Draw inspiration from nature, Alexander Calder mobiles, and modern dance.
@@ -118,6 +118,15 @@ Every world should have sound, if only a global background of wind or water flow
 Take advantage of spatial audio. A waterfall which roars when you're near can get by with less animation. 
 
 Check out  [Where can I find assets?](https://aframe.io/docs/0.8.0/introduction/faq.html#where-can-i-find-assets)
+
+You should use [aframe-look-controls-z](https://www.npmjs.com/package/aframe-look-controls-z) instead of 
+aframe-look-controls, so in magic window mode, the virtual horizon stays parallel to the real horizon.
+
+You probably should use [aframe-simple-sun-sky](https://www.npmjs.com/package/aframe-simple-sun-sky) to save the GPU
+for the terrain (unless it's night).
+
+Consider whether [aframe-dust-component](https://www.npmjs.com/package/aframe-dust-component) would help the user
+orient him/herself.  (For Safari or Edge, you should polyfill requestIdleCallback.)
 
 
 ## Developing
