@@ -13,8 +13,6 @@ AFRAME.registerShader('land', {
     },
 
     vertexShader: `
-precision mediump float;
-
 uniform vec3 sunNormal;
 
 varying vec3 pos;
@@ -29,8 +27,6 @@ void main() {
 }`,
 
     fragmentShader: `
-precision mediump float;
-
 uniform vec3 colorYin;
 uniform vec3 colorYang;
 
