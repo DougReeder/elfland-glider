@@ -17,6 +17,8 @@
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
 
     <script src="https://unpkg.com/aframe-shader-buildings@^0.7.0/dist/main.js"></script>
+    <script src="https://unpkg.com/aframe-faceset-component@^0.4.1/dist/aframe-faceset-component.min.js"></script>
+    <script src="../src/aframe-heightgrid-component.min.js"></script>
     <script src="../assets/land-shader.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
@@ -24,7 +26,7 @@
     <script>
         const INITIAL_POSITION = {x:150, y:100, z:150};
         const INITIAL_ROTATION_X = 0;
-        const INITIAL_ROTATION_Y = -45;
+        const INITIAL_ROTATION_Y = 45;
         AFRAME.registerComponent('city', {
             init: function () {
                 let sceneEl = this.el;
@@ -37,6 +39,20 @@
                 });
 
                 sceneEl.emit('countYellowStars', {});
+
+
+                fetch('terrain-heights-city.txt').then((response) => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        console.error("terrain-heights:", response);
+                        return '0 2 1'
+                    }
+                }).then((text) => {
+                    // console.log("heights:", text.split(/\s/));
+                    let terrainEl = document.getElementById('terrain');
+                    terrainEl.setAttribute('heightgrid', 'heights', text);
+                });
 
 
                 const numStyles = 6;
@@ -191,20 +207,20 @@
     <a-assets>
     </a-assets>
 
-    <a-simple-sun-sky sun-position="-1 0.5 1"></a-simple-sun-sky>
+    <a-simple-sun-sky sun-position="-1 0.75 1"></a-simple-sun-sky>
 
-    <a-entity geometry="primitive: plane; height: 4000; width: 4000" rotation="-90 0 0"
-              material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.5 1" class="landscape"></a-entity>
+    <a-entity id="terrain" material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1"
+              heightgrid="origin:-3040 0 -2000; xdimension:13; zdimension:13; xspacing:333.333; zspacing:333.333;"
+              class="landscape"></a-entity>
 
-
-    <a-entity geometry="primitive:triangle; vertexA:-2000 0 -2000; vertexB:7483 0 -2000; vertexC:-2000 0 -7483"
-              material="shader:land; colorYin:#61a036; colorYang:#557736;" class="landscape"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:2000 0 -2000; vertexB:2000 0 7483; vertexC:7483 0 -2000"
-              material="shader:land; colorYin:#61a036; colorYang:#557736;" class="landscape"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:2000 0 2000; vertexB:-7483 0 2000; vertexC:2000 0 7483"
-              material="shader:land; colorYin:#61a036; colorYang:#557736;" class="landscape"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:-2000 0 2000; vertexB:-2000 0 -7483; vertexC:-7483 0 2000"
-              material="shader:land; colorYin:#61a036; colorYang:#557736;" class="landscape"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:-3040 0 -2000; vertexB:7483 0 -2000; vertexC:-3040 0 -7483"
+              material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:960 0 -2000; vertexB:960 0 7483; vertexC:7483 0 -2000"
+              material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:960 0 2000; vertexB:-7483 0 2000; vertexC:960 0 7483"
+              material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+    <a-entity geometry="primitive:triangle; vertexA:-3040 0 2000; vertexB:-3040 0 -7483; vertexC:-7483 0 2000"
+              material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
 
 
     <!--<a-dust num-points="192" dispersion="100" color="gray"></a-dust>-->
