@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <script src="../assets/intro.js"></script>
     <script>
-        const INITIAL_POSITION = {x:150, y:100, z:150};
+        const INITIAL_POSITION = {x:325, y:100, z:325};
         const INITIAL_ROTATION_X = 0;
         const INITIAL_ROTATION_Y = 45;
         AFRAME.registerComponent('city', {
@@ -38,7 +38,7 @@
                     gliderRotationYStart: INITIAL_ROTATION_Y
                 });
 
-                sceneEl.emit('countYellowStars', {});
+                // sceneEl.emit('countYellowStars', {});
 
 
                 fetch('terrain-heights-city.txt').then((response) => {
@@ -64,10 +64,10 @@
                 buildingEls[0].setAttribute('wall-color', '#808080');
 
                 buildingEls[1] = document.createElement('a-shader-buildings');
-                buildingEls[1].setAttribute('x-proportion-geometry', 4);
-                buildingEls[1].setAttribute('x-proportion-material', 4);
-                buildingEls[1].setAttribute('z-proportion-geometry', 4);
-                buildingEls[1].setAttribute('z-proportion-material', 4);
+                buildingEls[1].setAttribute('x-proportion-geometry', 5);
+                buildingEls[1].setAttribute('x-proportion-material', 5);
+                buildingEls[1].setAttribute('z-proportion-geometry', 5);
+                buildingEls[1].setAttribute('z-proportion-material', 5);
                 buildingEls[1].setAttribute('y-proportion-geometry', 3.5);
                 buildingEls[1].setAttribute('y-proportion-material', 3.5);
                 buildingEls[1].setAttribute('window-width', -0.5);
@@ -137,21 +137,22 @@
                 for (let s=0; s<numStyles; ++s) {
                     buildings[s] = [];
                 }
-                for (let i=-16.5; i<=16.5; ++i) {
-                    for (let j = -16.5; j <= 16.5; ++j) {
-                        if (Math.abs(i) < 1 && Math.abs(j) < 1) {
+                // increments x by the common multiple of x-proportion for building styles
+                for (let i=0, x=-990; x <= 990; ++i, i%4 ? x+= 60 : x+=90) {
+                    // increments z by the common multiple of z-proportion for building styles
+                    for (let j=0, z=-990; z<=990; ++j, j%2 ? z+=60 : z+=90) {
+                        if (Math.abs(x) <= 60 && Math.abs(z) <= 60) {
                             continue;
                         }
+
                         const CITY_RADIUS_SQ = 1000000;
                         const MAX_HEIGHT_SQ = 36864;
                         const AVG_STORY = 5;
-                        let x = i * 60;   // common multiple of x-proportion for building styles
-                        let z = j * 60;   // common multiple of z-proportion for building styles
 
-                        let xCoreSections = 1 + Math.floor(Math.random() * 4);
-                        let xWingSections = Math.floor(Math.random() * 4);
-                        let zCoreSections = 1 + Math.floor(Math.random() * 4);
-                        let zWingSections = Math.floor(Math.random() * 4);
+                        let xCoreSections = 1 + Math.floor(Math.random() * 5);
+                        let xWingSections = Math.floor(Math.random() * 6);
+                        let zCoreSections = 1 + Math.floor(Math.random() * 5);
+                        let zWingSections = Math.floor(Math.random() * 6);
 
                         let maxStories = Math.sqrt((1 - x*x/CITY_RADIUS_SQ - z*z/CITY_RADIUS_SQ)*MAX_HEIGHT_SQ) / AVG_STORY;
                         if (isNaN(maxStories)) {
@@ -226,25 +227,24 @@
 
     <a-simple-sun-sky sun-position="-1 0.75 1"></a-simple-sun-sky>
 
-    <a-entity id="terrain" material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1"
+    <a-entity id="terrain" material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1"
               heightgrid="origin:-3040 0 -2000; xdimension:13; zdimension:13; xspacing:333.333; zspacing:333.333;"
               class="landscape"></a-entity>
 
     <a-entity geometry="primitive:triangle; vertexA:-3040 0 -2000; vertexB:7483 0 -2000; vertexC:-3040 0 -7483"
-              material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+              material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:960 0 -2000; vertexB:960 0 7483; vertexC:7483 0 -2000"
-              material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+              material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:960 0 2000; vertexB:-7483 0 2000; vertexC:960 0 7483"
-              material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+              material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:-3040 0 2000; vertexB:-3040 0 -7483; vertexC:-7483 0 2000"
-              material="shader:land; colorYin:#61a036; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+              material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
 
 
     <!--<a-dust num-points="192" dispersion="100" color="gray"></a-dust>-->
 
-    <a-entity id="nextQuestPortal" position="0 5 -500" scale="5 5 0"
-              link="href:../yggdrasil; title:Elfland; image:../yggdrasil/screenshot.png; on:hitstart"
-              bind="visible: questComplete"></a-entity>
+    <a-entity id="nextQuestPortal" position="45 5 -750" scale="5 5 0"
+              link="href:../yggdrasil; title:Elfland; image:../yggdrasil/screenshot.png; on:hitstart"></a-entity>
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state

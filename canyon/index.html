@@ -48,7 +48,7 @@
                 sceneEl.emit('setState', {gliderPositionStart: {x:150, y:-5, z:150}});
                 sceneEl.emit('setState', {gliderPosition: {x:150, y:-5, z:150}});
 
-                sceneEl.emit('countYellowStars', {});
+                // sceneEl.emit('countYellowStars', {});
 
                 this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);
                 this.position = new THREE.Vector3();
@@ -95,8 +95,7 @@
     <a-dust num-points="192" dispersion="100" color="white"></a-dust>
 
     <a-entity id="nextQuestPortal" position="0 -5 -500" scale="5 5 0"
-              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart"
-              bind="visible: questComplete"></a-entity>
+              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart"></a-entity>
 
     <!--<a-entity fps-counter="for90fps:false"></a-entity>-->
     <!--<a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="left" value="Message" geometry="primitive:plane; width:10; height:1.4;"-->
