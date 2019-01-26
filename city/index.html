@@ -137,13 +137,30 @@
                 for (let s=0; s<numStyles; ++s) {
                     buildings[s] = [];
                 }
-                for (let i=-15.5; i<=15.5; ++i) {
-                    for (let j = -15.5; j <= 15.5; ++j) {
+                for (let i=-16.5; i<=16.5; ++i) {
+                    for (let j = -16.5; j <= 16.5; ++j) {
+                        if (Math.abs(i) < 1 && Math.abs(j) < 1) {
+                            continue;
+                        }
+                        const CITY_RADIUS_SQ = 1000000;
+                        const MAX_HEIGHT_SQ = 36864;
+                        const AVG_STORY = 5;
+                        let x = i * 60;   // common multiple of x-proportion for building styles
+                        let z = j * 60;   // common multiple of z-proportion for building styles
+
                         let xCoreSections = 1 + Math.floor(Math.random() * 4);
                         let xWingSections = Math.floor(Math.random() * 4);
                         let zCoreSections = 1 + Math.floor(Math.random() * 4);
                         let zWingSections = Math.floor(Math.random() * 4);
-                        let ySections = Math.ceil((Math.exp(Math.random()) - 0.99999) * 20) + Math.random() * 0.2;
+
+                        let maxStories = Math.sqrt((1 - x*x/CITY_RADIUS_SQ - z*z/CITY_RADIUS_SQ)*MAX_HEIGHT_SQ) / AVG_STORY;
+                        if (isNaN(maxStories)) {
+                            continue;
+                        }
+                        let ySections = Math.ceil((Math.exp(Math.random()) - 0.99999) * 20 * maxStories / 35) + Math.random() * 0.2;
+                        if (ySections < 1) {
+                            continue;
+                        }
 
                         // sanity-checks proportions
                         if (xWingSections >= 2 && zCoreSections < 2) {
@@ -172,8 +189,8 @@
                         }
 
                         let building = {
-                            x: i * 60,   // common multiple of x-proportion for building styles
-                            z: j * 60,   // common multiple of z-proportion for building styles
+                            x: x,
+                            z: z,
                             xCoreSections: xCoreSections,
                             xWingSections: xWingSections,
                             zCoreSections: zCoreSections,
