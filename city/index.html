@@ -21,12 +21,15 @@
     <script src="../src/aframe-heightgrid-component.min.js"></script>
     <script src="../assets/land-shader.js"></script>
 
+    <script src="https://unpkg.com/aframe-glow@^1.0.1/dist/aframe-glow-component.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <script src="../assets/intro.js"></script>
     <script>
         const INITIAL_POSITION = {x:325, y:100, z:325};
         const INITIAL_ROTATION_X = 0;
         const INITIAL_ROTATION_Y = 45;
+        const CITY_RADIUS_SQ = 1000000;
         AFRAME.registerComponent('city', {
             init: function () {
                 let sceneEl = this.el;
@@ -117,6 +120,29 @@
                 }
 
 
+                for (let p=0; p<4; ++p) {
+                    let powerupEl = document.createElement('a-entity');
+                    powerupEl.setAttribute('class', 'powerup');
+                    powerupEl.setAttribute('position', this.randomIntersection());
+                    powerupEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
+                    powerupEl.setAttribute('material', {visible:false});
+
+                    let powerupInnerEl = document.createElement('a-icosahedron');
+                    powerupInnerEl.setAttribute('material', {color:'#ff0000'});
+                    powerupInnerEl.setAttribute('glow', {c: '0.2', color: '#ff0000', scale:'3.5'});
+
+                    powerupEl.appendChild(powerupInnerEl);
+                    sceneEl.appendChild(powerupEl);
+                }
+
+                let portalEl = document.createElement('a-entity');
+                portalEl.setAttribute('id', 'nextQuestPortal');
+                portalEl.setAttribute('position', this.randomIntersection());
+                portalEl.setAttribute('scale', '5 5 0');
+                portalEl.setAttribute('link', 'href:../yggdrasil; title:Elfland; image:../yggdrasil/screenshot.png; on:hitstart');
+                sceneEl.appendChild(portalEl);
+
+
                 // this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);
                 // this.position = new THREE.Vector3();
                 // this.sss = document.querySelector('a-simple-sun-sky');
@@ -145,7 +171,6 @@
                             continue;
                         }
 
-                        const CITY_RADIUS_SQ = 1000000;
                         const MAX_HEIGHT_SQ = 36864;
                         const AVG_STORY = 5;
 
@@ -216,6 +241,16 @@
                     }
                 }
                 return buildings;
+            },
+
+            randomIntersection: function () {
+                let x, z;
+                do {
+                    x = -1035 + Math.floor(Math.random() * 8) * 270;
+                    z = -1035 + Math.floor(Math.random() * 14) * 150;
+                } while (x*x + z*z > CITY_RADIUS_SQ);
+                const y = 10;
+                return x + ' ' + y + ' ' + z;
             }
         });
     </script>
@@ -225,7 +260,7 @@
     <a-assets>
     </a-assets>
 
-    <a-simple-sun-sky sun-position="-1 0.75 1"></a-simple-sun-sky>
+    <a-simple-sun-sky sun-position="-1 0.75 1" radius="7500"></a-simple-sun-sky>
 
     <a-entity id="terrain" material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1"
               heightgrid="origin:-3040 0 -2000; xdimension:13; zdimension:13; xspacing:333.333; zspacing:333.333;"
@@ -243,12 +278,10 @@
 
     <!--<a-dust num-points="192" dispersion="100" color="gray"></a-dust>-->
 
-    <a-entity id="nextQuestPortal" position="45 5 -750" scale="5 5 0"
-              link="href:../yggdrasil; title:Elfland; image:../yggdrasil/screenshot.png; on:hitstart"></a-entity>
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
-              aabb-collider="objects:.star,[link]" >
+              aabb-collider="objects:.powerup,.star,[link]" >
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
                   raycaster="objects:.landscape; far:0.5;">
             <a-entity id="wing" position="0 1.5 0" bind__rotation.z="gliderRotationZ" material="visible:false">
@@ -267,7 +300,7 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity id="body">
-            <a-entity camera="" look-controls-z>
+            <a-entity camera="far:15000" look-controls-z>
             </a-entity>
         </a-entity>
         <a-entity button-controls></a-entity>
