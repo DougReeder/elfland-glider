@@ -258,6 +258,7 @@
 <body>
 <a-scene city cursor="rayOrigin: mouse">
     <a-assets>
+        <a-asset-item id="dome-obj" src="dome.obj"></a-asset-item>
     </a-assets>
 
     <a-simple-sun-sky sun-position="-1 0.75 1" radius="7500"></a-simple-sun-sky>
@@ -275,6 +276,8 @@
     <a-entity geometry="primitive:triangle; vertexA:-3040 0 2000; vertexB:-3040 0 -7483; vertexC:-7483 0 2000"
               material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
 
+    <a-entity obj-model="obj:#dome-obj" material="shader:flat; color:#222; wireframe:true; side:back" class="landscape"
+              position="0 0.3 0"></a-entity>
 
     <!--<a-dust num-points="192" dispersion="100" color="gray"></a-dust>-->
 
