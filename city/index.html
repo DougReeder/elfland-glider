@@ -26,10 +26,10 @@
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <script src="../assets/intro.js"></script>
     <script>
-        const INITIAL_POSITION = {x:325, y:100, z:325};
+        const INITIAL_POSITION = {x:385, y:100, z:385};
         const INITIAL_ROTATION_X = 0;
         const INITIAL_ROTATION_Y = 45;
-        const CITY_RADIUS_SQ = 1000000;
+        const CITY_RADIUS_SQ = 921600;
         AFRAME.registerComponent('city', {
             init: function () {
                 let sceneEl = this.el;
@@ -164,9 +164,9 @@
                     buildings[s] = [];
                 }
                 // increments x by the common multiple of x-proportion for building styles
-                for (let i=0, x=-990; x <= 990; ++i, i%4 ? x+= 60 : x+=90) {
+                for (let i=0, x=-930; x <= 930; ++i, i%4 ? x+= 60 : x+=90) {
                     // increments z by the common multiple of z-proportion for building styles
-                    for (let j=0, z=-990; z<=990; ++j, j%2 ? z+=60 : z+=90) {
+                    for (let j=0, z=-930; z<=930; ++j, j%2 ? z+=60 : z+=90) {
                         if (Math.abs(x) <= 60 && Math.abs(z) <= 60) {
                             continue;
                         }
@@ -246,9 +246,9 @@
             randomIntersection: function () {
                 let x, z;
                 do {
-                    x = -1035 + Math.floor(Math.random() * 8) * 270;
-                    z = -1035 + Math.floor(Math.random() * 14) * 150;
-                } while (x*x + z*z > CITY_RADIUS_SQ);
+                    x = -975 + Math.floor(Math.random() * 8) * 270;
+                    z = -975 + Math.floor(Math.random() * 14) * 150;
+                } while (x*x + z*z >= CITY_RADIUS_SQ);
                 const y = 10;
                 return x + ' ' + y + ' ' + z;
             }
