@@ -19,7 +19,7 @@
     <script src="https://unpkg.com/aframe-shader-buildings@^0.7.0/dist/main.js"></script>
     <script src="https://unpkg.com/aframe-faceset-component@^0.4.1/dist/aframe-faceset-component.min.js"></script>
     <script src="../src/aframe-heightgrid-component.min.js"></script>
-    <script src="../assets/land-shader.js"></script>
+    <script src="../src/settlement-shader.js"></script>
 
     <script src="https://unpkg.com/aframe-glow@^1.0.1/dist/aframe-glow-component.min.js"></script>
 
@@ -263,21 +263,21 @@
 
     <a-simple-sun-sky sun-position="-1 0.75 1" radius="7500"></a-simple-sun-sky>
 
-    <a-entity id="terrain" material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1"
+    <a-entity id="terrain" material="shader:settlement; sunPosition:-1 0.75 1"
               heightgrid="origin:-3040 0 -2000; xdimension:13; zdimension:13; xspacing:333.333; zspacing:333.333;"
               class="landscape"></a-entity>
 
     <a-entity geometry="primitive:triangle; vertexA:-3040 0 -2000; vertexB:7483 0 -2000; vertexC:-3040 0 -7483"
-              material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+              material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:960 0 -2000; vertexB:960 0 7483; vertexC:7483 0 -2000"
-              material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+              material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:960 0 2000; vertexB:-7483 0 2000; vertexC:960 0 7483"
-              material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+              material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:-3040 0 2000; vertexB:-3040 0 -7483; vertexC:-7483 0 2000"
-              material="shader:land; colorYin:#599432; colorYang:#557736; sunPosition:-1 0.75 1" class="landscape"></a-entity>
+              material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
 
     <a-entity obj-model="obj:#dome-obj" material="shader:flat; color:#222; wireframe:true; side:back" class="landscape"
-              position="0 0.3 0"></a-entity>
+              position="0 0.1 0"></a-entity>
 
     <!--<a-dust num-points="192" dispersion="100" color="gray"></a-dust>-->
 
