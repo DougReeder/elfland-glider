@@ -11,6 +11,8 @@ AFRAME.registerShader('settlement', {
         colorYangInside: {type: 'color', default: '#557736'},   // dark green
         colorYinOutside: {type: 'color', default: '#e8e5e2'},   // off white
         colorYangOutside: {type: 'color', default: '#d8d2d0'},   // darker off white
+        colorYinWater: {type: 'color', default: '#006994'},   // water blue
+        colorYangWater: {type: 'color', default: '#005b89'},   // darker water blue
         radius: {type: 'number', default: 1000},
         sunPosition: {type: 'vec3', default: {x:-1.0, y:1.0, z:-1.0}}
     },
@@ -34,6 +36,8 @@ uniform vec3 colorYinInside;
 uniform vec3 colorYangInside;
 uniform vec3 colorYinOutside;
 uniform vec3 colorYangOutside;
+uniform vec3 colorYinWater;
+uniform vec3 colorYangWater;
 uniform float radiusSquared;
 
 varying vec3 pos;
@@ -115,8 +119,17 @@ float snoise(vec3 v){
 }
 
 void main() {
-    vec3 colorYin = pos.x * pos.x + pos.z * pos.z < radiusSquared ? colorYinInside : colorYinOutside;
-    vec3 colorYang = pos.x * pos.x + pos.z * pos.z < radiusSquared ? colorYangInside : colorYangOutside;
+    float pct = smoothstep(0.0, 1.0, pos.y);
+    vec3 colorYin = mix(
+        colorYinWater,
+        pos.x * pos.x + pos.z * pos.z < radiusSquared ? colorYinInside : colorYinOutside,
+        pct
+    );
+    vec3 colorYang = mix(
+        colorYangWater,
+        pos.x * pos.x + pos.z * pos.z < radiusSquared ? colorYangInside : colorYangOutside,
+        pct
+    );
     
     vec3 inherent = mix(
         colorYin,
@@ -138,6 +151,8 @@ void main() {
                 colorYangInside: {value: new THREE.Color(data.colorYangInside)},
                 colorYinOutside: {value: new THREE.Color(data.colorYinOutside)},
                 colorYangOutside: {value: new THREE.Color(data.colorYangOutside)},
+                colorYinWater: {value: new THREE.Color(data.colorYinWater)},
+                colorYangWater: {value: new THREE.Color(data.colorYangWater)},
                 radiusSquared: {value: data.radius * data.radius},
                 sunNormal: {value: sunPos.normalize()}
             },
@@ -153,6 +168,8 @@ void main() {
         this.material.uniforms.colorYangInside.value.set(data.colorYangInside);
         this.material.uniforms.colorYinOutside.value.set(data.colorYinOutside);
         this.material.uniforms.colorYangOutside.value.set(data.colorYangOutside);
+        this.material.uniforms.colorYinWater.value.set(data.colorYinWater);
+        this.material.uniforms.colorYangWater.value.set(data.colorYangWater);
         this.material.uniforms.radiusSquared.value = data.radius * data.radius;
         let sunPos = new THREE.Vector3(data.sunPosition.x, data.sunPosition.y, data.sunPosition.z);
         this.material.uniforms.sunNormal.value = sunPos.normalize();

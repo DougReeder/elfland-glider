@@ -16,7 +16,7 @@
     <!--<script src="https://unpkg.com/aframe-dust-component@^1.0.4/aframe-dust-component.js"></script>-->
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
 
-    <script src="https://unpkg.com/aframe-shader-buildings@^0.7.0/dist/main.js"></script>
+    <script src="https://unpkg.com/aframe-shader-buildings@^0.7.1/dist/main.js"></script>
     <script src="https://unpkg.com/aframe-faceset-component@^0.4.1/dist/aframe-faceset-component.min.js"></script>
     <script src="../src/aframe-heightgrid-component.min.js"></script>
     <script src="../src/settlement-shader.js"></script>
@@ -26,7 +26,7 @@
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <script src="../assets/intro.js"></script>
     <script>
-        const INITIAL_POSITION = {x:385, y:100, z:385};
+        const INITIAL_POSITION = {x:385, y:101, z:385};
         const INITIAL_ROTATION_X = 0;
         const INITIAL_ROTATION_Y = 45;
         const CITY_RADIUS_SQ = 921600;
@@ -113,6 +113,8 @@
                 buildingEls[5].setAttribute('wall-color', '#a5a696');
 
                 for (let s=0; s<numStyles; ++s) {
+                    buildingEls[s].setAttribute('elevation-geometry', 1);
+                    buildingEls[s].setAttribute('elevation-material', 1);
                     buildingEls[s].setAttribute('sun-position', "-1 0.5 1");
                     buildingEls[s].setAttribute('buildings', JSON.stringify(buildings[s]));
                     buildingEls[s].classList.add('landscape');
@@ -249,7 +251,7 @@
                     x = -975 + Math.floor(Math.random() * 8) * 270;
                     z = -975 + Math.floor(Math.random() * 14) * 150;
                 } while (x*x + z*z >= CITY_RADIUS_SQ);
-                const y = 10;
+                const y = 8.5;
                 return x + ' ' + y + ' ' + z;
             }
         });
@@ -264,20 +266,20 @@
     <a-simple-sun-sky sun-position="-1 0.75 1" radius="7500"></a-simple-sun-sky>
 
     <a-entity id="terrain" material="shader:settlement; sunPosition:-1 0.75 1"
-              heightgrid="origin:-3040 0 -2000; xdimension:13; zdimension:13; xspacing:333.333; zspacing:333.333;"
+              heightgrid="origin:-1700 0 -1600; xdimension:29; zdimension:33; xspacing:100; zspacing:100;"
               class="landscape"></a-entity>
 
-    <a-entity geometry="primitive:triangle; vertexA:-3040 0 -2000; vertexB:7483 0 -2000; vertexC:-3040 0 -7483"
+    <a-entity geometry="primitive:triangle; vertexA:-1700 0 -1600; vertexB:7483 0 -1600; vertexC:-1700 0 -7483"
               material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:960 0 -2000; vertexB:960 0 7483; vertexC:7483 0 -2000"
+    <a-entity geometry="primitive:triangle; vertexA:1100 0 -1600; vertexB:1100 0 7483; vertexC:7483 0 -1600"
               material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:960 0 2000; vertexB:-7483 0 2000; vertexC:960 0 7483"
+    <a-entity geometry="primitive:triangle; vertexA:1100 0 1600; vertexB:-7483 0 1600; vertexC:1100 0 7483"
               material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:-3040 0 2000; vertexB:-3040 0 -7483; vertexC:-7483 0 2000"
+    <a-entity geometry="primitive:triangle; vertexA:-1700 0 1600; vertexB:-1700 0 -7483; vertexC:-7483 0 1600"
               material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
 
     <a-entity obj-model="obj:#dome-obj" material="shader:flat; color:#222; wireframe:true; side:back" class="landscape"
-              position="0 0.1 0"></a-entity>
+              position="0 0.6 0"></a-entity>
 
     <!--<a-dust num-points="192" dispersion="100" color="gray"></a-dust>-->
 
