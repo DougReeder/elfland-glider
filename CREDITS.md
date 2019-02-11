@@ -25,20 +25,24 @@ Nimbostratus_Cloud_PNG_Clipart-875.png is in the public domain
 
 ## Sounds
 
-Minimalist from _SelectCam Buddha Machine_ is by Olaf Post
+"Minimalist" from _SelectCam Buddha Machine_ is by Olaf Post
 
-Swell2 from _SelectCam Buddha Machine_ is by Randolph Johnson & P. Douglas Reeder
+"Swell2" from _SelectCam Buddha Machine_ is by Randolph Johnson & P. Douglas Reeder
 
-ding (https://freesound.org/people/Daronoxus/sounds/393633/) 
+"Worlds" (https://soundcloud.com/gabebaker88/worlds)
+by Gabriel Baker (https://soundcloud.com/gabebaker88)
+is licensed under Creative Commons Attribution
+
+"ding" (https://freesound.org/people/Daronoxus/sounds/393633/) 
 by Daronoxus (https://freesound.org/people/Daronoxus/) has been released to the public domain.
 
 opening fanfare to Strauss' First Horn Concerto in E-flat (https://freesound.org/people/TaranP/sounds/361684/)
 recorded by "TaranP" (https://freesound.org/people/TaranP/) is licensed under Creative Commons Attribution.
 
-Off stage crash (https://freesound.org/people/bone666138/sounds/198876/)
+"Off stage crash" (https://freesound.org/people/bone666138/sounds/198876/)
 by "bone666138" (https://freesound.org/people/bone666138/) is licensed under Creative Commons Attribution.
 
-Light Rain in Forest (https://freesound.org/people/jakobthiesen/sounds/100495/) 
+"Light Rain in Forest" (https://freesound.org/people/jakobthiesen/sounds/100495/) 
 by Jakob Thiesen (https://freesound.org/people/jakobthiesen/) is licensed under Creative Commons Attribution.
 
 

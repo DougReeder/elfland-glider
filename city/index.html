@@ -32,6 +32,8 @@
         const CITY_RADIUS_SQ = 921600;
         AFRAME.registerComponent('city', {
             init: function () {
+                setEnvironmentalSound('Gabriel Baker - Worlds.mp3', 0.2);
+
                 let sceneEl = this.el;
                 sceneEl.emit('setState', {
                     gliderPositionStart: INITIAL_POSITION,
@@ -268,6 +270,9 @@
     <a-entity id="terrain" material="shader:settlement; sunPosition:-1 0.75 1"
               heightgrid="origin:-1700 0 -1600; xdimension:29; zdimension:33; xspacing:100; zspacing:100;"
               class="landscape"></a-entity>
+    <a-text position="0 3 -995" rotation="0 0 0" width="40" align="center" baseline="bottom" color="yellow"
+            font="../assets/mozillavr.fnt" value="Live in concert\nGabriel Baker"
+            geometry="primitive:plane; width:16; height:5;" material="color: gray"></a-text>
 
     <a-entity geometry="primitive:triangle; vertexA:-1700 0 -1600; vertexB:7483 0 -1600; vertexC:-1700 0 -7483"
               material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
