@@ -6,7 +6,7 @@
     <meta name="description" content="Help the fairies collect all their stars!">
     <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
-    <script src="../src/aframe-master.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <!--<script src="../assets/aframe-master.min.js"></script>-->
     <!--<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>-->
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
@@ -52,7 +52,7 @@
     <a-dust num-points="192" dispersion="100" color="#f0c"></a-dust>
 
     <a-entity id="nextQuestPortal" position="0 15 -500" scale="5 5 0"
-              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart"
+              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"
               bind="visible: questComplete"></a-entity>
 
 

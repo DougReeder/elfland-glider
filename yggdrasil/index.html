@@ -6,7 +6,7 @@
     <meta name="description" content="Travel to any of the worlds">
     <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
-    <script src="../src/aframe-master.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
     <script src="../assets/elfland-utils.js"></script>
@@ -61,26 +61,26 @@
     <!--<a-cylinder id="yggdrasil" radius="10" height="5000" open-ended="true" src="#woodTexture"></a-cylinder>-->
 
     <a-entity id="islandPortal" position="0 0 -125" rotation="0 0 0" scale="5 5 0"
-              link="href:../island; title: Island; image:../island/screenshot.png; on:hitstart"></a-entity>
+              link="href:../island; title: Island; image:../island/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
     <a-entity id="archesPortal" position="125 0 0" rotation="0 -90 0" scale="5 5 0"
-              link="href:../arches; title: Arches; image:../arches/screenshot.png; on:hitstart"></a-entity>
+              link="href:../arches; title: Arches; image:../arches/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
     <a-entity id="canyonPortal" position="88 0 -88" rotation="0 -45 0" scale="5 5 0"
-              link="href:../canyon; title: Canyon; on:hitstart"></a-entity>
+              link="href:../canyon; title: Canyon; on:hitstart; visualAspectEnabled:true"></a-entity>
 
     <a-entity id="cityPortal" position="-88 0 -88" rotation="0 45 0" scale="5 5 0"
-              link="href:../city; title: City; image:../city/screenshot-city.png; on:hitstart"></a-entity>
+              link="href:../city; title: City; image:../city/screenshot-city.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
 
     <a-entity id="charringtonPortal" position="-88 -20 88" rotation="0 -45 0" scale="5 5 0"
-              link="href:https://dougreeder.github.io/webvr-tour/; title: Charrington Park; image:https://dougreeder.github.io/webvr-tour/CharringtonPark/CharringtonPark-CooperRoad.jpg; on:hitstart"></a-entity>
+              link="href:https://dougreeder.github.io/webvr-tour/; title: Charrington Park; image:https://dougreeder.github.io/webvr-tour/CharringtonPark/CharringtonPark-CooperRoad.jpg; on:hitstart; visualAspectEnabled:true"></a-entity>
 
     <a-entity id="ginnungagapPortal" position="-125 -20 0" rotation="0 90 0" scale="5 5 0"
-              link="href:../ginnungagap; title: Ginnungagap; image:../ginnungagap/screenshot.png; on:hitstart"></a-entity>
+              link="href:../ginnungagap; title: Ginnungagap; image:../ginnungagap/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
     <!--<a-entity id="argonPortal" position="0 -20 125" rotation="0 -180 0" scale="5 5 0"-->
-              <!--link="href:http://ansible.uk/misc/eyeargon.html; title: Eye of Argon; on:hitstart"></a-entity>-->
+              <!--link="href:http://ansible.uk/misc/eyeargon.html; title: Eye of Argon; on:hitstart; visualAspectEnabled:true"></a-entity>-->
 
     <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="../assets/mozillavr.fnt" value=""></a-text>
 

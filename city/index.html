@@ -6,7 +6,7 @@
     <meta name="description" content="More a technology test, than crafted game level.">
     <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
-    <script src="../src/aframe-master.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
     <script src="../assets/elfland-utils.js"></script>
@@ -88,7 +88,7 @@
                 buildingEls[2].setAttribute('y-proportion-material', 4.5);
                 buildingEls[2].setAttribute('window-width', -0.5);
                 buildingEls[2].setAttribute('window-height', 0.3);
-                buildingEls[2].setAttribute('wall-color', '#6e2b11');   // brick red
+                buildingEls[2].setAttribute('wall-color', '#675342');   // brown brick
 
                 buildingEls[3] = document.createElement('a-shader-buildings');
                 buildingEls[3].setAttribute('x-proportion-geometry', 6);
@@ -143,7 +143,7 @@
                 portalEl.setAttribute('id', 'nextQuestPortal');
                 portalEl.setAttribute('position', this.randomIntersection());
                 portalEl.setAttribute('scale', '5 5 0');
-                portalEl.setAttribute('link', 'href:../yggdrasil; title:Elfland; image:../yggdrasil/screenshot.png; on:hitstart');
+                portalEl.setAttribute('link', 'href:../yggdrasil; title:Elfland; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true');
                 sceneEl.appendChild(portalEl);
 
 

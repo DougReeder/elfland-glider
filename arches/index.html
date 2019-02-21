@@ -6,7 +6,7 @@
     <meta name="description" content="Collect all the stars">
     <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
-    <script src="../src/aframe-master.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@^1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
@@ -32,7 +32,7 @@
         <a-asset-item id="stabbur" src="../assets/stabbur/scene.gltf"></a-asset-item>
     </a-assets>
 
-    <a-entity environment="preset: arches;" class="landscape"></a-entity>
+    <a-entity environment="preset: arches;"></a-entity>
     <a-gltf-model position="0 0 10" src="#stabbur" scale="2 2 2" class="landscape"></a-gltf-model>
 
     <a-entity class="star" position="-4 15 4"
@@ -79,7 +79,7 @@
     </a-entity>
 
     <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0"
-              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart"
+              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"
               bind="visible: questComplete"></a-entity>
 
     <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="../assets/mozillavr.fnt" value="Collect all the stars."></a-text>
@@ -91,7 +91,7 @@
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
               aabb-collider="objects:.star,[link]" >
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
-                  raycaster="objects:.landscape; far:0.5;">
+                  raycaster="objects:.landscape,.environmentGround,.environmentDressing; far:0.5;">
             <a-entity id="wing" position="0 1.5 0" bind__rotation.z="gliderRotationZ" material="visible:false">
                 <a-plane rotation="90 0 0" position="0 -0.01 -1.54" height="5.35" width="0.05" color="black"></a-plane>
                 <a-entity geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:7.65 0 3.4; vertexC:0 0 -3.4;"

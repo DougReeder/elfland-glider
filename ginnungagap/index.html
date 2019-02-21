@@ -7,7 +7,7 @@
     <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
     <!--<script src="../assets/aframe-master.min.js"></script>-->
-    <script src="../src/aframe-master.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
     <script src="../assets/elfland-utils.js"></script>
@@ -102,7 +102,7 @@
     </a-assets>
 
     <a-entity id="returnPortal" position="0 15 -80" scale="5 5 0"
-              link="href:../yggdrasil; on:hitstart; title:return; image:../yggdrasil/screenshot.png;"
+              link="href:../yggdrasil; on:hitstart; visualAspectEnabled:true; title:return; image:../yggdrasil/screenshot.png;"
               visible="false"></a-entity>
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"

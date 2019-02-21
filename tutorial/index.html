@@ -6,7 +6,7 @@
     <meta name="description" content="Learn to fly!">
     <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
-    <script src="../src/aframe-master.min.js"></script>
+    <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
     <script src="../assets/elfland-utils.js"></script>
@@ -76,7 +76,7 @@
     <a-cylinder class="landscape" position="0 0 0" height="1000" radius="1.75" src="#grass"></a-cylinder>
 
     <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0"
-              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart"
+              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"
               bind="visible: questComplete"></a-entity>
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
