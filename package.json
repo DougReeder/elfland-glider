@@ -4,6 +4,7 @@
   "version": "0.4.0",
   "license": "GPL-3.0",
   "scripts": {
+    "build": "webpack",
     "start": "budo --live --verbose --port 3000 --open",
     "test": "open jasmine/SpecRunner.html   # on OSes other than OS X, load SpecRunner.html in a browser",
     "deploy": "ghpages",
@@ -11,7 +12,14 @@
   },
   "devDependencies": {
     "budo": "^11.5.0",
-    "ghpages": "0.0.10"
+    "clean-webpack-plugin": "^2.0.2",
+    "css-loader": "^2.1.1",
+    "ghpages": "0.0.10",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-glsl-loader": "^1.0.1"
   },
   "keywords": [
     "fly",

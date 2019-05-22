@@ -1,6 +1,9 @@
 // state.js - state model for Elfland Glider
-// Copyright © 2017-2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
+
+import './shim/requestIdleCallback'
+import {goFullscreenLandscape, isMagicWindow, calcPosChange} from './elfland-utils'
 
 const GRAVITY = 9.807;   // m/s^2
 const DIFFICULTY_VR = 0.75;
@@ -35,7 +38,7 @@ AFRAME.registerState({
 
     handlers: {
         setState: function (state, values) {
-            for (pName in values) {
+            for (let pName in values) {
                 if (pName !== 'target') {
                     console.log("setting", pName, values[pName]);
                     state[pName] = values[pName];

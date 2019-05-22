@@ -1,6 +1,5 @@
 // elfland-utils.js - common functions for Elfland Glider
-// Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
-// We don't yet use a preprocessor nor modules, so for now, these are global functions.
+// Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 
 function goFullscreenLandscape() {
@@ -85,3 +84,6 @@ document.addEventListener('visibilitychange', () => {
         }
     }
 }, false);
+
+
+export {goFullscreenLandscape, isMagicWindow, calcPosChange, setEnvironmentalSound};

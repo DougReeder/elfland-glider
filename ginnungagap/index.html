@@ -4,92 +4,15 @@
     <meta charset="UTF-8">
     <title>Ginnungagap - Elfland Glider</title>
     <meta name="description" content="Reflect on the choices that led you here">
-    <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
-    <script src="../assets/elfland-utils.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^3.2.4/dist/aframe-state-component.min.js"></script>
-    <script src="../assets/state.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
 
     <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
-    <script>
-        AFRAME.registerComponent('ginnungagap', {
-            init: function () {
-                let sceneEl = this.el;
-
-                setEnvironmentalSound('100495__jakobthiesen__light-rain-in-forest.ogg', 1.0);
-                // rain visual is too resource-intensive for mobile
-                if (! AFRAME.utils.device.isMobile()) {
-                    let rain = document.createElement('a-entity');
-                    rain.setAttribute('particle-system', {preset: 'rain', particleCount: 500});
-                    rain.setAttribute('bind__position', 'gliderPosition');
-                    sceneEl.appendChild(rain);
-                }
-
-                this.clouds = [];
-                let clouds = this.clouds;
-                setTimeout(() => {
-                    for (let i=0; i<=80; ++i) {
-                        placeCloud(875-i*10, 270);
-                    }
-                }, 4);
-                setInterval(placeCloud, 5000);
-                function placeCloud(distance=500, variation=80) {
-                    if (clouds.length >= 100) {
-                        sceneEl.components.pool__clouds.returnEntity(clouds.shift());
-                    }
-
-                    let cloudEl = sceneEl.components.pool__clouds.requestEntity(true);
-                    let opacity=0;
-                    cloudEl.setAttribute('material', 'opacity', opacity);
-                    let intervalID = setInterval( () => {
-                        opacity += 0.1 / 120;
-                        cloudEl.setAttribute('material', 'opacity', opacity);
-                        if (opacity >= 0.5) {
-                            clearInterval(intervalID);
-                        }
-                    }, 16);
-                    AFRAME.scenes[0].emit('placeInGliderPath', {el: cloudEl, distance: distance, variation:variation});
-                     // cloudEl.object3D.rotation.z = Math.floor(Math.random()*2) * Math.PI + (Math.random()-0.5) * 0.75;
-                    cloudEl.object3D.rotation.z = Math.random()*2*Math.PI;
-                    clouds.push(cloudEl);
-                }
-
-                this.armaturePosition = document.getElementById('armature').object3D.position;
-
-
-                var returnPath = sessionStorage.getItem('returnWorld');
-                if (returnPath) {
-                    var returnPortal = document.getElementById('returnPortal');
-                    returnPortal.setAttribute('link','href', returnPath);
-                    returnPortal.setAttribute('link','image', returnPath + 'screenshot.png');
-                }
-
-                setInterval( () => {
-                    let returnPortalEl = document.getElementById('returnPortal');
-                    returnPortalEl.setAttribute('visible', 'true');
-                    AFRAME.scenes[0].emit('placeInGliderPath', {el: returnPortalEl, distance: 100, variation:45});
-                }, 60000);
-            },
-
-            play: function () {
-                this.el.emit('launch', "ginnungagap play");
-            },
-
-            tick: function () {
-                this.clouds.forEach(cloud => {
-                    if (this.armaturePosition.distanceTo(cloud.object3D.position) > 100) {
-                        let rotationZ = cloud.object3D.rotation.z;
-                        cloud.object3D.lookAt(this.armaturePosition);
-                        cloud.object3D.rotation.z = rotationZ;
-                    }
-                });
-            }
-        });
-    </script>
+    <script src="../dist/ginnungagap.js"></script>
 </head>
 <body>
 <a-scene background="color:#616279" cursor="rayOrigin: mouse" ginnungagap pool__clouds="mixin:cloud; size:100; dynamic:true">
@@ -131,6 +54,6 @@
         <a-entity button-controls></a-entity>
     </a-entity>
 </a-scene>
-<!-- Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
+<!-- Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
 </body>
 </html>

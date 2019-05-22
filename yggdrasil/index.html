@@ -16,44 +16,16 @@
     <meta property="og:site_name" content="Elfland Glider" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
-    <script src="../assets/elfland-utils.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^3.2.4/dist/aframe-state-component.min.js"></script>
-    <script src="../assets/state.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-dust-component@^1.0.4/aframe-dust-component.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
-    <script src="../assets/intro.js"></script>
-    <script>
-        AFRAME.registerComponent('yggdrasil', {
-            init: function () {
-                setEnvironmentalSound('Swell2b-64k.mp3', 0.3);
-
-                this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);
-                this.position = new THREE.Vector3();
-                this.sss = document.querySelector('a-simple-sun-sky');
-                this.directional = document.getElementById('directional');
-
-                if (sessionStorage.getItem('previousWorld') === '/island/') {
-                    let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
-                    prelaunchHelp.setAttribute('value', "Congratulations!\\nYou've completed the main quests.\\nExplore all the worlds!");
-                }
-            },
-
-            tick: function (time) {
-                this.positionSph.phi = Math.PI * 0.5 + Math.sin(time / 120000 * 2 * Math.PI) * 0.8;
-                this.positionSph.theta = Math.PI * 0.25 + Math.sin(time / 240000 * 2 * Math.PI) * 1;
-                this.position.setFromSpherical(this.positionSph);
-                let positionStr = this.position.x + ' ' + this.position.y + ' ' + this.position.z;
-                this.sss.setAttribute('sun-position', positionStr);
-                this.directional.setAttribute('position', positionStr);
-            }
-        })
+    <script src="../dist/yggdrasil.js">
     </script>
 </head>
 <body>

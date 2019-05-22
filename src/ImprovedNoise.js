@@ -70,4 +70,4 @@ var ImprovedNoise = function () {
 	}
 };
 
-// module.exports = ImprovedNoise;
+export default ImprovedNoise;

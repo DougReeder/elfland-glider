@@ -130,9 +130,8 @@ orient him/herself.  (For Safari or Edge, you should polyfill requestIdleCallbac
 
 
 ## Developing
-For now, there is no build step.
 
-`npm install && npm start`
+`npm install && npm build && npm start`
 
 `open http://localhost:3000/`
 
@@ -157,9 +156,10 @@ To install the Node dependencies:
 
 To serve the site from a simple Node development server:
 
+	npm build
     npm start
 
-Then launch the site from your favourite browser:
+Then launch the site from Firefox or another WebVR-supporting browser:
 
 [__http://localhost:3000/__](http://localhost:3000/)
 

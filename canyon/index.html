@@ -4,68 +4,18 @@
     <meta charset="UTF-8">
     <title>Canyon - Elfland Glider</title>
     <meta name="description" content="Maneuver in cramped spaces">
-    <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
-    <script src="../assets/elfland-utils.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^3.2.4/dist/aframe-state-component.min.js"></script>
-    <script src="../assets/state.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-dust-component@^1.0.4/aframe-dust-component.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
     <script src="https://unpkg.com/aframe-faceset-component@^0.4.1/dist/aframe-faceset-component.min.js"></script>
-    <script src="../src/aframe-heightgrid-component.min.js"></script>
-    <script src="../assets/land-shader.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
-    <script src="../assets/intro.js"></script>
     <!--<script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>-->
-    <script>
-        AFRAME.registerComponent('load-terrain', {
-           init: function () {
-               let terrainEl = document.getElementById('terrain');
-
-               fetch('terrain-heights.txt').then((response) => {
-//                   console.log("terrain-heights.txt:", response);
-                   if (response.ok) {
-                       return response.text();
-                   } else {
-                       console.error("terrain-heights:", response);
-                       return '0 2 1'
-                   }
-               }).then((text) => {
-//                   console.log("text:", text);
-                   terrainEl.setAttribute('heightgrid', 'heights', text );
-               });
-
-           }
-        });
-
-        AFRAME.registerComponent('canyon', {
-            init: function () {
-                let sceneEl = this.el;
-                sceneEl.emit('setState', {gliderPositionStart: {x:150, y:-5, z:150}});
-                sceneEl.emit('setState', {gliderPosition: {x:150, y:-5, z:150}});
-
-                // sceneEl.emit('countYellowStars', {});
-
-                this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);
-                this.position = new THREE.Vector3();
-                this.sss = document.querySelector('a-simple-sun-sky');
-                this.terrainEl = document.getElementById('terrain');
-            },
-
-            tick: function (time) {
-                this.positionSph.phi = Math.PI * (0.25 + 0.2 * Math.sin(Math.PI * (time / 120000 - 0.5)));
-                this.positionSph.theta = Math.PI * time / 120000;
-                this.position.setFromSpherical(this.positionSph);
-                let positionStr = this.position.x + ' ' + this.position.y + ' ' + this.position.z;
-                this.sss.setAttribute('sun-position', positionStr);
-                this.terrainEl.setAttribute('material', 'sunPosition', positionStr);
-            }
-        });
-    </script>
+    <script src="../dist/canyon.js"></script>
 </head>
 <body>
 <a-scene load-terrain canyon cursor="rayOrigin: mouse">

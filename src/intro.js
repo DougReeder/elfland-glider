@@ -1,17 +1,13 @@
 /** intro.js - introductory text for an Elfland Glider world
- * Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+ * Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
  */
+
+import {goFullscreenLandscape} from './elfland-utils'
+import '../assets/intro.css'
 
 console.log("previousWorld:", sessionStorage.getItem('previousWorld'));
 if (! sessionStorage.getItem('previousWorld')) {
     document.addEventListener("DOMContentLoaded", function (details) {
-
-        let styleLinkEl = document.createElement('link');
-        styleLinkEl.setAttribute('rel', 'stylesheet');
-        styleLinkEl.setAttribute('href', '../assets/intro.css');
-        document.head.appendChild(styleLinkEl);
-
-
         let nativeVrHtml = '';
         if (!window.hasNativeWebVRImplementation) {
             nativeVrHtml = `<div style="margin-top: 1em;">
@@ -27,7 +23,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
         console.log("checkHeadsetConnected:", AFRAME.utils.device.checkHeadsetConnected());
         console.log("isMobile:", AFRAME.utils.device.isMobile());
         console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
-        closeBtnHtml = '';
+        let closeBtnHtml = '';
         let controlsHtml = `
 <table id="vrControls">
     <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>

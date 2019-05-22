@@ -1,4 +1,7 @@
-// var ImprovedNoise = require('./lib/ImprovedNoise.js');
+// aframe-island-component.js - island terrain for Elfland Glider
+// Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+
+import ImprovedNoise from "../src/ImprovedNoise.js"
 
 /**
  * Creates an island, with elevation 0 at the edge.
@@ -44,7 +47,7 @@ AFRAME.registerComponent('island', {
             h3 = this.terrainData[i + (j + 1) * width] || 0;
             h4 = this.terrainData[(i + 1) + (j + 1) * width] || 0;
             // console.log("buildingPosition heights:", h1, h2, h3, h4);
-        } while (h1 === 0 || h1 !== h2 || h2 !== h3 || h3 !== h4 )
+        } while (h1 === 0 || h1 !== h2 || h2 !== h3 || h3 !== h4 );
 
         let x = ((i+0.5)/(width-1) * 1000) - 500;
         let z = ((j+0.5)/(depth-1) * 1000) - 500;
@@ -82,7 +85,7 @@ AFRAME.registerComponent('island', {
         var material = new THREE.MeshBasicMaterial({map: texture});
 
         // Create mesh.
-        var mesh = new THREE.Mesh(geometry, new THREE.MeshBasicMaterial({map: texture}));
+        var mesh = new THREE.Mesh(geometry, material);
         this.el.setObject3D('mesh', mesh);
     }
 });

@@ -4,26 +4,16 @@
     <meta charset="UTF-8">
     <title>Arches - Elfland Glider</title>
     <meta name="description" content="Collect all the stars">
-    <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-environment-component@^1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
-    <script src="../assets/elfland-utils.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^3.2.4/dist/aframe-state-component.min.js"></script>
-    <script src="../assets/state.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
-    <script src="../assets/stella-octangula.js"></script>
     <script src="https://unpkg.com/aframe-glow@^1.0.1/dist/aframe-glow-component.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
-    <script src="../assets/intro.js"></script>
-    <script>
-        AFRAME.registerComponent('arches', {
-            init: function () {
-                this.el.emit('countYellowStars', {});
-            }
-        });
+    <script src="../dist/arches.js">
     </script>
 </head>
 <body>

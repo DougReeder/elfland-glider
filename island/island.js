@@ -1,6 +1,11 @@
 // island.js - island world for Elfland Glider
-// Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
+import {calcPosChange, setEnvironmentalSound} from "../src/elfland-utils";
+import '../src/state.js'
+import '../assets/stella-octangula.js'
+import '../src/intro.js'
+import './aframe-island-component.js'
 
 const INITIAL_POSITION = {x:0, y:100, z:500};
 const INITIAL_ROTATION_X = 0;

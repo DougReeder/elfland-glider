@@ -1,5 +1,5 @@
 /** intro.css - styling for intro dialog of Elfland Glider
-  * Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+  * Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
   */
 
 
@@ -51,7 +51,7 @@ h1 {
     right: 25px;
     width: 32px;
     height: 32px;
-    background-image: url(../assets/close-button-red32.png);
+    background-image: url(close-button-red32.png);
     z-index: 1;
 }
 

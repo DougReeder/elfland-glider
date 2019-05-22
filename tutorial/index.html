@@ -4,60 +4,16 @@
     <meta charset="UTF-8">
     <title>Tutorial - Elfland Glider</title>
     <meta name="description" content="Learn to fly!">
-    <script src="../src/shim/requestIdleCallback.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.14/howler.core.min.js"></script>
     <script src="https://aframe.io/releases/0.9.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-controls-z@^1.0.0/look-controls-z.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
-    <script src="../assets/elfland-utils.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^3.2.4/dist/aframe-state-component.min.js"></script>
-    <script src="../assets/state.js"></script>
 
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
-    <script src="../assets/land-shader.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
-    <script src="../assets/intro.js"></script>
 
-    <script>
-        AFRAME.registerComponent('tutorial', {
-            init: function () {
-                let sceneEl = this.el;
-                sceneEl.emit('setState', {gliderPositionStart: {x: 0, y: 501, z: 0}});
-                sceneEl.emit('setState', {gliderPosition: {x: 0, y: 501, z: 0}});
-
-                for (let x = -2000; x <= 2000; x += 500) {
-                    for (let z = -2000; z <= 2000; z += 500) {
-                        if (x === 0 && z === 0) {
-                            continue;   // no buoy at column location
-                        }
-                        for (let y = 0; y <= 500; y += 500) {
-                            let buoyEl = document.createElement('a-entity');
-                            buoyEl.object3D.position.x = x;
-                            buoyEl.object3D.position.y = y;
-                            buoyEl.object3D.position.z = z;
-                            buoyEl.setAttribute('mixin', "tetra");
-                            if ((x + z + y) % 1000 === 0) {
-                                buoyEl.setAttribute('material', 'color:red');
-                            } else {
-                                buoyEl.setAttribute('material', 'color:white');
-                            }
-                            sceneEl.appendChild(buoyEl);
-                        }
-                    }
-                }
-
-                if (!AFRAME.utils.device.isMobile()) {
-                    sceneEl.setAttribute('fog', {
-                        type: 'linear',
-                        color: '#4f81a2',
-                        near: 100,
-                        far: 10000
-                    });
-                }
-            }
-        });
-
-    </script>
+    <script src="../dist/tutorial.js"></script>
 
     <!--<script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>-->
 </head>
