@@ -3,7 +3,7 @@
 //
 
 import './shim/requestIdleCallback'
-import {goFullscreenLandscape, isMagicWindow, calcPosChange} from './elfland-utils'
+import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange} from './elfland-utils'
 
 const GRAVITY = 9.807;   // m/s^2
 const DIFFICULTY_VR = 0.75;
@@ -51,6 +51,7 @@ AFRAME.registerState({
 
             console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
             console.log("isMobile:", AFRAME.utils.device.isMobile());
+            console.log("isMobileVR:", AFRAME.utils.device.isMobileVR());
 
             state.armatureEl = armatureEl;
             state.gliderEl = armatureEl.querySelector('#glider');
@@ -72,7 +73,7 @@ AFRAME.registerState({
                 state.difficulty = DIFFICULTY_VR;
             } else {
                 this.adjustHudForFlat(hudEl);
-                if (AFRAME.utils.device.isMobile()) {
+                if (isMagicWindow()) {
                     state.difficulty = DIFFICULTY_MAGIC_WINDOW;
                 } else {
                     state.difficulty = DIFFICULTY_KEYBOARD;
@@ -90,14 +91,14 @@ AFRAME.registerState({
                 // bodyEl.object3D.position.y = 0;   // Why is this unnecessary?
                 this.adjustHudForFlat(hudEl);
                 this.adjustForMagicWindow(wingEl);
-                if (AFRAME.utils.device.isMobile()) {
+                if (isMagicWindow()) {
                     state.difficulty = DIFFICULTY_MAGIC_WINDOW;
                 } else {
                     state.difficulty = DIFFICULTY_KEYBOARD;
                 }
             });
 
-            if (!AFRAME.utils.device.isMobile() && !AFRAME.utils.device.checkHeadsetConnected()) {
+            if (isDesktop() && !AFRAME.utils.device.checkHeadsetConnected()) {
                 console.log("desktop w/o headset; disabling look-controls-z so keyboard controls can function");
                 state.cameraEl.setAttribute('look-controls-z', 'enabled', 'false');
             }
@@ -280,7 +281,7 @@ AFRAME.registerState({
             let intro = document.getElementById('intro');
             if (prelaunchHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
                 state.controlsReminderDisplayed = true;
-                if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isGearVR()) {
+                if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobileVR()) {
                     prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt your head left: turn left\nTilt your head right: turn right\nTrigger or touchpad: launch");
                 } else if (AFRAME.utils.device.isMobile()) {
                     prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTap screen: launch");
@@ -371,17 +372,29 @@ AFRAME.registerState({
         },
 
         adjustHudForVR: function (hudEl) {
-            hudEl.object3D.position.x = 0.2;
-            hudEl.object3D.position.y = 0.42;
+            if (AFRAME.utils.device.isMobile()) {
+                hudEl.object3D.position.x = 0.20;
+                hudEl.object3D.position.y = 0.30;
+            } else {
+                hudEl.object3D.position.x = 0.20;
+                hudEl.object3D.position.y = 0.42;
+            }
             hudEl.object3D.rotation.x = THREE.Math.degToRad(30.0);
             hudEl.object3D.rotation.y = THREE.Math.degToRad(-20.0);
         },
 
         adjustHudForFlat: function (hudEl) {
-            hudEl.object3D.position.x = 0.85;
-            hudEl.object3D.position.y = 0.5;
-            hudEl.object3D.rotation.x = 0.0;
-            hudEl.object3D.rotation.y = 0.0;
+            if (isDesktop()) {
+                hudEl.object3D.position.x = 0.85;
+                hudEl.object3D.position.y = 0.5;
+                hudEl.object3D.rotation.x = 0.0;
+                hudEl.object3D.rotation.y = 0.0;
+            } else {
+                hudEl.object3D.position.x = 0.70;
+                hudEl.object3D.position.y = 0.20;
+                hudEl.object3D.rotation.x = THREE.Math.degToRad(30.0);
+                hudEl.object3D.rotation.y = THREE.Math.degToRad(-20.0);
+            }
         }
     },
 

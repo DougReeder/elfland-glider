@@ -1,7 +1,7 @@
 // tutorial.js - Learn to fly, in Elfland Glider
 // Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
-// import {setEnvironmentalSound} from "../src/elfland-utils";
+import {isDesktop} from "../src/elfland-utils";
 import '../src/state.js'
 import '../assets/land-shader.js'
 import '../src/intro.js'
@@ -34,7 +34,7 @@ AFRAME.registerComponent('tutorial', {
             }
         }
 
-        if (!AFRAME.utils.device.isMobile()) {
+        if (isDesktop()) {
             sceneEl.setAttribute('fog', {
                 type: 'linear',
                 color: '#4f81a2',

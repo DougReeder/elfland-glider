@@ -41,6 +41,7 @@ var AFRAME = {
     utils: {
         device: {
             isMobile: function () {return true;},
+            isMobileVR: function () {return true;},
             isGearVR: function () {return true;}
         }
     }

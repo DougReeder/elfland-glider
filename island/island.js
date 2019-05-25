@@ -1,7 +1,7 @@
 // island.js - island world for Elfland Glider
 // Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
-import {calcPosChange, setEnvironmentalSound} from "../src/elfland-utils";
+import {isDesktop, calcPosChange, setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
 import '../assets/stella-octangula.js'
 import '../src/intro.js'
@@ -44,8 +44,8 @@ AFRAME.registerComponent('island-world', {
         }
 
 
-        let starScale = AFRAME.utils.device.isMobile() || AFRAME.utils.device.checkHeadsetConnected() ? 1.0 : 2.0;
-        let totalStars = AFRAME.utils.device.isMobile() ? 25 : 30;
+        let starScale = AFRAME.utils.device.isMobile() || AFRAME.utils.device.isMobileVR() || AFRAME.utils.device.checkHeadsetConnected() ? 1.0 : 2.0;
+        let totalStars = isDesktop() ? 30 : 25;
         for (let s=0; s<totalStars; ++s) {
             let starEl = document.createElement('a-entity');
             starEl.setAttribute('class', 'star');
@@ -86,7 +86,7 @@ AFRAME.registerComponent('island-world', {
         fairiesEl.appendChild(fairiesInnerEl);
         sceneEl.appendChild(fairiesEl);
 
-        if (!AFRAME.utils.device.isMobile()) {
+        if (isDesktop()) {
             sceneEl.setAttribute('fog', {
                 type: 'linear',
                 color: '#2a6799',

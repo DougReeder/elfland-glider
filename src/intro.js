@@ -2,7 +2,7 @@
  * Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
  */
 
-import {goFullscreenLandscape} from './elfland-utils'
+import {goFullscreenLandscape, isDesktop} from './elfland-utils'
 import '../assets/intro.css'
 
 console.log("previousWorld:", sessionStorage.getItem('previousWorld'));
@@ -15,13 +15,14 @@ This browser lacks <a href="https://webvr.info/">native WebVR</a>, so don't comp
         }
 
         let rotateHtml = '';
-        if (AFRAME.utils.device.isMobile() && !AFRAME.utils.device.isGearVR() && !(AFRAME.scenes[0] && AFRAME.scenes[0].is("vr-mode"))) {
+        if (AFRAME.utils.device.isMobile() && !(AFRAME.scenes[0] && AFRAME.scenes[0].is("vr-mode"))) {
             rotateHtml = `<div class="portraitOnly" style="color:red;margin-top: 1em;">
 Please rotate your device to landscape mode. &#x21B6;</div>`;
         }
 
         console.log("checkHeadsetConnected:", AFRAME.utils.device.checkHeadsetConnected());
         console.log("isMobile:", AFRAME.utils.device.isMobile());
+        console.log("isMobileVR:", AFRAME.utils.device.isMobileVR());
         console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
         let closeBtnHtml = '';
         let controlsHtml = `
@@ -36,7 +37,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
     <tr><td colspan="2"><b>Press</b> trigger or touchpad to launch</td></tr>
 </table>
 `;
-        if (AFRAME.utils.device.isMobile() && !AFRAME.utils.device.isGearVR()) {
+        if (AFRAME.utils.device.isMobile()) {
             closeBtnHtml = `<div class="closeBtnRed landscapeOnly"></div>`;
             controlsHtml = `
 <table class="landscapeOnly" style="width:100%">
@@ -52,7 +53,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
     <tr><td colspan="2"><b>Tap</b> the screen to launch</td></tr>
 </table>
 `;
-        } else if (!AFRAME.utils.device.checkHeadsetConnected() && !AFRAME.utils.device.isMobile()) {
+        } else if (!AFRAME.utils.device.checkHeadsetConnected() && isDesktop()) {
             closeBtnHtml = `<div class="closeBtnRed"></div>`;
             controlsHtml = `
 <table style="width:100%">

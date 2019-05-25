@@ -1,7 +1,7 @@
 // ginnungagap.js - the boring result of a high-speed crash in Elfland Glider
 // Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
-import {setEnvironmentalSound} from '../src/elfland-utils'
+import {isDesktop, setEnvironmentalSound} from '../src/elfland-utils'
 
 import '../src/state.js'
 
@@ -11,7 +11,7 @@ AFRAME.registerComponent('ginnungagap', {
 
         setEnvironmentalSound('100495__jakobthiesen__light-rain-in-forest.ogg', 1.0);
         // rain visual is too resource-intensive for mobile
-        if (! AFRAME.utils.device.isMobile()) {
+        if (isDesktop()) {
             let rain = document.createElement('a-entity');
             rain.setAttribute('particle-system', {preset: 'rain', particleCount: 500});
             rain.setAttribute('bind__position', 'gliderPosition');

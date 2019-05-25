@@ -33,10 +33,12 @@ function lockLandscapeOrientation() {
 }
 
 
+function isDesktop() {
+    return ! (AFRAME.utils.device.isMobile() || AFRAME.utils.device.isMobileVR());
+}
+
 function isMagicWindow() {
-    return AFRAME.utils.device.isMobile () &&
-        ! AFRAME.utils.device.isGearVR() &&
-        ! AFRAME.scenes[0].is("vr-mode")
+    return AFRAME.utils.device.isMobile() && ! AFRAME.scenes[0].is("vr-mode");
 }
 
 
@@ -65,7 +67,7 @@ function setEnvironmentalSound(url, volume) {
         autoplay: true,
         loop: true,
         volume: volume || 1.0,
-        html5: ! AFRAME.utils.device.isMobile(),   // on desktop, avoids wait for full download
+        html5: false,
         onplayerror: function() {
             environmentalSound.once('unlock', function() {
                 environmentalSound.play();
@@ -86,4 +88,4 @@ document.addEventListener('visibilitychange', () => {
 }, false);
 
 
-export {goFullscreenLandscape, isMagicWindow, calcPosChange, setEnvironmentalSound};
+export {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, setEnvironmentalSound};
