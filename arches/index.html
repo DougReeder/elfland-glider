@@ -10,6 +10,7 @@
     <script src="https://unpkg.com/aframe-environment-component@^1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^6.7.0/dist/aframe-state-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-geometry-merger-component@^2.0.0/dist/aframe-geometry-merger-component.min.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
     <script src="https://unpkg.com/aframe-glow@^1.0.1/dist/aframe-glow-component.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
@@ -83,15 +84,15 @@
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
                   raycaster="objects:.landscape,.environmentGround,.environmentDressing; far:0.5;">
             <a-entity id="wing" position="0 1.5 0" bind__rotation.z="gliderRotationZ" material="visible:false">
-                <a-plane rotation="90 0 0" position="0 -0.01 -1.54" height="5.35" width="0.05" color="black"></a-plane>
-                <a-entity geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:7.65 0 3.4; vertexC:0 0 -3.4;"
-                          material="shader: flat; transparent:true; opacity:0.5; color:black;"></a-entity>
-                <a-entity geometry="primitive:triangle; vertexA:0 0 -4.25; vertexB:0 0 -3.4; vertexC:-7.65 0 3.4;"
-                          material="shader: flat; transparent:true; opacity:0.5; color:black;"></a-entity>
-                <a-entity geometry="primitive:triangle; vertexA:0 0 -3.4; vertexB:7.65 0 3.4; vertexC:0 0 1.133;"
-                          material="shader: flat; transparent:true; opacity:0.5; color:white;"></a-entity>
-                <a-entity geometry="primitive:triangle; vertexA:0 0 -3.4; vertexB:0 0 1.133; vertexC:-7.65 0 3.4;"
-                          material="shader: flat; transparent:true; opacity:0.5; color:white;"></a-entity>
+                <a-plane rotation="90 0 0" position="0 0 -1.55" height="5.37" width="0.06" color="black"></a-plane>
+                <a-entity geometry-merger="preserveOriginal:false" material="shader:flat; transparent:true; opacity:0.5; color:black;">
+                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -4.25; vertexB:7.65 0 3.4; vertexC:0.03 0 -3.4; buffer:false"></a-entity>
+                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -4.25; vertexB:-0.03 0 -3.4; vertexC:-7.65 0 3.4; buffer:false"></a-entity>
+                </a-entity>
+                <a-entity geometry-merger="preserveOriginal:false" material="shader:flat; transparent:true; opacity:0.5; color:white;">
+                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -3.4; vertexB:7.65 0 3.4; vertexC:0.03 0 1.133; buffer:false"></a-entity>
+                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -3.4; vertexB:-0.03 0 1.133; vertexC:-7.65 0 3.4; buffer:false"></a-entity>
+                </a-entity>
             </a-entity>
             <a-text id="hud" position="0.2 0.42 -0.75" rotation="30 -20 0" width="2" align="center" value="HUD"
                     geometry="primitive:plane; width:0.14; height:0.1;"
