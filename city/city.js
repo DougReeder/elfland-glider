@@ -1,7 +1,7 @@
 // city.js - a domed acrtic city, for Elfland Glider
 // Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
-import {setEnvironmentalSound} from "../src/elfland-utils";
+import {isDesktop, setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
 import '../src/aframe-heightgrid-component.min.js'
 import '../src/settlement-shader.js'
@@ -104,6 +104,13 @@ AFRAME.registerComponent('city', {
             buildingEls[s].classList.add('landscape');
             sceneEl.appendChild(buildingEls[s]);
         }
+
+
+        let domeEl = document.createElement('a-entity');
+        domeEl.setAttribute('obj-model', isDesktop() ? 'obj:#dome-obj-desktop' : 'obj:#dome-obj-mobile');
+        domeEl.setAttribute('material','shader:flat; color:#222; wireframe:true; side:back');
+        domeEl.classList.add('landscape');
+        sceneEl.appendChild(domeEl);
 
 
         for (let p=0; p<4; ++p) {
