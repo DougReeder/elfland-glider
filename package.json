@@ -11,7 +11,7 @@
     "ghpages": "ghpages"
   },
   "devDependencies": {
-    "budo": "^11.5.0",
+    "budo": "^11.6.2",
     "clean-webpack-plugin": "^2.0.2",
     "css-loader": "^2.1.1",
     "ghpages": "0.0.10",
