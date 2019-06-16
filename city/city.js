@@ -107,7 +107,8 @@ AFRAME.registerComponent('city', {
 
 
         let domeEl = document.createElement('a-entity');
-        domeEl.setAttribute('obj-model', isDesktop() ? 'obj:#dome-obj-desktop' : 'obj:#dome-obj-mobile');
+        domeEl.setAttribute('obj-model', isDesktop() ? 'obj:dome16.obj' : 'obj:#dome-obj-mobile');
+        if (isDesktop()) {THREE.Cache.remove("dome14.obj");}
         domeEl.setAttribute('material','shader:flat; color:#222; wireframe:true; side:back');
         domeEl.classList.add('landscape');
         sceneEl.appendChild(domeEl);
