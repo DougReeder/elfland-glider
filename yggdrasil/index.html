@@ -73,7 +73,7 @@
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
               aabb-collider="objects:[link]" >
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
-                  raycaster="objects:.landscape; far:0.5;">
+                  raycaster="objects:.landscape; far:1.25;">
             <a-entity id="wing" position="0 1.5 0" bind__rotation.z="gliderRotationZ" material="visible:false">
                 <a-plane rotation="90 0 0" position="0 0 -1.55" height="5.37" width="0.06" color="black"></a-plane>
                 <a-entity geometry-merger="preserveOriginal:false" material="shader:flat; transparent:true; opacity:0.5; color:black;">

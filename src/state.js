@@ -108,7 +108,7 @@ AFRAME.registerState({
                 if (evt.detail.intersections.length > 0 && evt.detail.intersections[0].distance > 0) {
                     console.log("CRASH!", evt.detail.els[0].tagName,
                         evt.detail.intersections[0].distance,
-                        state.gliderEl.getAttribute('raycaster').far, state.gliderSpeed / 10);
+                        state.gliderEl.getAttribute('raycaster').far, state.gliderSpeed/4);
                     AFRAME.scenes[0].emit('hover', {});
                     let crash = new Howl({src: ['../assets/198876__bone666138__crash.mp3']});
                     crash.play();
@@ -345,7 +345,7 @@ AFRAME.registerState({
                     state.hudText = (state.gliderSpeed).toFixed(0);
                 }
 
-                state.gliderEl.setAttribute('raycaster', 'far', state.gliderSpeed/10);
+                state.gliderEl.setAttribute('raycaster', 'far', state.gliderSpeed/4);
             }
         },
 
