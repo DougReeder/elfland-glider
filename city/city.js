@@ -133,7 +133,7 @@ AFRAME.registerComponent('city', {
         portalEl.setAttribute('id', 'nextQuestPortal');
         portalEl.setAttribute('position', this.randomIntersection());
         portalEl.setAttribute('scale', '5 5 0');
-        portalEl.setAttribute('link', 'href:../yggdrasil; title:Elfland; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true');
+        portalEl.setAttribute('link', 'href:../island/; title:Elfland; image:../island/screenshot.png; on:hitstart; visualAspectEnabled:true');
         sceneEl.appendChild(portalEl);
 
 
