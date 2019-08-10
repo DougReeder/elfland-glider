@@ -239,6 +239,14 @@ AFRAME.registerState({
                 prelaunchHelp.setAttribute('value', "");
             }
             goFullscreenLandscape();
+
+            let postlaunchHelp = AFRAME.scenes[0].querySelector('#postlaunchHelp');
+            if (postlaunchHelp && postlaunchHelp.src) {
+                let postlaunchHelpAudio = new Howl({src: [postlaunchHelp.src]});
+                setTimeout(() => {
+                    postlaunchHelpAudio.play();
+                }, 60000);
+            }
         },
         hover: function (state, action) {
             console.log("hover", action);
