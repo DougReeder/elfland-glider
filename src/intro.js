@@ -6,7 +6,7 @@ import {goFullscreenLandscape, isDesktop} from './elfland-utils'
 import '../assets/intro.css'
 
 console.log("previousWorld:", sessionStorage.getItem('previousWorld'));
-if (! sessionStorage.getItem('previousWorld')) {
+if (! sessionStorage.getItem('previousWorld') && !window.hasOwnProperty('jasmine')) {
     document.addEventListener("DOMContentLoaded", function (details) {
         let nativeVrHtml = '';
         if (!window.hasNativeWebVRImplementation) {

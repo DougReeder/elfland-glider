@@ -14,6 +14,11 @@ var shaderParam = {};   // keyed by name
 var stateParam = null;
 
 var AFRAME = {
+    scenes: [{
+        is: () => false,
+        emit: () => false
+    }],
+
     registerElement: function (name, param) {
         elementParam[name] = param;
     },
@@ -40,9 +45,10 @@ var AFRAME = {
 
     utils: {
         device: {
-            isMobile: function () {return true;},
-            isMobileVR: function () {return true;},
-            isGearVR: function () {return true;}
+            isMobile: function () {return false;},
+            isMobileVR: function () {return false;},
+            isGearVR: function () {return false;},
+            checkHeadsetConnected: function () {return false;}
         }
     }
 };
