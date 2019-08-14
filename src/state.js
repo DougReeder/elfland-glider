@@ -409,7 +409,7 @@ AFRAME.registerState({
     computeState: function (newState, payload) {
         try {
             let oldQuestComplete = newState.questComplete;
-            newState.questComplete = newState.stars >= newState.numYellowStars;
+            newState.questComplete = newState.numYellowStars <= 0 || newState.stars / newState.numYellowStars >= 0.95;
             if (newState.questComplete && ! oldQuestComplete) {
                 let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
                 horncall.play();

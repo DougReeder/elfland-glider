@@ -172,4 +172,45 @@ describe("state", function () {
         expect(Math.abs(position.z + 89)).toBeGreaterThan(-35);
         expect(Math.abs(position.z + 89)).toBeLessThan(35);
     });
+
+
+    it("should set questComplete true when 0 of 0 stars have been collected", function () {
+        state.stars = 0;
+        state.numYellowStars = 0;
+        state.questComplete = false;
+
+        stateParam.computeState(state, {});
+
+        expect(state.questComplete).toBeTruthy();
+    });
+
+    it("should not set questComplete true when 18 of 19 stars have been collected", function () {
+        state.stars = 18;
+        state.numYellowStars = 19;
+        state.questComplete = false;
+
+        stateParam.computeState(state, {});
+
+        expect(state.questComplete).toBeFalsy();
+    });
+
+    it("should set questComplete true when 19 of 19 stars have been collected", function () {
+        state.stars = 19;
+        state.numYellowStars = 19;
+        state.questComplete = false;
+
+        stateParam.computeState(state, {});
+
+        expect(state.questComplete).toBeTruthy();
+    });
+
+    it("should set questComplete true when 19 of 20 stars have been collected", function () {
+        state.stars = 19;
+        state.numYellowStars = 20;
+        state.questComplete = false;
+
+        stateParam.computeState(state, {});
+
+        expect(state.questComplete).toBeTruthy();
+    });
 });
