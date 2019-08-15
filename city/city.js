@@ -132,6 +132,7 @@ AFRAME.registerComponent('city', {
         let portalEl = document.createElement('a-entity');
         portalEl.setAttribute('id', 'nextQuestPortal');
         portalEl.setAttribute('position', this.randomIntersection());
+        portalEl.setAttribute('rotation', '0 45 0');
         portalEl.setAttribute('scale', '5 5 0');
         portalEl.setAttribute('link', 'href:../island/; title:Elfland; image:../island/screenshot.png; on:hitstart; visualAspectEnabled:true');
         sceneEl.appendChild(portalEl);
