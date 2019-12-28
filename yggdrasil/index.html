@@ -17,9 +17,8 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js"></script>
-    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-controls-z@^2.0.0/look-controls-z.js"></script>
-    <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^4.7.0/dist/aframe-state-component.min.js"></script>
     <script src="https://unpkg.com/aframe-geometry-merger-component@^2.0.0/dist/aframe-geometry-merger-component.min.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
@@ -30,20 +29,21 @@
     </script>
 </head>
 <body>
-<a-scene yggdrasil>
+<a-scene yggdrasil background="color:#398bc5">
     <a-assets>
         <img id="woodTexture" src="../assets/stabbur/textures/Stabbur_diffuse.png">
+        <img id="treeFoliage" src="TexturesCom_Trees0096_masked_S.png">
     </a-assets>
 
-    <a-simple-sun-sky sun-position="1 1 1" fog-color="none"></a-simple-sun-sky>
+    <a-simple-sun-sky sun-position="1 1 1" fog-color="none" radius="4000"></a-simple-sun-sky>
     <a-entity light="type: ambient; color: #fff; intensity: 0.5"></a-entity>
     <a-entity id="directional" light="type: directional; color: #FFF; intensity: 1.0" position="0.7 0.4 -1"></a-entity>
 
     <a-dust num-points="1024" dispersion="100" color="white"></a-dust>
 
-    <a-torus-knot  scale="0.3 10 0.4" radius="100" p="2" q="21" radius-tubular="4" src="#woodTexture" roughness="1" metalness="0"
+    <a-torus-knot position="0 -400 0" scale="0.3 10 0.4" radius="100" p="2" q="21" radius-tubular="4" src="#woodTexture" roughness="1" metalness="0"
             class="landscape"></a-torus-knot>
-    <!--<a-cylinder id="yggdrasil" radius="10" height="5000" open-ended="true" src="#woodTexture"></a-cylinder>-->
+    <a-image src="#treeFoliage"position="0 888 0" rotation="90 0 0" scale="1212 1200 1"></a-image>
 
     <a-entity id="islandPortal" position="0 0 -125" rotation="0 0 0" scale="5 5 0"
               link="href:../island; title: Island; image:../island/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
@@ -90,7 +90,7 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity id="body">
-            <a-entity camera="" look-controls-z>
+            <a-entity camera="far:8100; near:0.10" look-controls>
             </a-entity>
         </a-entity>
         <a-entity button-controls></a-entity>

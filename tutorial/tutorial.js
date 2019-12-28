@@ -39,8 +39,20 @@ AFRAME.registerComponent('tutorial', {
                 type: 'linear',
                 color: '#4f81a2',
                 near: 100,
-                far: 10000
+                far: 7000
             });
         }
+
+        this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);
+        this.position = new THREE.Vector3();
+        this.sss = document.querySelector('a-simple-sun-sky');
+    },
+
+    tick: function (time) {
+        this.positionSph.phi = Math.PI * (0.27 + 0.2 * Math.sin(2 * Math.PI * time / 600000));   // 10 minutes
+        this.positionSph.theta = 2 * Math.PI * time / 600000;
+        this.position.setFromSpherical(this.positionSph);
+        let positionStr = this.position.x + ' ' + this.position.y + ' ' + this.position.z;
+        this.sss.setAttribute('sun-position', positionStr);
     }
 });

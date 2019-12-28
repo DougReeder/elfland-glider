@@ -5,14 +5,14 @@ help the merry and mischievous light elves,
 and avoid the surly and mischievous dark elves.
 
 A tranquil action game for VR and mobile 
-using [WebVR](https://webvr.info/) and [A-Frame](https://aframe.io).
+using WebXR or [WebVR](https://webvr.info/), and [A-Frame](https://aframe.io).
 
 Roll left to turn left, Roll right to turn right. 
 Tilt up to ascend, trading speed for altitude.
 Tilt down to dive, trading altitude for speed.
 Collect a powerup to gain speed.
 ~~Ride a thermal to gain altitude.~~
-Press trigger or touchpad to take a (context-specific) action, such as launching.
+Press trigger, button or touchpad to take a (context-specific) action, such as launching.
 
 [Play on-line](https://elfland-glider.surge.sh/)
 
@@ -117,10 +117,7 @@ or use a dynamic model using the player's location.
 Every world should have sound, if only a global background of wind or water flowing.
 Take advantage of spatial audio. A waterfall which roars when you're near can get by with less animation. 
 
-Check out  [Where can I find assets?](https://aframe.io/docs/0.8.0/introduction/faq.html#where-can-i-find-assets)
-
-You should use [aframe-look-controls-z](https://www.npmjs.com/package/aframe-look-controls-z) instead of 
-aframe-look-controls, so in magic window mode, the virtual horizon stays parallel to the real horizon.
+Check out  [Where can I find assets?](https://aframe.io/docs/1.0.0/introduction/faq.html#where-can-i-find-assets)
 
 You probably should use [aframe-simple-sun-sky](https://www.npmjs.com/package/aframe-simple-sun-sky) to save the GPU
 for the terrain (unless it's night).
@@ -159,7 +156,7 @@ To serve the site from a simple Node development server:
 	npm build
     npm start
 
-Then launch the site from Firefox or another WebVR-supporting browser:
+Then launch the site from Firefox, Chrome or another WebXR-supporting browser:
 
 [__http://localhost:3000/__](http://localhost:3000/)
 

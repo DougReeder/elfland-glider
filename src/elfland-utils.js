@@ -74,7 +74,13 @@ function setEnvironmentalSound(url, volume) {
             });
         }
     });
+}
 
+/** Starts the background sound for a world, if it wasn't already started. */
+function pokeEnvironmentalSound() {
+    if (environmentalSound && ! environmentalSound.playing()) {
+        environmentalSound.play();
+    }
 }
 
 document.addEventListener('visibilitychange', () => {
@@ -88,4 +94,4 @@ document.addEventListener('visibilitychange', () => {
 }, false);
 
 
-export {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, setEnvironmentalSound};
+export {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, setEnvironmentalSound, pokeEnvironmentalSound};

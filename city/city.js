@@ -1,4 +1,4 @@
-// city.js - a domed acrtic city, for Elfland Glider
+// city.js - a domed arctic city, for Elfland Glider
 // Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 import {isDesktop, setEnvironmentalSound} from "../src/elfland-utils";

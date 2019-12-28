@@ -45,6 +45,12 @@ h1 {
 }
 
 
+/* hides AR button, */
+div.a-enter-ar {
+    visibility: hidden;
+}
+
+
 .closeBtnRed {
     position: fixed;
     top: 25px;

@@ -3,7 +3,7 @@
 //
 
 import './shim/requestIdleCallback'
-import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange} from './elfland-utils'
+import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, pokeEnvironmentalSound} from './elfland-utils'
 
 const GRAVITY = 9.807;   // m/s^2
 const DIFFICULTY_VR = 0.75;
@@ -49,6 +49,7 @@ AFRAME.registerState({
         setArmatureEl: function (state, armatureEl) {
             this.powerup = new Howl({src: ['../assets/411460__inspectorj__power-up-bright-a.mp3']});
 
+            console.log("hasNativeWebXRImplementation:", window.hasNativeWebXRImplementation);
             console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
             console.log("isMobile:", AFRAME.utils.device.isMobile());
             console.log("isMobileVR:", AFRAME.utils.device.isMobileVR());
@@ -86,6 +87,7 @@ AFRAME.registerState({
                     this.adjustForMagicWindow(wingEl);
                     state.difficulty = DIFFICULTY_VR;
                 }
+                pokeEnvironmentalSound();
             });
             AFRAME.scenes[0].addEventListener('exit-vr', (event) => {
                 // bodyEl.object3D.position.y = 0;   // Why is this unnecessary?
@@ -99,8 +101,8 @@ AFRAME.registerState({
             });
 
             if (isDesktop() && !AFRAME.utils.device.checkHeadsetConnected()) {
-                console.log("desktop w/o headset; disabling look-controls-z so keyboard controls can function");
-                state.cameraEl.setAttribute('look-controls-z', 'enabled', 'false');
+                console.log("desktop w/o headset; disabling look-controls so keyboard controls can function");
+                state.cameraEl.setAttribute('look-controls', 'enabled', 'false');
             }
 
             state.gliderEl.addEventListener('raycaster-intersection', (evt) => {
@@ -126,7 +128,7 @@ AFRAME.registerState({
                             state.gliderRotationY = state.gliderRotationYStart;
                             state.gliderSpeed = 5;
                             state.hudText = "";
-                            state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-controls-z disabled
+                            state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-controls disabled
                             state.cameraEl.object3D.rotation.y = 0;
                             state.cameraEl.object3D.rotation.z = 0;
                             setTimeout(this.showControlsReminder.bind(this, state), 3000);
@@ -290,7 +292,7 @@ AFRAME.registerState({
             if (prelaunchHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
                 state.controlsReminderDisplayed = true;
                 if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobileVR()) {
-                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt your head left: turn left\nTilt your head right: turn right\nTrigger or touchpad: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt your head left: turn left\nTilt your head right: turn right\nTrigger, button or touchpad: launch");
                 } else if (AFRAME.utils.device.isMobile()) {
                     prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTap screen: launch");
                 } else {

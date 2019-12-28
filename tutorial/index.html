@@ -5,13 +5,13 @@
     <title>Tutorial - Elfland Glider</title>
     <meta name="description" content="Learn to fly!">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js"></script>
-    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-controls-z@^2.0.0/look-controls-z.js"></script>
-    <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^4.7.0/dist/aframe-state-component.min.js"></script>
     <script src="https://unpkg.com/aframe-geometry-merger-component@^2.0.0/dist/aframe-geometry-merger-component.min.js"></script>
 
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
 
     <script src="../dist/tutorial.js"></script>
@@ -19,22 +19,21 @@
     <!--<script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>-->
 </head>
 <body>
-<a-scene tutorial fog="type: exponential; color: #888; far: 30001">
+<a-scene tutorial background="color:#398bc5">
     <a-assets>
         <img id="ground" src="9367954712_55ded5574a_o.jpg">
         <a-mixin id="tetra" geometry="primitive: tetrahedron; radius: 4" rotation="45 0 0"></a-mixin>
         <img id="grass" src="../assets/stabbur/textures/Grass1_diffuse.png">
     </a-assets>
 
-    <a-simple-sun-sky sun-position="-1 1 1.8" dark-color="#0b486b" fog-color="#4f81a2" radius="30000"></a-simple-sun-sky>
+    <a-simple-sun-sky sun-position="-1 1 1.8" dark-color="#0b486b" fog-color="#4f81a2" radius="17500"></a-simple-sun-sky>
 
-    <a-plane class="landscape" position="0 -500 0" src="#ground" height="32000" width="32000" rotation="-90 0 0"></a-plane>
+    <a-plane class="landscape" position="0 -500 0" src="#ground" height="24000" width="24000" rotation="-90 0 0"></a-plane>
 
     <a-cylinder class="landscape" position="0 0 0" height="1000" radius="1.75" src="#grass"></a-cylinder>
 
-    <a-entity id="nextQuestPortal" position="0 15 -80" scale="5 5 0"
-              link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"
-              bind="visible: questComplete"></a-entity>
+    <a-entity id="nextQuestPortal" position="-400 -100 400" scale="5 5 0"
+              link="href:../yggdrasil; title: Yggdrasil; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
@@ -57,7 +56,7 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity id="body">
-            <a-entity camera="far:100000" look-controls-z>
+            <a-entity camera="far:35000; near:0.10" look-controls>
             </a-entity>
         </a-entity>
         <a-entity button-controls></a-entity>
@@ -66,6 +65,6 @@
 
     <!--<a-entity fps-counter="for90fps:false"></a-entity>-->
 </a-scene>
-<!-- Copyright © 2017-2018 by P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
+<!-- Copyright © 2017-2020 by P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
 </body>
 </html>

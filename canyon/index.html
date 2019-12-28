@@ -5,9 +5,8 @@
     <title>Canyon - Elfland Glider</title>
     <meta name="description" content="Maneuver in cramped spaces">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.core.min.js"></script>
-    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-controls-z@^2.0.0/look-controls-z.js"></script>
-    <script src="https://unpkg.com/aframe-button-controls@^1.0.1/aframe-button-controls.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^4.7.0/dist/aframe-state-component.min.js"></script>
     <script src="https://unpkg.com/aframe-geometry-merger-component@^2.0.0/dist/aframe-geometry-merger-component.min.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
@@ -19,11 +18,11 @@
     <script src="../dist/canyon.js"></script>
 </head>
 <body>
-<a-scene load-terrain canyon>
+<a-scene load-terrain canyon background="color:#398bc5">
     <a-assets>
     </a-assets>
 
-    <a-simple-sun-sky sun-position="-1 1 -1"></a-simple-sun-sky>
+    <a-simple-sun-sky sun-position="-1 1 -1" radius="1700"></a-simple-sun-sky>
 
 
     <a-entity id="terrain" material="shader:land; sunPosition:-1 1 -1"
@@ -73,8 +72,7 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity id="body">
-            <a-entity camera="" look-controls-z>
-            </a-entity>
+            <a-entity camera="far:2600; near:0.10" look-controls></a-entity>
         </a-entity>
         <a-entity button-controls></a-entity>
         <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="../assets/mozillavr.fnt" value="" visible="true"></a-text>

@@ -22,6 +22,7 @@ by "doop" (https://sketchfab.com/doop) is licensed under Creative Commons Attrib
 
 Nimbostratus_Cloud_PNG_Clipart-875.png is in the public domain
 
+TexturesCom_Trees0096_masked_S is in the public domain
 
 ## Sounds
 
