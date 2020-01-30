@@ -44,6 +44,14 @@ h1 {
     }
 }
 
+td.ruleAbove {
+    border-top: black 1px solid;
+}
+
+td.ruleBelow {
+    border-bottom: black 1px solid;
+}
+
 
 /* hides AR button, */
 div.a-enter-ar {

@@ -1,5 +1,5 @@
 /** intro.js - introductory text for an Elfland Glider world
- * Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+ * Copyright © 2018-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
  */
 
 import {goFullscreenLandscape, isDesktop, pokeEnvironmentalSound} from './elfland-utils'
@@ -21,15 +21,19 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
         }
 
         console.log("checkHeadsetConnected:", AFRAME.utils.device.checkHeadsetConnected());
-        console.log("isMobile:", AFRAME.utils.device.isMobile());
-        console.log("isMobileVR:", AFRAME.utils.device.isMobileVR());
-        console.log("hasNativeWebXRImplementation:", window.hasNativeWebXRImplementation);
-        console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
         let closeBtnHtml = '';
         let controlsHtml = `
 <table id="vrControls">
-    <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>
-    <tr><td colspan="2"><b>Tap</b> VR button ➘ to enter VR mode</td></tr>
+    <tr><td colspan="2">If you have two controllers: <b>Click</b> VR button ➘ to enter VR mode, <b>Grab</b> the control bar and...</td></tr>
+    <tr><td><b>Tilt</b> the bar left to turn glider left</td><td><img src="../assets/control-bar-left.png"></td></tr>
+    <tr><td><b>Tilt</b> the bar right to turn glider right</td><td><img src="../assets/control-bar-right.png"></td></tr>
+    <tr><td><b>Raise</b> the bar to climb (&amp; <b>slow down</b>)</td><td><img src="../assets/control-bar-up.png"></td></tr>
+    <tr><td><b>Lower</b> the bar to descend (&amp; <b>speed up</b>)</td><td><img src="../assets/control-bar-down.png"></td></tr>
+    <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>
+</table>
+<table id="vrControls">
+    <tr><td colspan="2">Without two controllers...</td></tr>
+    <tr><td colspan="2"><b>Click</b> VR button ➘ to enter VR mode</td></tr>
     <tr><td><b>Tilt</b> your head left to turn glider left</td><td><img src="../assets/head-tilt-left.png"></td></tr>
     <tr><td><b>Tilt</b> your head right to turn glider right</td><td><img src="../assets/head-tilt-right.png"></td></tr>
     <tr><td colspan="2"><b>Turn</b> your head left or right to look around without turning glider</td></tr>
@@ -42,7 +46,6 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
             closeBtnHtml = `<div class="closeBtnRed landscapeOnly"></div>`;
             controlsHtml = `
 <table class="landscapeOnly" style="width:100%">
-    <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>
     <tr><td colspan="2"><b>Tap</b> the close button ➚ to play in magic window mode, or <b>Tap</b> VR button ➘ and place phone in headset to enter VR mode</td></tr>
     <tr><td><b>Roll</b> your device left to turn glider left</td>
         <td><img src="../assets/device-rotate-ccw.png"></td></tr>
@@ -59,7 +62,6 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
             controlsHtml = `
 <table style="width:100%">
     <tr><td colspan="2">Elfland Glider is designed for VR or mobile, but if you want to try it here:</td></tr>
-    <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>
     <tr><td>A or left-arrow</td><td>turn glider left</td></tr>
     <tr><td>D or right-arrow</td><td>turn glider right</td></tr>
     <tr><td>W or up-arrow</td><td>climb (&amp; <b>slow down</b>)</td></tr>
@@ -84,6 +86,9 @@ ${closeBtnHtml}
         & avoid the surly and mischievous dark elves.
         ${rotateHtml}
         ${nativeXrHtml}
+        <table id="vrControls">
+            <tr><td colspan="2" class="ruleAbove">The wing above you points the direction you're flying</td></tr>
+        </table>
       </div>
       ${controlsHtml}
       <div style="font-family:serif; font-size: 0.75rem">

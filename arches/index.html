@@ -20,6 +20,8 @@
 <a-scene arches>
     <a-assets>
         <a-asset-item id="stabbur" src="../assets/stabbur/scene.gltf"></a-asset-item>
+        <img id="steelGrip" src="../assets/TexturesCom_MetalVarious0052_1_M_y.jpg" />
+        <img id="screenshot" src="./screenshot.png" />
     </a-assets>
 
     <a-entity environment="preset: arches;"></a-entity>
@@ -98,8 +100,12 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity id="body">
-            <a-entity camera="" look-controls>
-            </a-entity>
+            <a-entity camera="near:0.05" look-controls></a-entity>
+            <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color:#666"></a-entity>
+            <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color:#666"></a-entity>
+            <a-entity id="controlBar" position="0 0.95 -0.4" rotation="0 0 90" visible="false"
+                      geometry="primitive:cylinder; height:0.9; radius: 0.012; segmentsRadial:24;"
+                      material="normalMap:#steelGrip; npot:true; normalTextureRepeat:1 4; normalTextureOffset:107 0; metalness:0.8; roughness:0.4; sphericalEnvMap:#screenshot;"></a-entity>
         </a-entity>
         <a-entity button-controls></a-entity>
     </a-entity>

@@ -1,9 +1,9 @@
 // state.js - state model for Elfland Glider
-// Copyright © 2017-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
 
 import './shim/requestIdleCallback'
-import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, pokeEnvironmentalSound} from './elfland-utils'
+import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, pokeEnvironmentalSound, barFromHands} from './elfland-utils'
 
 const GRAVITY = 9.807;   // m/s^2
 const DIFFICULTY_VR = 0.75;
@@ -16,6 +16,13 @@ AFRAME.registerState({
         armatureEl: null,
         gliderEl: null,
         cameraEl: null,
+        leftHandEl: null,
+        rightHandEl: null,
+        controllerConnections: {},
+        controlBarEl: null,
+        controlNeutralHeight: 0.95,
+        controlMode: 'HEAD',   // or 'TWO_HANDS'
+        isControlEngaged: false,
         time: 0,
         difficulty: DIFFICULTY_MAGIC_WINDOW,
         gliderPosition: {x:-30, y:15, z:30},
@@ -208,7 +215,86 @@ AFRAME.registerState({
                         break;
                 }
             }, false);
+
+            // two-controller steering
+
+            state.leftHandEl = document.getElementById("leftHand");
+            state.rightHandEl = document.getElementById("rightHand");
+            if (isDesktop()) {
+                state.leftHandEl.setAttribute('hand-controls', 'handModelStyle', 'highPoly');
+                state.rightHandEl.setAttribute('hand-controls', 'handModelStyle', 'highPoly');
+            }
+
+            this.leftDownHandler = this.handHandler.bind(this, 'LEFT', 'DOWN', state);
+            this.leftUpHandler = this.handHandler.bind(this, 'LEFT', 'UP', state);
+            this.rightDownHandler = this.handHandler.bind(this, 'RIGHT', 'DOWN', state);
+            this.rightUpHandler = this.handHandler.bind(this, 'RIGHT', 'UP', state);
+
+            state.controlBarEl = document.getElementById('controlBar');
         },
+
+        controllerconnected: function (state, evt) {   // evt is name and component; this is state obj
+            state.controllerConnections[evt.component.el.id] = true;
+            this.adjustControlMode(state);
+        },
+        controllerdisconnected: function (state, evt) {
+            state.controllerConnections[evt.component.el.id] = false;
+            this.adjustControlMode(state);
+        },
+        adjustControlMode: function (state) {
+            const oldControlMode =  state.controlMode;
+            if (state.controllerConnections.leftHand && state.controllerConnections.rightHand) {
+                state.controlMode = 'TWO_HANDS';
+            } else {
+                state.controlMode = 'HEAD';
+            }
+            if (state.controlMode !== oldControlMode) {
+                console.log("changed control mode from", oldControlMode, "to", state.controlMode);
+                if (state.controlMode === 'TWO_HANDS') {
+                    state.leftHandEl.addEventListener('buttondown', this.leftDownHandler);
+                    state.leftHandEl.addEventListener('buttonup', this.leftUpHandler);
+                    state.rightHandEl.addEventListener('buttondown', this.rightDownHandler);
+                    state.rightHandEl.addEventListener('buttonup', this.rightUpHandler);
+
+                    state.controlBarEl.object3D.visible = true;
+                } else if (state.controlMode === 'HEAD') {
+                    state.leftHandEl.removeEventListener('buttondown', this.leftDownHandler);
+                    state.leftHandEl.removeEventListener('buttonup', this.leftUpHandler);
+                    state.rightHandEl.removeEventListener('buttondown', this.rightDownHandler);
+                    state.rightHandEl.removeEventListener('buttonup', this.rightUpHandler);
+
+                    state.controlBarEl.object3D.visible = false;
+                }
+            }
+        },
+        handHandler: function handHandler(handedness, upDown, state, evt) {
+            let isAnyPressed = false;
+
+            const handEl = evt.target;
+            const buttons = handEl.components['tracked-controls'].controller.gamepad.buttons;
+            for (let i = 0; i < buttons.length; ++i) {   // not a JavaScript array
+                if (buttons[i].pressed) {
+                    isAnyPressed = true;
+                }
+            }
+
+            let otherHandEl = "LEFT" === handedness ? state.rightHandEl : state.leftHandEl;
+            const otherButtons = otherHandEl.components['tracked-controls'].controller.gamepad.buttons;
+            for (let i = 0; i < otherButtons.length; ++i) {   // not a JavaScript array
+                if (otherButtons[i].pressed) {
+                    isAnyPressed = true;
+                }
+            }
+
+            if (!state.isControlEngaged && isAnyPressed) {
+                const leftHandPos = state.leftHandEl.getAttribute("position");
+                const rightHandPos = state.rightHandEl.getAttribute("position");
+                state.controlNeutralHeight = Math.min(Math.max((leftHandPos.y + rightHandPos.y) / 2, 0.25), 1.90);
+            }
+
+            state.isControlEngaged = isAnyPressed;
+        },
+
 
         // aframe-button-controls: any controller button, or scene touch
         buttondown: function (state, action) {
@@ -283,7 +369,7 @@ AFRAME.registerState({
             if (state.controlsReminderDisplayed) {
                 this.showControlsReminder(state);   // updates list of controls
             } else {
-                setTimeout(this.showControlsReminder.bind(this, state), 6000);
+                setTimeout(this.showControlsReminder.bind(this, state), 10000);
             }
         },
         showControlsReminder: function (state) {
@@ -292,9 +378,9 @@ AFRAME.registerState({
             if (prelaunchHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
                 state.controlsReminderDisplayed = true;
                 if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobileVR()) {
-                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt your head left: turn left\nTilt your head right: turn right\nTrigger, button or touchpad: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt left: turn left\nTilt right: turn right\nUp: climb & slow down\nDown: descend & speed up\nTrigger, button or touchpad: launch");
                 } else if (AFRAME.utils.device.isMobile()) {
-                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTap screen: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTilt up: climb & slow down\nTilt down: descend & speed up\nTap screen: launch");
                 } else {
                     prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nA: turn left\nD: turn right\nW: climb (& slow down)\nS: descend (& speed up)\nSpace bar: launch");
                 }
@@ -305,30 +391,55 @@ AFRAME.registerState({
             // A pause in the action is better than flying blind
             action.timeDelta = Math.min(action.timeDelta, 100);
             state.time += action.timeDelta * state.difficulty;
-            let cameraRotation = state.cameraEl.getAttribute('rotation');
-            if (!cameraRotation) {
-                console.warn("camera rotation not available");
-                return;
+            let xDiff, zDiff;
+            switch (state.controlMode) {
+                case "HEAD":
+                    let cameraRotation = state.cameraEl.getAttribute('rotation');
+                    if (!cameraRotation) {
+                        console.warn("camera rotation not available");
+                        return;
+                    }
+
+                    let cameraRotX = isMagicWindow() ? cameraRotation.x + 20 : cameraRotation.x;
+                    xDiff = cameraRotX - state.gliderRotationX;
+                    zDiff = cameraRotation.z - state.gliderRotationZ;
+                    break;
+                case "TWO_HANDS":
+                    const leftHandPos = state.leftHandEl.getAttribute("position");
+                    const rightHandPos = state.rightHandEl.getAttribute("position");
+                    if (state.isControlEngaged) {
+                        let {position, rotation} = barFromHands(leftHandPos, rightHandPos);
+
+                        state.controlBarEl.setAttribute('position', position);
+                        state.controlBarEl.setAttribute('rotation', {x:rotation.x, y:rotation.y, z:rotation.z+90});
+
+                        xDiff = (position.y - state.controlNeutralHeight) * 150 - state.gliderRotationX;
+                        zDiff = rotation.z - state.gliderRotationZ;
+                    } else {
+                        state.controlBarEl.setAttribute('position', {x:0, y:state.controlNeutralHeight, z:-0.4});
+                        state.controlBarEl.setAttribute('rotation', {x:0, y:0, z:90});
+
+                        xDiff = -state.gliderRotationX;
+                        zDiff = -state.gliderRotationZ;
+                    }
+                    break;
             }
-            let cameraRotX = isMagicWindow() ? cameraRotation.x + 20 : cameraRotation.x;
-            let xDiff = cameraRotX - state.gliderRotationX;
             let xChange = (xDiff + Math.sign(xDiff)*15) * (action.timeDelta / 1000);
             if (Math.abs(xChange) > Math.abs(xDiff)) {
                 xChange = xDiff;
             }
             let newXrot = state.gliderRotationX + xChange;
-            newXrot = Math.max(newXrot, -89);
-            newXrot = Math.min(newXrot, 89);
+            newXrot = Math.max(newXrot, -75);
+            newXrot = Math.min(newXrot, 75);
             state.gliderRotationX = newXrot;
 
-            let zDiff = cameraRotation.z - state.gliderRotationZ;
             let zChange = (zDiff + Math.sign(zDiff)*15) * (action.timeDelta / 1000);
             if (Math.abs(zChange) > Math.abs(zDiff)) {
                 zChange = zDiff;
             }
             let newZrot = state.gliderRotationZ + zChange;
-            newZrot = Math.max(newZrot, -89);
-            newZrot = Math.min(newZrot, 89);
+            newZrot = Math.max(newZrot, -70);
+            newZrot = Math.min(newZrot, 70);
             state.gliderRotationZ = newZrot;
 
             let deltaHeading = state.gliderRotationZ * action.timeDelta / 1000;

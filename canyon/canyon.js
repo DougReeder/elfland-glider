@@ -1,5 +1,5 @@
 // canyon.js - maneuvering in cramped spaces, for Elfland Glider
-// Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2019-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 // import {setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
@@ -31,8 +31,10 @@ AFRAME.registerComponent('load-terrain', {
 AFRAME.registerComponent('canyon', {
     init: function () {
         let sceneEl = this.el;
-        sceneEl.emit('setState', {gliderPositionStart: {x:150, y:-5, z:150}});
-        sceneEl.emit('setState', {gliderPosition: {x:150, y:-5, z:150}});
+        sceneEl.emit('setState', {
+            gliderPositionStart: {x:150, y:-5, z:150},
+            gliderPosition: {x:150, y:-5, z:150},
+        });
 
         // sceneEl.emit('countYellowStars', {});
 

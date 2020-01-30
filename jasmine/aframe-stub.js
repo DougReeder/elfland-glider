@@ -1,5 +1,5 @@
 // aframe-stub.js - allows testing app code that uses A-Frame
-// Copyright © 2017-2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 var elementParam = {};   // keyed by name
 
@@ -86,4 +86,11 @@ class MockElement {
 
     setObject3D() {
     }
+}
+
+
+
+// not actually A-Frame, but used in Elfland Glider
+function Howl() {
+    this.play = function () {};
 }

@@ -1,5 +1,5 @@
-// state.js - unit tests for state model for Elfland Glider
-// Copyright © 2017 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// state-spec.js - unit tests for state model for Elfland Glider
+// Copyright © 2017-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 describe("state", function () {
     let state;
@@ -9,6 +9,13 @@ describe("state", function () {
         state = {
             gliderEl: new MockElement({rotation: {x: 0, y: 0, z: 0}}),
             cameraEl: new MockElement({rotation: {x: 0, y: 0, z: 0}}),
+            leftHandEl: null,
+            rightHandEl: null,
+            controllerConnections: {},
+            controlBarEl: null,
+            controlNeutralHeight: 0.95,
+            controlMode: 'HEAD',
+            isControlEngaged: false,
             time: 5000,
             difficulty: 0.5,
             gliderPosition: {x: 0, y: 10, z: 10},
@@ -170,7 +177,7 @@ describe("state", function () {
         expect(Math.abs(position.x - 0)).toBeLessThan(80);
         expect(Math.abs(position.y - 10)).toBeLessThan(80);
         expect(Math.abs(position.z + 89)).toBeGreaterThan(-35);
-        expect(Math.abs(position.z + 89)).toBeLessThan(35);
+        expect(Math.abs(position.z + 89)).toBeLessThan(39);
     });
 
 

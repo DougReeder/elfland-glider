@@ -94,4 +94,23 @@ document.addEventListener('visibilitychange', () => {
 }, false);
 
 
-export {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, setEnvironmentalSound, pokeEnvironmentalSound};
+function barFromHands(leftHand, rightHand) {
+    let position = {
+        x:(leftHand.x + rightHand.x) / 2,
+        y:(leftHand.y + rightHand.y) / 2,
+        z:(leftHand.z + rightHand.z) / 2
+    };
+    if (leftHand.x - rightHand.x > -0.02) {   // limit rotation
+        leftHand = {x:position.x - 0.01, y:leftHand.y, z:leftHand.z};
+        rightHand = {x:position.x + 0.01, y:rightHand.y, z:rightHand.z};
+    }
+    let rotation = {
+        x:0,
+        y:Math.atan2(rightHand.z - leftHand.z, rightHand.x - leftHand.x) * -180 / Math.PI,
+        z:Math.atan2(rightHand.y - leftHand.y, rightHand.x - leftHand.x) * 180 / Math.PI
+    };
+    return {position, rotation};
+}
+
+export {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, setEnvironmentalSound, pokeEnvironmentalSound,
+    barFromHands};

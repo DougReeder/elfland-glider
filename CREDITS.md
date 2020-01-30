@@ -24,6 +24,8 @@ Nimbostratus_Cloud_PNG_Clipart-875.png is in the public domain
 
 TexturesCom_Trees0096_masked_S is in the public domain
 
+TexturesCom_MetalVarious0052_1_M is in the public domain
+
 ## Sounds
 
 "Minimalist" from _SelectCam Buddha Machine_ is by Olaf Post
