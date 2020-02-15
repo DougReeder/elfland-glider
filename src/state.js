@@ -21,8 +21,8 @@ AFRAME.registerState({
         controllerConnections: {},
         controlBarEl: null,
         controlNeutralHeight: 0.95,
-        controlMode: 'HEAD',   // or 'TWO_HANDS'
-        isControlEngaged: false,
+        controlMode: 'HEAD',   // or 'HANDS'
+        controlSubmode: 'NONE',
         time: 0,
         difficulty: DIFFICULTY_MAGIC_WINDOW,
         gliderPosition: {x:-30, y:15, z:30},
@@ -243,14 +243,14 @@ AFRAME.registerState({
         },
         adjustControlMode: function (state) {
             const oldControlMode =  state.controlMode;
-            if (state.controllerConnections.leftHand && state.controllerConnections.rightHand) {
-                state.controlMode = 'TWO_HANDS';
+            if (state.controllerConnections.leftHand || state.controllerConnections.rightHand) {
+                state.controlMode = 'HANDS';
             } else {
                 state.controlMode = 'HEAD';
             }
             if (state.controlMode !== oldControlMode) {
                 console.log("changed control mode from", oldControlMode, "to", state.controlMode);
-                if (state.controlMode === 'TWO_HANDS') {
+                if (state.controlMode === 'HANDS') {
                     state.leftHandEl.addEventListener('buttondown', this.leftDownHandler);
                     state.leftHandEl.addEventListener('buttonup', this.leftUpHandler);
                     state.rightHandEl.addEventListener('buttondown', this.rightDownHandler);
@@ -268,31 +268,45 @@ AFRAME.registerState({
             }
         },
         handHandler: function handHandler(handedness, upDown, state, evt) {
-            let isAnyPressed = false;
-
-            const handEl = evt.target;
-            const buttons = handEl.components['tracked-controls'].controller.gamepad.buttons;
-            for (let i = 0; i < buttons.length; ++i) {   // not a JavaScript array
-                if (buttons[i].pressed) {
-                    isAnyPressed = true;
+            let isAnyPressedLeft = false;
+            const buttonsLeft = state.leftHandEl.components['tracked-controls'].controller.gamepad.buttons;
+            for (let i = 0; i < buttonsLeft.length; ++i) {   // not a JavaScript array
+                if (buttonsLeft[i].pressed) {
+                    isAnyPressedLeft = true;
                 }
             }
 
-            let otherHandEl = "LEFT" === handedness ? state.rightHandEl : state.leftHandEl;
-            const otherButtons = otherHandEl.components['tracked-controls'].controller.gamepad.buttons;
-            for (let i = 0; i < otherButtons.length; ++i) {   // not a JavaScript array
-                if (otherButtons[i].pressed) {
-                    isAnyPressed = true;
+            let isAnyPressedRight = false;
+            const buttonsRight = state.rightHandEl.components['tracked-controls'].controller.gamepad.buttons;
+            for (let i = 0; i < buttonsRight.length; ++i) {   // not a JavaScript array
+                if (buttonsRight[i].pressed) {
+                    isAnyPressedRight = true;
                 }
             }
 
-            if (!state.isControlEngaged && isAnyPressed) {
-                const leftHandPos = state.leftHandEl.getAttribute("position");
-                const rightHandPos = state.rightHandEl.getAttribute("position");
-                state.controlNeutralHeight = Math.min(Math.max((leftHandPos.y + rightHandPos.y) / 2, 0.25), 1.90);
+            if (isAnyPressedLeft && isAnyPressedRight) {
+                if ('BOTH' !== state.controlSubmode) {
+                    const leftHandPos = state.leftHandEl.getAttribute("position");
+                    const rightHandPos = state.rightHandEl.getAttribute("position");
+                    state.controlNeutralHeight = (leftHandPos.y + rightHandPos.y) / 2;
+                }
+                state.controlSubmode = 'BOTH';
+            } else if (isAnyPressedLeft) {
+                if ('LEFT' !== state.controlSubmode) {
+                    const leftHandPos = state.leftHandEl.getAttribute("position");
+                    state.controlNeutralHeight = leftHandPos.y;
+                }
+                state.controlSubmode = 'LEFT';
+            } else if (isAnyPressedRight) {
+                if ('RIGHT' !== state.controlSubmode) {
+                    const rightHandPos = state.rightHandEl.getAttribute("position");
+                    state.controlNeutralHeight = rightHandPos.y;
+                }
+                state.controlSubmode = 'RIGHT';
+            } else {
+                state.controlSubmode = 'NONE';
             }
-
-            state.isControlEngaged = isAnyPressed;
+            state.controlNeutralHeight = Math.min(Math.max(state.controlNeutralHeight, 0.25), 1.90);
         },
 
 
@@ -391,7 +405,7 @@ AFRAME.registerState({
             // A pause in the action is better than flying blind
             action.timeDelta = Math.min(action.timeDelta, 100);
             state.time += action.timeDelta * state.difficulty;
-            let xDiff, zDiff;
+            let xSetting, zSetting;
             switch (state.controlMode) {
                 case "HEAD":
                     let cameraRotation = state.cameraEl.getAttribute('rotation');
@@ -401,29 +415,51 @@ AFRAME.registerState({
                     }
 
                     let cameraRotX = isMagicWindow() ? cameraRotation.x + 20 : cameraRotation.x;
-                    xDiff = cameraRotX - state.gliderRotationX;
-                    zDiff = cameraRotation.z - state.gliderRotationZ;
+                    xSetting = cameraRotX;
+                    zSetting = cameraRotation.z;
                     break;
-                case "TWO_HANDS":
+                case "HANDS":
                     const leftHandPos = state.leftHandEl.getAttribute("position");
                     const rightHandPos = state.rightHandEl.getAttribute("position");
-                    if (state.isControlEngaged) {
-                        let {position, rotation} = barFromHands(leftHandPos, rightHandPos);
+                    switch (state.controlSubmode) {
+                        case "BOTH":
+                            let {position, rotation} = barFromHands(leftHandPos, rightHandPos);
 
-                        state.controlBarEl.setAttribute('position', position);
-                        state.controlBarEl.setAttribute('rotation', {x:rotation.x, y:rotation.y, z:rotation.z+90});
+                            state.controlBarEl.setAttribute('position', position);
+                            state.controlBarEl.setAttribute('rotation', {x:rotation.x, y:rotation.y, z:rotation.z+90});
 
-                        xDiff = (position.y - state.controlNeutralHeight) * 150 - state.gliderRotationX;
-                        zDiff = rotation.z - state.gliderRotationZ;
-                    } else {
-                        state.controlBarEl.setAttribute('position', {x:0, y:state.controlNeutralHeight, z:-0.4});
-                        state.controlBarEl.setAttribute('rotation', {x:0, y:0, z:90});
+                            xSetting = (position.y - state.controlNeutralHeight) * 150;
+                            zSetting = rotation.z;
+                            break;
+                        case "LEFT":
+                            const leftHandRot = state.leftHandEl.getAttribute('rotation');
 
-                        xDiff = -state.gliderRotationX;
-                        zDiff = -state.gliderRotationZ;
+                            state.controlBarEl.setAttribute('position', leftHandPos);
+                            state.controlBarEl.setAttribute('rotation', leftHandRot);
+
+                            xSetting = (leftHandPos.y - state.controlNeutralHeight) * 150;
+                            zSetting = leftHandRot.z + 90;
+                            break;
+                        case "RIGHT":
+                            const rightHandRot = state.rightHandEl.getAttribute('rotation');
+
+                            state.controlBarEl.setAttribute('position', rightHandPos);
+                            state.controlBarEl.setAttribute('rotation', rightHandRot);
+
+                            xSetting = (rightHandPos.y - state.controlNeutralHeight) * 150;
+                            zSetting = rightHandRot.z - 90;
+                            break;
+                        case "NONE":
+                            state.controlBarEl.setAttribute('position', {x: 0, y: state.controlNeutralHeight, z: -0.4});
+                            state.controlBarEl.setAttribute('rotation', {x: 0, y: 0, z: 90});
+
+                            xSetting = 0;
+                            zSetting = 0;
+                            break;
                     }
                     break;
             }
+            let xDiff = xSetting - state.gliderRotationX;
             let xChange = (xDiff + Math.sign(xDiff)*15) * (action.timeDelta / 1000);
             if (Math.abs(xChange) > Math.abs(xDiff)) {
                 xChange = xDiff;
@@ -433,6 +469,7 @@ AFRAME.registerState({
             newXrot = Math.min(newXrot, 75);
             state.gliderRotationX = newXrot;
 
+            let zDiff = zSetting - state.gliderRotationZ;
             let zChange = (zDiff + Math.sign(zDiff)*15) * (action.timeDelta / 1000);
             if (Math.abs(zChange) > Math.abs(zDiff)) {
                 zChange = zDiff;

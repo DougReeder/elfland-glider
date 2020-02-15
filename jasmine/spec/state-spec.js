@@ -15,7 +15,7 @@ describe("state", function () {
             controlBarEl: null,
             controlNeutralHeight: 0.95,
             controlMode: 'HEAD',
-            isControlEngaged: false,
+            controlSubmode: 'NONE',
             time: 5000,
             difficulty: 0.5,
             gliderPosition: {x: 0, y: 10, z: 10},
