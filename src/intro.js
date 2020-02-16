@@ -28,7 +28,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
     <tr><td><b>Tilt</b> the bar left to turn glider left</td><td><img src="../assets/control-bar-left.png"></td></tr>
     <tr><td><b>Tilt</b> the bar right to turn glider right</td><td><img src="../assets/control-bar-right.png"></td></tr>
     <tr><td><b>Raise</b> the bar to climb (&amp; <b>slow down</b>)</td><td><img src="../assets/control-bar-up.png"></td></tr>
-    <tr><td><b>Lower</b> the bar to descend (&amp; <b>speed up</b>)</td><td><img src="../assets/control-bar-down.png"></td></tr>
+    <tr><td><b>Lower</b> the bar to dive (&amp; <b>speed up</b>)</td><td><img src="../assets/control-bar-down.png"></td></tr>
     <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>
 </table>
 <table id="vrControls">
@@ -38,7 +38,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
     <tr><td><b>Tilt</b> your head right to turn glider right</td><td><img src="../assets/head-tilt-right.png"></td></tr>
     <tr><td colspan="2"><b>Turn</b> your head left or right to look around without turning glider</td></tr>
     <tr><td colspan="2"><b>Tilt</b> your head up to climb (&amp; <b>slow down</b>)</td></tr>
-    <tr><td colspan="2"><b>Tilt</b> your head down to descend (&amp; <b>speed up</b>)</td></tr>
+    <tr><td colspan="2"><b>Tilt</b> your head down to dive (&amp; <b>speed up</b>)</td></tr>
     <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>
 </table>
 `;
@@ -53,7 +53,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
         <td><img src="../assets/device-rotate-cw.png"></td></tr>
     <tr><td colspan="2"><b>Turn</b> your device left or right to look around without turning glider</td></tr>
     <tr><td colspan="2"><b>Tilt</b> your device up to climb (&amp; <b>slow down</b>)</td></tr>
-    <tr><td colspan="2"><b>Tilt</b> your device down to descend (&amp; <b>speed up</b>)</td></tr>
+    <tr><td colspan="2"><b>Tilt</b> your device down to dive (&amp; <b>speed up</b>)</td></tr>
     <tr><td colspan="2"><b>Tap</b> the screen to launch</td></tr>
 </table>
 `;
@@ -65,7 +65,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
     <tr><td>A or left-arrow</td><td>turn glider left</td></tr>
     <tr><td>D or right-arrow</td><td>turn glider right</td></tr>
     <tr><td>W or up-arrow</td><td>climb (&amp; <b>slow down</b>)</td></tr>
-    <tr><td>S or down-arrow</td><td>descend (&amp; <b>speed up</b>)</td></tr>
+    <tr><td>S or down-arrow</td><td>dive (&amp; <b>speed up</b>)</td></tr>
     <tr><td>space bar</td><td>launch</td></tr>
     <tr><td>VR button ➘</td><td>enter fullscreen mode</td></tr>
 </table>
@@ -87,7 +87,8 @@ ${closeBtnHtml}
         ${rotateHtml}
         ${nativeXrHtml}
         <table id="vrControls">
-            <tr><td colspan="2" class="ruleAbove">The wing above you points the direction you're flying</td></tr>
+            <tr><td colspan="2" class="ruleAbove">Remain seated while learning to fly</td></tr>
+            <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>
         </table>
       </div>
       ${controlsHtml}

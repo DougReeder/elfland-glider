@@ -6,6 +6,7 @@ import './shim/requestIdleCallback'
 import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, pokeEnvironmentalSound, barFromHands} from './elfland-utils'
 
 const GRAVITY = 9.807;   // m/s^2
+const HUMAN_EYE_ELBOW_DISTANCE = 0.56;   // m
 const DIFFICULTY_VR = 0.75;
 const DIFFICULTY_MAGIC_WINDOW = 0.6;
 const DIFFICULTY_KEYBOARD = 0.5;
@@ -256,6 +257,8 @@ AFRAME.registerState({
                     state.rightHandEl.addEventListener('buttondown', this.rightDownHandler);
                     state.rightHandEl.addEventListener('buttonup', this.rightUpHandler);
 
+                    const cameraPos = state.cameraEl.getAttribute("position");
+                    state.controlNeutralHeight = cameraPos.y - HUMAN_EYE_ELBOW_DISTANCE;
                     state.controlBarEl.object3D.visible = true;
                 } else if (state.controlMode === 'HEAD') {
                     state.leftHandEl.removeEventListener('buttondown', this.leftDownHandler);
@@ -392,11 +395,11 @@ AFRAME.registerState({
             if (prelaunchHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
                 state.controlsReminderDisplayed = true;
                 if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobileVR()) {
-                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt left: turn left\nTilt right: turn right\nUp: climb & slow down\nDown: descend & speed up\nTrigger, button or touchpad: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt left: turn left\nTilt right: turn right\nUp: climb & slow down\nDown: dive & speed up\nTrigger, button or touchpad: launch");
                 } else if (AFRAME.utils.device.isMobile()) {
-                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTilt up: climb & slow down\nTilt down: descend & speed up\nTap screen: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTilt up: climb & slow down\nTilt down: dive & speed up\nTap screen: launch");
                 } else {
-                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nA: turn left\nD: turn right\nW: climb (& slow down)\nS: descend (& speed up)\nSpace bar: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nA: turn left\nD: turn right\nW: climb (& slow down)\nS: dive (& speed up)\nSpace bar: launch");
                 }
             }
         },
