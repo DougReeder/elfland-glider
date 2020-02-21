@@ -20,6 +20,8 @@ AFRAME.registerState({
         leftHandEl: null,
         rightHandEl: null,
         controllerConnections: {},
+        isAnyPressedLeft: false,
+        isAnyPressedRight: false,
         controlBarEl: null,
         controlNeutralHeight: 0.95,
         controlMode: 'HEAD',   // or 'HANDS'
@@ -271,36 +273,46 @@ AFRAME.registerState({
             }
         },
         handHandler: function handHandler(handedness, upDown, state, evt) {
-            let isAnyPressedLeft = false;
-            const buttonsLeft = state.leftHandEl.components['tracked-controls'].controller.gamepad.buttons;
-            for (let i = 0; i < buttonsLeft.length; ++i) {   // not a JavaScript array
-                if (buttonsLeft[i].pressed) {
-                    isAnyPressedLeft = true;
+            const gamepadLeft = state.leftHandEl.components['tracked-controls'].controller.gamepad;
+            if (gamepadLeft && gamepadLeft.buttons) {
+                state.isAnyPressedLeft = false;
+                const buttonsLeft = gamepadLeft.buttons;
+                for (let i = 0; i < buttonsLeft.length; ++i) {   // not a JavaScript array
+                    if (buttonsLeft[i].pressed) {
+                        state.isAnyPressedLeft = true;
+                    }
                 }
+            } else if ('LEFT' === handedness) {
+                state.isAnyPressedLeft = 'DOWN' === upDown;   // hack
             }
 
-            let isAnyPressedRight = false;
-            const buttonsRight = state.rightHandEl.components['tracked-controls'].controller.gamepad.buttons;
-            for (let i = 0; i < buttonsRight.length; ++i) {   // not a JavaScript array
-                if (buttonsRight[i].pressed) {
-                    isAnyPressedRight = true;
+            const gamepadRight = state.rightHandEl.components['tracked-controls'].controller.gamepad;
+            if (gamepadRight && gamepadRight.buttons) {
+                state.isAnyPressedRight = false;
+                const buttonsRight = gamepadRight.buttons;
+                for (let i = 0; i < buttonsRight.length; ++i) {   // not a JavaScript array
+                    if (buttonsRight[i].pressed) {
+                        state.isAnyPressedRight = true;
+                    }
                 }
+            } else if ('RIGHT' === handedness) {
+                state.isAnyPressedRight = 'DOWN' === upDown;   // hack
             }
 
-            if (isAnyPressedLeft && isAnyPressedRight) {
+            if (state.isAnyPressedLeft && state.isAnyPressedRight) {
                 if ('BOTH' !== state.controlSubmode) {
                     const leftHandPos = state.leftHandEl.getAttribute("position");
                     const rightHandPos = state.rightHandEl.getAttribute("position");
                     state.controlNeutralHeight = (leftHandPos.y + rightHandPos.y) / 2;
                 }
                 state.controlSubmode = 'BOTH';
-            } else if (isAnyPressedLeft) {
+            } else if (state.isAnyPressedLeft) {
                 if ('LEFT' !== state.controlSubmode) {
                     const leftHandPos = state.leftHandEl.getAttribute("position");
                     state.controlNeutralHeight = leftHandPos.y;
                 }
                 state.controlSubmode = 'LEFT';
-            } else if (isAnyPressedRight) {
+            } else if (state.isAnyPressedRight) {
                 if ('RIGHT' !== state.controlSubmode) {
                     const rightHandPos = state.rightHandEl.getAttribute("position");
                     state.controlNeutralHeight = rightHandPos.y;
