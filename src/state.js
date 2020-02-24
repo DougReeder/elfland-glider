@@ -3,7 +3,8 @@
 //
 
 import './shim/requestIdleCallback'
-import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, pokeEnvironmentalSound, barFromHands} from './elfland-utils'
+import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, pokeEnvironmentalSound,
+        barFromHands, gosper} from './elfland-utils'
 
 const GRAVITY = 9.807;   // m/s^2
 const HUMAN_EYE_ELBOW_DISTANCE = 0.56;   // m
@@ -319,6 +320,23 @@ AFRAME.registerState({
                 state.controlBarEl.setAttribute('rotation', {x: 0, y: 0, z: 90});
                 state.xSetting = 0;
                 state.zSetting = 0;
+
+                if (! sessionStorage.getItem('previousWorld')) {
+                    const bodyEl = document.getElementById('body');
+                    let neutralIndicatorEl = bodyEl.querySelector("#neutralIndicator");
+                    if (!neutralIndicatorEl) {
+                        neutralIndicatorEl = document.createElement('a-lines');
+                        neutralIndicatorEl.setAttribute('id', 'neutralIndicator');
+
+                        const points = gosper(4, 0.3);
+                        neutralIndicatorEl.setAttribute('points', points.join());
+                        neutralIndicatorEl.setAttribute('color', 'white');
+                        neutralIndicatorEl.setAttribute('opacity', '0.30');
+
+                        bodyEl.appendChild(neutralIndicatorEl);
+                    }
+                    neutralIndicatorEl.setAttribute('position', {x: 0.04, y: state.controlNeutralHeight, z: -0.565});
+                }
             }
         },
 

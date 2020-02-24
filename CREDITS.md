@@ -7,6 +7,8 @@ Most code by P. Douglas Reeder
 
 Simplex 3D noise by Ian McEwan, Ashima Arts
 
+Gosper curve implementation by Jos Dirksen in "Learn Three.js"
+
 ## Models
 
 Stabbur (https://sketchfab.com/models/d13301cc019345589af8a415feebc985)
