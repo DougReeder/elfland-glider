@@ -17,7 +17,7 @@ Press trigger, button or touchpad to take a (context-specific) action, such as l
 [Play on-line](https://elfland-glider.surge.sh/)
 
 ## Gameplay
-Gliding is controlled by headset orientation. 
+Gliding is controlled by the control bar, when a 6-DOF controller is available, or headset orientation. 
 Yawing the head left or right does *not* control the glider,
 so the player can look other directions than the direction of travel.
 
@@ -29,7 +29,7 @@ One or more challenges arise, which the player must solve using adroit flying an
 Then a portal to the next quest (or set of quests) opens.
 
 There is no health nor lives, and no leveling up. 
-A normal landing or crash just moves the player back to the launch point, as if he/she had walked and/or swum there.
+A normal landing or crash just moves the player back to the launch point, as if he/she had walked and/or swum back there.
 A high-velocity crash or landing on lava sends the player to dreary Ginnungagap,
 to fly through mists for a minute or two, before a portal appears to take him/her back.
 
