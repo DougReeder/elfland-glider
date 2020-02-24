@@ -139,6 +139,7 @@ AFRAME.registerState({
                             state.gliderRotationX = 0;
                             state.gliderRotationY = state.gliderRotationYStart;
                             state.gliderSpeed = 5;
+                            this.controlBarToNeutral(state);
                             state.hudText = "";
                             state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-controls disabled
                             state.cameraEl.object3D.rotation.y = 0;
@@ -261,8 +262,7 @@ AFRAME.registerState({
                     state.rightHandEl.addEventListener('buttondown', this.rightDownHandler);
                     state.rightHandEl.addEventListener('buttonup', this.rightUpHandler);
 
-                    const cameraPos = state.cameraEl.getAttribute("position");
-                    state.controlNeutralHeight = cameraPos.y - HUMAN_EYE_ELBOW_DISTANCE;
+                    this.controlBarToNeutral(state);
                     state.controlBarEl.object3D.visible = true;
                 } else if (state.controlMode === 'HEAD') {
                     state.leftHandEl.removeEventListener('buttondown', this.leftDownHandler);
@@ -309,6 +309,16 @@ AFRAME.registerState({
                 state.controlSubmode = 'RIGHT';
             } else {
                 state.controlSubmode = 'NONE';
+            }
+        },
+        controlBarToNeutral: function (state) {
+            if (state.controlBarEl) {
+                const cameraPos = state.cameraEl.getAttribute("position");
+                state.controlNeutralHeight = cameraPos.y - HUMAN_EYE_ELBOW_DISTANCE;
+                state.controlBarEl.setAttribute('position', {x: 0, y: state.controlNeutralHeight, z: -0.4});
+                state.controlBarEl.setAttribute('rotation', {x: 0, y: 0, z: 90});
+                state.xSetting = 0;
+                state.zSetting = 0;
             }
         },
 
