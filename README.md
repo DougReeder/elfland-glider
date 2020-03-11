@@ -17,7 +17,7 @@ Press trigger, button or touchpad to take a (context-specific) action, such as l
 [Play on-line](https://elfland-glider.surge.sh/)
 
 ## Gameplay
-Gliding is controlled by the control bar, when a 6-DOF controller is available, or headset orientation. 
+Gliding is controlled by the control stick, when a 6-DOF controller is available, or headset orientation. 
 Yawing the head left or right does *not* control the glider,
 so the player can look other directions than the direction of travel.
 

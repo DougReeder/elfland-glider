@@ -12,7 +12,7 @@ describe("state", function () {
             leftHandEl: null,
             rightHandEl: null,
             controllerConnections: {},
-            controlBarEl: null,
+            controlStickEl: null,
             controlNeutralHeight: 0.95,
             controlMode: 'HEAD',
             controlSubmode: 'NONE',

@@ -24,11 +24,11 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
         let closeBtnHtml = '';
         let controlsHtml = `
 <table id="vrControls">
-    <tr><td colspan="2">If you have a position-tracking controller: <b>Click</b> VR button ➘ to enter VR mode, <b>Grab</b> the control bar and...</td></tr>
-    <tr><td><b>Tilt</b> the bar left to turn glider left</td><td><img src="../assets/control-bar-left.png"></td></tr>
-    <tr><td><b>Tilt</b> the bar right to turn glider right</td><td><img src="../assets/control-bar-right.png"></td></tr>
-    <tr><td><b>Raise</b> the bar to climb (&amp; <b>slow down</b>)</td><td><img src="../assets/control-bar-up.png"></td></tr>
-    <tr><td><b>Lower</b> the bar to dive (&amp; <b>speed up</b>)</td><td><img src="../assets/control-bar-down.png"></td></tr>
+    <tr><td colspan="2">If you have a position-tracking controller: <b>Click</b> VR button ➘ to enter VR mode, <b>Grab</b> the control stick and...</td></tr>
+    <tr><td><b>Tilt</b> the stick left to turn glider left</td><td><img src="../assets/control-bar-left.png"></td></tr>
+    <tr><td><b>Tilt</b> the stick right to turn glider right</td><td><img src="../assets/control-bar-right.png"></td></tr>
+    <tr><td colspan="2"><b>Tilt</b> the stick back to climb (&amp; <b>slow down</b>)</td></tr>
+    <tr><td colspan="2"><b>Tilt</b> the stick forward to dive (&amp; <b>speed up</b>)</td></tr>
     <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>
 </table>
 <table id="vrControls">

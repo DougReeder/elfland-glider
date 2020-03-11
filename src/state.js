@@ -3,8 +3,7 @@
 //
 
 import './shim/requestIdleCallback'
-import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, pokeEnvironmentalSound,
-        barFromHands, gosper} from './elfland-utils'
+import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, pokeEnvironmentalSound} from './elfland-utils'
 
 const GRAVITY = 9.807;   // m/s^2
 const HUMAN_EYE_ELBOW_DISTANCE = 0.56;   // m
@@ -25,10 +24,10 @@ AFRAME.registerState({
         isAnyPressedRight: false,
         xSetting: 0,
         zSetting: 0,
-        controlBarEl: null,
+        controlStickEl: null,
         controlNeutralHeight: 0.95,
         controlMode: 'HEAD',   // or 'HANDS'
-        controlSubmode: 'NONE',
+        controlSubmode: 'NONE',   // or 'LEFT' or 'RIGHT'
         time: 0,
         difficulty: DIFFICULTY_MAGIC_WINDOW,
         gliderPosition: {x:-30, y:15, z:30},
@@ -140,7 +139,7 @@ AFRAME.registerState({
                             state.gliderRotationX = 0;
                             state.gliderRotationY = state.gliderRotationYStart;
                             state.gliderSpeed = 5;
-                            this.controlBarToNeutral(state);
+                            this.controlStickToNeutral(state);
                             state.hudText = "";
                             state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-controls disabled
                             state.cameraEl.object3D.rotation.y = 0;
@@ -237,7 +236,7 @@ AFRAME.registerState({
             this.rightDownHandler = this.handHandler.bind(this, 'RIGHT', 'DOWN', state);
             this.rightUpHandler = this.handHandler.bind(this, 'RIGHT', 'UP', state);
 
-            state.controlBarEl = document.getElementById('controlBar');
+            state.controlStickEl = document.getElementById('controlStick');
         },
 
         controllerconnected: function (state, evt) {   // evt is name and component; this is state obj
@@ -263,23 +262,26 @@ AFRAME.registerState({
                     state.rightHandEl.addEventListener('buttondown', this.rightDownHandler);
                     state.rightHandEl.addEventListener('buttonup', this.rightUpHandler);
 
-                    this.controlBarToNeutral(state);
-                    state.controlBarEl.object3D.visible = true;
+                    this.controlStickToNeutral(state);
+                    state.controlStickEl.object3D.visible = true;
                 } else if (state.controlMode === 'HEAD') {
                     state.leftHandEl.removeEventListener('buttondown', this.leftDownHandler);
                     state.leftHandEl.removeEventListener('buttonup', this.leftUpHandler);
                     state.rightHandEl.removeEventListener('buttondown', this.rightDownHandler);
                     state.rightHandEl.removeEventListener('buttonup', this.rightUpHandler);
 
-                    state.controlBarEl.object3D.visible = false;
+                    state.controlStickEl.object3D.visible = false;
                 }
             }
         },
         handHandler: function handHandler(handedness, upDown, state, evt) {
-            const gamepadLeft = state.leftHandEl.components['tracked-controls'].controller.gamepad;
-            if (gamepadLeft && gamepadLeft.buttons) {
+            const trackedControlsLeft = state.leftHandEl.components['tracked-controls'];
+            const buttonsLeft = trackedControlsLeft &&
+                    trackedControlsLeft.controller &&
+                    trackedControlsLeft.controller.gamepad &&
+                    trackedControlsLeft.controller.gamepad.buttons;
+            if (buttonsLeft) {
                 state.isAnyPressedLeft = false;
-                const buttonsLeft = gamepadLeft.buttons;
                 for (let i = 0; i < buttonsLeft.length; ++i) {   // not a JavaScript array
                     if (buttonsLeft[i].pressed) {
                         state.isAnyPressedLeft = true;
@@ -289,10 +291,13 @@ AFRAME.registerState({
                 state.isAnyPressedLeft = 'DOWN' === upDown;   // hack
             }
 
-            const gamepadRight = state.rightHandEl.components['tracked-controls'].controller.gamepad;
-            if (gamepadRight && gamepadRight.buttons) {
+            const trackedControlsRight = state.rightHandEl.components['tracked-controls'];
+            const buttonsRight = trackedControlsRight &&
+                    trackedControlsRight.controller &&
+                    trackedControlsRight.controller.gamepad &&
+                    trackedControlsRight.controller.gamepad.buttons;
+            if (buttonsRight) {
                 state.isAnyPressedRight = false;
-                const buttonsRight = gamepadRight.buttons;
                 for (let i = 0; i < buttonsRight.length; ++i) {   // not a JavaScript array
                     if (buttonsRight[i].pressed) {
                         state.isAnyPressedRight = true;
@@ -303,7 +308,7 @@ AFRAME.registerState({
             }
 
             if (state.isAnyPressedLeft && state.isAnyPressedRight) {
-                state.controlSubmode = 'BOTH';
+                state.controlSubmode =  handedness;
             } else if (state.isAnyPressedLeft) {
                 state.controlSubmode = 'LEFT';
             } else if (state.isAnyPressedRight) {
@@ -311,32 +316,16 @@ AFRAME.registerState({
             } else {
                 state.controlSubmode = 'NONE';
             }
+            console.log("controlSubmode:", state.controlSubmode);
         },
-        controlBarToNeutral: function (state) {
-            if (state.controlBarEl) {
+        controlStickToNeutral: function (state) {
+            if (state.controlStickEl) {
                 const cameraPos = state.cameraEl.getAttribute("position");
                 state.controlNeutralHeight = cameraPos.y - HUMAN_EYE_ELBOW_DISTANCE;
-                state.controlBarEl.setAttribute('position', {x: 0, y: state.controlNeutralHeight, z: -0.4});
-                state.controlBarEl.setAttribute('rotation', {x: 0, y: 0, z: 90});
+                state.controlStickEl.setAttribute('position', {x: 0, y: state.controlNeutralHeight, z: -0.4});
+                state.controlStickEl.setAttribute('rotation', {x: 0, y: 0, z: 0});
                 state.xSetting = 0;
                 state.zSetting = 0;
-
-                if (! sessionStorage.getItem('previousWorld')) {
-                    const bodyEl = document.getElementById('body');
-                    let neutralIndicatorEl = bodyEl.querySelector("#neutralIndicator");
-                    if (!neutralIndicatorEl) {
-                        neutralIndicatorEl = document.createElement('a-lines');
-                        neutralIndicatorEl.setAttribute('id', 'neutralIndicator');
-
-                        const points = gosper(4, 0.3);
-                        neutralIndicatorEl.setAttribute('points', points.join());
-                        neutralIndicatorEl.setAttribute('color', 'white');
-                        neutralIndicatorEl.setAttribute('opacity', '0.30');
-
-                        bodyEl.appendChild(neutralIndicatorEl);
-                    }
-                    neutralIndicatorEl.setAttribute('position', {x: 0.04, y: state.controlNeutralHeight, z: -0.565});
-                }
             }
         },
 
@@ -423,7 +412,7 @@ AFRAME.registerState({
             if (prelaunchHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
                 state.controlsReminderDisplayed = true;
                 if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobileVR()) {
-                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt left: turn left\nTilt right: turn right\nUp: climb & slow down\nDown: dive & speed up\nTrigger, button or touchpad: launch");
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt left: turn left\nTilt right: turn right\nTilt back: climb & slow down\nTilt forward: dive & speed up\nTrigger, button or touchpad: launch");
                 } else if (AFRAME.utils.device.isMobile()) {
                     prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTilt up: climb & slow down\nTilt down: dive & speed up\nTap screen: launch");
                 } else {
@@ -453,34 +442,26 @@ AFRAME.registerState({
                     const leftHandPos = state.leftHandEl.getAttribute("position");
                     const rightHandPos = state.rightHandEl.getAttribute("position");
                     switch (state.controlSubmode) {
-                        case "BOTH":
-                            let {position, rotation} = barFromHands(leftHandPos, rightHandPos);
-
-                            state.controlBarEl.setAttribute('position', position);
-                            state.controlBarEl.setAttribute('rotation', {x:rotation.x, y:rotation.y, z:rotation.z+90});
-
-                            state.xSetting = (position.y - state.controlNeutralHeight) * 150;
-                            state.zSetting = rotation.z;
-                            break;
                         case "LEFT":
                             const leftHandRot = state.leftHandEl.getAttribute('rotation');
 
-                            state.controlBarEl.setAttribute('position', leftHandPos);
-                            state.controlBarEl.setAttribute('rotation', leftHandRot);
+                            state.controlStickEl.setAttribute('position', leftHandPos);
+                            state.controlStickEl.setAttribute('rotation', leftHandRot);
 
-                            state.xSetting = (leftHandPos.y - state.controlNeutralHeight) * 150;
-                            state.zSetting = leftHandRot.z + 90;
+                            state.xSetting = leftHandRot.x;
+                            state.zSetting = leftHandRot.z;
                             break;
                         case "RIGHT":
                             const rightHandRot = state.rightHandEl.getAttribute('rotation');
 
-                            state.controlBarEl.setAttribute('position', rightHandPos);
-                            state.controlBarEl.setAttribute('rotation', rightHandRot);
+                            state.controlStickEl.setAttribute('position', rightHandPos);
+                            state.controlStickEl.setAttribute('rotation', rightHandRot);
 
-                            state.xSetting = (rightHandPos.y - state.controlNeutralHeight) * 150;
-                            state.zSetting = rightHandRot.z - 90;
+                            state.xSetting = rightHandRot.x;
+                            state.zSetting = rightHandRot.z;
                             break;
                         case "NONE":
+                            // TODO: slow decay to neutral?
                             break;
                     }
                     break;

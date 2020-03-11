@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack",
     "start": "budo --live --verbose --port 3000 --open --ssl --cors",
+    "start-http": "budo --live --verbose --port 3000 --open --cors",
     "test": "open jasmine/SpecRunner.html   # on OSes other than OS X, load SpecRunner.html in a browser",
     "deploy": "ghpages",
     "ghpages": "ghpages"
