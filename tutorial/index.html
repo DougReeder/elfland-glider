@@ -59,7 +59,8 @@
         <a-entity id="body">
             <a-entity camera="far:35000; near:0.05" look-controls></a-entity>
             <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color:#666"></a-entity>
-            <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color:#666"></a-entity>
+            <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color:#666"
+                      gearvr-controls oculus-go-controls daydream-controls></a-entity>
             <a-entity id="controlStick" position="0 0.95 -0.4" rotation="0 0 90" visible="false"
                       geometry="primitive:cylinder; height:0.4; radius: 0.012; segmentsRadial:36;"
                       material="normalMap:#steelGrip; npot:true; normalTextureRepeat:1 2; normalTextureOffset:107 0; metalness:0.8; roughness:0.4; sphericalEnvMap:#screenshot;"></a-entity>

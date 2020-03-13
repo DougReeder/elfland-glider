@@ -24,7 +24,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
         let closeBtnHtml = '';
         let controlsHtml = `
 <table id="vrControls">
-    <tr><td colspan="2">If you have a position-tracking controller: <b>Click</b> VR button ➘ to enter VR mode, <b>Grab</b> the control stick and...</td></tr>
+    <tr><td colspan="2">If you have a controller: <b>Click</b> VR button ➘ to enter VR mode, <b>Grab</b> the control stick and...</td></tr>
     <tr><td><b>Tilt</b> the stick left to turn glider left</td><td><img src="../assets/control-bar-left.png"></td></tr>
     <tr><td><b>Tilt</b> the stick right to turn glider right</td><td><img src="../assets/control-bar-right.png"></td></tr>
     <tr><td colspan="2"><b>Tilt</b> the stick back to climb (&amp; <b>slow down</b>)</td></tr>
@@ -32,7 +32,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
     <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>
 </table>
 <table id="vrControls">
-    <tr><td colspan="2">Without a position-tracking controller...</td></tr>
+    <tr><td colspan="2">Without a controller...</td></tr>
     <tr><td colspan="2"><b>Click</b> VR button ➘ to enter VR mode</td></tr>
     <tr><td><b>Tilt</b> your head left to turn glider left</td><td><img src="../assets/head-tilt-left.png"></td></tr>
     <tr><td><b>Tilt</b> your head right to turn glider right</td><td><img src="../assets/head-tilt-right.png"></td></tr>
