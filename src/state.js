@@ -275,6 +275,7 @@ AFRAME.registerState({
             }
         },
         handHandler: function handHandler(handedness, upDown, state, evt) {
+            const wasAnyPressedLeft = state.isAnyPressedLeft;
             const trackedControlsLeft = state.leftHandEl.components['tracked-controls'];
             const buttonsLeft = trackedControlsLeft &&
                     trackedControlsLeft.controller &&
@@ -291,6 +292,7 @@ AFRAME.registerState({
                 state.isAnyPressedLeft = 'DOWN' === upDown;   // hack
             }
 
+            const wasAnyPressedRight = state.isAnyPressedRight;
             const trackedControlsRight = state.rightHandEl.components['tracked-controls'];
             const buttonsRight = trackedControlsRight &&
                     trackedControlsRight.controller &&
@@ -307,14 +309,26 @@ AFRAME.registerState({
                 state.isAnyPressedRight = 'DOWN' === upDown;   // hack
             }
 
-            if (state.isAnyPressedLeft && state.isAnyPressedRight) {
-                state.controlSubmode =  handedness;
-            } else if (state.isAnyPressedLeft) {
-                state.controlSubmode = 'LEFT';
-            } else if (state.isAnyPressedRight) {
-                state.controlSubmode = 'RIGHT';
-            } else {
-                state.controlSubmode = 'NONE';
+            if (state.isAnyPressedLeft && ! wasAnyPressedLeft) {
+                switch (state.controlSubmode) {
+                    case 'LEFT':
+                        state.controlSubmode = 'NONE';
+                        break;
+                    case 'RIGHT':
+                    case 'NONE':
+                        state.controlSubmode = 'LEFT';
+                        break;
+                }
+            } else if (state.isAnyPressedRight && ! wasAnyPressedRight) {
+                switch (state.controlSubmode) {
+                    case 'RIGHT':
+                        state.controlSubmode = 'NONE';
+                        break;
+                    case 'LEFT':
+                    case 'NONE':
+                        state.controlSubmode = 'RIGHT';
+                        break;
+                }
             }
             console.log("controlSubmode:", state.controlSubmode);
         },
