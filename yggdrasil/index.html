@@ -83,14 +83,14 @@
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
                   raycaster="objects:.landscape; far:1.25;">
             <a-entity id="wing" position="0 1.5 0" bind__rotation.z="gliderRotationZ" material="visible:false">
-                <a-plane rotation="90 0 0" position="0 0 -1.55" height="5.37" width="0.06" color="black"></a-plane>
+                <a-entity rotation="90 0 0" position="0 0 -1.05" geometry="primitive:plane; height:6.39; width:0.06" material="shader:flat; color:black"></a-entity>
                 <a-entity geometry-merger="preserveOriginal:false" material="shader:flat; transparent:true; opacity:0.5; color:black;">
-                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -4.25; vertexB:7.65 0 3.4; vertexC:0.03 0 -3.4; buffer:false"></a-entity>
-                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -4.25; vertexB:-0.03 0 -3.4; vertexC:-7.65 0 3.4; buffer:false"></a-entity>
+                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -4.25; vertexB:7.65 0 5.55; vertexC:0.03 0 -3.4; buffer:false"></a-entity>
+                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -4.25; vertexB:-0.03 0 -3.4; vertexC:-7.65 0 5.55; buffer:false"></a-entity>
                 </a-entity>
                 <a-entity geometry-merger="preserveOriginal:false" material="shader:flat; transparent:true; opacity:0.5; color:white;">
-                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -3.4; vertexB:7.65 0 3.4; vertexC:0.03 0 1.133; buffer:false"></a-entity>
-                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -3.4; vertexB:-0.03 0 1.133; vertexC:-7.65 0 3.4; buffer:false"></a-entity>
+                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -3.4; vertexB:7.65 0 5.55; vertexC:0.03 0 2.133; buffer:false"></a-entity>
+                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -3.4; vertexB:-0.03 0 2.133; vertexC:-7.65 0 5.55; buffer:false"></a-entity>
                 </a-entity>
             </a-entity>
             <a-text id="hud" position="0.2 0.42 -0.75" rotation="30 -20 0" width="2" align="center" value="HUD"
