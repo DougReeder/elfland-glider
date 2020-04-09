@@ -20,6 +20,9 @@ by "7718" (https://sketchfab.com/7718) is licensed under Creative Commons Attrib
 Hermit's Windmill (https://sketchfab.com/models/f7f354caaf50408fa3f3525eec716d7b)
 by "doop" (https://sketchfab.com/doop) is licensed under Creative Commons Attribution
 
+Tower (https://sketchfab.com/3d-models/tower-b08d8f5a40894169b851d269b18ebbbd)
+by "beherca" (https://sketchfab.com/beherca) is licensed under Creative Commons Attribution
+
 ## Textures
 
 Nimbostratus_Cloud_PNG_Clipart-875.png is in the public domain
