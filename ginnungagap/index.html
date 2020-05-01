@@ -15,7 +15,7 @@
     <script src="../dist/ginnungagap.js"></script>
 </head>
 <body>
-<a-scene background="color:#616279" ginnungagap pool__clouds="mixin:cloud; size:100; dynamic:true"
+<a-scene background="color:#616279" ginnungagap pool__clouds="mixin:cloud; size:250; dynamic:true"
          renderer="sortObjects:true">
     <a-assets>
         <img id="cloudImg" crossorigin="anonymous"
@@ -51,7 +51,7 @@
                     material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
         </a-entity>
         <a-entity id="body">
-            <a-entity camera="far:1000; near:0.05" look-controls></a-entity>
+            <a-entity camera="far:2000; near:0.05" look-controls></a-entity>
             <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color:#666"></a-entity>
             <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color:#666"
                       gearvr-controls oculus-go-controls daydream-controls></a-entity>

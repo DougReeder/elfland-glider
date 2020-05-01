@@ -18,16 +18,19 @@ AFRAME.registerComponent('ginnungagap', {
             sceneEl.appendChild(rain);
         }
 
+        const maxClouds = isDesktop() ? 1200 : 300;
         this.clouds = [];
         let clouds = this.clouds;
         setTimeout(() => {
-            for (let i=0; i<=80; ++i) {
-                placeCloud(875-i*10, 270);
+            // adds clouds all around
+            for (let i=Math.floor(maxClouds*0.5); i>0; --i) {
+                placeCloud(200 + 1500*i/Math.floor(maxClouds*0.5), 270);
             }
         }, 4);
-        setInterval(placeCloud, 5000);
-        function placeCloud(distance=500, variation=80) {
-            if (clouds.length >= 100) {
+        // adds cloud in front of glider
+        setInterval(placeCloud, 1000);
+        function placeCloud(distance=900+Math.random()*300, variation=80) {
+            if (clouds.length >= maxClouds) {
                 sceneEl.components.pool__clouds.returnEntity(clouds.shift());
             }
 
@@ -35,7 +38,7 @@ AFRAME.registerComponent('ginnungagap', {
             let opacity=0;
             cloudEl.setAttribute('material', 'opacity', opacity);
             let intervalID = setInterval( () => {
-                opacity += 0.1 / 120;
+                opacity += 1 / 2400;
                 cloudEl.setAttribute('material', 'opacity', opacity);
                 if (opacity >= 0.5) {
                     clearInterval(intervalID);
@@ -70,7 +73,7 @@ AFRAME.registerComponent('ginnungagap', {
 
     tick: function () {
         this.clouds.forEach(cloud => {
-            if (this.armaturePosition.distanceTo(cloud.object3D.position) > 100) {
+            if (this.armaturePosition.distanceTo(cloud.object3D.position) > 150) {
                 let rotationZ = cloud.object3D.rotation.z;
                 cloud.object3D.lookAt(this.armaturePosition);
                 cloud.object3D.rotation.z = rotationZ;
