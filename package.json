@@ -19,7 +19,7 @@
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
     "webpack": "^4.31.0",
-    "webpack-cli": "^3.3.2",
+    "webpack-cli": "^3.3.12",
     "webpack-glsl-loader": "^1.0.1"
   },
   "keywords": [
