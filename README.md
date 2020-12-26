@@ -7,9 +7,9 @@ and avoid the surly and mischievous dark elves.
 A tranquil action game for VR and mobile 
 using WebXR or [WebVR](https://webvr.info/), and [A-Frame](https://aframe.io).
 
-Roll left to turn left, Roll right to turn right. 
-Tilt up to ascend, trading speed for altitude.
-Tilt down to dive, trading altitude for speed.
+Tilt the stick left to turn glider left, right to turn right.
+Tilt the stick back to climb (and slow down).
+Tilt the stick forward to dive (and speed up).
 Collect a powerup to gain speed.
 ~~Ride a thermal to gain altitude.~~
 Press trigger, button or touchpad to take a (context-specific) action, such as launching.
