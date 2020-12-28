@@ -130,7 +130,7 @@ AFRAME.registerState({
                     setTimeout(() => {
                         if (state.gliderSpeed >= 30) {
                             sessionStorage.setItem('returnWorld', location.pathname);
-                            location.pathname = '/ginnungagap/'
+                            location.assign('../ginnungagap/');
                         } else {
                             // console.log("setting start position", state.gliderPositionStart);
                             state.gliderPosition.x = state.gliderPositionStart.x;
@@ -178,7 +178,7 @@ AFRAME.registerState({
                         }
                    } else if (el.components.link) {
                        console.log("hit link");
-                       if (location.pathname !== '/ginnungagap/') {
+                       if (! /ginnungagap/.test(location.pathname)) {
                            sessionStorage.setItem('previousWorld', location.pathname);
                        }
                    }

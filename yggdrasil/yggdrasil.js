@@ -14,7 +14,7 @@ AFRAME.registerComponent('yggdrasil', {
         this.sss = document.querySelector('a-simple-sun-sky');
         this.directional = document.getElementById('directional');
 
-        if (sessionStorage.getItem('previousWorld') === '/island/') {
+        if (/island/.test(sessionStorage.getItem('previousWorld'))) {
             let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
             prelaunchHelp.setAttribute('value', "Congratulations!\\nYou've completed the main quests.\\nExplore all the worlds!");
         }
