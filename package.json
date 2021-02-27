@@ -1,10 +1,11 @@
 {
   "name": "elfland-glider",
   "description": "Fly through fantastic worlds, help the merry and mischievous light elves, and avoid the surly and mischievous dark elves.  A tranquil action game for VR and mobile",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "license": "GPL-3.0",
   "scripts": {
     "build": "webpack",
+    "watch": "webpack --watch",
     "start": "budo --live --verbose --port 3000 --open --ssl --cors",
     "start-http": "budo --live --verbose --port 3000 --open --cors",
     "test": "open jasmine/SpecRunner.html   # on OSes other than OS X, load SpecRunner.html in a browser",

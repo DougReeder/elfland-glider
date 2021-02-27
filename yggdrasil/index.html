@@ -21,6 +21,7 @@
     <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^4.7.0/dist/aframe-state-component.min.js"></script>
     <script src="https://unpkg.com/aframe-geometry-merger-component@^2.0.0/dist/aframe-geometry-merger-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-dial@^1.2.0/dist/dial.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.2/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-dust-component@^1.0.5/aframe-dust-component.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
@@ -35,6 +36,7 @@
         <img id="woodTexture" src="../assets/stabbur/textures/Stabbur_diffuse.png">
         <img id="treeFoliage" src="TexturesCom_Trees0096_masked_S.png">
         <img id="steelGrip" src="../assets/TexturesCom_MetalVarious0052_1_M_y.jpg" />
+        <img id="bezel" src="https://unpkg.com/aframe-dial@1.2.0/assets/bezel.png" crossorigin="anonymous" />
         <img id="screenshot" src="./screenshot.png" />
     </a-assets>
 
@@ -97,9 +99,10 @@
                     <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -3.4; vertexB:-0.03 0 2.133; vertexC:-7.65 0 5.55; buffer:false"></a-entity>
                 </a-entity>
             </a-entity>
-            <a-text id="hud" position="0.2 0.42 -0.75" rotation="30 -20 0" width="2" align="center" value="HUD"
-                    geometry="primitive:plane; width:0.14; height:0.1;"
-                    material="color: gray; opacity: 0.7" bind__text="value: hudText" bind__visible="hudVisible"></a-text>
+            <a-entity id="hud" position="0.85 0.45 -1.00" rotation="30 -20 0"
+                    bind__angle="dial.thetaEnd: hudAirspeedAngle" bind__color="dial.wedgeColor: hudAirspeedColor"
+                    dial="size:0.15; src:#bezel; radius:0.95; innerRadius:0.33; thetaStart:0; thetaEnd:0; backgroundColor:#e4dcc9;">
+            </a-entity>
         </a-entity>
         <a-entity id="body">
             <a-entity camera="far:8100; near:0.05" look-controls></a-entity>

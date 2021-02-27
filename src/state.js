@@ -1,5 +1,5 @@
 // state.js - state model for Elfland Glider
-// Copyright © 2017-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017-2021 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
 
 import './shim/requestIdleCallback'
@@ -11,6 +11,7 @@ const DIFFICULTY_VR = 0.75;
 const DIFFICULTY_MAGIC_WINDOW = 0.6;
 const DIFFICULTY_KEYBOARD = 0.5;
 const POWERUP_BOOST = 16;
+const BAD_CRASH_SPEED = 30;
 
 AFRAME.registerState({
     initialState: {
@@ -43,7 +44,8 @@ AFRAME.registerState({
         questComplete: false,
         inventory: {},   // keyed by object ID
         hudVisible: true,
-        hudText: "",
+        hudAirspeedAngle: 0,
+        hudAirspeedColor: 'forestgreen',
         controlsReminderDisplayed: false,
         debug: false   // no way to enable this yet
     },
@@ -128,7 +130,7 @@ AFRAME.registerState({
                     crash.play();
 
                     setTimeout(() => {
-                        if (state.gliderSpeed >= 30) {
+                        if (state.gliderSpeed >= BAD_CRASH_SPEED) {
                             sessionStorage.setItem('returnWorld', location.pathname);
                             location.assign('../ginnungagap/');
                         } else {
@@ -140,7 +142,8 @@ AFRAME.registerState({
                             state.gliderRotationY = state.gliderRotationYStart;
                             state.gliderSpeed = 5;
                             this.controlStickToNeutral(state);
-                            state.hudText = "";
+                            state.hudAirspeedAngle = 0;
+                            state.hudAirspeedColor = 'forestgreen';
                             state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-controls disabled
                             state.cameraEl.object3D.rotation.y = 0;
                             state.cameraEl.object3D.rotation.z = 0;
@@ -518,11 +521,8 @@ AFRAME.registerState({
                 state.gliderSpeed = Math.max(state.gliderSpeed + speedChange, 0.1);
                 state.gliderSpeed = Math.min(state.gliderSpeed, 99.4);
 
-                if (state.gliderSpeed < 9.95) {
-                    state.hudText = (state.gliderSpeed).toFixed(1);
-                } else {
-                    state.hudText = (state.gliderSpeed).toFixed(0);
-                }
+                state.hudAirspeedAngle = Math.min(state.gliderSpeed * 9, 359);
+                state.hudAirspeedColor = state.gliderSpeed < BAD_CRASH_SPEED ? 'forestgreen' : 'goldenrod';
 
                 state.gliderEl.setAttribute('raycaster', 'far', state.gliderSpeed/4);
             }
@@ -552,26 +552,26 @@ AFRAME.registerState({
 
         adjustHudForVR: function (hudEl) {
             if (AFRAME.utils.device.isMobile()) {
-                hudEl.object3D.position.x = 0.20;
+                hudEl.object3D.position.x = 0.30;
                 hudEl.object3D.position.y = 0.30;
             } else {
-                hudEl.object3D.position.x = 0.20;
+                hudEl.object3D.position.x = 0.40;
                 hudEl.object3D.position.y = 0.42;
             }
-            hudEl.object3D.rotation.x = THREE.Math.degToRad(30.0);
-            hudEl.object3D.rotation.y = THREE.Math.degToRad(-20.0);
+            hudEl.object3D.rotation.x = THREE.Math.degToRad(25.0);
+            hudEl.object3D.rotation.y = THREE.Math.degToRad(-15.0);
         },
 
         adjustHudForFlat: function (hudEl) {
             if (isDesktop()) {
                 hudEl.object3D.position.x = 0.85;
-                hudEl.object3D.position.y = 0.5;
+                hudEl.object3D.position.y = 0.45;
                 hudEl.object3D.rotation.x = 0.0;
                 hudEl.object3D.rotation.y = 0.0;
             } else {
                 hudEl.object3D.position.x = 0.70;
-                hudEl.object3D.position.y = 0.20;
-                hudEl.object3D.rotation.x = THREE.Math.degToRad(30.0);
+                hudEl.object3D.position.y = 0.15;
+                hudEl.object3D.rotation.x = THREE.Math.degToRad(15.0);
                 hudEl.object3D.rotation.y = THREE.Math.degToRad(-20.0);
             }
         }
