@@ -15,12 +15,12 @@
   "devDependencies": {
     "budo": "^11.6.2",
     "clean-webpack-plugin": "^2.0.2",
-    "css-loader": "^2.1.1",
+    "css-loader": "^6.7.3",
     "ghpages": "0.0.10",
-    "style-loader": "^0.23.1",
-    "url-loader": "^1.1.2",
-    "webpack": "^4.31.0",
-    "webpack-cli": "^3.3.12",
+    "style-loader": "^3.3.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
     "webpack-glsl-loader": "^1.0.1"
   },
   "keywords": [
