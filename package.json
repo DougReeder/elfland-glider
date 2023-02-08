@@ -33,6 +33,5 @@
     "webxr",
     "webvr",
     "vr"
-  ],
-  "dependencies": {}
+  ]
 }
