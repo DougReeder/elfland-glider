@@ -1,5 +1,5 @@
 // aframe-stub.js - allows testing app code that uses A-Frame
-// Copyright © 2017-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 var elementParam = {};   // keyed by name
 
@@ -57,6 +57,9 @@ var THREE = {
     Color: function () {},
     Vector3: function () {},
     CanvasTexture: function () {},
+    PlaneGeometry: function () {
+        this.attributes = {position: {array: []}};
+    },
     PlaneBufferGeometry: function () {
         this.attributes = {position: {array: []}};
     },

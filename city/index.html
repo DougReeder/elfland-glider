@@ -17,19 +17,18 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js"></script>
-    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^4.7.0/dist/aframe-state-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-geometry-merger-component@^2.0.0/dist/aframe-geometry-merger-component.min.js"></script>
     <script src="https://unpkg.com/aframe-dial@^1.2.1/dist/dial.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.3/simple-sun-sky.js"></script>
     <!--<script src="https://unpkg.com/aframe-dust-component@^1.0.5/aframe-dust-component.js"></script>-->
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
 
-    <script src="https://unpkg.com/aframe-shader-buildings@^0.7.1/dist/main.js"></script>
+    <script src="https://unpkg.com/aframe-shader-buildings@^1.1.0/dist/main.js"></script>
     <script src="https://unpkg.com/aframe-faceset-component@^0.4.1/dist/aframe-faceset-component.min.js"></script>
 
-    <script src="https://unpkg.com/aframe-glow@^1.0.1/dist/aframe-glow-component.min.js"></script>
+<!--    <script src="https://unpkg.com/aframe-glow@^1.0.1/dist/aframe-glow-component.min.js"></script>-->
 
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <script src="../dist/city.js">
@@ -48,9 +47,9 @@
 
     <a-simple-sun-sky sun-position="-1 0.75 1" radius="5300"></a-simple-sun-sky>
 
-    <a-entity id="terrain" material="shader:settlement; sunPosition:-1 0.75 1"
-              heightgrid="origin:-1700 0 -1600; xdimension:29; zdimension:33; xspacing:100; zspacing:100;"
-              class="landscape"></a-entity>
+    <a-entity id="terrain" position="-300 0 0" class="landscape"
+              geometry="primitive: city-terrain; xdimension:29; zdimension:33; xspacing:100; zspacing:100; sunPosition:-1 0.75 1"
+              material="shader:settlement; sunPosition:-1 0.75 1"></a-entity>
     <a-text position="0 3 -995" rotation="0 0 0" width="40" align="center" baseline="bottom" color="yellow"
             font="../assets/mozillavr.fnt" value="Live in concert\nGabriel Baker"
             geometry="primitive:plane; width:16; height:5;" material="color: gray"></a-text>
@@ -74,14 +73,14 @@
                   raycaster="objects:.landscape; far:1.25;">
             <a-entity id="wing" position="0 1.5 0" bind__rotation.z="gliderRotationZ" material="visible:false">
                 <a-entity rotation="90 0 0" position="0 0 -1.05" geometry="primitive:plane; height:6.39; width:0.06" material="shader:flat; color:black"></a-entity>
-                <a-entity geometry-merger="preserveOriginal:false" material="shader:flat; transparent:true; opacity:0.5; color:black;">
-                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -4.25; vertexB:7.65 0 5.55; vertexC:0.03 0 -3.4; buffer:false"></a-entity>
-                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -4.25; vertexB:-0.03 0 -3.4; vertexC:-7.65 0 5.55; buffer:false"></a-entity>
-                </a-entity>
-                <a-entity geometry-merger="preserveOriginal:false" material="shader:flat; transparent:true; opacity:0.5; color:white;">
-                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -3.4; vertexB:7.65 0 5.55; vertexC:0.03 0 2.133; buffer:false"></a-entity>
-                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -3.4; vertexB:-0.03 0 2.133; vertexC:-7.65 0 5.55; buffer:false"></a-entity>
-                </a-entity>
+                <a-entity geometry="primitive:triangle; vertexA:0.03 0 -4.25; vertexB:7.65 0 5.55; vertexC:0.03 0 -3.4;"
+                          material="shader:flat; transparent:true; opacity:0.5; color:black;"></a-entity>
+                <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -4.25; vertexB:-0.03 0 -3.4; vertexC:-7.65 0 5.55;"
+                          material="shader:flat; transparent:true; opacity:0.5; color:black;"></a-entity>
+                <a-entity geometry="primitive:triangle; vertexA:0.03 0 -3.4; vertexB:7.65 0 5.55; vertexC:0.03 0 2.133;"
+                          material="shader:flat; transparent:true; opacity:0.5; color:white;"></a-entity>
+                <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -3.4; vertexB:-0.03 0 2.133; vertexC:-7.65 0 5.55;"
+                          material="shader:flat; transparent:true; opacity:0.5; color:white;"></a-entity>
             </a-entity>
             <a-entity id="hud" position="0.85 0.45 -1.00" rotation="30 -20 0"
                     bind__angle="dial.thetaEnd: hudAirspeedAngle" bind__color="dial.wedgeColor: hudAirspeedColor"
@@ -103,4 +102,4 @@
 </a-scene>
 </body>
 </html>
-<!-- Copyright © 2018-2019 by P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->
+<!-- Copyright © 2018-2023 by P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->

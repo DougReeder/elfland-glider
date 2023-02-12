@@ -1,5 +1,5 @@
 // settlement-shader.js - smooth noise, with one pair of colors inside a radius, another pair outside
-// Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2019, 2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
 // The produced texture is a mix of the specified colors.
 // Faces will be 50% brighter in direct sun and 50% darker when facing away from the sun.
@@ -24,7 +24,7 @@ varying vec3 pos;
 varying float sunFactor;
 
 void main() {
-  pos = position;
+  pos = position + vec3(-300.0, 0.0, 0.0);
     
   sunFactor = 0.5 + max(dot(normal, sunNormal), 0.0);
    
@@ -120,14 +120,15 @@ float snoise(vec3 v){
 
 void main() {
     float pct = smoothstep(0.0, 1.0, pos.y);
+    bool isInside = pos.x * pos.x + pos.z * pos.z < radiusSquared;
     vec3 colorYin = mix(
         colorYinWater,
-        pos.x * pos.x + pos.z * pos.z < radiusSquared ? colorYinInside : colorYinOutside,
+        isInside ? colorYinInside : colorYinOutside,
         pct
     );
     vec3 colorYang = mix(
         colorYangWater,
-        pos.x * pos.x + pos.z * pos.z < radiusSquared ? colorYangInside : colorYangOutside,
+        isInside ? colorYangInside : colorYangOutside,
         pct
     );
     

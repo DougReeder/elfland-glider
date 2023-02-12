@@ -1,3 +1,10 @@
+// city-terrain.js - the landscape geometry for an arctic city
+// Copyright © 2023 Doug Reeder; Licensed under the GNU GPL-3.0
+
+const X_POINTS = 29;
+const Z_POINTS = 33;
+const SPACING = 100;
+const terrainHeights = `
 0   0   0   0   0   0   0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 0  40  40  40  40  34  30 23 25 28 30 24 18 13  7 11 14 18 15 11  8  4  8 10 14 15  8  0  0
 0  40  80  80  80  69  60 46 50 55 60 49 37 26 13 22 27 37 30 22 16  8 16 20 27 30 16  6  0
@@ -31,3 +38,30 @@
 0  32  42  32  26  20  15 20 25 25 20 17 23 30 37 27 18  2  0  0  2 16 27 23 26 37 23 12  0
 0  16  21  16  13  10   7 10 12 12 10  8 11 15 18 14  9 .5  0  0  2  8 13 12 13 18 12  6  0
 0   0   0   0   0   0   0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+`;
+
+
+AFRAME.registerGeometry('city-terrain', {
+  schema: {
+    xdimension: {default: 29},
+    zdimension: {default: 33},
+    xspacing: {default: 100},
+    zspacing: {default: 100},
+    sunPosition: {type: 'vec3', default: {x:-1.0, y:1.0, z:-1.0}}
+  },
+
+  init: function () {
+    // Creates geometry.
+    const geometry = new THREE.PlaneGeometry((X_POINTS - 1) * SPACING, (Z_POINTS - 1) * SPACING, X_POINTS - 1, Z_POINTS - 1);
+    geometry.rotateX(-Math.PI / 2);
+    const vertices = geometry.attributes.position.array;
+    const floatPatt = /\s*\S+/y;
+    let match, i = 0;
+    while (match = floatPatt.exec(terrainHeights)) {
+      const height = parseFloat(match[0]);
+      vertices[i * 3 + 1] = height;
+      ++i;
+    }
+    this.geometry = geometry;
+  }
+});

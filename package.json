@@ -1,10 +1,11 @@
 {
   "name": "elfland-glider",
   "description": "Fly through fantastic worlds, help the merry and mischievous light elves, and avoid the surly and mischievous dark elves.  A tranquil action game for VR and mobile",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "license": "GPL-3.0",
   "scripts": {
     "build": "webpack",
+    "postbuild": "surge . https://elfland-glider.surge.sh/; true",
     "watch": "webpack --watch",
     "start": "budo --live --verbose --port 3000 --open --ssl --cors",
     "start-http": "budo --live --verbose --port 3000 --open --cors",
@@ -19,8 +20,8 @@
     "ghpages": "0.0.10",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
-    "webpack": "^4.31.0",
-    "webpack-cli": "^3.3.12",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
     "webpack-glsl-loader": "^1.0.1"
   },
   "keywords": [

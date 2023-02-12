@@ -1,5 +1,5 @@
 /** intro.js - introductory text for an Elfland Glider world
- * Copyright © 2018-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+ * Copyright © 2018-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
  */
 
 import {goFullscreenLandscape, isDesktop, pokeEnvironmentalSound} from './elfland-utils'
@@ -97,7 +97,7 @@ ${closeBtnHtml}
         <div>${mt}</div>
         <div><a href="../CREDITS.md">Credits</a></div>
         <div>Uses <a href="https://caniuse.com/#search=webxr">WebXR</a> or <a href="https://webvr.info/">WebVR</a>, and the <a href="https://aframe.io"><nobr>A-Frame</nobr></a> framework.</div>
-        <div>Copyright © 2017-2020 by P. Douglas Reeder; Licensed under the GNU GPL-3.0</div>
+        <div>Copyright © 2017-2023 by P. Douglas Reeder; Licensed under the GNU GPL-3.0</div>
         <div><a href="https://github.com/DougReeder/elfland-glider">View source code and contribute</a> </div>
       </div>
     </div>

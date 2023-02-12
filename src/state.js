@@ -1,5 +1,5 @@
 // state.js - state model for Elfland Glider
-// Copyright © 2017-2021 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
 
 import './shim/requestIdleCallback'
@@ -260,18 +260,18 @@ AFRAME.registerState({
             if (state.controlMode !== oldControlMode) {
                 console.log("changed control mode from", oldControlMode, "to", state.controlMode);
                 if (state.controlMode === 'HANDS') {
-                    state.leftHandEl.addEventListener('buttondown', this.leftDownHandler);
-                    state.leftHandEl.addEventListener('buttonup', this.leftUpHandler);
-                    state.rightHandEl.addEventListener('buttondown', this.rightDownHandler);
-                    state.rightHandEl.addEventListener('buttonup', this.rightUpHandler);
+                    state.leftHandEl?.addEventListener('buttondown', this.leftDownHandler);
+                    state.leftHandEl?.addEventListener('buttonup', this.leftUpHandler);
+                    state.rightHandEl?.addEventListener('buttondown', this.rightDownHandler);
+                    state.rightHandEl?.addEventListener('buttonup', this.rightUpHandler);
 
                     this.controlStickToNeutral(state);
                     state.controlStickEl.object3D.visible = true;
                 } else if (state.controlMode === 'HEAD') {
-                    state.leftHandEl.removeEventListener('buttondown', this.leftDownHandler);
-                    state.leftHandEl.removeEventListener('buttonup', this.leftUpHandler);
-                    state.rightHandEl.removeEventListener('buttondown', this.rightDownHandler);
-                    state.rightHandEl.removeEventListener('buttonup', this.rightUpHandler);
+                    state.leftHandEl?.removeEventListener('buttondown', this.leftDownHandler);
+                    state.leftHandEl?.removeEventListener('buttonup', this.leftUpHandler);
+                    state.rightHandEl?.removeEventListener('buttondown', this.rightDownHandler);
+                    state.rightHandEl?.removeEventListener('buttonup', this.rightUpHandler);
 
                     state.controlStickEl.object3D.visible = false;
                 }
@@ -279,7 +279,7 @@ AFRAME.registerState({
         },
         handHandler: function handHandler(handedness, upDown, state, evt) {
             const wasAnyPressedLeft = state.isAnyPressedLeft;
-            const trackedControlsLeft = state.leftHandEl.components['tracked-controls'];
+            const trackedControlsLeft = state.leftHandEl?.components['tracked-controls'];
             const buttonsLeft = trackedControlsLeft &&
                     trackedControlsLeft.controller &&
                     trackedControlsLeft.controller.gamepad &&
@@ -296,7 +296,7 @@ AFRAME.registerState({
             }
 
             const wasAnyPressedRight = state.isAnyPressedRight;
-            const trackedControlsRight = state.rightHandEl.components['tracked-controls'];
+            const trackedControlsRight = state.rightHandEl?.components['tracked-controls'];
             const buttonsRight = trackedControlsRight &&
                     trackedControlsRight.controller &&
                     trackedControlsRight.controller.gamepad &&
@@ -456,11 +456,11 @@ AFRAME.registerState({
                     state.zSetting = cameraRotation.z;
                     break;
                 case "HANDS":
-                    const leftHandPos = state.leftHandEl.getAttribute("position");
-                    const rightHandPos = state.rightHandEl.getAttribute("position");
+                    const leftHandPos = state.leftHandEl?.getAttribute("position");
+                    const rightHandPos = state.rightHandEl?.getAttribute("position");
                     switch (state.controlSubmode) {
                         case "LEFT":
-                            const leftHandRot = state.leftHandEl.getAttribute('rotation');
+                            const leftHandRot = state.leftHandEl?.getAttribute('rotation');
 
                             state.controlStickEl.setAttribute('position', leftHandPos);
                             state.controlStickEl.setAttribute('rotation', leftHandRot);
@@ -469,7 +469,7 @@ AFRAME.registerState({
                             state.zSetting = leftHandRot.z;
                             break;
                         case "RIGHT":
-                            const rightHandRot = state.rightHandEl.getAttribute('rotation');
+                            const rightHandRot = state.rightHandEl?.getAttribute('rotation');
 
                             state.controlStickEl.setAttribute('position', rightHandPos);
                             state.controlStickEl.setAttribute('rotation', rightHandRot);
@@ -545,7 +545,7 @@ AFRAME.registerState({
                 wingEl.object3D.rotation.x = 0;
                 wingEl.object3D.scale.set(1, 1, 1);
             } else {
-                wingEl.object3D.rotation.x = THREE.Math.degToRad(-30.0);
+                wingEl.object3D.rotation.x = THREE.MathUtils.degToRad(-30.0);
                 wingEl.object3D.scale.set(1, 1, 3);
             }
         },
@@ -558,8 +558,8 @@ AFRAME.registerState({
                 hudEl.object3D.position.x = 0.40;
                 hudEl.object3D.position.y = 0.42;
             }
-            hudEl.object3D.rotation.x = THREE.Math.degToRad(25.0);
-            hudEl.object3D.rotation.y = THREE.Math.degToRad(-15.0);
+            hudEl.object3D.rotation.x = THREE.MathUtils.degToRad(25.0);
+            hudEl.object3D.rotation.y = THREE.MathUtils.degToRad(-15.0);
         },
 
         adjustHudForFlat: function (hudEl) {
@@ -571,8 +571,8 @@ AFRAME.registerState({
             } else {
                 hudEl.object3D.position.x = 0.70;
                 hudEl.object3D.position.y = 0.15;
-                hudEl.object3D.rotation.x = THREE.Math.degToRad(15.0);
-                hudEl.object3D.rotation.y = THREE.Math.degToRad(-20.0);
+                hudEl.object3D.rotation.x = THREE.MathUtils.degToRad(15.0);
+                hudEl.object3D.rotation.y = THREE.MathUtils.degToRad(-20.0);
             }
         }
     },

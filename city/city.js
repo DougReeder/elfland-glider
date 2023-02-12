@@ -1,9 +1,9 @@
 // city.js - a domed arctic city, for Elfland Glider
-// Copyright © 2019-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2019-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 import {isDesktop, setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
-import '../src/aframe-heightgrid-component.min.js'
+import './city-terrain';
 import '../src/settlement-shader.js'
 import '../src/intro.js'
 
@@ -25,23 +25,8 @@ AFRAME.registerComponent('city', {
             gliderRotationYStart: INITIAL_ROTATION_Y
         });
 
-        // sceneEl.emit('countYellowStars', {});
 
-
-        fetch('terrain-heights-city.txt').then((response) => {
-            if (response.ok) {
-                return response.text();
-            } else {
-                console.error("terrain-heights:", response);
-                return '0 2 1'
-            }
-        }).then((text) => {
-            // console.log("heights:", text.split(/\s/));
-            let terrainEl = document.getElementById('terrain');
-            terrainEl.setAttribute('heightgrid', 'heights', text);
-        });
-
-
+        // creates random buildings that fit under the dome
         const numStyles = 6;
         let buildings = this.randomBuildings(numStyles);   // array of arrays
 
@@ -118,12 +103,12 @@ AFRAME.registerComponent('city', {
             let powerupEl = document.createElement('a-entity');
             powerupEl.setAttribute('class', 'powerup');
             powerupEl.setAttribute('position', this.randomIntersection());
-            powerupEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
-            powerupEl.setAttribute('material', {visible:false});
+
+            powerupEl.setAttribute('material', {color: '#ff0000', transparent: true, opacity: 0.25});
+            powerupEl.setAttribute('geometry', {primitive: 'sphere', radius: 2.5, segmentsWidth: 9, segmentsHeight: 18});
 
             let powerupInnerEl = document.createElement('a-icosahedron');
             powerupInnerEl.setAttribute('material', {color:'#ff0000'});
-            powerupInnerEl.setAttribute('glow', {c: '0.2', color: '#ff0000', scale:'3.5'});
 
             powerupEl.appendChild(powerupInnerEl);
             sceneEl.appendChild(powerupEl);
