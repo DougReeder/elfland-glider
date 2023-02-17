@@ -114,12 +114,12 @@ AFRAME.registerComponent('city', {
             let powerupEl = document.createElement('a-entity');
             powerupEl.setAttribute('class', 'powerup');
             powerupEl.setAttribute('position', this.randomIntersection());
-
-            powerupEl.setAttribute('material', {color: '#ff0000', transparent: true, opacity: 0.25});
-            powerupEl.setAttribute('geometry', {primitive: 'sphere', radius: 2.5, segmentsWidth: 9, segmentsHeight: 18});
+            powerupEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
+            powerupEl.setAttribute('material', {visible:false});
 
             let powerupInnerEl = document.createElement('a-icosahedron');
             powerupInnerEl.setAttribute('material', {color:'#ff0000'});
+            powerupInnerEl.setAttribute('glow', {c: '0.2', color: '#ff0000', scale:'3.5'});
 
             powerupEl.appendChild(powerupInnerEl);
             sceneEl.appendChild(powerupEl);
