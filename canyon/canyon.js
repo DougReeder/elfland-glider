@@ -3,30 +3,10 @@
 
 // import {setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
-import '../src/aframe-heightgrid-component.min.js'
+import './canyon-terrain'
 import '../assets/land-shader.js'
 import '../src/intro.js'
 
-
-AFRAME.registerComponent('load-terrain', {
-    init: function () {
-        let terrainEl = document.getElementById('terrain');
-
-        fetch('terrain-heights.txt').then((response) => {
-//                   console.log("terrain-heights.txt:", response);
-            if (response.ok) {
-                return response.text();
-            } else {
-                console.error("terrain-heights:", response);
-                return '0 2 1'
-            }
-        }).then((text) => {
-//                   console.log("text:", text);
-            terrainEl.setAttribute('heightgrid', 'heights', text );
-        });
-
-    }
-});
 
 AFRAME.registerComponent('canyon', {
     init: function () {
@@ -41,7 +21,7 @@ AFRAME.registerComponent('canyon', {
         this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);
         this.position = new THREE.Vector3();
         this.sss = document.querySelector('a-simple-sun-sky');
-        this.terrainEl = document.getElementById('terrain');
+        this.landscapeEls = document.getElementsByClassName('landscape');
     },
 
     tick: function (time) {
@@ -50,6 +30,8 @@ AFRAME.registerComponent('canyon', {
         this.position.setFromSpherical(this.positionSph);
         let positionStr = this.position.x + ' ' + this.position.y + ' ' + this.position.z;
         this.sss.setAttribute('sun-position', positionStr);
-        this.terrainEl.setAttribute('material', 'sunPosition', positionStr);
+        for (const el of this.landscapeEls) {
+            el.setAttribute('material', 'sunPosition', positionStr);
+        }
     }
 });
