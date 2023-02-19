@@ -17,13 +17,12 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js"></script>
-    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.4.1/aframe.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^4.7.0/dist/aframe-state-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-geometry-merger-component@^2.0.0/dist/aframe-geometry-merger-component.min.js"></script>
     <script src="https://unpkg.com/aframe-dial@^1.2.1/dist/dial.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.3/simple-sun-sky.js"></script>
-    <script src="https://unpkg.com/aframe-dust-component@^1.0.5/aframe-dust-component.js"></script>
+    <script src="https://unpkg.com/aframe-dust-component@^1.1.0/aframe-dust-component.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <script src="../dist/yggdrasil.js">
@@ -48,7 +47,7 @@
 
     <a-torus-knot position="0 -400 0" scale="0.3 10 0.4" radius="100" p="2" q="21" radius-tubular="4" src="#woodTexture" roughness="1" metalness="0"
             class="landscape"></a-torus-knot>
-    <a-image src="#treeFoliage"position="0 888 0" rotation="90 0 0" scale="1212 1200 1"></a-image>
+    <a-image src="#treeFoliage" position="0 888 0" rotation="90 0 0" scale="1212 1200 1"></a-image>
 
     <a-entity id="archesPortal" position="125 0 0" rotation="0 -90 0" scale="5 5 0"
               link="href:../arches; title: Arches; image:../arches/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
@@ -90,14 +89,14 @@
                   raycaster="objects:.landscape; far:1.25;">
             <a-entity id="wing" position="0 1.5 0" bind__rotation.z="gliderRotationZ" material="visible:false">
                 <a-entity rotation="90 0 0" position="0 0 -1.05" geometry="primitive:plane; height:6.39; width:0.06" material="shader:flat; color:black"></a-entity>
-                <a-entity geometry-merger="preserveOriginal:false" material="shader:flat; transparent:true; opacity:0.5; color:black;">
-                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -4.25; vertexB:7.65 0 5.55; vertexC:0.03 0 -3.4; buffer:false"></a-entity>
-                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -4.25; vertexB:-0.03 0 -3.4; vertexC:-7.65 0 5.55; buffer:false"></a-entity>
-                </a-entity>
-                <a-entity geometry-merger="preserveOriginal:false" material="shader:flat; transparent:true; opacity:0.5; color:white;">
-                    <a-entity geometry="primitive:triangle; vertexA:0.03 0 -3.4; vertexB:7.65 0 5.55; vertexC:0.03 0 2.133; buffer:false"></a-entity>
-                    <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -3.4; vertexB:-0.03 0 2.133; vertexC:-7.65 0 5.55; buffer:false"></a-entity>
-                </a-entity>
+                <a-entity geometry="primitive:triangle; vertexA:0.03 0 -4.25; vertexB:7.65 0 5.55; vertexC:0.03 0 -3.4;"
+                          material="shader:flat; transparent:true; opacity:0.5; color:black;"></a-entity>
+                <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -4.25; vertexB:-0.03 0 -3.4; vertexC:-7.65 0 5.55;"
+                          material="shader:flat; transparent:true; opacity:0.5; color:black;"></a-entity>
+                <a-entity geometry="primitive:triangle; vertexA:0.03 0 -3.4; vertexB:7.65 0 5.55; vertexC:0.03 0 2.133;"
+                          material="shader:flat; transparent:true; opacity:0.5; color:white;"></a-entity>
+                <a-entity geometry="primitive:triangle; vertexA:-0.03 0 -3.4; vertexB:-0.03 0 2.133; vertexC:-7.65 0 5.55;"
+                          material="shader:flat; transparent:true; opacity:0.5; color:white;"></a-entity>
             </a-entity>
             <a-entity id="hud" position="0.85 0.45 -1.00" rotation="30 -20 0"
                     bind__angle="dial.thetaEnd: hudAirspeedAngle" bind__color="dial.wedgeColor: hudAirspeedColor"
