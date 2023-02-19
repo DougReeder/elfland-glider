@@ -24,6 +24,7 @@
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.3/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-dust-component@^1.1.0/aframe-dust-component.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/DougReeder/aframe-glow@6bebc86ee57f2ccc57637db442f1a36d31f5f61d/dist/aframe-glow-component.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <script src="../dist/yggdrasil.js">
     </script>
@@ -80,11 +81,78 @@
     <!--<a-entity id="argonPortal" position="0 -20 125" rotation="0 -180 0" scale="5 5 0"-->
               <!--link="href:http://ansible.uk/misc/eyeargon.html; title: Eye of Argon; on:hitstart; visualAspectEnabled:true"></a-entity>-->
 
+    <a-entity class="powerup" position="0 -800 0" material="visible: false"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5">
+        <a-icosahedron material="color:red" glow="c: 0.2; color: red; scale: 3.5"></a-icosahedron>
+    </a-entity>
+
+    <a-entity class="powerup" position="0 -400 0" material="visible: false"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5">
+        <a-icosahedron material="color:red" glow="c: 0.2; color: red; scale: 3.5"></a-icosahedron>
+    </a-entity>
+
+
+    <a-entity class="star" position="-25 -100 0"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5"
+              material="visible:false">
+        <a-entity rotation="45 0 45" geometry="primitive: stella-octangula"
+                  material="color:#ffce00" glow="c: 0.2; color: #feca05; scale:3.5"></a-entity>
+    </a-entity>
+
+    <a-entity class="star" position="25 -100 0"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5"
+              material="visible:false">
+        <a-entity rotation="45 0 45" geometry="primitive: stella-octangula"
+                  material="color:#ffce00" glow="c: 0.2; color: #feca05; scale:3.5"></a-entity>
+    </a-entity>
+
+    <a-entity class="star" position="-25 -200 0"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5"
+              material="visible:false">
+        <a-entity rotation="45 0 45" geometry="primitive: stella-octangula"
+                  material="color:#ffce00" glow="c: 0.2; color: #feca05; scale:3.5"></a-entity>
+    </a-entity>
+
+    <a-entity class="star" position="30 -200 0"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5"
+              material="visible:false">
+        <a-entity rotation="45 0 45" geometry="primitive: stella-octangula"
+                  material="color:#ffce00" glow="c: 0.2; color: #feca05; scale:3.5"></a-entity>
+    </a-entity>
+
+    <a-entity class="star" position="-25 -300 0"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5"
+              material="visible:false">
+        <a-entity rotation="45 0 45" geometry="primitive: stella-octangula"
+                  material="color:#ffce00" glow="c: 0.2; color: #feca05; scale:3.5"></a-entity>
+    </a-entity>
+
+    <a-entity class="star" position="30 -300 0"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5"
+              material="visible:false">
+        <a-entity rotation="45 0 45" geometry="primitive: stella-octangula"
+                  material="color:#ffce00" glow="c: 0.2; color: #feca05; scale:3.5"></a-entity>
+    </a-entity>
+
+    <a-entity class="star" position="-25 -400 0"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5"
+              material="visible:false">
+        <a-entity rotation="45 0 45" geometry="primitive: stella-octangula"
+                  material="color:#ffce00" glow="c: 0.2; color: #feca05; scale:3.5"></a-entity>
+    </a-entity>
+
+    <a-entity class="star" position="30 -400 0"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5"
+              material="visible:false">
+        <a-entity rotation="45 0 45" geometry="primitive: stella-octangula"
+                  material="color:#ffce00" glow="c: 0.2; color: #feca05; scale:3.5"></a-entity>
+    </a-entity>
+
     <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="../assets/mozillavr.fnt" value=""></a-text>
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
-              aabb-collider="objects:[link]" >
+              aabb-collider="objects:.powerup,.star,[link]" >
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
                   raycaster="objects:.landscape; far:1.25;">
             <a-entity id="wing" position="0 1.5 0" bind__rotation.z="gliderRotationZ" material="visible:false">

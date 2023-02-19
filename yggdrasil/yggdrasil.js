@@ -3,6 +3,7 @@
 
 import {setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
+import '../assets/stella-octangula.js'
 import '../src/intro.js'
 
 AFRAME.registerComponent('yggdrasil', {
@@ -13,6 +14,8 @@ AFRAME.registerComponent('yggdrasil', {
         this.position = new THREE.Vector3();
         this.sss = document.querySelector('a-simple-sun-sky');
         this.directional = document.getElementById('directional');
+
+        this.el.emit('countYellowStars', {});
 
         if (/island/.test(sessionStorage.getItem('previousWorld'))) {
             let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
