@@ -5,15 +5,22 @@
 import '../src/state.js'
 import './canyon-terrain'
 import '../assets/land-shader.js'
-import '../src/intro.js'
+// import '../src/intro.js'
 
+
+const INITIAL_POSITION = {x:18, y:-100, z:48};
+const INITIAL_ROTATION_X = 0;
+const INITIAL_ROTATION_Y = -175;
 
 AFRAME.registerComponent('canyon', {
     init: function () {
         let sceneEl = this.el;
         sceneEl.emit('setState', {
-            gliderPositionStart: {x:150, y:-5, z:150},
-            gliderPosition: {x:150, y:-5, z:150},
+            gliderPositionStart: INITIAL_POSITION,
+            gliderPosition: {x: INITIAL_POSITION.x, y: INITIAL_POSITION.y, z: INITIAL_POSITION.z},
+            gliderRotationX: INITIAL_ROTATION_X,
+            gliderRotationY: INITIAL_ROTATION_Y,
+            gliderRotationYStart: INITIAL_ROTATION_Y
         });
 
         // sceneEl.emit('countYellowStars', {});

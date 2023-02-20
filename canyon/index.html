@@ -29,22 +29,24 @@
 
 
     <a-entity id="terrain" position="0 0 0" class="landscape"
-              geometry="primitive: canyon-terrain; spacing:100"
+              geometry="primitive: canyon-terrain; spacing:10"
               material="shader:land"></a-entity>
 
-    <a-entity geometry="primitive:triangle; vertexA:-600 0 -600; vertexB:7483 0 -600; vertexC:-600 0 -7483"
+    <a-entity geometry="primitive:triangle; vertexA:-200 0 -330; vertexB:7083 0 -330; vertexC:-200 0 -7213"
               material="shader:land;" class="landscape"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:600 0 -600; vertexB:600 0 7483; vertexC:7483 0 -600"
+    <a-entity geometry="primitive:triangle; vertexA:200 0 -330; vertexB:200 0 7213; vertexC:7083 0 -330"
               material="shader:land;" class="landscape"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:600 0 600; vertexB:-7483 0 600; vertexC:600 0 7483"
+    <a-entity geometry="primitive:triangle; vertexA:200 0 330; vertexB:-7083 0 330; vertexC:200 0 7213"
               material="shader:land;" class="landscape"></a-entity>
-    <a-entity geometry="primitive:triangle; vertexA:-600 0 600; vertexB:-600 0 -7483; vertexC:-7483 0 600"
+    <a-entity geometry="primitive:triangle; vertexA:-200 0 330; vertexB:-200 0 -7213; vertexC:-7083 0 330"
               material="shader:land;" class="landscape"></a-entity>
 
 
     <a-dust num-points="512" dispersion="100" color="white"></a-dust>
 
-    <a-entity id="nextQuestPortal" position="0 -5 -500" scale="5 5 0"
+<!--    <a-entity id="key" position="40 -100 -179" scale="5 5 0"></a-entity>-->
+
+    <a-entity id="nextQuestPortal" position="-27 -115 116" scale="5 5 0"
               link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
     <!--<a-entity fps-counter="for90fps:false"></a-entity>-->
