@@ -220,4 +220,14 @@ describe("state", function () {
 
         expect(state.questComplete).toBeTruthy();
     });
+
+    it("should not set questComplete false when already true", function () {
+        state.stars = 1;
+        state.numYellowStars = 20;
+        state.questComplete = true;
+
+        stateParam.computeState(state, {});
+
+        expect(state.questComplete).toBeTruthy();
+    });
 });

@@ -8,7 +8,7 @@ import '../assets/land-shader.js'
 // import '../src/intro.js'
 
 
-const INITIAL_POSITION = {x:18, y:-100, z:48};
+const INITIAL_POSITION = {x:-1, y:-100, z:48};
 const INITIAL_ROTATION_X = 0;
 const INITIAL_ROTATION_Y = -175;
 

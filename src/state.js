@@ -161,10 +161,15 @@ AFRAME.registerState({
                         state.gliderSpeed += POWERUP_BOOST;
                         this.powerup.play();
                     } else if (el.classList.contains('star')) {
-                       ++state.stars;
-                       console.log("collected star", state.stars, "of", state.numYellowStars);
+                        ++state.stars;
+                        console.log("collected star", state.stars, "of", state.numYellowStars);
                         el.parentNode.removeChild(el);
-                       this.ding.play();
+                        this.ding.play();
+                    } else if ('key' === el.id) {
+                        state.questComplete = true;
+                        let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
+                        horncall.play();
+                        el.parentNode.removeChild(el);
                     } else if (el.classList.contains('proximitySound')) {
                         let url = el.getAttribute('data-sound-url');
                         let volume = el.getAttribute('data-sound-volume') || 1.0;
@@ -579,11 +584,12 @@ AFRAME.registerState({
 
     computeState: function (newState, payload) {
         try {
-            let oldQuestComplete = newState.questComplete;
-            newState.questComplete = newState.numYellowStars <= 0 || newState.stars / newState.numYellowStars >= 0.95;
-            if (newState.questComplete && ! oldQuestComplete) {
-                let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
-                horncall.play();
+            if (!newState.questComplete) {
+                newState.questComplete = newState.numYellowStars <= 0 || newState.stars / newState.numYellowStars >= 0.95;
+                if (newState.questComplete) {
+                    let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
+                    horncall.play();
+                }
             }
         } catch (err) {
             console.error(err);

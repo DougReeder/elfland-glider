@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.3/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-dust-component@^1.1.0/aframe-dust-component.js"></script>
     <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/gh/DougReeder/aframe-glow@6bebc86ee57f2ccc57637db442f1a36d31f5f61d/dist/aframe-glow-component.min.js"></script>-->
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <!--<script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>-->
     <script src="../dist/canyon.js" type="application/javascript"></script>
@@ -22,6 +23,7 @@
     <a-assets>
         <img id="steelGrip" src="../assets/textures/TexturesCom_MetalVarious0052_1_M_y.jpg" />
         <img id="bezel" src="https://unpkg.com/aframe-dial@1.2.0/assets/bezel.png" crossorigin="anonymous" />
+        <a-asset-item id="keyModel" src="../assets/key-Alfonso.glb"></a-asset-item>
         <img id="screenshot" src="./screenshot.png" />
     </a-assets>
 
@@ -44,9 +46,14 @@
 
     <a-dust num-points="512" dispersion="100" color="white"></a-dust>
 
-<!--    <a-entity id="key" position="40 -100 -179" scale="5 5 0"></a-entity>-->
+<!--    production position="44 -100 -192"-->
+<!--    debug      position="18 -100 60"-->
+    <a-sphere id="key" radius="2.5" segments-width="9" segments-height="18"
+              transparent="true" opacity="0.2" color="gold" position="44 -100 -192">
+        <a-entity gltf-model="#keyModel" scale="50 50 50" rotation="10 0 10"></a-entity>
+    </a-sphere>
 
-    <a-entity id="nextQuestPortal" position="-27 -115 116" scale="5 5 0"
+    <a-entity id="nextQuestPortal" position="-27 -115 116" scale="5 5 0" bind="visible: questComplete"
               link="href:../yggdrasil; title: Next Quest; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
     <!--<a-entity fps-counter="for90fps:false"></a-entity>-->
@@ -55,7 +62,7 @@
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
-              aabb-collider="objects:.star,[link]" >
+              aabb-collider="objects:#key,[link]" >
         <a-entity id="glider" position="0 0 0" bind__rotation.x="gliderRotationX"
                   raycaster="objects:.landscape; far:1.25;">
             <a-entity id="wing" position="0 1.5 0" bind__rotation.z="gliderRotationZ" material="visible:false">
