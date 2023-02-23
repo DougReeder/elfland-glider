@@ -76,7 +76,7 @@ AFRAME.registerState({
             if (dustEl) {
                 requestIdleCallback(() => {   // delays setup until there's some slack time
                     dustEl.components.dust.setCamera(state.armatureEl);
-                });
+                }, {timeout: 10_000});
             }
 
             let bodyEl = state.armatureEl.querySelector('#body');
