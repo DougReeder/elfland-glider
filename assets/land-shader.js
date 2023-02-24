@@ -1,14 +1,16 @@
 // land-shader.js - vaguely natural-looking material for A-Frame
-// Copyright © 2018 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2018,2023 Doug Reeder; Licensed under the GNU GPL-3.0
 //
 // The produced texture is a mix of the specified colors (default gray brown and dirt brown).
-// Faces will be 50% brighter in direct sun and 50% darker when facing away from the sun.
-// Example: material="shader:land; colorYin:#63574d"
+// Faces will be 44% brighter in direct sun and 44% darker when facing away from the sun.
+// Example: material="shader:land; color1Yin:#63574d"
 
 AFRAME.registerShader('land', {
     schema: {
-        colorYin: {type: 'color', default: '#63574d'},   // gray brown
-        colorYang: {type: 'color', default: '#553c29'},   // dirt brown
+        color1Yin: {type: 'color', default: '#63574d'},   // gray brown
+        color1Yang: {type: 'color', default: '#553c29'},   // dirt brown
+        color2Yin: {type: 'color', default: '#655b43'},   // gray sand
+        color2Yang: {type: 'color', default: '#60502f'},   // sand
         sunPosition: {type: 'vec3', default: {x:-1.0, y:1.0, z:-1.0}}
     },
 
@@ -21,14 +23,16 @@ varying float sunFactor;
 void main() {
   pos = position;
     
-  sunFactor = 0.5 + max(dot(normal, sunNormal), 0.0);
+  sunFactor = 0.6875 + 0.75 * max(dot(normal, sunNormal), 0.0);
    
   gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 }`,
 
     fragmentShader: `
-uniform vec3 colorYin;
-uniform vec3 colorYang;
+uniform vec3 color1Yin;
+uniform vec3 color1Yang;
+uniform vec3 color2Yin;
+uniform vec3 color2Yang;
 
 varying vec3 pos;
 varying float sunFactor;
@@ -109,10 +113,14 @@ float snoise(vec3 v){
 }
 
 void main() {
+    float strata = smoothstep(-214.0, -212.0, pos.y) - smoothstep(-103.0, -101.0, pos.y) + smoothstep(-33.0, -31.0, pos.y);
+    vec3 colorYin  = mix(color1Yin,  color2Yin,  strata);
+    vec3 colorYang = mix(color1Yang, color2Yang, strata);
+
     vec3 inherent = mix(
         colorYin,
         colorYang,
-        0.5 * (1.0 + snoise(pos*0.4))
+        0.5 * (1.0 + snoise(pos*0.5) + 0.75*snoise(pos))
     );
     gl_FragColor = vec4(inherent * sunFactor, 1.0);
 }
@@ -125,8 +133,10 @@ void main() {
         let sunPos = new THREE.Vector3(data.sunPosition.x, data.sunPosition.y, data.sunPosition.z);
         this.material = new THREE.ShaderMaterial({
             uniforms: {
-                colorYin: {value: new THREE.Color(data.colorYin)},
-                colorYang: {value: new THREE.Color(data.colorYang)},
+                color1Yin: {value: new THREE.Color(data.color1Yin)},
+                color1Yang: {value: new THREE.Color(data.color1Yang)},
+                color2Yin: {value: new THREE.Color(data.color2Yin)},
+                color2Yang: {value: new THREE.Color(data.color2Yang)},
                 sunNormal: {value: sunPos.normalize()}
             },
             vertexShader: this.vertexShader,
@@ -137,8 +147,10 @@ void main() {
      * `update` used to update the material. Called on initialization and when data updates.
      */
     update: function (data) {
-        this.material.uniforms.colorYin.value.set(data.colorYin);
-        this.material.uniforms.colorYang.value.set(data.colorYang);
+        this.material.uniforms.color1Yin.value.set(data.color1Yin);
+        this.material.uniforms.color1Yang.value.set(data.color1Yang);
+        this.material.uniforms.color2Yin.value.set(data.color2Yin);
+        this.material.uniforms.color2Yang.value.set(data.color2Yang);
         let sunPos = new THREE.Vector3(data.sunPosition.x, data.sunPosition.y, data.sunPosition.z);
         this.material.uniforms.sunNormal.value = sunPos.normalize();
         // this.material.uniforms.sunNormal.value.set(sunPos.normalize());
