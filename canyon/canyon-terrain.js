@@ -1,6 +1,7 @@
 // canyon-terrain.js - the landscape geometry for a canyon
 // Data and code are in one file to avoid asynchronous loading.
 // Copyright © 2023 Doug Reeder; Licensed under the GNU GPL-3.0
+import { toCreasedNormals } from '../src/BufferGeometryUtilsRump';
 
 const X_POINTS = 41;
 const Z_POINTS = 67;
@@ -104,6 +105,8 @@ AFRAME.registerGeometry('canyon-terrain', {
     // Creates geometry.
     const geometry = new THREE.PlaneGeometry((X_POINTS - 1) * data.spacing, (Z_POINTS - 1) * data.spacing, X_POINTS - 1, Z_POINTS - 1);
     geometry.rotateX(-Math.PI / 2);
+
+    // applies elevations
     const vertices = geometry.attributes.position.array;
     const floatPatt = /\s*\S+/y;
     let match;
@@ -117,7 +120,10 @@ AFRAME.registerGeometry('canyon-terrain', {
       vertices[v * 3 + 1] = height;
       ++v;
     }
-    geometry.computeVertexNormals();
-    this.geometry = geometry;
+
+    // computes normals that are smooth for shallow angles
+    const creasedGeometry = toCreasedNormals(geometry, 0.45 * Math.PI);
+    this.geometry = creasedGeometry;
+    geometry.dispose();
   }
 });
