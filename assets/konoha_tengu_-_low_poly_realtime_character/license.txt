@@ -1,0 +1,8 @@
+Model Information:
+* title:	konoha tengu - Low Poly Realtime Character
+* source:	https://sketchfab.com/3d-models/konoha-tengu-low-poly-realtime-character-892bfcdaba3d4a1899214f92ef5e9a63
+* author:	manoeldarochadeoliveira (https://sketchfab.com/manoeldarochadeoliveira)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
