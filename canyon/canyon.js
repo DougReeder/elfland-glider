@@ -5,6 +5,7 @@
 import '../src/state.js'
 import './canyon-terrain'
 import '../assets/land-shader.js'
+import {darkElf} from './dark-elf'
 // import '../src/intro.js'
 
 

@@ -68,12 +68,13 @@
     <a-entity id="nextQuestPortal" position="-27 -115 116" scale="5 5 0" bind="visible: questComplete"
               link="href:../yggdrasil; title: The Tree of Worlds; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-triangle vertex-a="-10 -10 -10" vertex-b="10 -10 10" vertex-c="10 10 -10" material="visible:false"
-                position="-1 -100.5 60" rotation="0 180 0"
-                class="proximitySound" data-text="You can't have our key! Go away!"
-                data-sound-url="you-cant-have-our-key.ogg">
-        <a-entity gltf-model="#darkElf" scale="2 2 2" animation-mixer="clip: root|flying_idle"></a-entity>
-    </a-triangle>
+        <a-entity gltf-model="#darkElf" scale="2 2 2" position="-1 -100.5 115" rotation="2 180 0"
+                  animation-mixer="crossFadeDuration: 0.5" raycaster="objects:.landscape" dark-elf="">
+            <a-triangle vertex-a="-5 -5 -5" vertex-b="5 -5 5" vertex-c="5 5 -5" material="visible:false"
+                        class="proximitySound" data-text="You can't have our key! Go away!"
+                        data-sound-url="you-cant-have-our-key.ogg">
+            </a-triangle>
+        </a-entity>
 
     <!--<a-entity fps-counter="for90fps:false"></a-entity>-->
     <!--<a-text id="debugDisplay" position="0 13 -0.5" rotation="0 15 0" width="30" align="left" value="Message" geometry="primitive:plane; width:10; height:1.4;"-->
