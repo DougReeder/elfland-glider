@@ -55,7 +55,27 @@ var AFRAME = {
 
 var THREE = {
     Color: function () {},
-    Vector3: function () {},
+    Vector3: function (x, y, z) {
+        this.x = 'number' === typeof x ? x : 0;
+        this.y = 'number' === typeof y ? y : 0;
+        this.z = 'number' === typeof z ? z : 0;
+    },
+    Euler: function (x, y, z, order) {
+        this.x = 'number' === typeof x ? x : 0;
+        this.y = 'number' === typeof y ? y : 0;
+        this.z = 'number' === typeof z ? z : 0;
+        this.order = 'string' === typeof order ? order : 'XYZ';
+    },
+    Quaternion: function (x, y, z, w) {
+        this.x = 'number' === typeof x ? x : 0;
+        this.y = 'number' === typeof y ? y : 0;
+        this.z = 'number' === typeof z ? z : 0;
+        this.w = 'number' === typeof w ? w : 0;
+    },
+    Object3D: function() {
+        this.position = new THREE.Vector3();
+        this.rotation = new THREE.Euler();
+    },
     CanvasTexture: function () {},
     PlaneGeometry: function () {
         this.attributes = {position: {array: []}};
@@ -77,6 +97,7 @@ class MockElement {
         } else {
             this._attributes = {};
         }
+        this.object3D = new THREE.Object3D();
     }
 
     setAttribute(name, value) {
@@ -87,7 +108,8 @@ class MockElement {
         return this._attributes[name];
     }
 
-    setObject3D() {
+    setObject3D(obj) {
+        this.object3D = obj;
     }
 }
 

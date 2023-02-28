@@ -1,7 +1,7 @@
 // dark-elf.js - antagonist behavior for Elfland Glider
 // Copyright © 2023 by Doug Reeder; Licensed under the GNU GPL-3.0
 
- const modeList = [
+ const wanderList = [
    {animation: 'root|flying_idle',      vector: new THREE.Vector3(0, 0, 1),  far: 5},
    {animation: 'root|flying_left',      vector: new THREE.Vector3(2, 0, 0),  far: 5},
    {animation: 'root|flying_right',     vector: new THREE.Vector3(-2, 0, 0), far: 5},
@@ -11,20 +11,20 @@
    {animation: 'root|flying_backwards', vector: new THREE.Vector3(0, 0, -2), far: 5},
  ]
 
-const X_ROT_LIMIT = Math.PI / 10;
+const UP = new THREE.Vector3(0, 1, 0);
 
 AFRAME.registerComponent('dark-elf', {
   schema: {
-    isPursuing: {default: false},
-    goalLocation: {type: 'vec3'},
+    goalSelector: {type: 'selector'},
     idleSpeed:    {default:  0.5},   // m/s
-    pursuitSpeed: {default: 10.0},   // m/s
+    pursuitSpeed: {default:  5.0},   // m/s
   },
 
   vector: new THREE.Vector3(),
   increment: new THREE.Vector3(),
   isAvoidingLandcape: false,
-  goalNormal: new THREE.Vector3(),
+  facingMatrix: new THREE.Matrix4(),
+  facingQuaternion: new THREE.Quaternion(),
 
   init() {
     const {el} = this;
@@ -33,62 +33,79 @@ AFRAME.registerComponent('dark-elf', {
     const newXRot = el.object3D.rotation.x + (Math.random() - 0.5) * Math.PI / 16;
     el.object3D.rotation.set(newXRot, newYRot, el.object3D.rotation.z);
 
-    this.setMode(modeList[0]);
+    this.setModeOrPursuit(wanderList[0]);
 
     setInterval(this.randomMode.bind(this, el), 3000);
 
     el.addEventListener('raycaster-intersection', (evt) => {
       // Intersection w/ distance 0 is sometimes sent immediately
       if (evt.detail.intersections.length > 0 && evt.detail.intersections[0].distance > 0) {
-        // console.log("intersections[0]:", evt.detail.intersections[0])
         this.isAvoidingLandcape = true;
         const newXRot = el.object3D.rotation.x + (Math.random() - 0.5) * Math.PI / 36;
         el.object3D.rotation.set(newXRot, el.object3D.rotation.y, el.object3D.rotation.z);
-        this.setMode(modeList[0]);
+        this.setModeOrPursuit(wanderList[0]);
       }
     });
     el.addEventListener('raycaster-intersection-cleared', (evt) => {
       // console.log("cleared intersections:", evt.detail?.clearedEls)
-      this.isAvoidingLandcape = false;
+      setTimeout(() => {   // keeps turning away from wall for another second
+        this.isAvoidingLandcape = false;
+        this.setModeOrPursuit(wanderList[0]);
+      }, 1000);
     });
   },
 
   update(oldData) {
+    this.setModeOrPursuit(wanderList[0]);
   },
 
   tick(time, timeDelta) {
     const {el} = this;
-    let distance = 0;
+    const hasGoal = Boolean(this.data.goalSelector?.object3D?.position);
     if (this.isAvoidingLandcape) {
-      const newYRot = el.object3D.rotation.y - Math.PI / 90;   // turns right
-      el.object3D.rotation.set(el.object3D.rotation.x, newYRot, el.object3D.rotation.z);
+      const newYRot = el.object3D.rotation.y + (hasGoal ? Math.PI : -Math.PI) / 180;
+      const newXRot = el.object3D.rotation.x - Math.PI / 1800;
+      el.object3D.rotation.set(newXRot, newYRot, el.object3D.rotation.z);
       return;
-    } else if (this.data.isPursuing) {
-      this.goalNormal.copy(this.data.goalLocation);
-      this.goalNormal.sub(el.object3D.position);
-      this.goalNormal.normalize();
+    } else if (hasGoal) {
+      this.facingMatrix.lookAt(this.data.goalSelector.object3D.position, el.object3D.position, UP);
+      this.facingQuaternion.setFromRotationMatrix(this.facingMatrix);
+      el.object3D.quaternion.rotateTowards(this.facingQuaternion, Math.PI / 180);
+
+      const distance = this.data.pursuitSpeed * timeDelta / 1000;
+      this.increment.set(0, 0, distance);
     } else {   // wandering
       if (el.object3D.position.y > -50) {
         el.object3D.rotation.x = Math.PI / 36;   // keeps elf in canyon
       }
 
-      distance = this.data.idleSpeed * timeDelta / 1000;
+      const distance = this.data.idleSpeed * timeDelta / 1000;
       this.increment.copy(this.vector);
       this.increment.multiplyScalar(distance);
     }
+    if (!(timeDelta > 0)) {
+      return;   // when timeDelta is 0 or NaN, nothing can be done
+    }
     this.increment.applyEuler(el.object3D.rotation);
     el.object3D.position.add(this.increment);
-    // console.log("", this.increment, el.object3D.position)
   },
 
   randomMode(el) {
-    if (this.data.isPursuing) {
+    if (this.data.goalSelector?.object3D?.position) {
       return;
     }
     if (Math.random() > 0.6667) {
-      this.setMode(modeList[Math.floor(modeList.length * Math.random())])
+      this.setMode(wanderList[Math.floor(wanderList.length * Math.random())])
     } else {
-      this.setMode(modeList[0]);
+      this.setMode(wanderList[0]);
+    }
+  },
+
+  setModeOrPursuit(mode) {
+    if (this.data.goalSelector?.object3D?.position) {
+      this.setPursuit();
+    } else {
+      this.setMode(mode);
     }
   },
 
@@ -99,6 +116,14 @@ AFRAME.registerComponent('dark-elf', {
     this.el.setAttribute('raycaster', 'direction', {x: mode.vector.x, y: mode.vector.y, z: mode.vector.z});
 
     this.el.setAttribute('raycaster', 'far', mode.far * this.data.idleSpeed);
+  },
+
+  setPursuit() {
+    this.el.setAttribute('animation-mixer', 'clip', 'root|flying_forward');
+
+    this.el.setAttribute('raycaster', 'direction', {x: 0, y: 0, z: 1});
+
+    this.el.setAttribute('raycaster', 'far', 5);
   },
 });
 

@@ -1,3 +1,2186 @@
-/*! For license information please see island.js.LICENSE.txt */
-(()=>{var t={638:()=>{AFRAME.registerGeometry("stella-octangula",{schema:{},init:function(t){const e=new Float32Array(216),n=new Float32Array(216),o=[],r=.5;e.set([0,r,0,-r,r,r,0,0,r,r,-r,r,r,0,0,r,r,-r],0),n.set([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],0),o.push(0,1,2,2,3,4,4,5,0),e.set([0,r,0,-r,r,-r,-r,0,0,-r,-r,r,0,0,r,r,r,r],18),n.set([-1,1,1,-1,1,1,-1,1,1,-1,1,1,-1,1,1,-1,1,1],18),o.push(6,7,8,8,9,10,10,11,6),e.set([0,r,0,r,r,-r,0,0,-r,-r,-r,-r,-r,0,0,-r,r,r],36),n.set([-1,1,-1,-1,1,-1,-1,1,-1,-1,1,-1,-1,1,-1,-1,1,-1],36),o.push(12,13,14,14,15,16,16,17,12),e.set([0,r,0,r,r,r,r,0,0,r,-r,-r,0,0,-r,-r,r,-r],54),n.set([1,1,-1,1,1,-1,1,1,-1,1,1,-1,1,1,-1,1,1,-1],54),o.push(18,19,20,20,21,22,22,23,18),e.set([0,0,r,-r,-r,r,0,-r,0,r,-r,-r,r,0,0,r,r,r],72),n.set([1,-1,1,1,-1,1,1,-1,1,1,-1,1,1,-1,1,1,-1,1],72),o.push(24,25,26,26,27,28,28,29,24),e.set([0,0,r,-r,r,r,-r,0,0,-r,-r,-r,0,-r,0,r,-r,r],90),n.set([-1,-1,1,-1,-1,1,-1,-1,1,-1,-1,1,-1,-1,1,-1,-1,1],90),o.push(30,31,32,32,33,34,34,35,30),e.set([r,0,0,r,-r,r,0,-r,0,-r,-r,-r,0,0,-r,r,r,-r],108),n.set([1,-1,-1,1,-1,-1,1,-1,-1,1,-1,-1,1,-1,-1,1,-1,-1],108),o.push(36,37,38,38,39,40,40,41,36),e.set([0,-r,0,-r,-r,r,-r,0,0,-r,r,-r,0,0,-r,r,-r,-r],126),n.set([-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1],126),o.push(42,43,44,44,45,46,46,47,42);const i=new THREE.BufferGeometry;i.setAttribute("position",new THREE.BufferAttribute(e,3)),i.setAttribute("normal",new THREE.BufferAttribute(n,3)),i.setIndex(o),i.normalizeNormals(),i.computeBoundingBox(),this.geometry=i}})},742:(t,e,n)=>{"use strict";n.d(e,{Z:()=>p});var o=n(537),r=n.n(o),i=n(645),a=n.n(i),s=n(667),l=n.n(s),d=new URL(n(324),n.b),c=a()(r()),u=l()(d);c.push([t.id,'/** intro.css - styling for intro dialog of Elfland Glider\n  * Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0\n  */\n\n\nhtml {\n    font: 1.5rem Niconne, "Goudy Old Style", Papyrus, serif;\n}\n\nh1 {\n    margin: 0.5em;\n}\n\n.wrapper {\n    margin: 1em;\n}\n.wrapper > * {\n    margin: 1em;\n}\n@supports (display: grid) {\n    .wrapper {\n        display: grid;\n        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));\n        grid-gap: 1em;\n        gap: 1em;\n    }\n    .wrapper > * {\n        margin: 0;\n    }\n}\n\n.portraitOnly {\n    display: none;\n}\n.landscapeOnly {\n    display: block;\n}\n@media only screen and (orientation: portrait) {\n    .portraitOnly {\n        display: block;\n    }\n    .landscapeOnly {\n        display: none;\n    }\n}\n\ntd.ruleAbove {\n    border-top: black 1px solid;\n}\n\ntd.ruleBelow {\n    border-bottom: black 1px solid;\n}\n\n\n/* hides AR button, */\ndiv.a-enter-ar {\n    visibility: hidden;\n}\n\n\n.closeBtnRed {\n    position: fixed;\n    top: 25px;\n    right: 25px;\n    width: 32px;\n    height: 32px;\n    background-image: url('+u+");\n    z-index: 1;\n}\n\n\n\n/* forces scrollbar to be visible in webkit browsers */\n::-webkit-scrollbar {\n    width:9px;\n}\n\n::-webkit-scrollbar-track {\n    -webkit-border-radius:5px;\n    border-radius:5px;\n    background:rgba(0,0,0,0.1);\n}\n\n::-webkit-scrollbar-thumb {\n    -webkit-border-radius:5px;\n    border-radius:5px;\n    background:rgba(0,0,0,0.2);\n}\n\n::-webkit-scrollbar-thumb:hover {\n    background:rgba(0,0,0,0.4);\n}\n\n::-webkit-scrollbar-thumb:window-inactive {\n    background:rgba(0,0,0,0.05);\n}\n","",{version:3,sources:["webpack://./assets/intro.css"],names:[],mappings:"AAAA;;GAEG;;;AAGH;IACI,uDAAuD;AAC3D;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,WAAW;AACf;AACA;IACI,WAAW;AACf;AACA;IACI;QACI,aAAa;QACb,2DAA2D;QAC3D,aAAa;QACb,QAAQ;IACZ;IACA;QACI,SAAS;IACb;AACJ;;AAEA;IACI,aAAa;AACjB;AACA;IACI,cAAc;AAClB;AACA;IACI;QACI,cAAc;IAClB;IACA;QACI,aAAa;IACjB;AACJ;;AAEA;IACI,2BAA2B;AAC/B;;AAEA;IACI,8BAA8B;AAClC;;;AAGA,qBAAqB;AACrB;IACI,kBAAkB;AACtB;;;AAGA;IACI,eAAe;IACf,SAAS;IACT,WAAW;IACX,WAAW;IACX,YAAY;IACZ,yDAA6C;IAC7C,UAAU;AACd;;;;AAIA,sDAAsD;AACtD;IACI,SAAS;AACb;;AAEA;IACI,yBAAyB;IACzB,iBAAiB;IACjB,0BAA0B;AAC9B;;AAEA;IACI,yBAAyB;IACzB,iBAAiB;IACjB,0BAA0B;AAC9B;;AAEA;IACI,0BAA0B;AAC9B;;AAEA;IACI,2BAA2B;AAC/B",sourcesContent:['/** intro.css - styling for intro dialog of Elfland Glider\n  * Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0\n  */\n\n\nhtml {\n    font: 1.5rem Niconne, "Goudy Old Style", Papyrus, serif;\n}\n\nh1 {\n    margin: 0.5em;\n}\n\n.wrapper {\n    margin: 1em;\n}\n.wrapper > * {\n    margin: 1em;\n}\n@supports (display: grid) {\n    .wrapper {\n        display: grid;\n        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));\n        grid-gap: 1em;\n        gap: 1em;\n    }\n    .wrapper > * {\n        margin: 0;\n    }\n}\n\n.portraitOnly {\n    display: none;\n}\n.landscapeOnly {\n    display: block;\n}\n@media only screen and (orientation: portrait) {\n    .portraitOnly {\n        display: block;\n    }\n    .landscapeOnly {\n        display: none;\n    }\n}\n\ntd.ruleAbove {\n    border-top: black 1px solid;\n}\n\ntd.ruleBelow {\n    border-bottom: black 1px solid;\n}\n\n\n/* hides AR button, */\ndiv.a-enter-ar {\n    visibility: hidden;\n}\n\n\n.closeBtnRed {\n    position: fixed;\n    top: 25px;\n    right: 25px;\n    width: 32px;\n    height: 32px;\n    background-image: url(close-button-red32.png);\n    z-index: 1;\n}\n\n\n\n/* forces scrollbar to be visible in webkit browsers */\n::-webkit-scrollbar {\n    width:9px;\n}\n\n::-webkit-scrollbar-track {\n    -webkit-border-radius:5px;\n    border-radius:5px;\n    background:rgba(0,0,0,0.1);\n}\n\n::-webkit-scrollbar-thumb {\n    -webkit-border-radius:5px;\n    border-radius:5px;\n    background:rgba(0,0,0,0.2);\n}\n\n::-webkit-scrollbar-thumb:hover {\n    background:rgba(0,0,0,0.4);\n}\n\n::-webkit-scrollbar-thumb:window-inactive {\n    background:rgba(0,0,0,0.05);\n}\n'],sourceRoot:""}]);const p=c},645:t=>{"use strict";t.exports=function(t){var e=[];return e.toString=function(){return this.map((function(e){var n="",o=void 0!==e[5];return e[4]&&(n+="@supports (".concat(e[4],") {")),e[2]&&(n+="@media ".concat(e[2]," {")),o&&(n+="@layer".concat(e[5].length>0?" ".concat(e[5]):""," {")),n+=t(e),o&&(n+="}"),e[2]&&(n+="}"),e[4]&&(n+="}"),n})).join("")},e.i=function(t,n,o,r,i){"string"==typeof t&&(t=[[null,t,void 0]]);var a={};if(o)for(var s=0;s<this.length;s++){var l=this[s][0];null!=l&&(a[l]=!0)}for(var d=0;d<t.length;d++){var c=[].concat(t[d]);o&&a[c[0]]||(void 0!==i&&(void 0===c[5]||(c[1]="@layer".concat(c[5].length>0?" ".concat(c[5]):""," {").concat(c[1],"}")),c[5]=i),n&&(c[2]?(c[1]="@media ".concat(c[2]," {").concat(c[1],"}"),c[2]=n):c[2]=n),r&&(c[4]?(c[1]="@supports (".concat(c[4],") {").concat(c[1],"}"),c[4]=r):c[4]="".concat(r)),e.push(c))}},e}},667:t=>{"use strict";t.exports=function(t,e){return e||(e={}),t?(t=String(t.__esModule?t.default:t),/^['"].*['"]$/.test(t)&&(t=t.slice(1,-1)),e.hash&&(t+=e.hash),/["'() \t\n]|(%20)/.test(t)||e.needQuotes?'"'.concat(t.replace(/"/g,'\\"').replace(/\n/g,"\\n"),'"'):t):t}},537:t=>{"use strict";t.exports=function(t){var e=t[1],n=t[3];if(!n)return e;if("function"==typeof btoa){var o=btoa(unescape(encodeURIComponent(JSON.stringify(n)))),r="sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(o),i="/*# ".concat(r," */");return[e].concat([i]).join("\n")}return[e].join("\n")}},379:t=>{"use strict";var e=[];function n(t){for(var n=-1,o=0;o<e.length;o++)if(e[o].identifier===t){n=o;break}return n}function o(t,o){for(var i={},a=[],s=0;s<t.length;s++){var l=t[s],d=o.base?l[0]+o.base:l[0],c=i[d]||0,u="".concat(d," ").concat(c);i[d]=c+1;var p=n(u),h={css:l[1],media:l[2],sourceMap:l[3],supports:l[4],layer:l[5]};if(-1!==p)e[p].references++,e[p].updater(h);else{var b=r(h,o);o.byIndex=s,e.splice(s,0,{identifier:u,updater:b,references:1})}a.push(u)}return a}function r(t,e){var n=e.domAPI(e);return n.update(t),function(e){if(e){if(e.css===t.css&&e.media===t.media&&e.sourceMap===t.sourceMap&&e.supports===t.supports&&e.layer===t.layer)return;n.update(t=e)}else n.remove()}}t.exports=function(t,r){var i=o(t=t||[],r=r||{});return function(t){t=t||[];for(var a=0;a<i.length;a++){var s=n(i[a]);e[s].references--}for(var l=o(t,r),d=0;d<i.length;d++){var c=n(i[d]);0===e[c].references&&(e[c].updater(),e.splice(c,1))}i=l}}},569:t=>{"use strict";var e={};t.exports=function(t,n){var o=function(t){if(void 0===e[t]){var n=document.querySelector(t);if(window.HTMLIFrameElement&&n instanceof window.HTMLIFrameElement)try{n=n.contentDocument.head}catch(t){n=null}e[t]=n}return e[t]}(t);if(!o)throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");o.appendChild(n)}},216:t=>{"use strict";t.exports=function(t){var e=document.createElement("style");return t.setAttributes(e,t.attributes),t.insert(e,t.options),e}},565:(t,e,n)=>{"use strict";t.exports=function(t){var e=n.nc;e&&t.setAttribute("nonce",e)}},795:t=>{"use strict";t.exports=function(t){var e=t.insertStyleElement(t);return{update:function(n){!function(t,e,n){var o="";n.supports&&(o+="@supports (".concat(n.supports,") {")),n.media&&(o+="@media ".concat(n.media," {"));var r=void 0!==n.layer;r&&(o+="@layer".concat(n.layer.length>0?" ".concat(n.layer):""," {")),o+=n.css,r&&(o+="}"),n.media&&(o+="}"),n.supports&&(o+="}");var i=n.sourceMap;i&&"undefined"!=typeof btoa&&(o+="\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(i))))," */")),e.styleTagTransform(o,t,e.options)}(e,t,n)},remove:function(){!function(t){if(null===t.parentNode)return!1;t.parentNode.removeChild(t)}(e)}}}},589:t=>{"use strict";t.exports=function(t,e){if(e.styleSheet)e.styleSheet.cssText=t;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(t))}}},861:()=>{window.requestIdleCallback=window.requestIdleCallback||function(t){return setTimeout((function(){var e=Date.now();t({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-e))}})}),1)},window.cancelIdleCallback=window.cancelIdleCallback||function(t){clearTimeout(t)}},324:(t,e,n)=>{"use strict";t.exports=n.p+"8357cd993c948fc4d3a7.png"}},e={};function n(o){var r=e[o];if(void 0!==r)return r.exports;var i=e[o]={id:o,exports:{}};return t[o](i,i.exports,n),i.exports}n.m=t,n.n=t=>{var e=t&&t.__esModule?()=>t.default:()=>t;return n.d(e,{a:e}),e},n.d=(t,e)=>{for(var o in e)n.o(e,o)&&!n.o(t,o)&&Object.defineProperty(t,o,{enumerable:!0,get:e[o]})},n.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(t){if("object"==typeof window)return window}}(),n.o=(t,e)=>Object.prototype.hasOwnProperty.call(t,e),(()=>{var t;n.g.importScripts&&(t=n.g.location+"");var e=n.g.document;if(!t&&e&&(e.currentScript&&(t=e.currentScript.src),!t)){var o=e.getElementsByTagName("script");o.length&&(t=o[o.length-1].src)}if(!t)throw new Error("Automatic publicPath is not supported in this browser");t=t.replace(/#.*$/,"").replace(/\?.*$/,"").replace(/\/[^\/]+$/,"/"),n.p=t})(),n.b=document.baseURI||self.location.href,n.nc=void 0,(()=>{"use strict";function t(){if(!r())return;let t,n=document.querySelector("canvas.a-canvas"),o=n.requestFullscreen||n.webkitRequestFullscreen||n.mozRequestFullScreen||n.msRequestFullscreen;o&&(t=o.apply(n)),t&&t.then||(t=Promise.resolve()),t.then(e,e)}function e(){screen.orientation&&screen.orientation.lock&&screen.orientation.lock("landscape").then((t=>{console.log("screen orientation locked:",t)})).catch((t=>{console.warn("screen orientation didn't lock:",t)}))}function o(){return!(AFRAME.utils.device.isMobile()||AFRAME.utils.device.isMobileVR())}function r(){return AFRAME.utils.device.isMobile()&&!AFRAME.scenes[0].is("vr-mode")}function i(t,e,n){let o=t/180*Math.PI,r=n*Math.sin(o),i=n*Math.cos(o),a=e/180*Math.PI;return{x:i*Math.cos(a),y:r,z:-i*Math.sin(a)}}var a=null;function s(){a&&!a.playing()&&a.play()}if(document.addEventListener("visibilitychange",(()=>{a&&(document.hidden?a.pause():a.play())}),!1),document.monetization){function C(t){console.log("monetization started:",t)}function M(t){console.log("monetization stopped:",t)}document.monetization.addEventListener("monetizationstart",C),document.monetization.addEventListener("monetizationstop",M)}else console.log("no monetization API");n(861),AFRAME.registerState({initialState:{armatureEl:null,gliderEl:null,cameraEl:null,leftHandEl:null,rightHandEl:null,controllerConnections:{},isAnyPressedLeft:!1,isAnyPressedRight:!1,xSetting:0,zSetting:0,controlStickEl:null,controlNeutralHeight:.95,controlMode:"HEAD",controlSubmode:"NONE",time:0,difficulty:.6,gliderPosition:{x:-30,y:15,z:30},gliderPositionStart:{x:-30,y:15,z:30},gliderRotationX:0,gliderRotationY:-45,gliderRotationZ:0,gliderRotationYStart:-45,isFlying:!1,gliderSpeed:5,numYellowStars:Math.POSITIVE_INFINITY,stars:0,questComplete:!1,inventory:{},hudVisible:!0,hudAirspeedAngle:0,hudAirspeedColor:"forestgreen",controlsReminderDisplayed:!1,debug:!1},handlers:{setState:function(t,e){for(let n in e)"target"!==n&&(console.log("setting",n,e[n]),t[n]=e[n])},setArmatureEl:function(t,e){this.powerup=new Howl({src:["../assets/411460__inspectorj__power-up-bright-a.mp3"]}),console.log("hasNativeWebXRImplementation:",window.hasNativeWebXRImplementation),console.log("hasNativeWebVRImplementation:",window.hasNativeWebVRImplementation),console.log("isMobile:",AFRAME.utils.device.isMobile()),console.log("isMobileVR:",AFRAME.utils.device.isMobileVR()),t.armatureEl=e,t.gliderEl=e.querySelector("#glider"),t.cameraEl=e.querySelector("[camera]");let n=AFRAME.scenes[0].querySelector("a-dust");n&&requestIdleCallback((()=>{n.components.dust.setCamera(t.armatureEl)}),{timeout:1e4});let i=t.armatureEl.querySelector("#body"),a=t.gliderEl.querySelector("#wing"),l=e.querySelector("#hud");this.adjustForMagicWindow(a),AFRAME.scenes[0].is("vr-mode")&&AFRAME.utils.device.checkHeadsetConnected()?(this.adjustHudForVR(l),t.difficulty=.75):(this.adjustHudForFlat(l),r()?t.difficulty=.6:t.difficulty=.5),AFRAME.scenes[0].addEventListener("enter-vr",(e=>{AFRAME.utils.device.checkHeadsetConnected()&&(i.object3D.position.y=-1.6,this.adjustHudForVR(l),this.adjustForMagicWindow(a),t.difficulty=.75),s()})),AFRAME.scenes[0].addEventListener("exit-vr",(e=>{this.adjustHudForFlat(l),this.adjustForMagicWindow(a),r()?t.difficulty=.6:t.difficulty=.5})),o()&&!AFRAME.utils.device.checkHeadsetConnected()&&(console.log("desktop w/o headset; disabling look-controls so keyboard controls can function"),t.cameraEl.setAttribute("look-controls","enabled","false")),t.gliderEl.addEventListener("raycaster-intersection",(e=>{e.detail.intersections.length>0&&e.detail.intersections[0].distance>0&&(console.log("CRASH!",e.detail.els[0].tagName,e.detail.intersections[0].distance,t.gliderEl.getAttribute("raycaster").far,t.gliderSpeed/4),AFRAME.scenes[0].emit("hover",{}),new Howl({src:["../assets/198876__bone666138__crash.mp3"]}).play(),setTimeout((()=>{t.gliderSpeed>=30?(sessionStorage.setItem("returnWorld",location.pathname),location.assign("../ginnungagap/")):(t.gliderPosition.x=t.gliderPositionStart.x,t.gliderPosition.y=t.gliderPositionStart.y,t.gliderPosition.z=t.gliderPositionStart.z,t.gliderRotationX=0,t.gliderRotationY=t.gliderRotationYStart,t.gliderSpeed=5,this.controlStickToNeutral(t),t.hudAirspeedAngle=0,t.hudAirspeedColor="forestgreen",t.cameraEl.object3D.rotation.x=0,t.cameraEl.object3D.rotation.y=0,t.cameraEl.object3D.rotation.z=0,setTimeout(this.showControlsReminder.bind(this,t),3e3))}),2e3))})),e.addEventListener("hitstart",(e=>{e.detail.intersectedEls.forEach((e=>{if(e.classList.contains("powerup"))console.log("powerup"),t.gliderSpeed+=16,this.powerup.play();else if(e.classList.contains("star"))++t.stars,console.log("collected star",t.stars,"of",t.numYellowStars),e.parentNode.removeChild(e),this.ding.play();else if("key"===e.id)t.questComplete=!0,new Howl({src:["../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3"]}).play(),e.parentNode.removeChild(e);else if(e.classList.contains("proximitySound")){let t=e.getAttribute("data-sound-url"),n=e.getAttribute("data-sound-volume")||1;t&&new Howl({src:t,volume:n,autoplay:!0});let o=e.getAttribute("data-text"),r=AFRAME.scenes[0].querySelector("#subtitle");o&&r&&(r.setAttribute("value",o),setTimeout((()=>{r.setAttribute("value","")}),5e3))}else e.components.link&&(console.log("hit link"),/ginnungagap/.test(location.pathname)||sessionStorage.setItem("previousWorld",location.pathname))}))})),document.addEventListener("keydown",(function(e){switch(t.cameraEl.getAttribute("rotation"),e.code){case"KeyA":case"ArrowLeft":t.cameraEl.object3D.rotation.z+=.07;break;case"KeyD":case"ArrowRight":t.cameraEl.object3D.rotation.z-=.07;break;case"KeyW":case"ArrowUp":t.cameraEl.object3D.rotation.x+=.045;break;case"KeyS":case"ArrowDown":t.cameraEl.object3D.rotation.x-=.045;break;case"Space":t.isFlying?t.debug&&AFRAME.scenes[0].emit("hover",e):AFRAME.scenes[0].emit("launch",e);break;case"Enter":t.hudVisible=!t.hudVisible}}),!1),t.leftHandEl=document.getElementById("leftHand"),t.rightHandEl=document.getElementById("rightHand"),o()&&(t.leftHandEl.setAttribute("hand-controls","handModelStyle","highPoly"),t.rightHandEl.setAttribute("hand-controls","handModelStyle","highPoly")),this.leftDownHandler=this.handHandler.bind(this,"LEFT","DOWN",t),this.leftUpHandler=this.handHandler.bind(this,"LEFT","UP",t),this.rightDownHandler=this.handHandler.bind(this,"RIGHT","DOWN",t),this.rightUpHandler=this.handHandler.bind(this,"RIGHT","UP",t),t.controlStickEl=document.getElementById("controlStick")},controllerconnected:function(t,e){t.controllerConnections[e.component.el.id]=!0,this.adjustControlMode(t)},controllerdisconnected:function(t,e){t.controllerConnections[e.component.el.id]=!1,this.adjustControlMode(t)},adjustControlMode:function(t){const e=t.controlMode;t.controllerConnections.leftHand||t.controllerConnections.rightHand?t.controlMode="HANDS":t.controlMode="HEAD",t.controlMode!==e&&(console.log("changed control mode from",e,"to",t.controlMode),"HANDS"===t.controlMode?(t.leftHandEl?.addEventListener("buttondown",this.leftDownHandler),t.leftHandEl?.addEventListener("buttonup",this.leftUpHandler),t.rightHandEl?.addEventListener("buttondown",this.rightDownHandler),t.rightHandEl?.addEventListener("buttonup",this.rightUpHandler),this.controlStickToNeutral(t),t.controlStickEl.object3D.visible=!0):"HEAD"===t.controlMode&&(t.leftHandEl?.removeEventListener("buttondown",this.leftDownHandler),t.leftHandEl?.removeEventListener("buttonup",this.leftUpHandler),t.rightHandEl?.removeEventListener("buttondown",this.rightDownHandler),t.rightHandEl?.removeEventListener("buttonup",this.rightUpHandler),t.controlStickEl.object3D.visible=!1))},handHandler:function(t,e,n,o){const r=n.isAnyPressedLeft,i=n.leftHandEl?.components["tracked-controls"],a=i&&i.controller&&i.controller.gamepad&&i.controller.gamepad.buttons;if(a){n.isAnyPressedLeft=!1;for(let t=0;t<a.length;++t)a[t].pressed&&(n.isAnyPressedLeft=!0)}else"LEFT"===t&&(n.isAnyPressedLeft="DOWN"===e);const s=n.isAnyPressedRight,l=n.rightHandEl?.components["tracked-controls"],d=l&&l.controller&&l.controller.gamepad&&l.controller.gamepad.buttons;if(d){n.isAnyPressedRight=!1;for(let t=0;t<d.length;++t)d[t].pressed&&(n.isAnyPressedRight=!0)}else"RIGHT"===t&&(n.isAnyPressedRight="DOWN"===e);if(n.isAnyPressedLeft&&!r)switch(n.controlSubmode){case"LEFT":n.controlSubmode="NONE";break;case"RIGHT":case"NONE":n.controlSubmode="LEFT"}else if(n.isAnyPressedRight&&!s)switch(n.controlSubmode){case"RIGHT":n.controlSubmode="NONE";break;case"LEFT":case"NONE":n.controlSubmode="RIGHT"}console.log("controlSubmode:",n.controlSubmode)},controlStickToNeutral:function(t){if(t.controlStickEl){const e=t.cameraEl.getAttribute("position");t.controlNeutralHeight=e.y-.56,t.controlStickEl.setAttribute("position",{x:0,y:t.controlNeutralHeight,z:-.4}),t.controlStickEl.setAttribute("rotation",{x:0,y:0,z:0}),t.xSetting=0,t.zSetting=0}},buttondown:function(t,e){t.isFlying?t.debug&&AFRAME.scenes[0].emit("hover",e):AFRAME.scenes[0].emit("launch",e)},countYellowStars:function(t,e){t.numYellowStars=AFRAME.scenes[0].querySelectorAll(".star").length,console.log("numYellowStars:",t.numYellowStars),t.numYellowStars&&(this.ding=new Howl({src:["../assets/393633__daronoxus__ding.mp3"]}))},launch:function(e,n){console.log("launch",n),e.isFlying=!0,e.controlsReminderDisplayed=!1;let o=AFRAME.scenes[0].querySelector("#prelaunchHelp");o&&o.setAttribute("value",""),t();let r=AFRAME.scenes[0].querySelector("#postlaunchHelp");if(r&&r.src){let t=new Howl({src:[r.src]});setTimeout((()=>{t.play()}),6e4)}},hover:function(t,e){console.log("hover",e),t.isFlying=!1},loaded:function(t,e){document.getElementById("intro")||this.startInteraction(t)},"enter-vr":function(t){this.startInteraction(t)},"exit-vr":function(t,e){t.controlsReminderDisplayed&&this.showControlsReminder(t),document.getElementById("intro")&&AFRAME.scenes[0].emit("hover",e)},startInteraction:function(t){t.controlsReminderDisplayed?this.showControlsReminder(t):setTimeout(this.showControlsReminder.bind(this,t),1e4)},showControlsReminder:function(t){let e=AFRAME.scenes[0].querySelector("#prelaunchHelp"),n=document.getElementById("intro");!e||n&&!AFRAME.scenes[0].is("vr-mode")||t.isFlying||(t.controlsReminderDisplayed=!0,AFRAME.scenes[0].is("vr-mode")&&AFRAME.utils.device.checkHeadsetConnected()||AFRAME.utils.device.isMobileVR()?e.setAttribute("value","The wing above you\npoints where you're flying.\n\nTilt left: turn left\nTilt right: turn right\nTilt back: climb & slow down\nTilt forward: dive & speed up\nTrigger, button or touchpad: launch"):AFRAME.utils.device.isMobile()?e.setAttribute("value","The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTilt up: climb & slow down\nTilt down: dive & speed up\nTap screen: launch"):e.setAttribute("value","The wing above you\npoints where you're flying.\n\nA: turn left\nD: turn right\nW: climb (& slow down)\nS: dive (& speed up)\nSpace bar: launch"))},iterate:function(t,e){switch(e.timeDelta=Math.min(e.timeDelta,100),t.time+=e.timeDelta*t.difficulty,t.controlMode){case"HEAD":let e=t.cameraEl.getAttribute("rotation");if(!e)return void console.warn("camera rotation not available");let n=r()?e.x+20:e.x;t.xSetting=n,t.zSetting=e.z;break;case"HANDS":const o=t.leftHandEl?.getAttribute("position"),i=t.rightHandEl?.getAttribute("position");switch(t.controlSubmode){case"LEFT":const e=t.leftHandEl?.getAttribute("rotation");t.controlStickEl.setAttribute("position",o),t.controlStickEl.setAttribute("rotation",e),t.xSetting=e.x,t.zSetting=e.z;break;case"RIGHT":const n=t.rightHandEl?.getAttribute("rotation");t.controlStickEl.setAttribute("position",i),t.controlStickEl.setAttribute("rotation",n),t.xSetting=n.x,t.zSetting=n.z}}let n=t.xSetting-t.gliderRotationX,o=(n+15*Math.sign(n))*(e.timeDelta/1e3);Math.abs(o)>Math.abs(n)&&(o=n);let a=t.gliderRotationX+o;a=Math.max(a,-75),a=Math.min(a,75),t.gliderRotationX=a;let s=t.zSetting-t.gliderRotationZ,l=(s+15*Math.sign(s))*(e.timeDelta/1e3);Math.abs(l)>Math.abs(s)&&(l=s);let d=t.gliderRotationZ+l;d=Math.max(d,-70),d=Math.min(d,70),t.gliderRotationZ=d;let c=t.gliderRotationZ*e.timeDelta/1e3;if(t.gliderRotationY=(t.gliderRotationY+c+180)%360-180,t.isFlying){let n=t.gliderSpeed*e.timeDelta/1e3,o=i(t.gliderRotationX,t.gliderRotationY+90,n),r=o.y;t.gliderPosition.x+=o.x,t.gliderPosition.y+=r,t.gliderPosition.z+=o.z;let a=(-Math.sign(r)*Math.sqrt(19.614*Math.abs(r))-5e-4*t.gliderSpeed*t.gliderSpeed)*e.timeDelta/1e3;t.gliderSpeed=Math.max(t.gliderSpeed+a,.1),t.gliderSpeed=Math.min(t.gliderSpeed,99.4),t.hudAirspeedAngle=Math.min(9*t.gliderSpeed,359),t.hudAirspeedColor=t.gliderSpeed<30?"forestgreen":"goldenrod",t.gliderEl.setAttribute("raycaster","far",t.gliderSpeed/4)}},placeInGliderPath:function(t,e){let n=i(t.gliderRotationX+(Math.random()-.5)*e.variation,t.gliderRotationY+90+(Math.random()-.5)*e.variation,e.distance),o={x:t.gliderPosition.x+n.x,y:t.gliderPosition.y+n.y,z:t.gliderPosition.z+n.z};e.el.setAttribute("position",o),e.el.setAttribute("rotation","y",t.gliderRotationY)},adjustForMagicWindow:function(t){r()?(t.object3D.rotation.x=THREE.MathUtils.degToRad(-30),t.object3D.scale.set(1,1,3)):(t.object3D.rotation.x=0,t.object3D.scale.set(1,1,1))},adjustHudForVR:function(t){AFRAME.utils.device.isMobile()?(t.object3D.position.x=.3,t.object3D.position.y=.3):(t.object3D.position.x=.4,t.object3D.position.y=.42),t.object3D.rotation.x=THREE.MathUtils.degToRad(25),t.object3D.rotation.y=THREE.MathUtils.degToRad(-15)},adjustHudForFlat:function(t){o()?(t.object3D.position.x=.85,t.object3D.position.y=.45,t.object3D.rotation.x=0,t.object3D.rotation.y=0):(t.object3D.position.x=.7,t.object3D.position.y=.15,t.object3D.rotation.x=THREE.MathUtils.degToRad(15),t.object3D.rotation.y=THREE.MathUtils.degToRad(-20))}},computeState:function(t,e){try{!t.questComplete&&(t.questComplete=t.numYellowStars<=0||t.stars/t.numYellowStars>=.95,t.questComplete)&&new Howl({src:["../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3"]}).play()}catch(t){console.error(t)}}}),AFRAME.registerComponent("armature-tick-state",{init:function(){AFRAME.scenes[0].emit("setArmatureEl",this.el)},tick:function(t,e){AFRAME.scenes[0].emit("iterate",{time:t,timeDelta:e})}}),n(638);var l=n(379),d=n.n(l),c=n(795),u=n.n(c),p=n(569),h=n.n(p),b=n(565),A=n.n(b),m=n(216),g=n.n(m),f=n(589),v=n.n(f),y=n(742),w={};w.styleTagTransform=v(),w.setAttributes=A(),w.insert=h().bind(null,"head"),w.domAPI=u(),w.insertStyleElement=g(),d()(y.Z,w),y.Z&&y.Z.locals&&y.Z.locals,console.log("previousWorld:",sessionStorage.getItem("previousWorld")),sessionStorage.getItem("previousWorld")||window.hasOwnProperty("jasmine")||document.addEventListener("DOMContentLoaded",(function(e){let n="";window.hasNativeWebXRImplementation||window.hasNativeWebVRImplementation||(n='<div style="margin-top: 1em;">\nThis browser lacks both <a href="https://caniuse.com/#search=webxr">native WebXR</a> and <a href="https://webvr.info/">native WebVR</a>, so don\'t complain about performance. </div>');let r="";!AFRAME.utils.device.isMobile()||AFRAME.scenes[0]&&AFRAME.scenes[0].is("vr-mode")||(r='<div class="portraitOnly" style="color:red;margin-top: 1em;">\nPlease rotate your device to landscape mode. &#x21B6;</div>'),console.log("checkHeadsetConnected:",AFRAME.utils.device.checkHeadsetConnected());let i="",a='\n<table id="vrControls">\n    <tr><td colspan="2">If you have a controller: <b>Click</b> VR button ➘ to enter VR mode, then...</td></tr>\n    <tr><td colspan="2"><b>Press & Release</b> trigger, button or touchpad to grab (or release) the virtual control stick</td></tr>\n    <tr><td><b>Tilt</b> the stick left to turn glider left</td><td><img src="../assets/control-bar-left.png"></td></tr>\n    <tr><td><b>Tilt</b> the stick right to turn glider right</td><td><img src="../assets/control-bar-right.png"></td></tr>\n    <tr><td colspan="2"><b>Tilt</b> the stick back to climb (&amp; <b>slow down</b>)</td></tr>\n    <tr><td colspan="2"><b>Tilt</b> the stick forward to dive (&amp; <b>speed up</b>)</td></tr>\n    <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>\n</table>\n<table id="vrControls">\n    <tr><td colspan="2">Without a controller...</td></tr>\n    <tr><td colspan="2"><b>Click</b> VR button ➘ to enter VR mode</td></tr>\n    <tr><td><b>Tilt</b> your head left to turn glider left</td><td><img src="../assets/head-tilt-left.png"></td></tr>\n    <tr><td><b>Tilt</b> your head right to turn glider right</td><td><img src="../assets/head-tilt-right.png"></td></tr>\n    <tr><td colspan="2"><b>Turn</b> your head left or right to look around without turning glider</td></tr>\n    <tr><td colspan="2"><b>Tilt</b> your head up to climb (&amp; <b>slow down</b>)</td></tr>\n    <tr><td colspan="2"><b>Tilt</b> your head down to dive (&amp; <b>speed up</b>)</td></tr>\n    <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>\n</table>\n';AFRAME.utils.device.isMobile()?(i='<div class="closeBtnRed landscapeOnly"></div>',a='\n<table class="landscapeOnly" style="width:100%">\n    <tr><td colspan="2"><b>Tap</b> the close button ➚ to play in magic window mode, or <b>Tap</b> VR button ➘ and place phone in headset to enter VR mode</td></tr>\n    <tr><td><b>Roll</b> your device left to turn glider left</td>\n        <td><img src="../assets/device-rotate-ccw.png"></td></tr>\n    <tr><td><b>Roll</b> your device right to turn glider right</td>\n        <td><img src="../assets/device-rotate-cw.png"></td></tr>\n    <tr><td colspan="2"><b>Turn</b> your device left or right to look around without turning glider</td></tr>\n    <tr><td colspan="2"><b>Tilt</b> your device up to climb (&amp; <b>slow down</b>)</td></tr>\n    <tr><td colspan="2"><b>Tilt</b> your device down to dive (&amp; <b>speed up</b>)</td></tr>\n    <tr><td colspan="2"><b>Tap</b> the screen to launch</td></tr>\n</table>\n'):!AFRAME.utils.device.checkHeadsetConnected()&&o()&&(i='<div class="closeBtnRed"></div>',a='\n<table style="width:100%">\n    <tr><td colspan="2">Elfland Glider is designed for VR or mobile, but if you want to try it here:</td></tr>\n    <tr><td>A or left-arrow</td><td>turn glider left</td></tr>\n    <tr><td>D or right-arrow</td><td>turn glider right</td></tr>\n    <tr><td>W or up-arrow</td><td>climb (&amp; <b>slow down</b>)</td></tr>\n    <tr><td>S or down-arrow</td><td>dive (&amp; <b>speed up</b>)</td></tr>\n    <tr><td>space bar</td><td>launch</td></tr>\n    <tr><td>VR button ➘</td><td>enter fullscreen mode</td></tr>\n</table>\n');let l=`\n${i}\n<h1 style="text-align:center;">Elfland Glider</h1>\n    <div class="wrapper">\n      <div id="overview">\n        Fly through fantastic worlds,\n        help the merry and mischievous light elves,\n        & avoid the surly and mischievous dark elves.\n        ${r}\n        ${n}\n        <table id="vrControls">\n            <tr><td colspan="2" class="ruleAbove">Remain seated while learning to fly</td></tr>\n            <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>\n        </table>\n      </div>\n      ${a}\n      <div style="font-family:serif; font-size: 0.75rem">\n        <div>${atob("ZS1tYWlsOiA8YSBocmVmPSJtYWlsdG86dnJAaG9taW5pZHNvZnR3YXJlLmNvbT9zdWJqZWN0PUVsZmxhbmQlMjBHbGlkZXImYm9keT0=")+encodeURIComponent("\n\n\n"+navigator.userAgent+"\n\n\n")+atob("Ij52ckBob21pbmlkc29mdHdhcmUuY29tPC9hPg==")}</div>\n        <div><a href="../CREDITS.md">Credits</a></div>\n        <div>Uses <a href="https://caniuse.com/#search=webxr">WebXR</a> or <a href="https://webvr.info/">WebVR</a>, and the <a href="https://aframe.io"><nobr>A-Frame</nobr></a> framework.</div>\n        <div>Copyright © 2017-2023 by P. Douglas Reeder; Licensed under the GNU GPL-3.0</div>\n        <div><a href="https://github.com/DougReeder/elfland-glider">View source code and contribute</a> </div>\n      </div>\n    </div>\n`,d=document.createElement("div");d.setAttribute("id","intro"),d.setAttribute("style","position:fixed; top:0; bottom:0; left:0; right:0;\n                background: rgba(255,255,255,0.75);\n                overflow-y: scroll"),d.innerHTML=l,document.body.appendChild(d);let c=d.querySelector(".closeBtnRed");c&&c.addEventListener("click",(function e(n){console.log("closeBtn click",n),document.body.removeChild(d),c.removeEventListener("click",e),AFRAME&&AFRAME.scenes[0]&&AFRAME.scenes[0].emit("startInteraction"),t(),s()}))}));const E=function(){for(var t=[151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,23,190,6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,88,237,149,56,87,174,20,125,136,171,168,68,175,74,165,71,134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,133,230,220,105,92,41,55,46,245,40,244,102,143,54,65,25,63,161,1,216,80,73,209,76,132,187,208,89,18,169,200,196,135,130,116,188,159,86,164,100,109,198,173,186,3,64,52,217,226,250,124,123,5,202,38,147,118,126,255,82,85,212,207,206,59,227,47,16,58,17,182,189,28,42,223,183,170,213,119,248,152,2,44,154,163,70,221,153,101,155,167,43,172,9,129,22,39,253,19,98,108,110,79,113,224,232,178,185,112,104,218,246,97,228,251,34,242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,14,239,107,49,192,214,31,181,199,106,157,184,84,204,176,115,121,50,45,127,4,150,254,138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180],e=0;e<256;e++)t[256+e]=t[e];function n(t){return t*t*t*(t*(6*t-15)+10)}function o(t,e,n){return e+t*(n-e)}function r(t,e,n,o){var r=15&t,i=r<8?e:n,a=r<4?n:12==r||14==r?e:o;return(0==(1&r)?i:-i)+(0==(2&r)?a:-a)}return{noise:function(e,i,a){var s=~~e,l=~~i,d=~~a,c=255&s,u=255&l,p=255&d,h=(e-=s)-1,b=(i-=l)-1,A=(a-=d)-1,m=n(e),g=n(i),f=n(a),v=t[c]+u,y=t[v]+p,w=t[v+1]+p,E=t[c+1]+u,R=t[E]+p,C=t[E+1]+p;return o(f,o(g,o(m,r(t[y],e,i,a),r(t[R],h,i,a)),o(m,r(t[w],e,b,a),r(t[C],h,b,a))),o(g,o(m,r(t[y+1],e,i,A),r(t[R+1],h,i,a-1)),o(m,r(t[w+1],e,b,A),r(t[C+1],h,b,A))))}}};AFRAME.registerComponent("island",{schema:{color:{default:"rgb(92, 32, 0)"},shadowColor:{default:"rgb(128, 96, 96)"},seaColor:{default:"rgb(0, 105, 148)"},sunPosition:{type:"vec3",default:{x:1,y:1,z:1}},worldDepth:{default:256},worldWidth:{default:256}},terrainData:null,height:function(t,e){if(t<=-500||t>=500||e<=-500||e>=500)return 0;{const n=this.data.worldWidth,o=this.data.worldDepth;let r=Math.floor((t+500)/1e3*(n-1)),i=Math.floor((e+500)/1e3*(o-1));return 10*Math.max(this.terrainData[r+i*n],this.terrainData[r+1+i*n]||0,this.terrainData[r+(i+1)*n]||0,this.terrainData[r+1+(i+1)*n]||0)}},buildingPosition:function(){const t=this.data.worldWidth,e=this.data.worldDepth;let n,o,r,i,a,s;do{n=Math.floor(Math.random()*(t-3))+1,o=Math.floor(Math.random()*(e-3))+1,r=this.terrainData[n+o*t]||0,i=this.terrainData[n+1+o*t]||0,a=this.terrainData[n+(o+1)*t]||0,s=this.terrainData[n+1+(o+1)*t]||0}while(0===r||r!==i||i!==a||a!==s);return(n+.5)/(t-1)*1e3-500+" "+10*r+" "+((o+.5)/(e-1)*1e3-500)},update:function(){var t=this.data,e=t.worldDepth,n=t.worldWidth;this.terrainData=function(t,e){let n=t*e,o=Math.max(t,e)/8,r=new Uint8Array(n),i=new E,a=100*Math.random();for(let s=0;s<n;s++){let n=s%t,l=~~(s/t);if(n>0&&n<t-1&&l>0&&l<e-1){let d=0;for(let t=1;t<=25;t*=5)d+=Math.abs(i.noise(n/t,l/t,a)*t*1.75);d<6?d=0:d-=6,d*=Math.min(.5*n,.5*l,.5*(t-n),.5*(e-l),o)/o,r[s]=d}}return r}(n,e);var o=function(t,e,n,o,r,i,a){var s=new THREE.Vector3(a.x,a.y,a.z);s.normalize();var l=document.createElement("canvas");l.width=e,l.height=n;var d=l.getContext("2d");d.fillStyle="#000",d.fillRect(0,0,e,n);var c=d.getImageData(0,0,l.width,l.height),u=c.data,p=256*o.r,h=256*o.g,b=256*o.b,A=256*r.r,m=256*r.g,g=256*r.b;let f=256*i.r,v=256*i.g,y=256*i.b;for(var w,E=new THREE.Vector3(0,0,0),R=0,C=0,M=u.length;R<M;R+=4,C++)t[C-1]||t[C]||t[C+1]||t[C-e-1]||t[C-e]||t[C-e+1]||t[C+e-1]||t[C+e]||t[C+e+1]?(E.x=(t[C-2]||0)-(t[C+2]||0),E.y=2,E.z=(t[C-2*e]||0)-(t[C+2*e]||0),E.normalize(),w=E.dot(s),u[R]=(p+w*A)*(.5+.007*t[C])+~~(17*Math.random()-8),u[R+1]=(h+w*g)*(.5+.007*t[C])+~~(17*Math.random()-8),u[R+2]=(b+w*m)*(.5+.007*t[C])+~~(17*Math.random()-8)):(u[R]=f+~~(5*Math.random()-2),u[R+1]=v+~~(5*Math.random()-2),u[R+2]=y+~~(5*Math.random()-2));d.putImageData(c,0,0);var S=document.createElement("canvas");S.width=4*e,S.height=4*n;let x=S.getContext("2d");return x.scale(4,4),x.drawImage(l,0,0),S}(this.terrainData,n,e,new THREE.Color(t.color),new THREE.Color(t.shadowColor),new THREE.Color(t.seaColor),t.sunPosition),r=new THREE.CanvasTexture(o);r.wrapS=THREE.ClampToEdgeWrapping,r.wrapT=THREE.ClampToEdgeWrapping;var i=new THREE.PlaneBufferGeometry(1e3,1e3,n-1,e-1);i.rotateX(-Math.PI/2);for(var a=i.attributes.position.array,s=0,l=0,d=a.length;s<d;s++,l+=3)a[l+1]=10*this.terrainData[s];var c=new THREE.MeshBasicMaterial({map:r}),u=new THREE.Mesh(i,c);this.el.setObject3D("mesh",u)}}),AFRAME.registerPrimitive("a-island",{defaultComponents:{island:{}},mappings:{color:"island.color","shadow-color":"island.shadowColor","sea-color":"island.seaColor","sun-position":"island.sunPosition","world-depth":"island.worldDepth","world-width":"island.worldWidth"}});const R={x:0,y:100,z:500};AFRAME.registerComponent("island-world",{init:function(){a=new Howl({src:"Olaf%20Minimalist.mp3",autoplay:!0,loop:!0,volume:.1,html5:!1,onplayerror:function(){a.once("unlock",(function(){a.play()}))}});let t=this.el;t.emit("setState",{gliderPositionStart:R,gliderPosition:{x:R.x,y:R.y,z:R.z},gliderRotationX:0,gliderRotationY:0,gliderRotationYStart:0});let e=t.querySelector("a-island").components.island;for(let n=0;n<6;++n){let o=document.createElement("a-entity");o.setAttribute("class","powerup");let r=1e3,i=n<1?15:100;o.setAttribute("position",this.randomPosition(e,r,9,i)),o.setAttribute("geometry",{primitive:"triangle",vertexA:"-1.5 -1.5 -1.5",vertexB:"1.5 -1.5 1.5",vertexC:"1.5 1.5 -1.5"}),o.setAttribute("material",{visible:!1});let a=document.createElement("a-icosahedron");a.setAttribute("material",{color:"#ff0000"}),a.setAttribute("glow",{c:"0.2",color:"#ff0000",scale:"3.5"}),o.appendChild(a),t.appendChild(o)}let n=AFRAME.utils.device.isMobile()||AFRAME.utils.device.isMobileVR()||AFRAME.utils.device.checkHeadsetConnected()?1:2,r=o()?30:25;for(let o=0;o<r;++o){let r=document.createElement("a-entity");r.setAttribute("class","star");let i=o<3?1750:1e3;r.setAttribute("position",this.randomPosition(e,i,12,150)),r.setAttribute("geometry",{primitive:"triangle",vertexA:"-1.5 -1.5 -1.5",vertexB:"1.5 -1.5 1.5",vertexC:"1.5 1.5 -1.5"}),r.setAttribute("material",{visible:!1}),r.object3D.scale.set(n,n,n);let a=document.createElement("a-entity");a.setAttribute("rotation","45 0 45"),a.setAttribute("geometry",{primitive:"stella-octangula"}),a.setAttribute("material",{color:"#ffce00"}),/iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent)||a.setAttribute("glow",{c:"0.2",color:"#feca05",scale:"3.5"}),r.appendChild(a),t.appendChild(r)}t.emit("countYellowStars",{}),document.getElementById("nextQuestPortal").setAttribute("position",this.randomPosition(e,1e3,12,100));let i=document.createElement("a-entity");i.setAttribute("position",this.belowGliderPathAboveIsland(e)),i.setAttribute("geometry",{primitive:"triangle",vertexA:"-15 -15 -15",vertexB:"15 -15 15",vertexC:"15 15 -15"}),i.setAttribute("material",{visible:!1}),i.setAttribute("class","proximitySound"),i.setAttribute("data-sound-url","please help collect stars.ogg"),i.setAttribute("data-text","Please help collect stars!");let s=document.createElement("a-gltf-model");if(s.setAttribute("position","0 -6 0"),s.setAttribute("src","#fairies"),s.setAttribute("scale","0.5 0.5 0.5"),i.appendChild(s),t.appendChild(i),o()){t.setAttribute("fog",{type:"linear",color:"#2a6799",near:10,far:1e3});let n=document.createElement("a-gltf-model");n.setAttribute("position",this.randomPosition(e,750,50,100)),n.setAttribute("src","../assets/hermit_s_windmill/scene.gltf"),n.setAttribute("scale","0.01 0.01 0.01"),n.setAttribute("class","proximitySound"),n.setAttribute("data-sound-url","../assets/look out.ogg"),n.setAttribute("data-sound-volume",1),n.setAttribute("data-text","Look out!"),t.appendChild(n)}},randomPosition:function(t,e,n,o){let r,i,a;do{r=(Math.random()-.5)*e,a=(Math.random()-.5)*e,i=t.height(r,a)+n}while(i>o);return r+" "+i+" "+a},belowGliderPathAboveIsland:function(t){let e,n=100;do{let t=i(0-15*Math.random(),90+30*(Math.random()-.5),n);e={x:R.x+t.x,y:R.y+t.y,z:R.z+t.z},n-=2}while(e.y-t.height(e.x,e.z)<12);return e}})})()})();
+/******/ (() => { // webpackBootstrap
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./assets/stella-octangula.js":
+/*!************************************!*\
+  !*** ./assets/stella-octangula.js ***!
+  \************************************/
+/***/ (() => {
+
+// stella-octangula.js - geometry of a stellated octahedron for A-Frame WebXR
+// Copyright © 2018,2023 Doug Reeder; Licensed under the GNU GPL-3.0
+
+AFRAME.registerGeometry('stella-octangula', {
+    schema: {
+    },
+
+    init: function (_data) {
+        const NUM_PLANES = 8;
+        const positions = new Float32Array(NUM_PLANES * 3 * 9);
+        const normals = new Float32Array(NUM_PLANES * 3 * 9);
+        const indexes = [];
+        const C = 0.5;   // coordinates are on a cube 1m across
+
+        positions.set([0, C, 0,  -C, C, C,  0, 0, C,  C, -C, C,  C, 0, 0,  C, C, -C], 0*18);
+        normals.set([1, 1, 1,  1, 1, 1,  1, 1, 1,  1, 1, 1,  1, 1, 1,  1, 1, 1], 0*18);
+        indexes.push(0, 1, 2,  2, 3, 4,  4, 5, 0);
+
+        positions.set([0, C, 0,  -C, C, -C,  -C, 0, 0,  -C, -C, C,  0, 0, C,  C, C, C], 1*18);
+        normals.set([-1, 1, 1,  -1, 1, 1,  -1, 1, 1,  -1, 1, 1,  -1, 1, 1,  -1, 1, 1], 1*18);
+        indexes.push(6, 7, 8,  8, 9, 10,  10, 11, 6);
+
+        positions.set([0, C, 0,  C, C, -C,  0, 0, -C,  -C, -C, -C,  -C, 0, 0, -C, C, C], 2*18);
+        normals.set([-1, 1, -1,  -1, 1, -1,  -1, 1, -1,  -1, 1, -1,  -1, 1, -1,  -1, 1, -1], 2*18);
+        indexes.push(12, 13, 14,  14, 15, 16,  16, 17, 12);
+
+        positions.set([0, C, 0,  C, C, C,  C, 0, 0,  C, -C, -C,  0, 0, -C,  -C, C, -C], 3*18);
+        normals.set([1, 1, -1,  1, 1, -1,  1, 1, -1,  1, 1, -1,  1, 1, -1,  1, 1, -1], 3*18);
+        indexes.push(18, 19, 20,  20, 21, 22,  22, 23, 18);
+
+        positions.set([0, 0, C,  -C, -C, C,  0, -C, 0,  C, -C, -C,  C, 0, 0,  C, C, C], 4*18);
+        normals.set([1, -1, 1,  1, -1, 1,  1, -1, 1,  1, -1, 1,  1, -1, 1,  1, -1, 1], 4*18);
+        indexes.push(24, 25, 26,  26, 27, 28,  28, 29, 24);
+
+        positions.set([0, 0, C,  -C, C, C,  -C, 0, 0,  -C, -C, -C,  0, -C, 0,  C, -C, C], 5*18);
+        normals.set([-1, -1, 1,  -1, -1, 1,  -1, -1, 1,  -1, -1, 1,  -1, -1, 1,  -1, -1, 1], 5*18);
+        indexes.push(30, 31, 32,  32, 33, 34,  34, 35, 30);
+
+        positions.set([C, 0, 0,  C, -C, C,  0, -C, 0,  -C, -C, -C,  0, 0, -C,  C, C, -C], 6*18);
+        normals.set([1, -1, -1,  1, -1, -1,  1, -1, -1,  1, -1, -1,  1, -1, -1,  1, -1, -1], 6*18);
+        indexes.push(36, 37, 38,  38, 39, 40,  40, 41, 36);
+
+        positions.set([0, -C, 0,  -C, -C, C,  -C, 0, 0,  -C, C, -C,  0, 0, -C,  C, -C, -C], 7*18);
+        normals.set([-1, -1, -1,  -1, -1, -1,  -1, -1, -1,  -1, -1, -1,  -1, -1, -1,  -1, -1, -1], 7*18);
+        indexes.push(42, 43, 44,  44, 45, 46,  46, 47, 42);
+
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
+        geometry.setIndex(indexes);
+        geometry.normalizeNormals();
+        geometry.computeBoundingBox();
+
+        this.geometry = geometry;
+    }
+});
+
+
+/***/ }),
+
+/***/ "./island/aframe-island-component.js":
+/*!*******************************************!*\
+  !*** ./island/aframe-island-component.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_ImprovedNoise_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/ImprovedNoise.js */ "./src/ImprovedNoise.js");
+// aframe-island-component.js - island terrain for Elfland Glider
+// Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+
+
+
+/**
+ * Creates an island, with elevation 0 at the edge.
+ */
+AFRAME.registerComponent('island', {
+    schema: {
+        color: {default: 'rgb(92, 32, 0)'},
+        shadowColor: {default: 'rgb(128, 96, 96)'},
+        seaColor: {default: 'rgb(0, 105, 148)'},
+        sunPosition: {type: 'vec3', default: {x: 1, y: 1, z: 1}},
+        worldDepth: {default: 256},
+        worldWidth: {default: 256}
+    },
+
+    terrainData: null,
+
+    height: function(x, z) {
+        if (x <= -500 || x >= 500 || z <= -500 || z >= 500) {
+            return 0;
+        } else {
+            const width = this.data.worldWidth;
+            const depth = this.data.worldDepth;
+            let i = Math.floor((x + 500) / 1000 * (width-1));
+            let j = Math.floor((z + 500) / 1000 * (depth-1));
+            let h = Math.max(this.terrainData[i+j*width],
+                this.terrainData[(i+1)+j*width] || 0,
+                this.terrainData[i+(j+1)*width] || 0,
+                this.terrainData[(i+1)+(j+1)*width] || 0);
+            return h*10;
+        }
+    },
+
+    /** flat area not at sea level */
+    buildingPosition: function () {
+        const width = this.data.worldWidth;
+        const depth = this.data.worldDepth;
+        let i, j, h1, h2, h3, h4;
+        do {
+            i = Math.floor(Math.random() * (width-3)) + 1;   // edge squares can't qualify
+            j = Math.floor(Math.random() * (depth-3)) + 1;
+            h1 = this.terrainData[i + j * width] || 0;
+            h2 = this.terrainData[(i + 1) + j * width] || 0;
+            h3 = this.terrainData[i + (j + 1) * width] || 0;
+            h4 = this.terrainData[(i + 1) + (j + 1) * width] || 0;
+            // console.log("buildingPosition heights:", h1, h2, h3, h4);
+        } while (h1 === 0 || h1 !== h2 || h2 !== h3 || h3 !== h4 );
+
+        let x = ((i+0.5)/(width-1) * 1000) - 500;
+        let z = ((j+0.5)/(depth-1) * 1000) - 500;
+        let y = h1 * 10;
+
+        return x + ' ' + y + ' ' + z;
+    },
+
+    update: function () {
+        var data = this.data;
+
+        var worldDepth = data.worldDepth;
+        var worldWidth = data.worldWidth;
+
+        // Generate heightmap.
+        this.terrainData = generateHeight(worldWidth, worldDepth);
+
+        // Texture.
+        var canvas = generateTexture(
+            this.terrainData, worldWidth, worldDepth, new THREE.Color(data.color),
+            new THREE.Color(data.shadowColor), new THREE.Color(data.seaColor), data.sunPosition);
+        var texture = new THREE.CanvasTexture(canvas);
+        texture.wrapS = THREE.ClampToEdgeWrapping;
+        texture.wrapT = THREE.ClampToEdgeWrapping;
+
+        // Create geometry.
+        var geometry = new THREE.PlaneBufferGeometry(1000, 1000, worldWidth - 1, worldDepth - 1);
+        geometry.rotateX(-Math.PI / 2);
+        var vertices = geometry.attributes.position.array;
+        for (var i = 0, j = 0, l = vertices.length; i < l; i++, j += 3) {
+            vertices[j + 1] = this.terrainData[i] * 10;
+        }
+
+        // Create material.
+        var material = new THREE.MeshBasicMaterial({map: texture});
+
+        // Create mesh.
+        var mesh = new THREE.Mesh(geometry, material);
+        this.el.setObject3D('mesh', mesh);
+    }
+});
+
+function generateHeight(width, height) {
+    let size = width * height;
+    let plateauEdge = Math.max(width, height) / 8;
+    let data = new Uint8Array(size);
+    let perlin = new _src_ImprovedNoise_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    let z = Math.random() * 100;
+
+    for (let i = 0; i < size; i++) {
+        let x = i % width, y = ~~(i / width);
+        if (x > 0 && x < width - 1 && y > 0 && y < height - 1) {
+            let d = 0;
+            // generates smooth noisy terrain
+            for (let quality = 1; quality <= 25; quality *= 5) {
+                d += Math.abs(perlin.noise(x / quality, y / quality, z) * quality * 1.75);
+            }
+            // lowers the whole and flattens the bottom, so it's continuous with a sea or plain
+            if (d < 6) {
+              d = 0;
+            } else {
+              d -= 6;
+            }
+            // avoids cliffs at the edge
+            d *= Math.min(x*0.5, y*0.5, (width-x)*0.5, (height-y)*0.5, plateauEdge) / plateauEdge;
+            //
+            data[i] = d;
+        }
+    }
+
+    return data;
+}
+
+function generateTexture(terrainData, width, height, color, colorShadow, colorSea, sunPos) {
+    var sun = new THREE.Vector3(sunPos.x, sunPos.y, sunPos.z);
+    sun.normalize();
+
+    // Create canvas and context.
+    var canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    var context = canvas.getContext('2d');
+    context.fillStyle = '#000';
+    context.fillRect(0, 0, width, height);
+
+    var image = context.getImageData(0, 0, canvas.width, canvas.height);
+    var imageData = image.data;
+
+    // Convert three.js rgb to 256.
+    var red = color.r * 256;
+    var green = color.g * 256;
+    var blue = color.b * 256;
+    var redShadow = colorShadow.r * 256;
+    var greenShadow = colorShadow.g * 256;
+    var blueShadow = colorShadow.b * 256;
+    let redSea = colorSea.r * 256;
+    let greenSea = colorSea.g * 256;
+    let blueSea = colorSea.b * 256;
+
+    var shade;
+    var vector3 = new THREE.Vector3(0, 0, 0);
+    for (var i = 0, j = 0, l = imageData.length; i < l; i += 4, j++) {
+        if (terrainData[j-1] || terrainData[j] || terrainData[j+1] ||
+                terrainData[j-width-1] || terrainData[j-width] || terrainData[j-width+1] ||
+                terrainData[j+width-1] || terrainData[j+width] || terrainData[j+width+1]) {
+            vector3.x = (terrainData[j-2] || 0) - (terrainData[j+2] || 0);
+            vector3.y = 2;
+            vector3.z = (terrainData[j-width*2] || 0) - (terrainData[j+width*2] || 0);
+            vector3.normalize();
+            shade = vector3.dot(sun);
+            imageData[i] = (red + shade * redShadow) * (0.5 + terrainData[j] * 0.007) + ~~(Math.random() * 17 - 8);
+            imageData[i+1] = (green + shade * blueShadow) * (0.5 + terrainData[j] * 0.007) + ~~(Math.random() * 17 - 8);
+            imageData[i+2] = (blue + shade * greenShadow) * (0.5 + terrainData[j] * 0.007) + ~~(Math.random() * 17 - 8);
+        } else {
+            imageData[i] = redSea + ~~(Math.random() * 5 - 2);
+            imageData[i+1] = greenSea + ~~(Math.random() * 5 - 2);
+            imageData[i+2] = blueSea + ~~(Math.random() * 5 - 2);
+        }
+    }
+
+    context.putImageData(image, 0, 0);
+
+    // Scaled 4x.
+    var canvasScaled = document.createElement('canvas');
+    canvasScaled.width = width * 4;
+    canvasScaled.height = height * 4;
+
+    let contextScaled = canvasScaled.getContext('2d');
+    contextScaled.scale(4, 4);
+    contextScaled.drawImage(canvas, 0, 0);
+
+    return canvasScaled;
+}
+
+/**
+ * <a-island>
+ */
+AFRAME.registerPrimitive('a-island', {
+    defaultComponents: {
+        island: {}
+    },
+
+    mappings: {
+        color: 'island.color',
+        'shadow-color': 'island.shadowColor',
+        'sea-color': 'island.seaColor',
+        'sun-position': 'island.sunPosition',
+        'world-depth': 'island.worldDepth',
+        'world-width': 'island.worldWidth'
+    }
+});
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./assets/intro.css":
+/*!****************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./assets/intro.css ***!
+  \****************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/sourceMaps.js */ "./node_modules/css-loader/dist/runtime/sourceMaps.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+// Imports
+
+
+
+var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ __webpack_require__(/*! close-button-red32.png */ "./assets/close-button-red32.png"), __webpack_require__.b);
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, "/** intro.css - styling for intro dialog of Elfland Glider\n  * Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0\n  */\n\n\nhtml {\n    font: 1.5rem Niconne, \"Goudy Old Style\", Papyrus, serif;\n}\n\nh1 {\n    margin: 0.5em;\n}\n\n.wrapper {\n    margin: 1em;\n}\n.wrapper > * {\n    margin: 1em;\n}\n@supports (display: grid) {\n    .wrapper {\n        display: grid;\n        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));\n        grid-gap: 1em;\n        gap: 1em;\n    }\n    .wrapper > * {\n        margin: 0;\n    }\n}\n\n.portraitOnly {\n    display: none;\n}\n.landscapeOnly {\n    display: block;\n}\n@media only screen and (orientation: portrait) {\n    .portraitOnly {\n        display: block;\n    }\n    .landscapeOnly {\n        display: none;\n    }\n}\n\ntd.ruleAbove {\n    border-top: black 1px solid;\n}\n\ntd.ruleBelow {\n    border-bottom: black 1px solid;\n}\n\n\n/* hides AR button, */\ndiv.a-enter-ar {\n    visibility: hidden;\n}\n\n\n.closeBtnRed {\n    position: fixed;\n    top: 25px;\n    right: 25px;\n    width: 32px;\n    height: 32px;\n    background-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    z-index: 1;\n}\n\n\n\n/* forces scrollbar to be visible in webkit browsers */\n::-webkit-scrollbar {\n    width:9px;\n}\n\n::-webkit-scrollbar-track {\n    -webkit-border-radius:5px;\n    border-radius:5px;\n    background:rgba(0,0,0,0.1);\n}\n\n::-webkit-scrollbar-thumb {\n    -webkit-border-radius:5px;\n    border-radius:5px;\n    background:rgba(0,0,0,0.2);\n}\n\n::-webkit-scrollbar-thumb:hover {\n    background:rgba(0,0,0,0.4);\n}\n\n::-webkit-scrollbar-thumb:window-inactive {\n    background:rgba(0,0,0,0.05);\n}\n", "",{"version":3,"sources":["webpack://./assets/intro.css"],"names":[],"mappings":"AAAA;;GAEG;;;AAGH;IACI,uDAAuD;AAC3D;;AAEA;IACI,aAAa;AACjB;;AAEA;IACI,WAAW;AACf;AACA;IACI,WAAW;AACf;AACA;IACI;QACI,aAAa;QACb,2DAA2D;QAC3D,aAAa;QACb,QAAQ;IACZ;IACA;QACI,SAAS;IACb;AACJ;;AAEA;IACI,aAAa;AACjB;AACA;IACI,cAAc;AAClB;AACA;IACI;QACI,cAAc;IAClB;IACA;QACI,aAAa;IACjB;AACJ;;AAEA;IACI,2BAA2B;AAC/B;;AAEA;IACI,8BAA8B;AAClC;;;AAGA,qBAAqB;AACrB;IACI,kBAAkB;AACtB;;;AAGA;IACI,eAAe;IACf,SAAS;IACT,WAAW;IACX,WAAW;IACX,YAAY;IACZ,yDAA6C;IAC7C,UAAU;AACd;;;;AAIA,sDAAsD;AACtD;IACI,SAAS;AACb;;AAEA;IACI,yBAAyB;IACzB,iBAAiB;IACjB,0BAA0B;AAC9B;;AAEA;IACI,yBAAyB;IACzB,iBAAiB;IACjB,0BAA0B;AAC9B;;AAEA;IACI,0BAA0B;AAC9B;;AAEA;IACI,2BAA2B;AAC/B","sourcesContent":["/** intro.css - styling for intro dialog of Elfland Glider\n  * Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0\n  */\n\n\nhtml {\n    font: 1.5rem Niconne, \"Goudy Old Style\", Papyrus, serif;\n}\n\nh1 {\n    margin: 0.5em;\n}\n\n.wrapper {\n    margin: 1em;\n}\n.wrapper > * {\n    margin: 1em;\n}\n@supports (display: grid) {\n    .wrapper {\n        display: grid;\n        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));\n        grid-gap: 1em;\n        gap: 1em;\n    }\n    .wrapper > * {\n        margin: 0;\n    }\n}\n\n.portraitOnly {\n    display: none;\n}\n.landscapeOnly {\n    display: block;\n}\n@media only screen and (orientation: portrait) {\n    .portraitOnly {\n        display: block;\n    }\n    .landscapeOnly {\n        display: none;\n    }\n}\n\ntd.ruleAbove {\n    border-top: black 1px solid;\n}\n\ntd.ruleBelow {\n    border-bottom: black 1px solid;\n}\n\n\n/* hides AR button, */\ndiv.a-enter-ar {\n    visibility: hidden;\n}\n\n\n.closeBtnRed {\n    position: fixed;\n    top: 25px;\n    right: 25px;\n    width: 32px;\n    height: 32px;\n    background-image: url(close-button-red32.png);\n    z-index: 1;\n}\n\n\n\n/* forces scrollbar to be visible in webkit browsers */\n::-webkit-scrollbar {\n    width:9px;\n}\n\n::-webkit-scrollbar-track {\n    -webkit-border-radius:5px;\n    border-radius:5px;\n    background:rgba(0,0,0,0.1);\n}\n\n::-webkit-scrollbar-thumb {\n    -webkit-border-radius:5px;\n    border-radius:5px;\n    background:rgba(0,0,0,0.2);\n}\n\n::-webkit-scrollbar-thumb:hover {\n    background:rgba(0,0,0,0.4);\n}\n\n::-webkit-scrollbar-thumb:window-inactive {\n    background:rgba(0,0,0,0.05);\n}\n"],"sourceRoot":""}]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/api.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+*/
+module.exports = function (cssWithMappingToString) {
+  var list = [];
+
+  // return the list of modules as css string
+  list.toString = function toString() {
+    return this.map(function (item) {
+      var content = "";
+      var needLayer = typeof item[5] !== "undefined";
+      if (item[4]) {
+        content += "@supports (".concat(item[4], ") {");
+      }
+      if (item[2]) {
+        content += "@media ".concat(item[2], " {");
+      }
+      if (needLayer) {
+        content += "@layer".concat(item[5].length > 0 ? " ".concat(item[5]) : "", " {");
+      }
+      content += cssWithMappingToString(item);
+      if (needLayer) {
+        content += "}";
+      }
+      if (item[2]) {
+        content += "}";
+      }
+      if (item[4]) {
+        content += "}";
+      }
+      return content;
+    }).join("");
+  };
+
+  // import a list of modules into the list
+  list.i = function i(modules, media, dedupe, supports, layer) {
+    if (typeof modules === "string") {
+      modules = [[null, modules, undefined]];
+    }
+    var alreadyImportedModules = {};
+    if (dedupe) {
+      for (var k = 0; k < this.length; k++) {
+        var id = this[k][0];
+        if (id != null) {
+          alreadyImportedModules[id] = true;
+        }
+      }
+    }
+    for (var _k = 0; _k < modules.length; _k++) {
+      var item = [].concat(modules[_k]);
+      if (dedupe && alreadyImportedModules[item[0]]) {
+        continue;
+      }
+      if (typeof layer !== "undefined") {
+        if (typeof item[5] === "undefined") {
+          item[5] = layer;
+        } else {
+          item[1] = "@layer".concat(item[5].length > 0 ? " ".concat(item[5]) : "", " {").concat(item[1], "}");
+          item[5] = layer;
+        }
+      }
+      if (media) {
+        if (!item[2]) {
+          item[2] = media;
+        } else {
+          item[1] = "@media ".concat(item[2], " {").concat(item[1], "}");
+          item[2] = media;
+        }
+      }
+      if (supports) {
+        if (!item[4]) {
+          item[4] = "".concat(supports);
+        } else {
+          item[1] = "@supports (".concat(item[4], ") {").concat(item[1], "}");
+          item[4] = supports;
+        }
+      }
+      list.push(item);
+    }
+  };
+  return list;
+};
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/getUrl.js":
+/*!********************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/getUrl.js ***!
+  \********************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function (url, options) {
+  if (!options) {
+    options = {};
+  }
+  if (!url) {
+    return url;
+  }
+  url = String(url.__esModule ? url.default : url);
+
+  // If url is already wrapped in quotes, remove them
+  if (/^['"].*['"]$/.test(url)) {
+    url = url.slice(1, -1);
+  }
+  if (options.hash) {
+    url += options.hash;
+  }
+
+  // Should url be wrapped?
+  // See https://drafts.csswg.org/css-values-3/#urls
+  if (/["'() \t\n]|(%20)/.test(url) || options.needQuotes) {
+    return "\"".concat(url.replace(/"/g, '\\"').replace(/\n/g, "\\n"), "\"");
+  }
+  return url;
+};
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/runtime/sourceMaps.js":
+/*!************************************************************!*\
+  !*** ./node_modules/css-loader/dist/runtime/sourceMaps.js ***!
+  \************************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = function (item) {
+  var content = item[1];
+  var cssMapping = item[3];
+  if (!cssMapping) {
+    return content;
+  }
+  if (typeof btoa === "function") {
+    var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(cssMapping))));
+    var data = "sourceMappingURL=data:application/json;charset=utf-8;base64,".concat(base64);
+    var sourceMapping = "/*# ".concat(data, " */");
+    return [content].concat([sourceMapping]).join("\n");
+  }
+  return [content].join("\n");
+};
+
+/***/ }),
+
+/***/ "./assets/intro.css":
+/*!**************************!*\
+  !*** ./assets/intro.css ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleDomAPI.js */ "./node_modules/style-loader/dist/runtime/styleDomAPI.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertBySelector.js */ "./node_modules/style-loader/dist/runtime/insertBySelector.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js */ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/insertStyleElement.js */ "./node_modules/style-loader/dist/runtime/insertStyleElement.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! !../node_modules/style-loader/dist/runtime/styleTagTransform.js */ "./node_modules/style-loader/dist/runtime/styleTagTransform.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_intro_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! !!../node_modules/css-loader/dist/cjs.js!./intro.css */ "./node_modules/css-loader/dist/cjs.js!./assets/intro.css");
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (_node_modules_style_loader_dist_runtime_styleTagTransform_js__WEBPACK_IMPORTED_MODULE_5___default());
+options.setAttributes = (_node_modules_style_loader_dist_runtime_setAttributesWithoutAttributes_js__WEBPACK_IMPORTED_MODULE_3___default());
+
+      options.insert = _node_modules_style_loader_dist_runtime_insertBySelector_js__WEBPACK_IMPORTED_MODULE_2___default().bind(null, "head");
+    
+options.domAPI = (_node_modules_style_loader_dist_runtime_styleDomAPI_js__WEBPACK_IMPORTED_MODULE_1___default());
+options.insertStyleElement = (_node_modules_style_loader_dist_runtime_insertStyleElement_js__WEBPACK_IMPORTED_MODULE_4___default());
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_intro_css__WEBPACK_IMPORTED_MODULE_6__["default"], options);
+
+
+
+
+       /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_intro_css__WEBPACK_IMPORTED_MODULE_6__["default"] && _node_modules_css_loader_dist_cjs_js_intro_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals ? _node_modules_css_loader_dist_cjs_js_intro_css__WEBPACK_IMPORTED_MODULE_6__["default"].locals : undefined);
+
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
+/*!****************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
+  \****************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+var stylesInDOM = [];
+
+function getIndexByIdentifier(identifier) {
+  var result = -1;
+
+  for (var i = 0; i < stylesInDOM.length; i++) {
+    if (stylesInDOM[i].identifier === identifier) {
+      result = i;
+      break;
+    }
+  }
+
+  return result;
+}
+
+function modulesToDom(list, options) {
+  var idCountMap = {};
+  var identifiers = [];
+
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    var id = options.base ? item[0] + options.base : item[0];
+    var count = idCountMap[id] || 0;
+    var identifier = "".concat(id, " ").concat(count);
+    idCountMap[id] = count + 1;
+    var indexByIdentifier = getIndexByIdentifier(identifier);
+    var obj = {
+      css: item[1],
+      media: item[2],
+      sourceMap: item[3],
+      supports: item[4],
+      layer: item[5]
+    };
+
+    if (indexByIdentifier !== -1) {
+      stylesInDOM[indexByIdentifier].references++;
+      stylesInDOM[indexByIdentifier].updater(obj);
+    } else {
+      var updater = addElementStyle(obj, options);
+      options.byIndex = i;
+      stylesInDOM.splice(i, 0, {
+        identifier: identifier,
+        updater: updater,
+        references: 1
+      });
+    }
+
+    identifiers.push(identifier);
+  }
+
+  return identifiers;
+}
+
+function addElementStyle(obj, options) {
+  var api = options.domAPI(options);
+  api.update(obj);
+
+  var updater = function updater(newObj) {
+    if (newObj) {
+      if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap && newObj.supports === obj.supports && newObj.layer === obj.layer) {
+        return;
+      }
+
+      api.update(obj = newObj);
+    } else {
+      api.remove();
+    }
+  };
+
+  return updater;
+}
+
+module.exports = function (list, options) {
+  options = options || {};
+  list = list || [];
+  var lastIdentifiers = modulesToDom(list, options);
+  return function update(newList) {
+    newList = newList || [];
+
+    for (var i = 0; i < lastIdentifiers.length; i++) {
+      var identifier = lastIdentifiers[i];
+      var index = getIndexByIdentifier(identifier);
+      stylesInDOM[index].references--;
+    }
+
+    var newLastIdentifiers = modulesToDom(newList, options);
+
+    for (var _i = 0; _i < lastIdentifiers.length; _i++) {
+      var _identifier = lastIdentifiers[_i];
+
+      var _index = getIndexByIdentifier(_identifier);
+
+      if (stylesInDOM[_index].references === 0) {
+        stylesInDOM[_index].updater();
+
+        stylesInDOM.splice(_index, 1);
+      }
+    }
+
+    lastIdentifiers = newLastIdentifiers;
+  };
+};
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/runtime/insertBySelector.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/insertBySelector.js ***!
+  \********************************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+var memo = {};
+/* istanbul ignore next  */
+
+function getTarget(target) {
+  if (typeof memo[target] === "undefined") {
+    var styleTarget = document.querySelector(target); // Special case to return head of iframe instead of iframe itself
+
+    if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
+      try {
+        // This will throw an exception if access to iframe is blocked
+        // due to cross-origin restrictions
+        styleTarget = styleTarget.contentDocument.head;
+      } catch (e) {
+        // istanbul ignore next
+        styleTarget = null;
+      }
+    }
+
+    memo[target] = styleTarget;
+  }
+
+  return memo[target];
+}
+/* istanbul ignore next  */
+
+
+function insertBySelector(insert, style) {
+  var target = getTarget(insert);
+
+  if (!target) {
+    throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");
+  }
+
+  target.appendChild(style);
+}
+
+module.exports = insertBySelector;
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/runtime/insertStyleElement.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/insertStyleElement.js ***!
+  \**********************************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/* istanbul ignore next  */
+function insertStyleElement(options) {
+  var element = document.createElement("style");
+  options.setAttributes(element, options.attributes);
+  options.insert(element, options.options);
+  return element;
+}
+
+module.exports = insertStyleElement;
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js":
+/*!**********************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js ***!
+  \**********************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+/* istanbul ignore next  */
+function setAttributesWithoutAttributes(styleElement) {
+  var nonce =  true ? __webpack_require__.nc : 0;
+
+  if (nonce) {
+    styleElement.setAttribute("nonce", nonce);
+  }
+}
+
+module.exports = setAttributesWithoutAttributes;
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/runtime/styleDomAPI.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/styleDomAPI.js ***!
+  \***************************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/* istanbul ignore next  */
+function apply(styleElement, options, obj) {
+  var css = "";
+
+  if (obj.supports) {
+    css += "@supports (".concat(obj.supports, ") {");
+  }
+
+  if (obj.media) {
+    css += "@media ".concat(obj.media, " {");
+  }
+
+  var needLayer = typeof obj.layer !== "undefined";
+
+  if (needLayer) {
+    css += "@layer".concat(obj.layer.length > 0 ? " ".concat(obj.layer) : "", " {");
+  }
+
+  css += obj.css;
+
+  if (needLayer) {
+    css += "}";
+  }
+
+  if (obj.media) {
+    css += "}";
+  }
+
+  if (obj.supports) {
+    css += "}";
+  }
+
+  var sourceMap = obj.sourceMap;
+
+  if (sourceMap && typeof btoa !== "undefined") {
+    css += "\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))), " */");
+  } // For old IE
+
+  /* istanbul ignore if  */
+
+
+  options.styleTagTransform(css, styleElement, options.options);
+}
+
+function removeStyleElement(styleElement) {
+  // istanbul ignore if
+  if (styleElement.parentNode === null) {
+    return false;
+  }
+
+  styleElement.parentNode.removeChild(styleElement);
+}
+/* istanbul ignore next  */
+
+
+function domAPI(options) {
+  var styleElement = options.insertStyleElement(options);
+  return {
+    update: function update(obj) {
+      apply(styleElement, options, obj);
+    },
+    remove: function remove() {
+      removeStyleElement(styleElement);
+    }
+  };
+}
+
+module.exports = domAPI;
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/runtime/styleTagTransform.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/style-loader/dist/runtime/styleTagTransform.js ***!
+  \*********************************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/* istanbul ignore next  */
+function styleTagTransform(css, styleElement) {
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css;
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild);
+    }
+
+    styleElement.appendChild(document.createTextNode(css));
+  }
+}
+
+module.exports = styleTagTransform;
+
+/***/ }),
+
+/***/ "./src/ImprovedNoise.js":
+/*!******************************!*\
+  !*** ./src/ImprovedNoise.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+// http://mrl.nyu.edu/~perlin/noise/
+
+var ImprovedNoise = function () {
+
+	var p = [ 151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,8,99,37,240,21,10,
+		 23,190,6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,35,11,32,57,177,33,88,237,149,56,87,
+		 174,20,125,136,171,168,68,175,74,165,71,134,139,48,27,166,77,146,158,231,83,111,229,122,60,211,
+		 133,230,220,105,92,41,55,46,245,40,244,102,143,54,65,25,63,161,1,216,80,73,209,76,132,187,208,
+		 89,18,169,200,196,135,130,116,188,159,86,164,100,109,198,173,186,3,64,52,217,226,250,124,123,5,
+		 202,38,147,118,126,255,82,85,212,207,206,59,227,47,16,58,17,182,189,28,42,223,183,170,213,119,
+		 248,152,2,44,154,163,70,221,153,101,155,167,43,172,9,129,22,39,253,19,98,108,110,79,113,224,232,
+		 178,185,112,104,218,246,97,228,251,34,242,193,238,210,144,12,191,179,162,241,81,51,145,235,249,
+		 14,239,107,49,192,214,31,181,199,106,157,184,84,204,176,115,121,50,45,127,4,150,254,138,236,205,
+		 93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180 ];
+
+	for (var i = 0; i < 256 ; i ++) {
+
+		p[256 + i] = p[i];
+
+	}
+
+	function fade(t) {
+
+		return t * t * t * (t * (t * 6 - 15) + 10);
+
+	}
+
+	function lerp(t, a, b) {
+
+		return a + t * (b - a);
+
+	}
+
+	function grad(hash, x, y, z) {
+
+		var h = hash & 15;
+		var u = h < 8 ? x : y, v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+		return ((h&1) == 0 ? u : -u) + ((h&2) == 0 ? v : -v);
+
+	}
+
+	return {
+
+		noise: function (x, y, z) {
+
+			var floorX = ~~x, floorY = ~~y, floorZ = ~~z;
+
+			var X = floorX & 255, Y = floorY & 255, Z = floorZ & 255;
+
+			x -= floorX;
+			y -= floorY;
+			z -= floorZ;
+
+			var xMinus1 = x - 1, yMinus1 = y - 1, zMinus1 = z - 1;
+
+			var u = fade(x), v = fade(y), w = fade(z);
+
+			var A = p[X] + Y, AA = p[A] + Z, AB = p[A + 1] + Z, B = p[X + 1] + Y, BA = p[B] + Z, BB = p[B + 1] + Z;
+
+			return lerp(w, lerp(v, lerp(u, grad(p[AA], x, y, z),
+							grad(p[BA], xMinus1, y, z)),
+						lerp(u, grad(p[AB], x, yMinus1, z),
+							grad(p[BB], xMinus1, yMinus1, z))),
+					lerp(v, lerp(u, grad(p[AA + 1], x, y, zMinus1),
+							grad(p[BA + 1], xMinus1, y, z - 1)),
+						lerp(u, grad(p[AB + 1], x, yMinus1, zMinus1),
+							grad(p[BB + 1], xMinus1, yMinus1, zMinus1))));
+
+		}
+	}
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ImprovedNoise);
+
+
+/***/ }),
+
+/***/ "./src/elfland-utils.js":
+/*!******************************!*\
+  !*** ./src/elfland-utils.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "calcPosChange": () => (/* binding */ calcPosChange),
+/* harmony export */   "goFullscreenLandscape": () => (/* binding */ goFullscreenLandscape),
+/* harmony export */   "isDesktop": () => (/* binding */ isDesktop),
+/* harmony export */   "isMagicWindow": () => (/* binding */ isMagicWindow),
+/* harmony export */   "pokeEnvironmentalSound": () => (/* binding */ pokeEnvironmentalSound),
+/* harmony export */   "setEnvironmentalSound": () => (/* binding */ setEnvironmentalSound)
+/* harmony export */ });
+// elfland-utils.js - common functions for Elfland Glider
+// Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+
+
+function goFullscreenLandscape() {
+    // desktop is fine without fullscreen (which can be enabled via headset button, anyway)
+    if (!isMagicWindow()) {return;}
+
+    let canvasEl = document.querySelector('canvas.a-canvas');
+    let requestFullscreen =
+        canvasEl.requestFullscreen ||
+        canvasEl.webkitRequestFullscreen ||
+        canvasEl.mozRequestFullScreen ||  // The capitalized `S` is not a typo.
+        canvasEl.msRequestFullscreen;
+    let promise;
+    if (requestFullscreen) {
+        promise = requestFullscreen.apply(canvasEl);
+    }
+    if (!(promise && promise.then)) {
+        promise = Promise.resolve();
+    }
+    promise.then(lockLandscapeOrientation, lockLandscapeOrientation);
+}
+
+function lockLandscapeOrientation() {
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.lock("landscape").then(response => {
+            console.log("screen orientation locked:", response);
+        }).catch(err => {
+            console.warn("screen orientation didn't lock:", err);
+        });
+    }
+}
+
+
+function isDesktop() {
+    return ! (AFRAME.utils.device.isMobile() || AFRAME.utils.device.isMobileVR());
+}
+
+function isMagicWindow() {
+    return AFRAME.utils.device.isMobile() && ! AFRAME.scenes[0].is("vr-mode");
+}
+
+
+function calcPosChange(verticalAngleDeg, horizontalAngleDeg, distance) {
+    let verticalAngleRad = verticalAngleDeg/180*Math.PI;
+    let altitudeChange = distance * Math.sin(verticalAngleRad);
+
+    let horizontalDistance = distance * Math.cos(verticalAngleRad);
+    let horizontalAngleRad = horizontalAngleDeg/180*Math.PI;
+    return {x: horizontalDistance * Math.cos(horizontalAngleRad),
+        y: altitudeChange,
+        z: -horizontalDistance * Math.sin(horizontalAngleRad)};
+}
+
+
+var environmentalSound = null;
+
+/**
+ * Sets the background sound for a world. It is paused when the tab is hidden.
+ * @param url string or Array of strings
+ * @param volume number between 0.0 and 1.0
+ */
+function setEnvironmentalSound(url, volume) {
+    environmentalSound = new Howl({
+        src: url,
+        autoplay: true,
+        loop: true,
+        volume: volume || 1.0,
+        html5: false,
+        onplayerror: function() {
+            environmentalSound.once('unlock', function() {
+                environmentalSound.play();
+            });
+        }
+    });
+}
+
+/** Starts the background sound for a world, if it wasn't already started. */
+function pokeEnvironmentalSound() {
+    if (environmentalSound && ! environmentalSound.playing()) {
+        environmentalSound.play();
+    }
+}
+
+document.addEventListener('visibilitychange', () => {
+    if (environmentalSound) {
+        if (document.hidden) {
+            environmentalSound.pause();
+        } else {
+            environmentalSound.play();
+        }
+    }
+}, false);
+
+
+/** Web Monetization */
+if (document.monetization)  {
+    function handleMonetizationStart(evt) {
+        console.log("monetization started:", evt);
+    }
+    document.monetization.addEventListener('monetizationstart', handleMonetizationStart);
+
+    function handleMonetizationStop(evt) {
+        console.log("monetization stopped:", evt);
+    }
+    document.monetization.addEventListener('monetizationstop', handleMonetizationStop);
+} else {
+    console.log("no monetization API");
+}
+
+
+
+
+/***/ }),
+
+/***/ "./src/intro.js":
+/*!**********************!*\
+  !*** ./src/intro.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _elfland_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./elfland-utils */ "./src/elfland-utils.js");
+/* harmony import */ var _assets_intro_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../assets/intro.css */ "./assets/intro.css");
+/** intro.js - introductory text for an Elfland Glider world
+ * Copyright © 2018-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+ */
+
+
+
+
+console.log("previousWorld:", sessionStorage.getItem('previousWorld'));
+if (! sessionStorage.getItem('previousWorld') && !window.hasOwnProperty('jasmine')) {
+    document.addEventListener("DOMContentLoaded", function (details) {
+        let nativeXrHtml = '';
+        if (!window.hasNativeWebXRImplementation && !window.hasNativeWebVRImplementation) {
+            nativeXrHtml = `<div style="margin-top: 1em;">
+This browser lacks both <a href="https://caniuse.com/#search=webxr">native WebXR</a> and <a href="https://webvr.info/">native WebVR</a>, so don't complain about performance. </div>`;
+        }
+
+        let rotateHtml = '';
+        if (AFRAME.utils.device.isMobile() && !(AFRAME.scenes[0] && AFRAME.scenes[0].is("vr-mode"))) {
+            rotateHtml = `<div class="portraitOnly" style="color:red;margin-top: 1em;">
+Please rotate your device to landscape mode. &#x21B6;</div>`;
+        }
+
+        console.log("checkHeadsetConnected:", AFRAME.utils.device.checkHeadsetConnected());
+        let closeBtnHtml = '';
+        let controlsHtml = `
+<table id="vrControls">
+    <tr><td colspan="2">If you have a controller: <b>Click</b> VR button ➘ to enter VR mode, then...</td></tr>
+    <tr><td colspan="2"><b>Press & Release</b> trigger, button or touchpad to grab (or release) the virtual control stick</td></tr>
+    <tr><td><b>Tilt</b> the stick left to turn glider left</td><td><img src="../assets/control-bar-left.png"></td></tr>
+    <tr><td><b>Tilt</b> the stick right to turn glider right</td><td><img src="../assets/control-bar-right.png"></td></tr>
+    <tr><td colspan="2"><b>Tilt</b> the stick back to climb (&amp; <b>slow down</b>)</td></tr>
+    <tr><td colspan="2"><b>Tilt</b> the stick forward to dive (&amp; <b>speed up</b>)</td></tr>
+    <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>
+</table>
+<table id="vrControls">
+    <tr><td colspan="2">Without a controller...</td></tr>
+    <tr><td colspan="2"><b>Click</b> VR button ➘ to enter VR mode</td></tr>
+    <tr><td><b>Tilt</b> your head left to turn glider left</td><td><img src="../assets/head-tilt-left.png"></td></tr>
+    <tr><td><b>Tilt</b> your head right to turn glider right</td><td><img src="../assets/head-tilt-right.png"></td></tr>
+    <tr><td colspan="2"><b>Turn</b> your head left or right to look around without turning glider</td></tr>
+    <tr><td colspan="2"><b>Tilt</b> your head up to climb (&amp; <b>slow down</b>)</td></tr>
+    <tr><td colspan="2"><b>Tilt</b> your head down to dive (&amp; <b>speed up</b>)</td></tr>
+    <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>
+</table>
+`;
+        if (AFRAME.utils.device.isMobile()) {
+            closeBtnHtml = `<div class="closeBtnRed landscapeOnly"></div>`;
+            controlsHtml = `
+<table class="landscapeOnly" style="width:100%">
+    <tr><td colspan="2"><b>Tap</b> the close button ➚ to play in magic window mode, or <b>Tap</b> VR button ➘ and place phone in headset to enter VR mode</td></tr>
+    <tr><td><b>Roll</b> your device left to turn glider left</td>
+        <td><img src="../assets/device-rotate-ccw.png"></td></tr>
+    <tr><td><b>Roll</b> your device right to turn glider right</td>
+        <td><img src="../assets/device-rotate-cw.png"></td></tr>
+    <tr><td colspan="2"><b>Turn</b> your device left or right to look around without turning glider</td></tr>
+    <tr><td colspan="2"><b>Tilt</b> your device up to climb (&amp; <b>slow down</b>)</td></tr>
+    <tr><td colspan="2"><b>Tilt</b> your device down to dive (&amp; <b>speed up</b>)</td></tr>
+    <tr><td colspan="2"><b>Tap</b> the screen to launch</td></tr>
+</table>
+`;
+        } else if (!AFRAME.utils.device.checkHeadsetConnected() && (0,_elfland_utils__WEBPACK_IMPORTED_MODULE_0__.isDesktop)()) {
+            closeBtnHtml = `<div class="closeBtnRed"></div>`;
+            controlsHtml = `
+<table style="width:100%">
+    <tr><td colspan="2">Elfland Glider is designed for VR or mobile, but if you want to try it here:</td></tr>
+    <tr><td>A or left-arrow</td><td>turn glider left</td></tr>
+    <tr><td>D or right-arrow</td><td>turn glider right</td></tr>
+    <tr><td>W or up-arrow</td><td>climb (&amp; <b>slow down</b>)</td></tr>
+    <tr><td>S or down-arrow</td><td>dive (&amp; <b>speed up</b>)</td></tr>
+    <tr><td>space bar</td><td>launch</td></tr>
+    <tr><td>VR button ➘</td><td>enter fullscreen mode</td></tr>
+</table>
+`;
+        }
+
+        let mt = atob("ZS1tYWlsOiA8YSBocmVmPSJtYWlsdG86dnJAaG9taW5pZHNvZnR3YXJlLmNvbT9zdWJqZWN0PUVsZmxhbmQlMjBHbGlkZXImYm9keT0=") +
+            encodeURIComponent("\n\n\n" + navigator.userAgent + "\n\n\n") +
+            atob("Ij52ckBob21pbmlkc29mdHdhcmUuY29tPC9hPg==");
+
+        let html = `
+${closeBtnHtml}
+<h1 style="text-align:center;">Elfland Glider</h1>
+    <div class="wrapper">
+      <div id="overview">
+        Fly through fantastic worlds,
+        help the merry and mischievous light elves,
+        & avoid the surly and mischievous dark elves.
+        ${rotateHtml}
+        ${nativeXrHtml}
+        <table id="vrControls">
+            <tr><td colspan="2" class="ruleAbove">Remain seated while learning to fly</td></tr>
+            <tr><td colspan="2">The wing above you points the direction you're flying</td></tr>
+        </table>
+      </div>
+      ${controlsHtml}
+      <div style="font-family:serif; font-size: 0.75rem">
+        <div>${mt}</div>
+        <div><a href="../CREDITS.md">Credits</a></div>
+        <div>Uses <a href="https://caniuse.com/#search=webxr">WebXR</a> or <a href="https://webvr.info/">WebVR</a>, and the <a href="https://aframe.io"><nobr>A-Frame</nobr></a> framework.</div>
+        <div>Copyright © 2017-2023 by P. Douglas Reeder; Licensed under the GNU GPL-3.0</div>
+        <div><a href="https://github.com/DougReeder/elfland-glider">View source code and contribute</a> </div>
+      </div>
+    </div>
+`;
+
+        let introEl = document.createElement('div');
+        introEl.setAttribute('id', 'intro');
+        introEl.setAttribute('style', `position:fixed; top:0; bottom:0; left:0; right:0;
+                background: rgba(255,255,255,0.75);
+                overflow-y: scroll`);
+
+        introEl.innerHTML = html;
+
+        document.body.appendChild(introEl);
+
+
+        let closeBtn = introEl.querySelector('.closeBtnRed');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', handleCloseClick);
+        }
+
+        function handleCloseClick(evt) {
+            console.log("closeBtn click", evt);
+            document.body.removeChild(introEl);
+            closeBtn.removeEventListener('click', handleCloseClick);
+
+            AFRAME && AFRAME.scenes[0] && AFRAME.scenes[0].emit('startInteraction');
+
+            (0,_elfland_utils__WEBPACK_IMPORTED_MODULE_0__.goFullscreenLandscape)();
+
+            (0,_elfland_utils__WEBPACK_IMPORTED_MODULE_0__.pokeEnvironmentalSound)();
+        }
+    });
+}
+
+
+/***/ }),
+
+/***/ "./src/shim/requestIdleCallback.js":
+/*!*****************************************!*\
+  !*** ./src/shim/requestIdleCallback.js ***!
+  \*****************************************/
+/***/ (() => {
+
+/*!
+ * Copyright 2015 Google Inc. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+ 
+/*
+ * @see https://developers.google.com/web/updates/2015/08/using-requestidlecallback
+ */
+window.requestIdleCallback = window.requestIdleCallback ||
+  function (cb) {
+    return setTimeout(function () {
+      var start = Date.now();
+      cb({ 
+        didTimeout: false,
+        timeRemaining: function () {
+          return Math.max(0, 50 - (Date.now() - start));
+        }
+      });
+    }, 1);
+  }
+
+window.cancelIdleCallback = window.cancelIdleCallback ||
+  function (id) {
+    clearTimeout(id);
+  } 
+
+/***/ }),
+
+/***/ "./src/state.js":
+/*!**********************!*\
+  !*** ./src/state.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _shim_requestIdleCallback__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shim/requestIdleCallback */ "./src/shim/requestIdleCallback.js");
+/* harmony import */ var _shim_requestIdleCallback__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_shim_requestIdleCallback__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _elfland_utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./elfland-utils */ "./src/elfland-utils.js");
+// state.js - state model for Elfland Glider
+// Copyright © 2017-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+//
+
+
+
+
+const GRAVITY = 9.807;   // m/s^2
+const HUMAN_EYE_ELBOW_DISTANCE = 0.56;   // m
+const DIFFICULTY_VR = 0.75;
+const DIFFICULTY_MAGIC_WINDOW = 0.6;
+const DIFFICULTY_KEYBOARD = 0.5;
+const POWERUP_BOOST = 16;
+const BAD_CRASH_SPEED = 30;
+
+AFRAME.registerState({
+    initialState: {
+        armatureEl: null,
+        gliderEl: null,
+        cameraEl: null,
+        leftHandEl: null,
+        rightHandEl: null,
+        controllerConnections: {},
+        isAnyPressedLeft: false,
+        isAnyPressedRight: false,
+        xSetting: 0,
+        zSetting: 0,
+        controlStickEl: null,
+        controlNeutralHeight: 0.95,
+        controlMode: 'HEAD',   // or 'HANDS'
+        controlSubmode: 'NONE',   // or 'LEFT' or 'RIGHT'
+        time: 0,
+        difficulty: DIFFICULTY_MAGIC_WINDOW,
+        gliderPosition: {x:-30, y:15, z:30},
+        gliderPositionStart: {x:-30, y:15, z:30},
+        gliderRotationX: 0,
+        gliderRotationY: -45,
+        gliderRotationZ: 0,
+        gliderRotationYStart: -45,
+        isFlying: false,
+        gliderSpeed: 5,
+        numYellowStars: Math.POSITIVE_INFINITY,
+        stars: 0,
+        questComplete: false,
+        inventory: {},   // keyed by object ID
+        hudVisible: true,
+        hudAirspeedAngle: 0,
+        hudAirspeedColor: 'forestgreen',
+        controlsReminderDisplayed: false,
+        debug: false   // no way to enable this yet
+    },
+
+    handlers: {
+        setState: function (state, values) {
+            for (let pName in values) {
+                if (pName !== 'target') {
+                    console.log("setting", pName, values[pName]);
+                    state[pName] = values[pName];
+                }
+            }
+        },
+
+        setArmatureEl: function (state, armatureEl) {
+            this.powerup = new Howl({src: ['../assets/411460__inspectorj__power-up-bright-a.mp3']});
+
+            console.log("hasNativeWebXRImplementation:", window.hasNativeWebXRImplementation);
+            console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
+            console.log("isMobile:", AFRAME.utils.device.isMobile());
+            console.log("isMobileVR:", AFRAME.utils.device.isMobileVR());
+
+            state.armatureEl = armatureEl;
+            state.gliderEl = armatureEl.querySelector('#glider');
+            state.cameraEl = armatureEl.querySelector('[camera]');
+
+            let dustEl = AFRAME.scenes[0].querySelector('a-dust');
+            if (dustEl) {
+                requestIdleCallback(() => {   // delays setup until there's some slack time
+                    dustEl.components.dust.setCamera(state.armatureEl);
+                }, {timeout: 10_000});
+            }
+
+            let bodyEl = state.armatureEl.querySelector('#body');
+            let wingEl = state.gliderEl.querySelector('#wing');
+            let hudEl = armatureEl.querySelector('#hud');
+            this.adjustForMagicWindow(wingEl);
+            if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected()) {
+                this.adjustHudForVR(hudEl);
+                state.difficulty = DIFFICULTY_VR;
+            } else {
+                this.adjustHudForFlat(hudEl);
+                if ((0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.isMagicWindow)()) {
+                    state.difficulty = DIFFICULTY_MAGIC_WINDOW;
+                } else {
+                    state.difficulty = DIFFICULTY_KEYBOARD;
+                }
+            }
+            AFRAME.scenes[0].addEventListener('enter-vr', (event) => {
+                if (AFRAME.utils.device.checkHeadsetConnected()) {
+                    bodyEl.object3D.position.y = -1.6;
+                    this.adjustHudForVR(hudEl);
+                    this.adjustForMagicWindow(wingEl);
+                    state.difficulty = DIFFICULTY_VR;
+                }
+                (0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.pokeEnvironmentalSound)();
+            });
+            AFRAME.scenes[0].addEventListener('exit-vr', (event) => {
+                // bodyEl.object3D.position.y = 0;   // Why is this unnecessary?
+                this.adjustHudForFlat(hudEl);
+                this.adjustForMagicWindow(wingEl);
+                if ((0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.isMagicWindow)()) {
+                    state.difficulty = DIFFICULTY_MAGIC_WINDOW;
+                } else {
+                    state.difficulty = DIFFICULTY_KEYBOARD;
+                }
+            });
+
+            if ((0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.isDesktop)() && !AFRAME.utils.device.checkHeadsetConnected()) {
+                console.log("desktop w/o headset; disabling look-controls so keyboard controls can function");
+                state.cameraEl.setAttribute('look-controls', 'enabled', 'false');
+            }
+
+            state.gliderEl.addEventListener('raycaster-intersection', (evt) => {
+                // Intersection w/ distance 0 is sometimes sent immediately
+                if (evt.detail.intersections.length > 0 && evt.detail.intersections[0].distance > 0) {
+                    console.log("CRASH!", evt.detail.els[0].tagName,
+                        evt.detail.intersections[0].distance,
+                        state.gliderEl.getAttribute('raycaster').far, state.gliderSpeed/4);
+                    AFRAME.scenes[0].emit('hover', {});
+                    let crash = new Howl({src: ['../assets/198876__bone666138__crash.mp3']});
+                    crash.play();
+
+                    setTimeout(() => {
+                        if (state.gliderSpeed >= BAD_CRASH_SPEED) {
+                            sessionStorage.setItem('returnWorld', location.pathname);
+                            location.assign('../ginnungagap/');
+                        } else {
+                            // console.log("setting start position", state.gliderPositionStart);
+                            state.gliderPosition.x = state.gliderPositionStart.x;
+                            state.gliderPosition.y = state.gliderPositionStart.y;
+                            state.gliderPosition.z = state.gliderPositionStart.z;
+                            state.gliderRotationX = 0;
+                            state.gliderRotationY = state.gliderRotationYStart;
+                            state.gliderSpeed = 5;
+                            this.controlStickToNeutral(state);
+                            state.hudAirspeedAngle = 0;
+                            state.hudAirspeedColor = 'forestgreen';
+                            state.cameraEl.object3D.rotation.x = 0;   // only takes effect when look-controls disabled
+                            state.cameraEl.object3D.rotation.y = 0;
+                            state.cameraEl.object3D.rotation.z = 0;
+                            setTimeout(this.showControlsReminder.bind(this, state), 3000);
+                        }
+                    }, 2000)
+                }
+            });
+
+            armatureEl.addEventListener('hitstart', (evt) => {
+                // console.log('hitstart armature:', evt.detail.intersectedEls);
+                evt.detail.intersectedEls.forEach( (el) => {
+                    if (el.classList.contains('powerup')) {
+                        console.log("powerup");
+                        state.gliderSpeed += POWERUP_BOOST;
+                        this.powerup.play();
+                    } else if (el.classList.contains('star')) {
+                        ++state.stars;
+                        console.log("collected star", state.stars, "of", state.numYellowStars);
+                        el.parentNode.removeChild(el);
+                        this.ding.play();
+                    } else if ('key' === el.id) {
+                        state.questComplete = true;
+                        let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
+                        horncall.play();
+                        el.parentNode.removeChild(el);
+                    } else if (el.classList.contains('proximitySound')) {
+                        let url = el.getAttribute('data-sound-url');
+                        let volume = el.getAttribute('data-sound-volume') || 1.0;
+                        if (url) {
+                            new Howl({src: url, volume: volume, autoplay: true});
+                        }
+                        let text = el.getAttribute('data-text');
+                        let subtitle = AFRAME.scenes[0].querySelector('#subtitle');
+                        if (text && subtitle) {
+                            subtitle.setAttribute('value', text);
+                            setTimeout(() => {
+                                subtitle.setAttribute('value', "");
+                            }, 5000);
+                        }
+                   } else if (el.components.link) {
+                       console.log("hit link");
+                       if (! /ginnungagap/.test(location.pathname)) {
+                           sessionStorage.setItem('previousWorld', location.pathname);
+                       }
+                   }
+                });
+            });
+
+            // state doesn't have an init, so we'll register this here.
+            // desktop controls
+            document.addEventListener('keydown', function(evt) {
+                // console.log('keydown:', evt.code);
+                var cameraRotation = state.cameraEl.getAttribute('rotation');
+                switch (evt.code) {
+                    case 'KeyA':
+                    case 'ArrowLeft':
+                        state.cameraEl.object3D.rotation.z += 0.07;
+                        break;
+                    case 'KeyD':
+                    case 'ArrowRight':
+                        state.cameraEl.object3D.rotation.z -= 0.07;
+                        break;
+                    case 'KeyW':
+                    case 'ArrowUp':
+                        state.cameraEl.object3D.rotation.x += 0.045;
+                        break;
+                    case 'KeyS':
+                    case 'ArrowDown':
+                        state.cameraEl.object3D.rotation.x -= 0.045;
+                        break;
+                    case 'Space':
+                        if (!state.isFlying) {
+                            AFRAME.scenes[0].emit('launch', evt);
+                        } else {
+                            if (state.debug) {
+                                AFRAME.scenes[0].emit('hover', evt);
+                            }
+                        }
+                        break;
+                    case 'Enter':
+                        state.hudVisible = ! state.hudVisible;
+                        break;
+                }
+            }, false);
+
+            // two-controller steering
+
+            state.leftHandEl = document.getElementById("leftHand");
+            state.rightHandEl = document.getElementById("rightHand");
+            if ((0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.isDesktop)()) {
+                state.leftHandEl.setAttribute('hand-controls', 'handModelStyle', 'highPoly');
+                state.rightHandEl.setAttribute('hand-controls', 'handModelStyle', 'highPoly');
+            }
+
+            this.leftDownHandler = this.handHandler.bind(this, 'LEFT', 'DOWN', state);
+            this.leftUpHandler = this.handHandler.bind(this, 'LEFT', 'UP', state);
+            this.rightDownHandler = this.handHandler.bind(this, 'RIGHT', 'DOWN', state);
+            this.rightUpHandler = this.handHandler.bind(this, 'RIGHT', 'UP', state);
+
+            state.controlStickEl = document.getElementById('controlStick');
+        },
+
+        controllerconnected: function (state, evt) {   // evt is name and component; this is state obj
+            state.controllerConnections[evt.component.el.id] = true;
+            this.adjustControlMode(state);
+        },
+        controllerdisconnected: function (state, evt) {
+            state.controllerConnections[evt.component.el.id] = false;
+            this.adjustControlMode(state);
+        },
+        adjustControlMode: function (state) {
+            const oldControlMode =  state.controlMode;
+            if (state.controllerConnections.leftHand || state.controllerConnections.rightHand) {
+                state.controlMode = 'HANDS';
+            } else {
+                state.controlMode = 'HEAD';
+            }
+            if (state.controlMode !== oldControlMode) {
+                console.log("changed control mode from", oldControlMode, "to", state.controlMode);
+                if (state.controlMode === 'HANDS') {
+                    state.leftHandEl?.addEventListener('buttondown', this.leftDownHandler);
+                    state.leftHandEl?.addEventListener('buttonup', this.leftUpHandler);
+                    state.rightHandEl?.addEventListener('buttondown', this.rightDownHandler);
+                    state.rightHandEl?.addEventListener('buttonup', this.rightUpHandler);
+
+                    this.controlStickToNeutral(state);
+                    state.controlStickEl.object3D.visible = true;
+                } else if (state.controlMode === 'HEAD') {
+                    state.leftHandEl?.removeEventListener('buttondown', this.leftDownHandler);
+                    state.leftHandEl?.removeEventListener('buttonup', this.leftUpHandler);
+                    state.rightHandEl?.removeEventListener('buttondown', this.rightDownHandler);
+                    state.rightHandEl?.removeEventListener('buttonup', this.rightUpHandler);
+
+                    state.controlStickEl.object3D.visible = false;
+                }
+            }
+        },
+        handHandler: function handHandler(handedness, upDown, state, evt) {
+            const wasAnyPressedLeft = state.isAnyPressedLeft;
+            const trackedControlsLeft = state.leftHandEl?.components['tracked-controls'];
+            const buttonsLeft = trackedControlsLeft &&
+                    trackedControlsLeft.controller &&
+                    trackedControlsLeft.controller.gamepad &&
+                    trackedControlsLeft.controller.gamepad.buttons;
+            if (buttonsLeft) {
+                state.isAnyPressedLeft = false;
+                for (let i = 0; i < buttonsLeft.length; ++i) {   // not a JavaScript array
+                    if (buttonsLeft[i].pressed) {
+                        state.isAnyPressedLeft = true;
+                    }
+                }
+            } else if ('LEFT' === handedness) {
+                state.isAnyPressedLeft = 'DOWN' === upDown;   // hack
+            }
+
+            const wasAnyPressedRight = state.isAnyPressedRight;
+            const trackedControlsRight = state.rightHandEl?.components['tracked-controls'];
+            const buttonsRight = trackedControlsRight &&
+                    trackedControlsRight.controller &&
+                    trackedControlsRight.controller.gamepad &&
+                    trackedControlsRight.controller.gamepad.buttons;
+            if (buttonsRight) {
+                state.isAnyPressedRight = false;
+                for (let i = 0; i < buttonsRight.length; ++i) {   // not a JavaScript array
+                    if (buttonsRight[i].pressed) {
+                        state.isAnyPressedRight = true;
+                    }
+                }
+            } else if ('RIGHT' === handedness) {
+                state.isAnyPressedRight = 'DOWN' === upDown;   // hack
+            }
+
+            if (state.isAnyPressedLeft && ! wasAnyPressedLeft) {
+                switch (state.controlSubmode) {
+                    case 'LEFT':
+                        state.controlSubmode = 'NONE';
+                        break;
+                    case 'RIGHT':
+                    case 'NONE':
+                        state.controlSubmode = 'LEFT';
+                        break;
+                }
+            } else if (state.isAnyPressedRight && ! wasAnyPressedRight) {
+                switch (state.controlSubmode) {
+                    case 'RIGHT':
+                        state.controlSubmode = 'NONE';
+                        break;
+                    case 'LEFT':
+                    case 'NONE':
+                        state.controlSubmode = 'RIGHT';
+                        break;
+                }
+            }
+            console.log("controlSubmode:", state.controlSubmode);
+        },
+        controlStickToNeutral: function (state) {
+            if (state.controlStickEl) {
+                const cameraPos = state.cameraEl.getAttribute("position");
+                state.controlNeutralHeight = cameraPos.y - HUMAN_EYE_ELBOW_DISTANCE;
+                state.controlStickEl.setAttribute('position', {x: 0, y: state.controlNeutralHeight, z: -0.4});
+                state.controlStickEl.setAttribute('rotation', {x: 0, y: 0, z: 0});
+                state.xSetting = 0;
+                state.zSetting = 0;
+            }
+        },
+
+
+        // aframe-button-controls: any controller button, or scene touch
+        buttondown: function (state, action) {
+            // console.log("buttondown", action);
+            if (!state.isFlying) {
+                AFRAME.scenes[0].emit('launch', action);
+            } else {
+                if (state.debug) {
+                    AFRAME.scenes[0].emit('hover', action);
+                }
+            }
+        },
+
+        countYellowStars: function (state, action) {
+            state.numYellowStars = AFRAME.scenes[0].querySelectorAll('.star').length;
+            console.log("numYellowStars:", state.numYellowStars);
+            if (state.numYellowStars) {
+                this.ding = new Howl({src: ['../assets/393633__daronoxus__ding.mp3']});
+            }
+        },
+
+        launch: function (state, action) {
+            console.log("launch", action);
+
+            state.isFlying = true;
+
+            state.controlsReminderDisplayed = false;
+            let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
+            if (prelaunchHelp) {
+                prelaunchHelp.setAttribute('value', "");
+            }
+            (0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.goFullscreenLandscape)();
+
+            let postlaunchHelp = AFRAME.scenes[0].querySelector('#postlaunchHelp');
+            if (postlaunchHelp && postlaunchHelp.src) {
+                let postlaunchHelpAudio = new Howl({src: [postlaunchHelp.src]});
+                setTimeout(() => {
+                    postlaunchHelpAudio.play();
+                }, 60000);
+            }
+        },
+        hover: function (state, action) {
+            console.log("hover", action);
+
+            state.isFlying = false;
+        },
+
+        loaded: function (state, action) {
+            // console.log("loaded", state, action);
+            let intro = document.getElementById('intro');
+            if (!intro) {
+                this.startInteraction(state);
+            }
+        },
+
+        'enter-vr': function (state) {
+            // console.log("enter-vr");
+            this.startInteraction(state);
+        },
+        'exit-vr': function (state, action) {
+            // console.log("exit-vr", action);
+            if (state.controlsReminderDisplayed) {
+                this.showControlsReminder(state);   // updates list of controls for flat screen
+            }
+
+            let intro = document.getElementById('intro');
+            if (intro) {
+                AFRAME.scenes[0].emit('hover', action);
+            }
+        },
+        startInteraction: function (state) {
+            if (state.controlsReminderDisplayed) {
+                this.showControlsReminder(state);   // updates list of controls
+            } else {
+                setTimeout(this.showControlsReminder.bind(this, state), 10000);
+            }
+        },
+        showControlsReminder: function (state) {
+            let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
+            let intro = document.getElementById('intro');
+            if (prelaunchHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
+                state.controlsReminderDisplayed = true;
+                if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobileVR()) {
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt left: turn left\nTilt right: turn right\nTilt back: climb & slow down\nTilt forward: dive & speed up\nTrigger, button or touchpad: launch");
+                } else if (AFRAME.utils.device.isMobile()) {
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nRoll your device left: turn left\nRoll your device right: turn right\nTilt up: climb & slow down\nTilt down: dive & speed up\nTap screen: launch");
+                } else {
+                    prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nA: turn left\nD: turn right\nW: climb (& slow down)\nS: dive (& speed up)\nSpace bar: launch");
+                }
+            }
+        },
+
+        iterate: function (state, action) {
+            // A pause in the action is better than flying blind
+            action.timeDelta = Math.min(action.timeDelta, 100);
+            state.time += action.timeDelta * state.difficulty;
+
+            switch (state.controlMode) {
+                case "HEAD":
+                    let cameraRotation = state.cameraEl.getAttribute('rotation');
+                    if (!cameraRotation) {
+                        console.warn("camera rotation not available");
+                        return;
+                    }
+
+                    let cameraRotX = (0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.isMagicWindow)() ? cameraRotation.x + 20 : cameraRotation.x;
+                    state.xSetting = cameraRotX;
+                    state.zSetting = cameraRotation.z;
+                    break;
+                case "HANDS":
+                    const leftHandPos = state.leftHandEl?.getAttribute("position");
+                    const rightHandPos = state.rightHandEl?.getAttribute("position");
+                    switch (state.controlSubmode) {
+                        case "LEFT":
+                            const leftHandRot = state.leftHandEl?.getAttribute('rotation');
+
+                            state.controlStickEl.setAttribute('position', leftHandPos);
+                            state.controlStickEl.setAttribute('rotation', leftHandRot);
+
+                            state.xSetting = leftHandRot.x;
+                            state.zSetting = leftHandRot.z;
+                            break;
+                        case "RIGHT":
+                            const rightHandRot = state.rightHandEl?.getAttribute('rotation');
+
+                            state.controlStickEl.setAttribute('position', rightHandPos);
+                            state.controlStickEl.setAttribute('rotation', rightHandRot);
+
+                            state.xSetting = rightHandRot.x;
+                            state.zSetting = rightHandRot.z;
+                            break;
+                        case "NONE":
+                            // TODO: slow decay to neutral?
+                            break;
+                    }
+                    break;
+            }
+            let xDiff = state.xSetting - state.gliderRotationX;
+            let xChange = (xDiff + Math.sign(xDiff)*15) * (action.timeDelta / 1000);
+            if (Math.abs(xChange) > Math.abs(xDiff)) {
+                xChange = xDiff;
+            }
+            let newXrot = state.gliderRotationX + xChange;
+            newXrot = Math.max(newXrot, -75);
+            newXrot = Math.min(newXrot, 75);
+            state.gliderRotationX = newXrot;
+
+            let zDiff = state.zSetting - state.gliderRotationZ;
+            let zChange = (zDiff + Math.sign(zDiff)*15) * (action.timeDelta / 1000);
+            if (Math.abs(zChange) > Math.abs(zDiff)) {
+                zChange = zDiff;
+            }
+            let newZrot = state.gliderRotationZ + zChange;
+            newZrot = Math.max(newZrot, -70);
+            newZrot = Math.min(newZrot, 70);
+            state.gliderRotationZ = newZrot;
+
+            let deltaHeading = state.gliderRotationZ * action.timeDelta / 1000;
+            state.gliderRotationY = (state.gliderRotationY + deltaHeading + 180) % 360 - 180;
+
+            if (state.isFlying) {
+                let distance = state.gliderSpeed * action.timeDelta / 1000;
+
+                let posChange = (0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.calcPosChange)(state.gliderRotationX, state.gliderRotationY+90, distance);
+                let altitudeChange = posChange.y;
+                state.gliderPosition.x += posChange.x;
+                state.gliderPosition.y += altitudeChange;
+                state.gliderPosition.z += posChange.z;
+
+                let speedChange = (-Math.sign(altitudeChange) * Math.sqrt(2 * GRAVITY * Math.abs(altitudeChange)) -
+                                0.0005 * state.gliderSpeed * state.gliderSpeed)
+                        * action.timeDelta / 1000;
+                state.gliderSpeed = Math.max(state.gliderSpeed + speedChange, 0.1);
+                state.gliderSpeed = Math.min(state.gliderSpeed, 99.4);
+
+                state.hudAirspeedAngle = Math.min(state.gliderSpeed * 9, 359);
+                state.hudAirspeedColor = state.gliderSpeed < BAD_CRASH_SPEED ? 'forestgreen' : 'goldenrod';
+
+                state.gliderEl.setAttribute('raycaster', 'far', state.gliderSpeed/4);
+            }
+        },
+
+        placeInGliderPath: function (state, action) {
+            // console.log("placeInGliderPath:", action);
+            let verticalAngleDeg = state.gliderRotationX + (Math.random()-0.5) * action.variation;
+            let horizontalAngleDeg = state.gliderRotationY + 90 + (Math.random()-0.5) * action.variation;
+            let posChange = (0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.calcPosChange)(verticalAngleDeg, horizontalAngleDeg, action.distance);
+            let newPos = {x: state.gliderPosition.x + posChange.x,
+                y: state.gliderPosition.y + posChange.y,
+                z: state.gliderPosition.z + posChange.z};
+            action.el.setAttribute('position', newPos);
+            action.el.setAttribute('rotation', 'y', state.gliderRotationY);
+        },
+
+        adjustForMagicWindow: function (wingEl) {
+            if (! (0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.isMagicWindow)()) {
+                wingEl.object3D.rotation.x = 0;
+                wingEl.object3D.scale.set(1, 1, 1);
+            } else {
+                wingEl.object3D.rotation.x = THREE.MathUtils.degToRad(-30.0);
+                wingEl.object3D.scale.set(1, 1, 3);
+            }
+        },
+
+        adjustHudForVR: function (hudEl) {
+            if (AFRAME.utils.device.isMobile()) {
+                hudEl.object3D.position.x = 0.30;
+                hudEl.object3D.position.y = 0.30;
+            } else {
+                hudEl.object3D.position.x = 0.40;
+                hudEl.object3D.position.y = 0.42;
+            }
+            hudEl.object3D.rotation.x = THREE.MathUtils.degToRad(25.0);
+            hudEl.object3D.rotation.y = THREE.MathUtils.degToRad(-15.0);
+        },
+
+        adjustHudForFlat: function (hudEl) {
+            if ((0,_elfland_utils__WEBPACK_IMPORTED_MODULE_1__.isDesktop)()) {
+                hudEl.object3D.position.x = 0.85;
+                hudEl.object3D.position.y = 0.45;
+                hudEl.object3D.rotation.x = 0.0;
+                hudEl.object3D.rotation.y = 0.0;
+            } else {
+                hudEl.object3D.position.x = 0.70;
+                hudEl.object3D.position.y = 0.15;
+                hudEl.object3D.rotation.x = THREE.MathUtils.degToRad(15.0);
+                hudEl.object3D.rotation.y = THREE.MathUtils.degToRad(-20.0);
+            }
+        }
+    },
+
+    computeState: function (newState, payload) {
+        try {
+            if (!newState.questComplete) {
+                newState.questComplete = newState.numYellowStars <= 0 || newState.stars / newState.numYellowStars >= 0.95;
+                if (newState.questComplete) {
+                    let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
+                    horncall.play();
+                }
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+});
+
+AFRAME.registerComponent('armature-tick-state', {
+    init: function () {
+        AFRAME.scenes[0].emit('setArmatureEl', this.el);
+    },
+
+    tick: function (time, timeDelta) {
+        AFRAME.scenes[0].emit('iterate', {time: time, timeDelta: timeDelta});
+    }
+});
+
+
+/***/ }),
+
+/***/ "./assets/close-button-red32.png":
+/*!***************************************!*\
+  !*** ./assets/close-button-red32.png ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+module.exports = __webpack_require__.p + "8357cd993c948fc4d3a7.png";
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			id: moduleId,
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		__webpack_require__.b = document.baseURI || self.location.href;
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"island": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		// no on chunks loaded
+/******/ 		
+/******/ 		// no jsonp function
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+/*!**************************!*\
+  !*** ./island/island.js ***!
+  \**************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src_elfland_utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src/elfland-utils */ "./src/elfland-utils.js");
+/* harmony import */ var _src_state_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/state.js */ "./src/state.js");
+/* harmony import */ var _assets_stella_octangula_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../assets/stella-octangula.js */ "./assets/stella-octangula.js");
+/* harmony import */ var _assets_stella_octangula_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_stella_octangula_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _src_intro_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../src/intro.js */ "./src/intro.js");
+/* harmony import */ var _aframe_island_component_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./aframe-island-component.js */ "./island/aframe-island-component.js");
+// island.js - island world for Elfland Glider
+// Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+
+
+
+
+
+
+
+const INITIAL_POSITION = {x:0, y:100, z:500};
+const INITIAL_ROTATION_X = 0;
+const INITIAL_ROTATION_Y = 0;
+AFRAME.registerComponent('island-world', {
+    init: function () {
+        (0,_src_elfland_utils__WEBPACK_IMPORTED_MODULE_0__.setEnvironmentalSound)('Olaf%20Minimalist.mp3', 0.1);
+
+        let sceneEl = this.el;
+        sceneEl.emit('setState', {
+            gliderPositionStart: INITIAL_POSITION,
+            gliderPosition: {x: INITIAL_POSITION.x, y: INITIAL_POSITION.y, z: INITIAL_POSITION.z},
+            gliderRotationX: INITIAL_ROTATION_X,
+            gliderRotationY: INITIAL_ROTATION_Y,
+            gliderRotationYStart: INITIAL_ROTATION_Y
+        });
+
+        let islandEl = sceneEl.querySelector('a-island');
+        let islandComp = islandEl.components.island;
+
+        for (let p=0; p<6; ++p) {
+            let powerupEl = document.createElement('a-entity');
+            powerupEl.setAttribute('class', 'powerup');
+            let dispersion = 1000;
+            let ceiling = p < 1 ? 15 : 100;   // keep one powerup low
+            powerupEl.setAttribute('position', this.randomPosition(islandComp, dispersion, 9, ceiling));
+            powerupEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
+            powerupEl.setAttribute('material', {visible:false});
+
+            let powerupInnerEl = document.createElement('a-icosahedron');
+            powerupInnerEl.setAttribute('material', {color:'#ff0000'});
+            powerupInnerEl.setAttribute('glow', {c: '0.2', color: '#ff0000', scale:'3.5'});
+
+            powerupEl.appendChild(powerupInnerEl);
+            sceneEl.appendChild(powerupEl);
+        }
+
+
+        let starScale = AFRAME.utils.device.isMobile() || AFRAME.utils.device.isMobileVR() || AFRAME.utils.device.checkHeadsetConnected() ? 1.0 : 2.0;
+        let totalStars = (0,_src_elfland_utils__WEBPACK_IMPORTED_MODULE_0__.isDesktop)() ? 30 : 25;
+        for (let s=0; s<totalStars; ++s) {
+            let starEl = document.createElement('a-entity');
+            starEl.setAttribute('class', 'star');
+            let dispersion = s < 3 ? 1750 : 1000;   // place a couple stars away from the island
+            starEl.setAttribute('position', this.randomPosition(islandComp, dispersion, 12, 150));
+            starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
+            starEl.setAttribute('material', {visible:false});
+            starEl.object3D.scale.set(starScale, starScale, starScale);
+
+            let starInnerEl = document.createElement('a-entity');
+            starInnerEl.setAttribute('rotation', '45 0 45');
+            starInnerEl.setAttribute('geometry', {primitive: 'stella-octangula'});
+            starInnerEl.setAttribute('material', {color:'#ffce00'});
+            if (! /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent)) {   // not Mobile Safari
+                starInnerEl.setAttribute('glow', {c: '0.2', color: '#feca05', scale:'3.5'});
+            }
+
+            starEl.appendChild(starInnerEl);
+            sceneEl.appendChild(starEl);
+        }
+
+        sceneEl.emit('countYellowStars', {});
+
+        let portalEl = document.getElementById('nextQuestPortal');
+        portalEl.setAttribute('position', this.randomPosition(islandComp, 1000, 12, 100));
+
+        let fairiesEl = document.createElement('a-entity');
+        fairiesEl.setAttribute('position', this.belowGliderPathAboveIsland(islandComp));
+        fairiesEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-15 -15 -15', vertexB:'15 -15 15', vertexC:'15 15 -15'});
+        fairiesEl.setAttribute('material', {visible:false});
+        fairiesEl.setAttribute('class', 'proximitySound');
+        fairiesEl.setAttribute('data-sound-url', 'please help collect stars.ogg');
+        fairiesEl.setAttribute('data-text', "Please help collect stars!");
+        let fairiesInnerEl = document.createElement('a-gltf-model');
+        fairiesInnerEl.setAttribute('position', '0 -6 0');
+        fairiesInnerEl.setAttribute('src', '#fairies');
+        fairiesInnerEl.setAttribute('scale', '0.5 0.5 0.5');
+        fairiesEl.appendChild(fairiesInnerEl);
+        sceneEl.appendChild(fairiesEl);
+
+        if ((0,_src_elfland_utils__WEBPACK_IMPORTED_MODULE_0__.isDesktop)()) {
+            sceneEl.setAttribute('fog', {
+                type: 'linear',
+                color: '#2a6799',
+                near: 10,
+                far: 1000
+            });
+
+            // These decorations do not need to be pre-loaded via the asset mgr
+            let floatingEl = document.createElement('a-gltf-model');
+            floatingEl.setAttribute('position', this.randomPosition(islandComp, 750, 50, 100));
+            floatingEl.setAttribute('src', '../assets/hermit_s_windmill/scene.gltf');
+            floatingEl.setAttribute('scale', '0.01 0.01 0.01');
+            floatingEl.setAttribute('class', 'proximitySound');
+            floatingEl.setAttribute('data-sound-url', '../assets/look out.ogg');
+            floatingEl.setAttribute('data-sound-volume', 1.0);
+            floatingEl.setAttribute('data-text', "Look out!");
+            sceneEl.appendChild(floatingEl);
+
+            // let buildingEl = document.createElement('a-gltf-model');
+            // buildingEl.setAttribute('position', islandComp.buildingPosition());
+            // buildingEl.setAttribute('src', '../assets/stabbur/scene.gltf');
+            // buildingEl.setAttribute('scale', '3 3 3');
+            // buildingEl.setAttribute('class', 'landscape');
+            // sceneEl.appendChild(buildingEl);
+        }
+
+    },
+
+    randomPosition: function (islandComp, dispersion, verticalOffset, ceiling) {
+        let x, y, z;
+        do {
+            x = (Math.random() - 0.5) * dispersion;
+            z = (Math.random() - 0.5) * dispersion;
+            y = islandComp.height(x, z) + verticalOffset;
+        } while (y > ceiling);
+        return x + ' ' + y + ' ' + z;
+    },
+
+    belowGliderPathAboveIsland: function (islandComp) {
+        let pos;
+        let distance = 100;
+        do {
+            let verticalAngleDeg = INITIAL_ROTATION_X - Math.random() * 15;
+            let horizontalAngleDeg = INITIAL_ROTATION_Y + 90 + (Math.random()-0.5) * 30;
+            let posChange = (0,_src_elfland_utils__WEBPACK_IMPORTED_MODULE_0__.calcPosChange)(verticalAngleDeg, horizontalAngleDeg, distance);
+
+            pos = {x: INITIAL_POSITION.x + posChange.x,
+                y: INITIAL_POSITION.y + posChange.y,
+                z: INITIAL_POSITION.z + posChange.z};
+
+//                    console.log("altitudes:", pos.y, islandComp.height(pos.x, pos.z), distance);
+            distance -= 2;   // if altitude is too low, reduce distance
+        } while (pos.y - islandComp.height(pos.x, pos.z) < 12);
+
+        return pos;
+    }
+});
+
+})();
+
+/******/ })()
+;
 //# sourceMappingURL=island.js.map
