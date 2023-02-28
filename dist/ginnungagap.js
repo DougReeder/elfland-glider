@@ -361,6 +361,10 @@ AFRAME.registerState({
                         let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
                         horncall.play();
                         el.parentNode.removeChild(el);
+                        for (const entity of document.querySelectorAll('[dark-elf]')) {
+                            console.info("dark elf pursuing");
+                            entity.setAttribute('dark-elf', 'goalSelector', '#armature');
+                        }
                     } else if (el.classList.contains('proximitySound')) {
                         let url = el.getAttribute('data-sound-url');
                         let volume = el.getAttribute('data-sound-volume') || 1.0;

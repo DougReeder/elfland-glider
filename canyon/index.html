@@ -48,7 +48,12 @@
 
     <a-dust num-points="512" dispersion="33" color="#101010"></a-dust>
 
-    <a-entity class="powerup" position="-85 -265 -13" material="visible: false"
+    <a-entity class="powerup" position="2 -185 256" material="visible: false"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5">
+        <a-icosahedron material="color:red" glow="c: 0.2; color: red; scale: 3.5"></a-icosahedron>
+    </a-entity>
+
+    <a-entity class="powerup" position="-85 -260 -7" material="visible: false"
               geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5">
         <a-icosahedron material="color:red" glow="c: 0.2; color: red; scale: 3.5"></a-icosahedron>
     </a-entity>
@@ -62,7 +67,7 @@
 <!--    debug      position="18 -100 60"-->
     <a-sphere id="key" radius="2.5" segments-width="9" segments-height="18"
               transparent="true" opacity="0.2" color="gold" position="51 -100 -196">
-        <a-entity gltf-model="#keyModel" scale="50 50 50" rotation="10 0 10"></a-entity>
+        <a-entity gltf-model="#keyModel" scale="50 50 50" rotation="15 -45 15"></a-entity>
     </a-sphere>
 
     <a-entity id="nextQuestPortal" position="-27 -115 116" scale="5 5 0" bind="visible: questComplete"
