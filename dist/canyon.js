@@ -122,7 +122,7 @@ float snoise(vec3 v){
 }
 
 void main() {
-    float strata = smoothstep(-214.0, -212.0, pos.y) - smoothstep(-103.0, -101.0, pos.y) + smoothstep(-33.0, -31.0, pos.y);
+    float strata = smoothstep(-255.0, -253.0, pos.y) - smoothstep(-205.0, -203.0, pos.y) + smoothstep(-103.0, -100.5, pos.y);
     vec3 colorYin  = mix(color1Yin,  color2Yin,  strata);
     vec3 colorYang = mix(color1Yang, color2Yang, strata);
 
