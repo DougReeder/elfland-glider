@@ -65,16 +65,18 @@
 
 <!--    production position="44 -100 -192"-->
 <!--    debug      position="18 -100 60"-->
-    <a-sphere id="key" radius="2.5" segments-width="9" segments-height="18"
-              transparent="true" opacity="0.2" color="gold" position="51 -100 -196">
-        <a-entity gltf-model="#keyModel" scale="50 50 50" rotation="15 -45 15"></a-entity>
-    </a-sphere>
+    <template id="keyTemplate">
+        <a-sphere radius="2.5" segments-width="9" segments-height="18"
+                  transparent="true" opacity="0.2" color="gold" position="51 -100 -196">
+            <a-entity gltf-model="#keyModel" scale="50 50 50" rotation="15 -45 15"></a-entity>
+        </a-sphere>
+    </template>
 
     <a-entity id="nextQuestPortal" position="-27 -115 116" scale="5 5 0" bind="visible: questComplete"
               link="href:../yggdrasil; title: The Tree of Worlds; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
     <a-entity gltf-model="#darkElf" scale="2 2 2" position="-1 -100.5 115" rotation="2 180 0"
-              animation-mixer="crossFadeDuration: 0.5" raycaster="objects:.landscape"
+              animation-mixer="crossFadeDuration: 0.5" raycaster="objects:.landscape,#armature"
               dark-elf="goalSelector: ">
         <a-triangle vertex-a="-5 -5 -5" vertex-b="5 -5 5" vertex-c="5 5 -5" material="visible:false"
                     class="proximitySound" data-text="You can't have our key! Go away!"

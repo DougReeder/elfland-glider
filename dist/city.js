@@ -1219,7 +1219,7 @@ AFRAME.registerState({
         },
 
         setArmatureEl: function (state, armatureEl) {
-            this.powerup = new Howl({src: ['../assets/411460__inspectorj__power-up-bright-a.mp3']});
+            this.cacheSound(state, '../assets/411460__inspectorj__power-up-bright-a.mp3', 1.0, 'powerup');
 
             console.log("hasNativeWebXRImplementation:", window.hasNativeWebXRImplementation);
             console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
@@ -1284,8 +1284,7 @@ AFRAME.registerState({
                         evt.detail.intersections[0].distance,
                         state.gliderEl.getAttribute('raycaster').far, state.gliderSpeed/4);
                     AFRAME.scenes[0].emit('hover', {});
-                    let crash = new Howl({src: ['../assets/198876__bone666138__crash.mp3']});
-                    crash.play();
+                    this.cacheAndPlaySound(state, '../assets/198876__bone666138__crash.mp3');
 
                     setTimeout(() => {
                         if (state.gliderSpeed >= BAD_CRASH_SPEED) {
@@ -1317,17 +1316,23 @@ AFRAME.registerState({
                     if (el.classList.contains('powerup')) {
                         console.log("powerup");
                         state.gliderSpeed += POWERUP_BOOST;
-                        this.powerup.play();
+                        this.playSound(state, 'powerup');
                     } else if (el.classList.contains('star')) {
                         ++state.stars;
                         console.log("collected star", state.stars, "of", state.numYellowStars);
                         el.parentNode.removeChild(el);
-                        this.ding.play();
+                        this.playSound(state, 'ding');
                     } else if ('key' === el.id) {
                         state.questComplete = true;
-                        let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
-                        horncall.play();
+                        this.cacheAndPlaySound(state, '../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3');
                         el.parentNode.removeChild(el);
+                        const keyEnt = document.createElement('a-entity');
+                        keyEnt.setAttribute('id', 'keyCaptured');
+                        keyEnt.setAttribute('gltf-model', '#keyModel');
+                        keyEnt.setAttribute('position', '-0.85 0.20 -1.00');
+                        keyEnt.setAttribute('rotation', '0 0 90');
+                        keyEnt.setAttribute('scale', '10 10 10');
+                        state.gliderEl.appendChild(keyEnt);
                         for (const entity of document.querySelectorAll('[dark-elf]')) {
                             console.info("dark elf pursuing");
                             entity.setAttribute('dark-elf', 'goalSelector', '#armature');
@@ -1336,7 +1341,7 @@ AFRAME.registerState({
                         let url = el.getAttribute('data-sound-url');
                         let volume = el.getAttribute('data-sound-volume') || 1.0;
                         if (url) {
-                            new Howl({src: url, volume: volume, autoplay: true});
+                            this.cacheAndPlaySound(state, url, volume);
                         }
                         let text = el.getAttribute('data-text');
                         let subtitle = AFRAME.scenes[0].querySelector('#subtitle');
@@ -1530,7 +1535,7 @@ AFRAME.registerState({
             state.numYellowStars = AFRAME.scenes[0].querySelectorAll('.star').length;
             console.log("numYellowStars:", state.numYellowStars);
             if (state.numYellowStars) {
-                this.ding = new Howl({src: ['../assets/393633__daronoxus__ding.mp3']});
+                this.cacheSound(state, '../assets/393633__daronoxus__ding.mp3', 1.0, 'ding');
             }
         },
 
@@ -1548,9 +1553,8 @@ AFRAME.registerState({
 
             let postlaunchHelp = AFRAME.scenes[0].querySelector('#postlaunchHelp');
             if (postlaunchHelp && postlaunchHelp.src) {
-                let postlaunchHelpAudio = new Howl({src: [postlaunchHelp.src]});
                 setTimeout(() => {
-                    postlaunchHelpAudio.play();
+                    this.cacheAndPlaySound(state, postlaunchHelp.src)
                 }, 60000);
             }
         },
@@ -1695,6 +1699,34 @@ AFRAME.registerState({
             }
         },
 
+        cacheSound(_state, url, volume = 1.0, alias) {
+            if (!this.sounds) {
+                this.sounds = {};
+            }
+            if (! this.sounds[url]) {
+                this.sounds[url] = new Howl({src: url, volume: volume, autoplay: false});
+            }
+            if (alias) {
+                this.sounds[alias] = this.sounds[url];
+            }
+        },
+
+        playSound(_state, urlOrAlias) {
+            this.sounds?.[urlOrAlias]?.play();
+        },
+
+        cacheAndPlaySound(_state, url, volume = 1.0, alias) {
+            if (!this.sounds) {
+                this.sounds = {};
+            }
+            if (this.sounds[url]) {
+                this.sounds[url].play();
+            } else {
+                this.sounds[url] = new Howl({src: url, volume: volume, autoplay: true});
+                this.sounds[alias] = this.sounds[url];
+            }
+        },
+
         placeInGliderPath: function (state, action) {
             // console.log("placeInGliderPath:", action);
             let verticalAngleDeg = state.gliderRotationX + (Math.random()-0.5) * action.variation;
@@ -1749,8 +1781,7 @@ AFRAME.registerState({
             if (!newState.questComplete) {
                 newState.questComplete = newState.numYellowStars <= 0 || newState.stars / newState.numYellowStars >= 0.95;
                 if (newState.questComplete) {
-                    let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
-                    horncall.play();
+                    AFRAME.scenes[0].emit('cacheAndPlaySound', '../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3');
                 }
             }
         } catch (err) {

@@ -225,16 +225,15 @@ const terrainHeights = `
 0 0  0 35 70 85 95 96 96 95  95 90 85 80 70 75 95 95 96 95  90 87 86 84 83 80 75 70 57 59  55 46  1  0  0  0  0  0 0 0  0
 
 
-0 0 0 15 50 80 85 90 95 95  95 95 95 95 95 95 95 95 95 90  85 81 79 74 62 56 49 44 40 38  12 0 0 0 0 0 0 0 0 0  0
-0 0 0  0  5 61 79 85 90 95  99 99 99 99 99 99 99 90 85 80  75 62 50 39 29 26 23 20 36 35  10 0 0 0 0 0 0 0 0 0  0
-0 0 0  0  0  1 85 89 92 95  98 99 99 98 98 97 96 93 88 84   1  1  1  1  0  0  0  0 33 32   0 0 0 0 0 0 0 0 0 0  0
-0 0 0  0  0  0  1 90 93 94  97 98 97 96 97 96 95 94  1  1   0  0  0  0  0  0  0  0 31 30   0 0 0 0 0 0 0 0 0 0  0
-0 0 0  0  0  0  1 92 94 96  97 96 96 95 94  1  1  1  0  0   0  0  0  0  0  0  0  0 29 29   0 0 0 0 0 0 0 0 0 0  0
-
-0 0  0  0  0  0  1 92 94 95  96 95 94 94  1  0  0  0  0  0   0  0  1  1  1  1  1  1 26 27  23  3  2  1  1  1  0  0  0 0  0
-0 0  0  0  0  0  1 92 93 94  95 94 93  1  0  0  0  0  0  1   1  1  1  2  2  2  2  2 24 25  23 18  3  2  2  1  1  0  0 0  0
-0 0  0  0  0  0  1 92 93 94  94 93 92  1  0  0  0  1  1  1   2  2  2  2 14 14 17 20 22 23  24 22 20 19  3  2  1  0  0 0  0
-0 0  0  0  0  0  1 92 92 93  92 92 91  1  0  0  1  1  2  2   2 11 12 13 15 16 17 18 20 22  23 23 22 19 13  2  1  1  0 0  0
+0 0  0 15 50 80 85 90 95 95  95 95 95 95 95 95 95 95 95 90  85 81 79 74 62 56  1  0  0 38   0  0  0  0  0  0  0  0  0 0  0
+0 0  0  0  5 61 79 85 90 95  99 99 99 99 99 99 99 90 85 80  75 62 50 39 29  1  0  0  0 35   0  0  0  0  0  0  0  0  0 0  0
+0 0  0  0  0  1 85 89 92 95  98 99 99 98 98 97 95 90 82 79   1  1  1  0  0  0  0  0  0 32   0  0  0  0  0  0  0  0  0 0  0
+0 0  0  0  0  0  1 90 93 94  97 98 97 96 93 90 87 84  1  1   0  0  0  0  0  0  0  0  0 30   0  0  0  0  0  0  0  0  0 0  0
+0 0  0  0  0  0  1 92 94 96  97 96 94 91 83  1  1  1  0  0   0  0  0  0  0  0  0  0  0 29   0  0  0  0  0  0  0  0  0 0  0
+0 0  0  0  0  0  1 92 94 95  96 95 93 89  1  0  0  0  0  0   0  0  1  1  1  1  1  1  1 27   4  3  2  1  1  1  0  0  0 0  0
+0 0  0  0  0  0  1 92 93 94  95 94 92  1  0  0  0  0  0  1   1  1  1  2  2  2  2  2 24 25  23 18  3  2  2  1  1  0  0 0  0
+0 0  0  0  0  0  1 92 93 94  93 91 85  1  0  0  0  1  1  1   2  2  2  2 14 14 17 20 22 23  24 22 20 19  3  2  1  0  0 0  0
+0 0  0  0  0  0  1 92 92 93  92 90 86  1  0  0  1  1  2  2   2 11 12 13 15 16 17 18 20 22  23 23 22 19 13  2  1  1  0 0  0
 0 0  0  0  0  1 90 91 92 91  91 90  1  0  0  0  1  2  2  9  11 12 13 14 15 15 16 17 18 19  21 22 23 21 17  3  2  1  0 0  0
 0 0  0  0  0  1 89 90 91 90  89  1  1  0  0  1  2  6  7  9  11 12 13 14 14 14  2  1  1  0   0 18 22 24 22 18  2  1  1 0  0
 0 0  0  0  1  1 88 89 90 89  88  1  0  0  1  1  2  7  8 10  11 12 13 13 14 14  2  1  0  0   0 19 23 25 23 19  3  2  1 0  0
@@ -296,8 +295,7 @@ AFRAME.registerGeometry('canyon-terrain', {
     }
 
     // computes normals that are smooth for shallow angles
-    const creasedGeometry = (0,_src_BufferGeometryUtilsRump__WEBPACK_IMPORTED_MODULE_0__.toCreasedNormals)(geometry, 0.45 * Math.PI);
-    this.geometry = creasedGeometry;
+    this.geometry = (0,_src_BufferGeometryUtilsRump__WEBPACK_IMPORTED_MODULE_0__.toCreasedNormals)(geometry, 0.45 * Math.PI);
     geometry.dispose();
   }
 });
@@ -346,6 +344,11 @@ AFRAME.registerComponent('dark-elf', {
     const newXRot = el.object3D.rotation.x + (Math.random() - 0.5) * Math.PI / 16;
     el.object3D.rotation.set(newXRot, newYRot, el.object3D.rotation.z);
 
+    const keyTemplate = document.getElementById('keyTemplate');
+    const clone = keyTemplate.content.firstElementChild.cloneNode(true);
+    clone.setAttribute('id', 'key');
+    AFRAME.scenes[0].appendChild(clone);
+
     this.setModeOrPursuit(wanderList[0]);
 
     setInterval(this.randomMode.bind(this, el), 3000);
@@ -353,18 +356,44 @@ AFRAME.registerComponent('dark-elf', {
     el.addEventListener('raycaster-intersection', (evt) => {
       // Intersection w/ distance 0 is sometimes sent immediately
       if (evt.detail.intersections.length > 0 && evt.detail.intersections[0].distance > 0) {
-        this.isAvoidingLandcape = true;
-        const newXRot = el.object3D.rotation.x + (Math.random() - 0.5) * Math.PI / 36;
-        el.object3D.rotation.set(newXRot, el.object3D.rotation.y, el.object3D.rotation.z);
-        this.setModeOrPursuit(wanderList[0]);
+        for (const entity of evt.detail.els) {
+          if (entity.classList.contains('landscape')) {
+            this.isAvoidingLandcape = true;
+            const newXRot = el.object3D.rotation.x + (Math.random() - 0.5) * Math.PI / 36;
+            el.object3D.rotation.set(newXRot, el.object3D.rotation.y, el.object3D.rotation.z);
+            this.setModeOrPursuit(wanderList[0]);
+          } else if (entity.id === this.data.goalSelector?.id) {
+            console.log("caught goal")
+            const keyCaptured = document.getElementById('keyCaptured');
+            keyCaptured?.parentNode?.removeChild(keyCaptured);
+            AFRAME.scenes[0].emit('cacheAndPlaySound', 'Im-taking-that-back.ogg');
+            for (const entity of document.querySelectorAll('[dark-elf]')) {
+              console.info("dark elf wandering");
+              entity.setAttribute('dark-elf', 'goalSelector', '');
+            }
+
+            AFRAME.scenes[0].emit('setState', {questComplete: false});
+
+            const keyTemplate = document.getElementById('keyTemplate');
+            const clone = keyTemplate.content.firstElementChild.cloneNode(true);
+            clone.setAttribute('id', 'key');
+            AFRAME.scenes[0].appendChild(clone);
+          } else {
+            console.warn("unexpected raycaster intersection:", entity);
+          }
+        }
       }
     });
     el.addEventListener('raycaster-intersection-cleared', (evt) => {
       // console.log("cleared intersections:", evt.detail?.clearedEls)
-      setTimeout(() => {   // keeps turning away from wall for another second
-        this.isAvoidingLandcape = false;
-        this.setModeOrPursuit(wanderList[0]);
-      }, 1000);
+      for (const entity of evt.detail.clearedEls) {
+        if (entity.classList.contains('landscape')) {
+          setTimeout(() => {   // keeps turning away from wall for another second
+            this.isAvoidingLandcape = false;
+            this.setModeOrPursuit(wanderList[0]);
+          }, 1000);
+        }
+      }
     });
   },
 
@@ -826,7 +855,7 @@ AFRAME.registerState({
         },
 
         setArmatureEl: function (state, armatureEl) {
-            this.powerup = new Howl({src: ['../assets/411460__inspectorj__power-up-bright-a.mp3']});
+            this.cacheSound(state, '../assets/411460__inspectorj__power-up-bright-a.mp3', 1.0, 'powerup');
 
             console.log("hasNativeWebXRImplementation:", window.hasNativeWebXRImplementation);
             console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
@@ -891,8 +920,7 @@ AFRAME.registerState({
                         evt.detail.intersections[0].distance,
                         state.gliderEl.getAttribute('raycaster').far, state.gliderSpeed/4);
                     AFRAME.scenes[0].emit('hover', {});
-                    let crash = new Howl({src: ['../assets/198876__bone666138__crash.mp3']});
-                    crash.play();
+                    this.cacheAndPlaySound(state, '../assets/198876__bone666138__crash.mp3');
 
                     setTimeout(() => {
                         if (state.gliderSpeed >= BAD_CRASH_SPEED) {
@@ -924,17 +952,23 @@ AFRAME.registerState({
                     if (el.classList.contains('powerup')) {
                         console.log("powerup");
                         state.gliderSpeed += POWERUP_BOOST;
-                        this.powerup.play();
+                        this.playSound(state, 'powerup');
                     } else if (el.classList.contains('star')) {
                         ++state.stars;
                         console.log("collected star", state.stars, "of", state.numYellowStars);
                         el.parentNode.removeChild(el);
-                        this.ding.play();
+                        this.playSound(state, 'ding');
                     } else if ('key' === el.id) {
                         state.questComplete = true;
-                        let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
-                        horncall.play();
+                        this.cacheAndPlaySound(state, '../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3');
                         el.parentNode.removeChild(el);
+                        const keyEnt = document.createElement('a-entity');
+                        keyEnt.setAttribute('id', 'keyCaptured');
+                        keyEnt.setAttribute('gltf-model', '#keyModel');
+                        keyEnt.setAttribute('position', '-0.85 0.20 -1.00');
+                        keyEnt.setAttribute('rotation', '0 0 90');
+                        keyEnt.setAttribute('scale', '10 10 10');
+                        state.gliderEl.appendChild(keyEnt);
                         for (const entity of document.querySelectorAll('[dark-elf]')) {
                             console.info("dark elf pursuing");
                             entity.setAttribute('dark-elf', 'goalSelector', '#armature');
@@ -943,7 +977,7 @@ AFRAME.registerState({
                         let url = el.getAttribute('data-sound-url');
                         let volume = el.getAttribute('data-sound-volume') || 1.0;
                         if (url) {
-                            new Howl({src: url, volume: volume, autoplay: true});
+                            this.cacheAndPlaySound(state, url, volume);
                         }
                         let text = el.getAttribute('data-text');
                         let subtitle = AFRAME.scenes[0].querySelector('#subtitle');
@@ -1137,7 +1171,7 @@ AFRAME.registerState({
             state.numYellowStars = AFRAME.scenes[0].querySelectorAll('.star').length;
             console.log("numYellowStars:", state.numYellowStars);
             if (state.numYellowStars) {
-                this.ding = new Howl({src: ['../assets/393633__daronoxus__ding.mp3']});
+                this.cacheSound(state, '../assets/393633__daronoxus__ding.mp3', 1.0, 'ding');
             }
         },
 
@@ -1155,9 +1189,8 @@ AFRAME.registerState({
 
             let postlaunchHelp = AFRAME.scenes[0].querySelector('#postlaunchHelp');
             if (postlaunchHelp && postlaunchHelp.src) {
-                let postlaunchHelpAudio = new Howl({src: [postlaunchHelp.src]});
                 setTimeout(() => {
-                    postlaunchHelpAudio.play();
+                    this.cacheAndPlaySound(state, postlaunchHelp.src)
                 }, 60000);
             }
         },
@@ -1302,6 +1335,34 @@ AFRAME.registerState({
             }
         },
 
+        cacheSound(_state, url, volume = 1.0, alias) {
+            if (!this.sounds) {
+                this.sounds = {};
+            }
+            if (! this.sounds[url]) {
+                this.sounds[url] = new Howl({src: url, volume: volume, autoplay: false});
+            }
+            if (alias) {
+                this.sounds[alias] = this.sounds[url];
+            }
+        },
+
+        playSound(_state, urlOrAlias) {
+            this.sounds?.[urlOrAlias]?.play();
+        },
+
+        cacheAndPlaySound(_state, url, volume = 1.0, alias) {
+            if (!this.sounds) {
+                this.sounds = {};
+            }
+            if (this.sounds[url]) {
+                this.sounds[url].play();
+            } else {
+                this.sounds[url] = new Howl({src: url, volume: volume, autoplay: true});
+                this.sounds[alias] = this.sounds[url];
+            }
+        },
+
         placeInGliderPath: function (state, action) {
             // console.log("placeInGliderPath:", action);
             let verticalAngleDeg = state.gliderRotationX + (Math.random()-0.5) * action.variation;
@@ -1356,8 +1417,7 @@ AFRAME.registerState({
             if (!newState.questComplete) {
                 newState.questComplete = newState.numYellowStars <= 0 || newState.stars / newState.numYellowStars >= 0.95;
                 if (newState.questComplete) {
-                    let horncall = new Howl({src: ['../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3']});
-                    horncall.play();
+                    AFRAME.scenes[0].emit('cacheAndPlaySound', '../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3');
                 }
             }
         } catch (err) {

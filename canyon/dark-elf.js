@@ -33,6 +33,11 @@ AFRAME.registerComponent('dark-elf', {
     const newXRot = el.object3D.rotation.x + (Math.random() - 0.5) * Math.PI / 16;
     el.object3D.rotation.set(newXRot, newYRot, el.object3D.rotation.z);
 
+    const keyTemplate = document.getElementById('keyTemplate');
+    const clone = keyTemplate.content.firstElementChild.cloneNode(true);
+    clone.setAttribute('id', 'key');
+    AFRAME.scenes[0].appendChild(clone);
+
     this.setModeOrPursuit(wanderList[0]);
 
     setInterval(this.randomMode.bind(this, el), 3000);
@@ -40,18 +45,44 @@ AFRAME.registerComponent('dark-elf', {
     el.addEventListener('raycaster-intersection', (evt) => {
       // Intersection w/ distance 0 is sometimes sent immediately
       if (evt.detail.intersections.length > 0 && evt.detail.intersections[0].distance > 0) {
-        this.isAvoidingLandcape = true;
-        const newXRot = el.object3D.rotation.x + (Math.random() - 0.5) * Math.PI / 36;
-        el.object3D.rotation.set(newXRot, el.object3D.rotation.y, el.object3D.rotation.z);
-        this.setModeOrPursuit(wanderList[0]);
+        for (const entity of evt.detail.els) {
+          if (entity.classList.contains('landscape')) {
+            this.isAvoidingLandcape = true;
+            const newXRot = el.object3D.rotation.x + (Math.random() - 0.5) * Math.PI / 36;
+            el.object3D.rotation.set(newXRot, el.object3D.rotation.y, el.object3D.rotation.z);
+            this.setModeOrPursuit(wanderList[0]);
+          } else if (entity.id === this.data.goalSelector?.id) {
+            console.log("caught goal")
+            const keyCaptured = document.getElementById('keyCaptured');
+            keyCaptured?.parentNode?.removeChild(keyCaptured);
+            AFRAME.scenes[0].emit('cacheAndPlaySound', 'Im-taking-that-back.ogg');
+            for (const entity of document.querySelectorAll('[dark-elf]')) {
+              console.info("dark elf wandering");
+              entity.setAttribute('dark-elf', 'goalSelector', '');
+            }
+
+            AFRAME.scenes[0].emit('setState', {questComplete: false});
+
+            const keyTemplate = document.getElementById('keyTemplate');
+            const clone = keyTemplate.content.firstElementChild.cloneNode(true);
+            clone.setAttribute('id', 'key');
+            AFRAME.scenes[0].appendChild(clone);
+          } else {
+            console.warn("unexpected raycaster intersection:", entity);
+          }
+        }
       }
     });
     el.addEventListener('raycaster-intersection-cleared', (evt) => {
       // console.log("cleared intersections:", evt.detail?.clearedEls)
-      setTimeout(() => {   // keeps turning away from wall for another second
-        this.isAvoidingLandcape = false;
-        this.setModeOrPursuit(wanderList[0]);
-      }, 1000);
+      for (const entity of evt.detail.clearedEls) {
+        if (entity.classList.contains('landscape')) {
+          setTimeout(() => {   // keeps turning away from wall for another second
+            this.isAvoidingLandcape = false;
+            this.setModeOrPursuit(wanderList[0]);
+          }, 1000);
+        }
+      }
     });
   },
 
