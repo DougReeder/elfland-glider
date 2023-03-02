@@ -439,7 +439,8 @@ AFRAME.registerState({
         showControlsReminder: function (state) {
             let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
             let intro = document.getElementById('intro');
-            if (prelaunchHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
+            const existingHelp = prelaunchHelp?.getAttribute('value');
+            if (prelaunchHelp && !existingHelp && (!intro || AFRAME.scenes[0].is("vr-mode")) && !state.isFlying) {
                 state.controlsReminderDisplayed = true;
                 if (AFRAME.scenes[0].is("vr-mode") && AFRAME.utils.device.checkHeadsetConnected() || AFRAME.utils.device.isMobileVR()) {
                     prelaunchHelp.setAttribute('value', "The wing above you\npoints where you're flying.\n\nTilt left: turn left\nTilt right: turn right\nTilt back: climb & slow down\nTilt forward: dive & speed up\nTrigger, button or touchpad: launch");
