@@ -25,7 +25,7 @@
         <img id="steelGrip" src="../assets/textures/TexturesCom_MetalVarious0052_1_M_y.jpg" />
         <img id="bezel" src="https://unpkg.com/aframe-dial@1.2.0/assets/bezel.png" crossorigin="anonymous" />
         <a-asset-item id="keyModel" src="../assets/key-Alfonso.glb"></a-asset-item>
-        <a-asset-item id="darkElf" src="../assets/konoha_tengu_-_low_poly_realtime_character/scene.gltf"></a-asset-item>
+        <a-asset-item id="darkElfModel" src="../assets/konoha_tengu_-_low_poly_realtime_character/scene.gltf"></a-asset-item>
         <img id="screenshot" src="./screenshot.png" />
     </a-assets>
 
@@ -75,10 +75,11 @@
     <a-entity id="nextQuestPortal" position="-27 -115 116" scale="5 5 0" bind="visible: questComplete"
               link="href:../yggdrasil; title: The Tree of Worlds; image:../yggdrasil/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity gltf-model="#darkElf" scale="2 2 2" position="-1 -100.5 115" rotation="2 180 0"
+    <a-entity gltf-model="#darkElfModel" scale="2 2 2" position="-1 -100.5 115" rotation="2 180 0"
               animation-mixer="crossFadeDuration: 0.5" raycaster="objects:.landscape,#armature"
               dark-elf="goalSelector: ">
         <a-triangle vertex-a="-5 -5 -5" vertex-b="5 -5 5" vertex-c="5 5 -5" material="visible:false"
+                    data-aabb-collider-dynamic
                     class="proximitySound" data-text="You can't have our key! Go away!"
                     data-sound-url="you-cant-have-our-key.ogg">
         </a-triangle>

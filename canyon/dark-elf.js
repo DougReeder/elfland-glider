@@ -56,6 +56,11 @@ AFRAME.registerComponent('dark-elf', {
             const keyCaptured = document.getElementById('keyCaptured');
             keyCaptured?.parentNode?.removeChild(keyCaptured);
             AFRAME.scenes[0].emit('cacheAndPlaySound', 'Im-taking-that-back.ogg');
+            const subtitle = AFRAME.scenes[0].querySelector('#subtitle');
+            subtitle?.setAttribute('value', "I'm taking that back!");
+            setTimeout(() => {
+              subtitle?.setAttribute('value', "");
+            }, 5000);
             for (const entity of document.querySelectorAll('[dark-elf]')) {
               console.info("dark elf wandering");
               entity.setAttribute('dark-elf', 'goalSelector', '');
@@ -87,6 +92,11 @@ AFRAME.registerComponent('dark-elf', {
   },
 
   update(oldData) {
+    const {el} = this;
+    if (this.data.goalSelector) {
+      el.firstElementChild.classList.remove('proximitySound');
+      // raycaster will trigger sound
+    }
     this.setModeOrPursuit(wanderList[0]);
   },
 
