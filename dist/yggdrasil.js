@@ -1783,9 +1783,9 @@ AFRAME.registerComponent('yggdrasil', {
 
         this.el.emit('countYellowStars', {});
 
-        if (/island/.test(sessionStorage.getItem('previousWorld'))) {
+        if (/canyon/.test(sessionStorage.getItem('previousWorld'))) {
             let prelaunchHelp = AFRAME.scenes[0].querySelector('#prelaunchHelp');
-            prelaunchHelp.setAttribute('value', "Congratulations!\\nYou've completed the main quests.\\nExplore all the worlds!");
+            prelaunchHelp.setAttribute('value', "Congratulations!\\nYou've completed the quests.\\nExplore all the worlds!");
         }
     },
 

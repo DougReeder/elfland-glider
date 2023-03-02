@@ -1,12 +1,12 @@
 // canyon.js - maneuvering in cramped spaces, for Elfland Glider
-// Copyright © 2019-2020 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2019-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 // import {setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
 import './canyon-terrain'
 import '../assets/land-shader.js'
 import {darkElf} from './dark-elf'
-// import '../src/intro.js'
+import '../src/intro.js'
 
 
 const INITIAL_POSITION = {x:-1, y:-100, z:48};
