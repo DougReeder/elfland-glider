@@ -1912,10 +1912,10 @@ AFRAME.registerComponent('armature-tick-state', {
 /*!***************************************!*\
   !*** ./assets/close-button-red32.png ***!
   \***************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((module) => {
 
 "use strict";
-module.exports = __webpack_require__.p + "8357cd993c948fc4d3a7.png";
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAAZiS0dEAP8AAAAAMyd88wAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB94GFwMDIcNssL0AAAJJSURBVFjDzZc7S2NRFIVXxsc1iAoa3yiiEBAfoEim0ammEQMWFhZCOgvBwn/gDxD/RDobBeuAMI1OZxcDQsIgQUFERXFA4zfFNYma+zh3Jo5ZsLt979pn733W3iekAEAakvRN0ndJXyVFJf2W9EvST0kpST9CUk7VApKFlEB6QMLQHl6+sf6VPB6A1M3if3vqZBXIi5Y0zgZSK1KmiuRFyyC1mpz8I8hfB2F5BZD8QPJSOYI1XDgMa2uwuQlNTf4E7e2wtQWLi1BXZ9aYL6mvdGxogHyeEq6uIBZzJ19dhefnsv/Ojlew1usAEo5Oy8tU4PoapqYqfVdW3pIDPD1Bb69bAInXATiLzNwcjri7g4mJst/8vE32Hjc30NzsKlYlefWs6fGxcxCXlzA8DAsLUCg4+2xv+/XMkHv6i9bZCem0M8HFhfPJAfb2oL7eL4CE2dWLRCCTwRipFDQ2ml1JY+GJRCCb9Sc/PATLMhYmBZpyg4N27d1wdGRf3QBT80ugKRUO2+aG7m6prS3w5DMrwcAAnJ/7lyCfh76+QCXwb8L+fsjlzJvw5AQ6Ooyb0Psa9vTA6akzUTZry7MT0mno6jK6ht5CdHDgTHB2ZmvE+Djc3zv77O76C5GnFI+OuqvgyEjZLxp1zsTjo51BLyn2HEZjY5U/vb2FyclK3+lpe1C9nwUtLUbDyHJN0/7+27TPzLinNBYrB1EowMaG2Tj23YBnZ2F93WvBeGtLS37LS7z2VrKaWEo/fS2viYdJTTzN/ufjNPTZz/M/sV5aEsIQ08UAAAAASUVORK5CYII=";
 
 /***/ })
 
@@ -1973,18 +1973,6 @@ module.exports = __webpack_require__.p + "8357cd993c948fc4d3a7.png";
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -1999,26 +1987,6 @@ module.exports = __webpack_require__.p + "8357cd993c948fc4d3a7.png";
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/publicPath */
-/******/ 	(() => {
-/******/ 		var scriptUrl;
-/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
-/******/ 		var document = __webpack_require__.g.document;
-/******/ 		if (!scriptUrl && document) {
-/******/ 			if (document.currentScript)
-/******/ 				scriptUrl = document.currentScript.src
-/******/ 			if (!scriptUrl) {
-/******/ 				var scripts = document.getElementsByTagName("script");
-/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
-/******/ 			}
-/******/ 		}
-/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
-/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
-/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
-/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
-/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
