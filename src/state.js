@@ -50,6 +50,11 @@ AFRAME.registerState({
         debug: false   // no way to enable this yet
     },
 
+    nonBindedStateKeys: ['armatureEl', 'gliderEl', 'cameraEl', 'leftHandEl', 'rightHandEl',
+        'controllerConnections', 'isAnyPressedLeft', 'xSetting', 'zSetting', 'controlStickEl',
+        'controlNeutralHeight', 'controlMode', 'controlSubmode',
+        'gliderPositionStart', 'gliderRotationYStart'],
+
     handlers: {
         setState: function (state, values) {
             for (let pName in values) {
@@ -67,6 +72,10 @@ AFRAME.registerState({
             console.log("hasNativeWebVRImplementation:", window.hasNativeWebVRImplementation);
             console.log("isMobile:", AFRAME.utils.device.isMobile());
             console.log("isMobileVR:", AFRAME.utils.device.isMobileVR());
+
+            // It's best to re-use ThreeJS objects and not store objects in state.
+            this.quaternion = new THREE.Quaternion();
+            this.euler = new THREE.Euler();
 
             state.armatureEl = armatureEl;
             state.gliderEl = armatureEl.querySelector('#glider');
@@ -354,7 +363,7 @@ AFRAME.registerState({
                 const cameraPos = state.cameraEl.getAttribute("position");
                 state.controlNeutralHeight = cameraPos.y - HUMAN_EYE_ELBOW_DISTANCE;
                 state.controlStickEl.setAttribute('position', {x: 0, y: state.controlNeutralHeight, z: -0.4});
-                state.controlStickEl.setAttribute('rotation', {x: 0, y: 0, z: 0});
+                state.controlStickEl.object3D.quaternion.set(0, 0, 0, 1);
                 state.xSetting = 0;
                 state.zSetting = 0;
             }
@@ -470,31 +479,32 @@ AFRAME.registerState({
                     state.zSetting = cameraRotation.z;
                     break;
                 case "HANDS":
+                    let quaternion;
                     const leftHandPos = state.leftHandEl?.getAttribute("position");
                     const rightHandPos = state.rightHandEl?.getAttribute("position");
                     switch (state.controlSubmode) {
                         case "LEFT":
-                            const leftHandRot = state.leftHandEl?.getAttribute('rotation');
+                            quaternion = state.leftHandEl.object3D.quaternion;
 
                             state.controlStickEl.setAttribute('position', leftHandPos);
-                            state.controlStickEl.setAttribute('rotation', leftHandRot);
-
-                            state.xSetting = leftHandRot.x;
-                            state.zSetting = leftHandRot.z;
-                            break;
+                           break;
                         case "RIGHT":
-                            const rightHandRot = state.rightHandEl?.getAttribute('rotation');
+                            quaternion = state.rightHandEl.object3D.quaternion;
 
                             state.controlStickEl.setAttribute('position', rightHandPos);
-                            state.controlStickEl.setAttribute('rotation', rightHandRot);
-
-                            state.xSetting = rightHandRot.x;
-                            state.zSetting = rightHandRot.z;
                             break;
                         case "NONE":
+                            this.quaternion.identity();
+                            quaternion = this.quaternion;
                             // TODO: slow decay to neutral?
                             break;
                     }
+                    state.controlStickEl.object3D?.quaternion?.copy(quaternion)
+
+                    this.euler.setFromQuaternion(quaternion, 'XZY');
+                    state.xSetting = this.euler.x * 180 / Math.PI;
+                    this.euler.setFromQuaternion(quaternion, 'ZXY');
+                    state.zSetting = this.euler.z * 180 / Math.PI;
                     break;
             }
             let xDiff = state.xSetting - state.gliderRotationX;
