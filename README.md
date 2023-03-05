@@ -14,7 +14,7 @@ Collect a powerup to gain speed.
 ~~Ride a thermal to gain altitude.~~
 Press trigger, button or touchpad to take a (context-specific) action, such as launching.
 
-[Play on-line](https://elfland-glider.surge.sh/)
+[Play on-line](https://dougreeder.github.io/elfland-glider/)
 
 ## Gameplay
 Gliding is controlled by the virtual control stick, when a 6-DOF controller is available, or headset orientation. 
