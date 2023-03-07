@@ -33,9 +33,18 @@ AFRAME.registerComponent('city', {
         let buildingEls = new Array(numStyles);
 
         buildingEls[0] = document.createElement('a-shader-buildings');
-        buildingEls[0].setAttribute('wall-color', '#808080');
+        buildingEls[0].setAttribute('x-proportion-geometry', 5);
+        buildingEls[0].setAttribute('x-proportion-material', 5);
+        buildingEls[0].setAttribute('z-proportion-geometry', 5);
+        buildingEls[0].setAttribute('z-proportion-material', 5);
+        buildingEls[0].setAttribute('y-proportion-geometry', 3.5);
+        buildingEls[0].setAttribute('y-proportion-material', 3.5);
+        buildingEls[0].setAttribute('window-width', -0.5);
+        buildingEls[0].setAttribute('window-height', 0.0);
+        buildingEls[0].setAttribute('wall-color', '#5A5550');   // dark gray
         buildingEls[0].setAttribute('wall-src', '#concreteAggregate');
         buildingEls[0].setAttribute('wall-zoom', 1.5);
+        buildingEls[0].setAttribute('window-opacity', '0.9');
 
         buildingEls[1] = document.createElement('a-shader-buildings');
         buildingEls[1].setAttribute('x-proportion-geometry', 6);
@@ -46,22 +55,22 @@ AFRAME.registerComponent('city', {
         buildingEls[1].setAttribute('y-proportion-material', 5.5);
         buildingEls[1].setAttribute('window-width', 0.95);
         buildingEls[1].setAttribute('window-height', 0.0);
-        buildingEls[1].setAttribute('wall-color', '#a0a0a0');   // light gray
+        buildingEls[1].setAttribute('wall-color', '#75706D');   // light gray
         buildingEls[1].setAttribute('wall-src', '#concreteBlocks');
         buildingEls[1].setAttribute('wall-zoom', 2.5);
+        buildingEls[1].setAttribute('px', '#vr-ok-px');
+        buildingEls[1].setAttribute('nx', '#vr-ok-nx');
+        buildingEls[1].setAttribute('py', '#vr-ok-py');
+        buildingEls[1].setAttribute('ny', '#vr-ok-ny');
+        buildingEls[1].setAttribute('nz', '#vr-ok-nz');
+        buildingEls[1].setAttribute('window-opacity', '0.6');
 
         buildingEls[2] = document.createElement('a-shader-buildings');
-        buildingEls[2].setAttribute('x-proportion-geometry', 5);
-        buildingEls[2].setAttribute('x-proportion-material', 5);
-        buildingEls[2].setAttribute('z-proportion-geometry', 5);
-        buildingEls[2].setAttribute('z-proportion-material', 5);
-        buildingEls[2].setAttribute('y-proportion-geometry', 3.5);
-        buildingEls[2].setAttribute('y-proportion-material', 3.5);
-        buildingEls[2].setAttribute('window-width', -0.5);
-        buildingEls[2].setAttribute('window-height', 0.0);
-        buildingEls[2].setAttribute('wall-color', '#6e2b11');   // brick red
+        buildingEls[2].setAttribute('wall-color', '#614031');   // brick red
         buildingEls[2].setAttribute('wall-src', '#brick');
         buildingEls[2].setAttribute('wall-zoom', 2.25);
+        buildingEls[2].setAttribute('equirectangular', '#reading-room');
+        buildingEls[2].setAttribute('window-opacity', '0.7');
 
         buildingEls[3] = document.createElement('a-shader-buildings');
         buildingEls[3].setAttribute('x-proportion-geometry', 6);
@@ -72,25 +81,39 @@ AFRAME.registerComponent('city', {
         buildingEls[3].setAttribute('y-proportion-material', 4.5);
         buildingEls[3].setAttribute('window-width', -0.5);
         buildingEls[3].setAttribute('window-height', 0.3);
-        buildingEls[3].setAttribute('wall-color', '#675342');   // brown brick
+        buildingEls[3].setAttribute('wall-color', '#716049');   // brown brick
         buildingEls[3].setAttribute('wall-src', '#medievalBrick1');
         buildingEls[3].setAttribute('wall-zoom', 3.5);
+        buildingEls[3].setAttribute('px', '#hotel-px');
+        buildingEls[3].setAttribute('nx', '#hotel-nx');
+        buildingEls[3].setAttribute('py', '#hotel-py');
+        buildingEls[3].setAttribute('ny', '#hotel-ny');
+        buildingEls[3].setAttribute('nz', '#hotel-nz');
+        buildingEls[3].setAttribute('window-opacity', '0.5');
 
         buildingEls[4] = document.createElement('a-shader-buildings');
         buildingEls[4].setAttribute('y-proportion-geometry', 5);
         buildingEls[4].setAttribute('y-proportion-material', 5);
         buildingEls[4].setAttribute('window-width', 0.5);
         buildingEls[4].setAttribute('window-height', 0.0);
-        buildingEls[4].setAttribute('wall-color', '#a5a696');
+        buildingEls[4].setAttribute('wall-color', '#B8ADA1');   // tan
         buildingEls[4].setAttribute('wall-src', '#stoneBlocks');
         buildingEls[4].setAttribute('wall-zoom', 5.0);
+        buildingEls[4].setAttribute('equirectangular', '#reading-room');
+        buildingEls[4].setAttribute('window-opacity', '0.7');
 
         buildingEls[5] = document.createElement('a-shader-buildings');
         buildingEls[5].setAttribute('window-width', 0.8);
         buildingEls[5].setAttribute('window-height', -0.1);
-        buildingEls[5].setAttribute('wall-color', '#a5a696');
+        buildingEls[5].setAttribute('wall-color', '#9F9279');   // beige
         buildingEls[5].setAttribute('wall-src', '#medievalBrick2');
         buildingEls[5].setAttribute('wall-zoom', 5.0);
+        buildingEls[5].setAttribute('px', '#vr-ok-px');
+        buildingEls[5].setAttribute('nx', '#vr-ok-nx');
+        buildingEls[5].setAttribute('py', '#vr-ok-py');
+        buildingEls[5].setAttribute('ny', '#vr-ok-ny');
+        buildingEls[5].setAttribute('nz', '#vr-ok-nz');
+        buildingEls[5].setAttribute('window-opacity', '0.6');
 
         for (let s=0; s<numStyles; ++s) {
             buildingEls[s].setAttribute('elevation-geometry', 1);
