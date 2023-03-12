@@ -3,7 +3,6 @@
 
 import {isDesktop} from "../src/elfland-utils";
 import '../src/state.js'
-import '../assets/land-shader.js'
 import '../src/intro.js'
 
 

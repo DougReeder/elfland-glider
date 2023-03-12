@@ -4,7 +4,7 @@
 // import {setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
 import './canyon-terrain'
-import '../assets/land-shader.js'
+import './canyon-shader.js'
 import {darkElf} from './dark-elf'
 import '../src/intro.js'
 
