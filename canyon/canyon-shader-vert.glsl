@@ -5,11 +5,14 @@ uniform vec3 sunNormal;
 
 varying vec3 pos;
 varying float sunFactor;
+varying float cameraZ;
 
 void main() {
     pos = position;
 
     sunFactor = 0.6875 + 0.75 * max(dot(normal, sunNormal), 0.0);
 
-    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    vec4 cameraSpacePosition = modelViewMatrix * vec4(position, 1.0);
+    cameraZ = cameraSpacePosition.z;
+    gl_Position = projectionMatrix * cameraSpacePosition;
 }

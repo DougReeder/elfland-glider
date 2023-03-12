@@ -8,6 +8,7 @@ uniform vec3 color2Yang;
 
 varying vec3 pos;
 varying float sunFactor;
+varying float cameraZ;
 
 //	Simplex 3D Noise
 //	by Ian McEwan, Ashima Arts
@@ -89,10 +90,15 @@ void main() {
     vec3 colorYin  = mix(color1Yin,  color2Yin,  strata);
     vec3 colorYang = mix(color1Yang, color2Yang, strata);
 
+    float noise1 = snoise(pos * 0.5);
+    float noise2 = snoise(pos);
+    float noise3 = snoise(pos * 2.0);
+    float noise = mix(noise1, noise1 +  mix(noise2, noise2 + noise3, smoothstep(-50., -30., cameraZ)), smoothstep(-80., -50., cameraZ));
+
     vec3 inherent = mix(
     colorYin,
     colorYang,
-    0.5 * (1.0 + snoise(pos*0.5) + 0.75*snoise(pos))
+    noise
     );
     gl_FragColor = vec4(inherent * sunFactor, 1.0);
 }
