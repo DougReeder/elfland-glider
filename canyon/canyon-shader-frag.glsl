@@ -7,6 +7,7 @@ uniform vec3 color2Yin;
 uniform vec3 color2Yang;
 
 varying vec3 pos;
+varying float vIntensityTweak;
 varying float sunFactor;
 varying float cameraZ;
 
@@ -100,5 +101,5 @@ void main() {
     colorYang,
     noise
     );
-    gl_FragColor = vec4(inherent * sunFactor, 1.0);
+    gl_FragColor = vec4(inherent * (sunFactor + vIntensityTweak), 1.0);
 }

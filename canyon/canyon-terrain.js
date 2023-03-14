@@ -2,6 +2,7 @@
 // Data and code are in one file to avoid asynchronous loading.
 // Copyright © 2023 Doug Reeder; Licensed under the GNU GPL-3.0
 import {toCreasedNormals} from '../src/BufferGeometryUtilsRump';
+import ImprovedNoise from '../src/ImprovedNoise';
 
 const X_POINTS = 41;
 const Z_POINTS = 67;
@@ -112,6 +113,25 @@ AFRAME.registerGeometry('canyon-terrain', {
       vertices[v * 3 + 1] = height;
       ++v;
     }
+
+
+    const perlin = new ImprovedNoise();
+    const SEED = Math.random() * 100;
+
+    const intensityTweak = new Float32Array(X_POINTS * Z_POINTS);
+    for (let i = 0; i < X_POINTS; ++i) {
+      for (let j = 0; j < Z_POINTS; ++j) {
+        if (i > 0 && i < X_POINTS - 1 && j > 0 && j < Z_POINTS -1) {   // doesn't tweak rim
+          const v = i + j * X_POINTS;
+          for (let scale = 20; scale > 1; --scale) {
+            intensityTweak[v] += perlin.noise(i / scale, j / scale, SEED);
+          }
+          intensityTweak[v] /= 15;
+        }
+      }
+    }
+
+    geometry.setAttribute('intensityTweak', new THREE.BufferAttribute(intensityTweak, 1));
 
     // computes normals that are smooth for shallow angles
     this.geometry = toCreasedNormals(geometry, 0.45 * Math.PI);
