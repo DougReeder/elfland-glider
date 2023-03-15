@@ -53,6 +53,32 @@ function calcPosChange(verticalAngleDeg, horizontalAngleDeg, distance) {
         z: -horizontalDistance * Math.sin(horizontalAngleRad)};
 }
 
+function placeholderTexture(colorArg = '#808080', width = 1, height = 1) {
+    const size = width * height;
+    const data = new Uint8Array( 4 * size );
+
+    let color;
+    if (colorArg.isColor) {
+        color = colorArg;
+    } else {
+        color = new THREE.Color(colorArg);
+    }
+    const r = Math.floor(color.r * 255);
+    const g = Math.floor(color.g * 255);
+    const b = Math.floor(color.b * 255);
+
+    for (let i = 0; i < size; ++i ) {
+        const stride = i * 4;
+        data[stride] = r;
+        data[stride + 1] = g;
+        data[stride + 2] = b;
+        data[stride + 3] = 255;
+    }
+
+    const texture = new THREE.DataTexture(data, width, height);
+    texture.needsUpdate = true;
+    return texture;
+}
 
 var environmentalSound = null;
 
@@ -109,4 +135,4 @@ if (document.monetization)  {
     console.log("no monetization API");
 }
 
-export {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, setEnvironmentalSound, pokeEnvironmentalSound};
+export {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, placeholderTexture, setEnvironmentalSound, pokeEnvironmentalSound};

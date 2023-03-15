@@ -7,6 +7,7 @@
 // Faces will be 44% brighter in direct sun and 44% darker when facing away from the sun.
 // Example: material="shader:canyon; src:#rock"
 
+import {placeholderTexture} from "../src/elfland-utils";
 import vertexShader from './canyon-shader-vert.glsl'
 import fragmentShader from './canyon-shader-frag.glsl'
 
@@ -23,7 +24,7 @@ AFRAME.registerShader('canyon', {
         let sunPos = new THREE.Vector3(data.sunPosition.x, data.sunPosition.y, data.sunPosition.z);
         this.material = new THREE.ShaderMaterial({
             uniforms: {
-                rockTexture: {value: null},
+                rockTexture: {value: placeholderTexture()},
                 sunNormal: {value: sunPos.normalize()}
             },
             vertexShader: vertexShader,
@@ -47,6 +48,7 @@ AFRAME.registerShader('canyon', {
         if (src?.currentSrc) {
             const textureLoader = new THREE.TextureLoader();
             textureLoader.load(src.currentSrc, texture => {
+                this.material.uniforms.rockTexture.value?.dispose();
                 this.material.uniforms.rockTexture.value = texture;
                 texture.wrapS = THREE.RepeatWrapping;
                 texture.wrapT = THREE.RepeatWrapping;
