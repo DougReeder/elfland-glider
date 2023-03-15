@@ -3,11 +3,13 @@ Work is licensed under the GNU GPL-3.0, unless otherwise noted
 
 ## Code
 
-Most code by P. Douglas Reeder
+Most code by Doug Reeder
 
 Simplex 3D noise by Ian McEwan, Ashima Arts
 
 Gosper curve implementation by Jos Dirksen in "Learn Three.js"
+
+Biplanar texture mapping by Inigo Quilez - https://iquilezles.org/articles/biplanar/
 
 ## Models
 
