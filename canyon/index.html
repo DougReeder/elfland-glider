@@ -34,6 +34,7 @@
 <body>
 <a-scene canyon background="color:#398bc5">
     <a-assets>
+        <img id="rock" src="../assets/textures/TexturesCom_Rock_BoulderBase_A_2x2_1K_albedo.jpeg">
         <img id="steelGrip" src="../assets/textures/TexturesCom_MetalVarious0052_1_M_y.jpg" />
         <img id="bezel" src="https://unpkg.com/aframe-dial@1.2.0/assets/bezel.png" crossorigin="anonymous" />
         <a-asset-item id="keyModel" src="../assets/key-Alfonso.glb"></a-asset-item>
@@ -46,16 +47,16 @@
 
     <a-entity id="terrain" position="0 0 0" class="landscape"
               geometry="primitive: canyon-terrain; spacing:10"
-              material="shader:canyon"></a-entity>
+              material="shader:canyon; src:#rock"></a-entity>
 
     <a-entity geometry="primitive:triangle; vertexA:-200 0 -330; vertexB:7083 0 -330; vertexC:-200 0 -7213"
-              material="shader:canyon;" class="landscape"></a-entity>
+              material="shader:canyon; src:#rock" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:200 0 -330; vertexB:200 0 7213; vertexC:7083 0 -330"
-              material="shader:canyon;" class="landscape"></a-entity>
+              material="shader:canyon; src:#rock" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:200 0 330; vertexB:-7083 0 330; vertexC:200 0 7213"
-              material="shader:canyon;" class="landscape"></a-entity>
+              material="shader:canyon; src:#rock" class="landscape"></a-entity>
     <a-entity geometry="primitive:triangle; vertexA:-200 0 330; vertexB:-200 0 -7213; vertexC:-7083 0 330"
-              material="shader:canyon;" class="landscape"></a-entity>
+              material="shader:canyon; src:#rock" class="landscape"></a-entity>
 
 
     <a-dust num-points="512" dispersion="33" color="#101010"></a-dust>
