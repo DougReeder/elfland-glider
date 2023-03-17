@@ -7,9 +7,9 @@ varying vec3 pos;
 varying float sunFactor;
 
 void main() {
-    pos = position + vec3(-300.0, 0.0, 0.0);
-
     sunFactor = 0.5 + max(dot(normal, sunNormal), 0.0);
 
-    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+    vec4 globalPosition = modelMatrix * vec4(position, 1.0);
+    pos = globalPosition.xyz;
+    gl_Position = projectionMatrix * viewMatrix * globalPosition;
 }

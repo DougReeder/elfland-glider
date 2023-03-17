@@ -1,6 +1,7 @@
 // settlement-shader-frag.glsl - smooth noise, with one pair of colors inside a radius, another pair outside
 // Copyright © 2019, 2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
+uniform vec3 colorStreet;
 uniform vec3 colorYinInside;
 uniform vec3 colorYangInside;
 uniform vec3 colorYinOutside;
@@ -106,5 +107,14 @@ void main() {
     colorYang,
     0.5 * (1.0 + snoise(pos*0.4))
     );
-    gl_FragColor = vec4(inherent * sunFactor, 1.0);
+
+    const float xBlockLength = 270.;
+    const float zBlockLength = 150.;
+    float xRemainder = mod(1000. + pos.x, xBlockLength);
+    float zRemainder = mod(1000. + pos.z, zBlockLength);
+    bool isStreet = isInside && (xRemainder > 15. && xRemainder < 35. || zRemainder > 15. && zRemainder < 35.) &&
+                    (abs(pos.x) > 95. || abs(pos.z) > 95.);
+
+    vec3 final = isStreet ? colorStreet : inherent * sunFactor;
+    gl_FragColor = vec4(final, 1.0);
 }

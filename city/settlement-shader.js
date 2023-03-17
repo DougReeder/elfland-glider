@@ -10,6 +10,7 @@ import fragmentShader from './settlement-shader-frag.glsl';
 
 AFRAME.registerShader('settlement', {
     schema: {
+        colorStreet: {type: 'color', default: '#343432'},   // asphalt
         colorYinInside: {type: 'color', default: '#599432'},   // grass green
         colorYangInside: {type: 'color', default: '#557736'},   // dark green
         colorYinOutside: {type: 'color', default: '#e8e5e2'},   // off white
@@ -27,6 +28,7 @@ AFRAME.registerShader('settlement', {
         let sunPos = new THREE.Vector3(data.sunPosition.x, data.sunPosition.y, data.sunPosition.z);
         this.material = new THREE.ShaderMaterial({
             uniforms: {
+                colorStreet: {value: new THREE.Color(data.colorStreet)},
                 colorYinInside: {value: new THREE.Color(data.colorYinInside)},
                 colorYangInside: {value: new THREE.Color(data.colorYangInside)},
                 colorYinOutside: {value: new THREE.Color(data.colorYinOutside)},
@@ -44,6 +46,7 @@ AFRAME.registerShader('settlement', {
      * `update` used to update the material. Called on initialization and when data updates.
      */
     update: function (data) {
+        this.material.uniforms.colorStreet.value.set(data.colorStreet);
         this.material.uniforms.colorYinInside.value.set(data.colorYinInside);
         this.material.uniforms.colorYangInside.value.set(data.colorYangInside);
         this.material.uniforms.colorYinOutside.value.set(data.colorYinOutside);
