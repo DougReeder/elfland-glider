@@ -4,7 +4,7 @@
 import {isDesktop, setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
 import './city-terrain';
-import '../src/settlement-shader.js'
+import './settlement-shader.js'
 import '../src/intro.js'
 
 
