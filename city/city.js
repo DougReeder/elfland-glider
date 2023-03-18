@@ -7,8 +7,15 @@ import './city-terrain';
 import './settlement-shader.js'
 import '../src/intro.js'
 
-
-const INITIAL_POSITION = {x:385, y:101, z:385};
+const LAUNCH_X_CORE_SECTIONS = 5;
+const LAUNCH_Z_CORE_SECTIONS = 5;
+const LAUNCH_Y_SECTIONS = 20;
+const LAUNCH_X_PROPORTION = 5;
+const LAUNCH_Z_PROPORTION = 5;
+const LAUNCH_Y_PROPORTION = 5;
+const INITIAL_POSITION = {x: 420 - LAUNCH_X_CORE_SECTIONS * LAUNCH_X_PROPORTION + 1,
+                        y: LAUNCH_Y_SECTIONS * LAUNCH_Y_PROPORTION + 3,
+                        z: 420 - LAUNCH_Z_CORE_SECTIONS * LAUNCH_Z_PROPORTION + 1};
 const INITIAL_ROTATION_X = 0;
 const INITIAL_ROTATION_Y = 45;
 const CITY_RADIUS_SQ = 921600;
@@ -261,6 +268,12 @@ AFRAME.registerComponent('city', {
                     } else if (xCoreSections + xWingSections <= 4.5 && Math.random() < 0.1) {
                         building.zCoreSections += 0.15;
                     }
+                }
+                if (20 === i && 18 === j) {
+                    building.xCoreSections = LAUNCH_X_CORE_SECTIONS;
+                    building.zCoreSections = LAUNCH_Z_CORE_SECTIONS;
+                    building.ySections = LAUNCH_Y_SECTIONS;
+                    style = 4;   // x-proportion = z-proportion = y-proportion = 5
                 }
                 buildings[style].push(building);
             }
