@@ -5,7 +5,7 @@ AFRAME.registerGeometry('stella-octangula', {
     schema: {
     },
 
-    init: function (_data) {
+    init: function (data) {
         const NUM_PLANES = 8;
         const positions = new Float32Array(NUM_PLANES * 3 * 9);
         const normals = new Float32Array(NUM_PLANES * 3 * 9);
@@ -49,7 +49,13 @@ AFRAME.registerGeometry('stella-octangula', {
         geometry.setAttribute('normal', new THREE.BufferAttribute(normals, 3));
         geometry.setIndex(indexes);
         geometry.normalizeNormals();
-        geometry.computeBoundingBox();
+        const boundingBoxSize = parseFloat(data.boundingBoxSize);
+        if (boundingBoxSize > 0) {
+            const coord = data.boundingBoxSize / 2;
+            geometry.boundingBox = new THREE.Box3(new THREE.Vector3(-coord, -coord, -coord), new THREE.Vector3(coord, coord, coord));
+        } else {
+            geometry.computeBoundingBox();
+        }
 
         this.geometry = geometry;
     }

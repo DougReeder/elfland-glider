@@ -171,12 +171,12 @@ AFRAME.registerState({
                     } else if (el.classList.contains('star')) {
                         ++state.stars;
                         console.log("collected star", state.stars, "of", state.numYellowStars);
-                        el.parentNode.removeChild(el);
+                        el.parentNode?.removeChild(el);
                         this.playSound(state, 'ding');
                     } else if ('key' === el.id) {
                         state.questComplete = true;
                         this.cacheAndPlaySound(state, '../assets/361684__taranp__horncall-strauss1-eflatmajor_incipit.mp3');
-                        el.parentNode.removeChild(el);
+                        el.parentNode?.removeChild(el);
                         const keyEnt = document.createElement('a-entity');
                         keyEnt.setAttribute('id', 'keyCaptured');
                         keyEnt.setAttribute('gltf-model', '#keyModel');

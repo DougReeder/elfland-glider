@@ -51,19 +51,13 @@ AFRAME.registerComponent('island-world', {
             starEl.setAttribute('class', 'star');
             let dispersion = s < 3 ? 1750 : 1000;   // place a couple stars away from the island
             starEl.setAttribute('position', this.randomPosition(islandComp, dispersion, 12, 150));
-            starEl.setAttribute('geometry', {primitive:'triangle', vertexA:'-1.5 -1.5 -1.5', vertexB:'1.5 -1.5 1.5', vertexC:'1.5 1.5 -1.5'});
-            starEl.setAttribute('material', {visible:false});
+            starEl.setAttribute('rotation', '45 0 45');
             starEl.object3D.scale.set(starScale, starScale, starScale);
-
-            let starInnerEl = document.createElement('a-entity');
-            starInnerEl.setAttribute('rotation', '45 0 45');
-            starInnerEl.setAttribute('geometry', {primitive: 'stella-octangula'});
-            starInnerEl.setAttribute('material', {color:'#ffce00'});
+            starEl.setAttribute('geometry', {primitive: 'stella-octangula', boundingBoxSize: 3});
+            starEl.setAttribute('material', {color:'#ffce00'});
             if (! /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent)) {   // not Mobile Safari
-                starInnerEl.setAttribute('glow', {c: '0.2', color: '#feca05', scale:'3.5'});
+                starEl.setAttribute('glow', {c: '0.2', color: '#feca05', scale:'3.5'});
             }
-
-            starEl.appendChild(starInnerEl);
             sceneEl.appendChild(starEl);
         }
 
