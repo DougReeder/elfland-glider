@@ -11,6 +11,8 @@ Gosper curve implementation by Jos Dirksen in "Learn Three.js"
 
 Biplanar texture mapping by Inigo Quilez - https://iquilezles.org/articles/biplanar/
 
+requestIdleCallback shim Copyright 2015 Google Inc.
+
 ## Models
 
 Stabbur (https://sketchfab.com/models/d13301cc019345589af8a415feebc985)
