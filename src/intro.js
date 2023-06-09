@@ -8,10 +8,13 @@ import '../assets/intro.css'
 console.log("previousWorld:", sessionStorage.getItem('previousWorld'));
 if (! sessionStorage.getItem('previousWorld') && !window.hasOwnProperty('jasmine')) {
     document.addEventListener("DOMContentLoaded", function (details) {
+      const world = /([^/]+\/)[^/]*$/.exec(location.pathname)?.[1] || '';
+      const cannonicalURL = new URL(world, 'https://dougreeder.github.io/elfland-glider/');
+
         let nativeXrHtml = '';
         if (!window.hasNativeWebXRImplementation && !window.hasNativeWebVRImplementation) {
             nativeXrHtml = `<div style="margin-top: 1em;">
-This browser lacks both <a href="https://caniuse.com/#search=webxr">native WebXR</a> and <a href="https://webvr.info/">native WebVR</a>, so don't complain about performance. </div>`;
+This browser lacks both <a rel="noopener" href="https://caniuse.com/#search=webxr">native WebXR</a> and <a rel="noopener" href="https://webvr.info/">native WebVR</a>, so don't complain about performance. </div>`;
         }
 
         let rotateHtml = '';
@@ -56,13 +59,15 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
     <tr><td colspan="2"><b>Tilt</b> your device up to climb (&amp; <b>slow down</b>)</td></tr>
     <tr><td colspan="2"><b>Tilt</b> your device down to dive (&amp; <b>speed up</b>)</td></tr>
     <tr><td colspan="2"><b>Tap</b> the screen to launch</td></tr>
+    <tr><td colspan="2" class="ruleAbove"><a rel="noopener" href="https://www.oculus.com/open_url/?url=${encodeURIComponent(cannonicalURL)}">Send this page</a> to your Quest headset</td></tr>
 </table>
 `;
         } else if (!AFRAME.utils.device.checkHeadsetConnected() && isDesktop()) {
             closeBtnHtml = `<div class="closeBtnRed"></div>`;
             controlsHtml = `
 <table style="width:100%">
-    <tr><td colspan="2">Elfland Glider is designed for VR or mobile, but if you want to try it here:</td></tr>
+    <tr><td colspan="2"><a rel="noopener" href="https://www.oculus.com/open_url/?url=${encodeURIComponent(cannonicalURL)}">Send this page</a> to your Quest headset</td></tr>
+    <tr><td colspan="2" class="ruleAbove">Elfland Glider is designed for VR or mobile, but if you want to try it here:</td></tr>
     <tr><td>A or left-arrow</td><td>turn glider left</td></tr>
     <tr><td>D or right-arrow</td><td>turn glider right</td></tr>
     <tr><td>W or up-arrow</td><td>climb (&amp; <b>slow down</b>)</td></tr>
@@ -96,9 +101,9 @@ ${closeBtnHtml}
       <div style="font-family:serif; font-size: 0.75rem">
         <div>${mt}</div>
         <div><a href="../CREDITS.md">Credits</a></div>
-        <div>Uses <a href="https://caniuse.com/#search=webxr">WebXR</a> or <a href="https://webvr.info/">WebVR</a>, and the <a href="https://aframe.io"><nobr>A-Frame</nobr></a> framework.</div>
+        <div>Uses <a rel="noopener" href="https://caniuse.com/#search=webxr">WebXR</a> or <a href="https://webvr.info/">WebVR</a>, and the <a href="https://aframe.io"><nobr>A-Frame</nobr></a> framework.</div>
         <div>Copyright © 2017-2023 by P. Douglas Reeder; Licensed under the GNU GPL-3.0</div>
-        <div><a href="https://github.com/DougReeder/elfland-glider">View source code and contribute</a> </div>
+        <div><a rel="noopener" href="https://github.com/DougReeder/elfland-glider">View source code and contribute</a> </div>
       </div>
     </div>
 `;
