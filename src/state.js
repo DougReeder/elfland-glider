@@ -359,6 +359,7 @@ AFRAME.registerState({
             console.log("controlSubmode:", state.controlSubmode);
         },
         controlStickToNeutral: function (state) {
+            state.controlSubmode = 'NONE';
             if (state.controlStickEl) {
                 const cameraPos = state.cameraEl.getAttribute("position");
                 state.controlNeutralHeight = cameraPos.y - HUMAN_EYE_ELBOW_DISTANCE;
