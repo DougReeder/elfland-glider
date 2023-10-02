@@ -263,6 +263,7 @@ AFRAME.registerState({
             this.rightUpHandler = this.handHandler.bind(this, 'RIGHT', 'UP', state);
 
             state.controlStickEl = document.getElementById('controlStick');
+            this.controlStickToNeutral(state);
         },
 
         controllerconnected: function (state, evt) {   // evt is name and component; this is state obj
@@ -463,7 +464,7 @@ AFRAME.registerState({
         },
 
         iterate: function (state, action) {
-            // A pause in the action is better than flying blind
+            // If frames are dropped, ensures the user sees a pause in the action rather than flying blind.
             action.timeDelta = Math.min(action.timeDelta, 100);
             state.time += action.timeDelta * state.difficulty;
 
@@ -485,22 +486,26 @@ AFRAME.registerState({
                     const rightHandPos = state.rightHandEl?.getAttribute("position");
                     switch (state.controlSubmode) {
                         case "LEFT":
-                            quaternion = state.leftHandEl.object3D.quaternion;
+                            state.controlStickEl.object3D?.quaternion?.copy(state.leftHandEl.object3D.quaternion);
+                            state.controlStickEl.object3D.rotateX(-Math.PI/2);
+                            quaternion = state.controlStickEl.object3D?.quaternion;
 
                             state.controlStickEl.setAttribute('position', leftHandPos);
                            break;
                         case "RIGHT":
-                            quaternion = state.rightHandEl.object3D.quaternion;
+                            state.controlStickEl.object3D?.quaternion?.copy(state.rightHandEl.object3D.quaternion);
+                            state.controlStickEl.object3D.rotateX(-Math.PI/2);
+                            quaternion = state.controlStickEl.object3D?.quaternion;
 
                             state.controlStickEl.setAttribute('position', rightHandPos);
                             break;
                         case "NONE":
                             this.quaternion.identity();
                             quaternion = this.quaternion;
+                            state.controlStickEl.object3D?.quaternion?.copy(quaternion)
                             // TODO: slow decay to neutral?
                             break;
                     }
-                    state.controlStickEl.object3D?.quaternion?.copy(quaternion)
 
                     this.euler.setFromQuaternion(quaternion, 'XZY');
                     state.xSetting = this.euler.x * 180 / Math.PI;
