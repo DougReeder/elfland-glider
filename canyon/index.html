@@ -17,19 +17,18 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js"></script>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
-    <script src="https://unpkg.com/aframe-state-component@^4.7.0/dist/aframe-state-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-dial@^1.2.1/dist/dial.js"></script>
+    <script src="https://unpkg.com/aframe-state-component@^7.1.1/dist/aframe-state-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-dial@^1.2.2/dist/dial.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.3/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-dust-component@^1.1.0/aframe-dust-component.js"></script>
-    <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/DougReeder/aframe-glow@6bebc86ee57f2ccc57637db442f1a36d31f5f61d/dist/aframe-glow-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.loaders.min.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component@^3.2.2/dist/aframe-aabb-collider-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/DougReeder/aframe-glow@modernize/dist/aframe-glow-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.0/dist/aframe-extras.loaders.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <!--<script src="https://unpkg.com/aframe-fps-counter-component/dist/aframe-fps-counter-component.min.js"></script>-->
     <script src="../dist/canyon.js" type="application/javascript"></script>
-    <meta name="monetization" content="$ilp.uphold.com/jU9WUDJZNgQi">
 </head>
 <body>
 <a-scene canyon background="color:#398bc5">
@@ -59,7 +58,7 @@
               material="shader:canyon; src:#rock" class="landscape"></a-entity>
 
 
-    <a-dust num-points="512" dispersion="33" color="#101010"></a-dust>
+    <a-dust num-points="512" dispersion="50" color="#101010"></a-dust>
 
     <a-entity class="powerup" position="2 -185 256" material="visible: false"
               geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5">

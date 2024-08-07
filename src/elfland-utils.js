@@ -1,5 +1,5 @@
 // elfland-utils.js - common functions for Elfland Glider
-// Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2018-2024 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 
 function goFullscreenLandscape() {
@@ -119,20 +119,5 @@ document.addEventListener('visibilitychange', () => {
     }
 }, false);
 
-
-/** Web Monetization */
-if (document.monetization)  {
-    function handleMonetizationStart(evt) {
-        console.log("monetization started:", evt);
-    }
-    document.monetization.addEventListener('monetizationstart', handleMonetizationStart);
-
-    function handleMonetizationStop(evt) {
-        console.log("monetization stopped:", evt);
-    }
-    document.monetization.addEventListener('monetizationstop', handleMonetizationStop);
-} else {
-    console.log("no monetization API");
-}
 
 export {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, placeholderTexture, setEnvironmentalSound, pokeEnvironmentalSound};

@@ -1,13 +1,19 @@
 // yggdrasil.js - the tree between the worlds, for Elfland Glider
-// Copyright © 2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2019–2024 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 import {setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
 import '../assets/stella-octangula.js'
 import '../src/intro.js'
 
+const INITIAL_POSITION = {x: -24, y: 15, z: 60};
+const INITIAL_ROTATION_Y = -22;
+
 AFRAME.registerComponent('yggdrasil', {
     init: function () {
+        this.el.emit('setState', {gliderPositionStart: INITIAL_POSITION, gliderPosition: INITIAL_POSITION,
+            gliderRotationYStart: INITIAL_ROTATION_Y, gliderRotationY: INITIAL_ROTATION_Y});
+
         setEnvironmentalSound('Swell2b-64k.mp3', 0.3);
 
         this.positionSph = new THREE.Spherical(1, Math.PI/2, 0);

@@ -17,21 +17,20 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js"></script>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
-    <script src="https://unpkg.com/aframe-state-component@^4.7.0/dist/aframe-state-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-dial@^1.2.1/dist/dial.js"></script>
+    <script src="https://unpkg.com/aframe-state-component@^7.1.1/dist/aframe-state-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-dial@^1.2.2/dist/dial.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.3/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-dust-component@^1.1.0/aframe-dust-component.js"></script>
-    <script src="https://unpkg.com/aframe-aabb-collider-component@^3.2.0/dist/aframe-aabb-collider-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component@^3.2.2/dist/aframe-aabb-collider-component.min.js"></script>
 
-    <script src="https://unpkg.com/aframe-shader-buildings@^2.0.0/dist/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/DougReeder/aframe-glow@6bebc86ee57f2ccc57637db442f1a36d31f5f61d/dist/aframe-glow-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-shader-buildings@^2.0.1/dist/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/DougReeder/aframe-glow@modernize/dist/aframe-glow-component.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <script src="../dist/city.js">
     </script>
-    <meta name="monetization" content="$ilp.uphold.com/jU9WUDJZNgQi">
 </head>
 <body>
 <a-scene city background="color:#398bc5">
@@ -78,7 +77,7 @@
     <a-entity geometry="primitive:triangle; vertexA:-1700 0 1600; vertexB:-1700 0 -5000; vertexC:-5000 0 1600"
               material="shader:settlement; sunPosition:-1 0.75 1" class="landscape"></a-entity>
 
-    <a-dust num-points="512" dispersion="50" color="gray"></a-dust>
+    <a-dust num-points="512" dispersion="75" color="gray"></a-dust>
 
 
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"

@@ -1,5 +1,5 @@
 // aframe-island-component.js - island terrain for Elfland Glider
-// Copyright © 2018-2019 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2018–2024 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 import ImprovedNoise from "../src/ImprovedNoise.js"
 
@@ -74,7 +74,7 @@ AFRAME.registerComponent('island', {
         texture.wrapT = THREE.ClampToEdgeWrapping;
 
         // Create geometry.
-        var geometry = new THREE.PlaneBufferGeometry(1000, 1000, worldWidth - 1, worldDepth - 1);
+        var geometry = new THREE.PlaneGeometry(1000, 1000, worldWidth - 1, worldDepth - 1);
         geometry.rotateX(-Math.PI / 2);
         var vertices = geometry.attributes.position.array;
         for (var i = 0, j = 0, l = vertices.length; i < l; i++, j += 3) {

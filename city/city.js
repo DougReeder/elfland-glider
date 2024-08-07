@@ -1,5 +1,5 @@
 // city.js - a domed arctic city, for Elfland Glider
-// Copyright © 2019-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2019–2024 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 import {isDesktop, setEnvironmentalSound} from "../src/elfland-utils";
 import '../src/state.js'
@@ -172,10 +172,9 @@ AFRAME.registerComponent('city', {
         if (isDesktop()) {
             // This decoration does not need to be pre-loaded via the asset mgr
             let towerEl = document.createElement('a-gltf-model');
-            towerEl.setAttribute('src', '../assets/tower/source/tower.gltf');
-            towerEl.setAttribute('position', '0 -3 0');
-            towerEl.setAttribute('rotation', '0 -135 0');
-            towerEl.setAttribute('scale', '15 15 15');
+            towerEl.setAttribute('src', './tower_crane.glb');
+            towerEl.setAttribute('position', '44 0 52');
+            towerEl.setAttribute('scale', '2 2 2');
             towerEl.classList.add('landscape');
             sceneEl.appendChild(towerEl);
         }

@@ -17,18 +17,17 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js"></script>
-    <script src="https://aframe.io/releases/1.4.2/aframe.js"></script>
+    <script src="https://aframe.io/releases/1.6.0/aframe.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
-    <script src="https://unpkg.com/aframe-state-component@^4.7.0/dist/aframe-state-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-dial@^1.2.1/dist/dial.js"></script>
+    <script src="https://unpkg.com/aframe-state-component@^7.1.1/dist/aframe-state-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-dial@^1.2.2/dist/dial.js"></script>
     <script src="https://unpkg.com/aframe-simple-sun-sky@^1.2.3/simple-sun-sky.js"></script>
     <script src="https://unpkg.com/aframe-dust-component@^1.1.0/aframe-dust-component.js"></script>
-    <script src="https://unpkg.com/aframe-aabb-collider-component@^2.2.1/dist/aframe-aabb-collider-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/DougReeder/aframe-glow@6bebc86ee57f2ccc57637db442f1a36d31f5f61d/dist/aframe-glow-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-aabb-collider-component@^3.2.2/dist/aframe-aabb-collider-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/DougReeder/aframe-glow@modernize/dist/aframe-glow-component.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Niconne" rel="stylesheet">
     <script src="../dist/yggdrasil.js">
     </script>
-    <meta name="monetization" content="$ilp.uphold.com/jU9WUDJZNgQi">
 </head>
 <body>
 <a-scene yggdrasil background="color:#398bc5">
@@ -50,35 +49,35 @@
             class="landscape"></a-torus-knot>
     <a-image src="#treeFoliage" position="0 888 0" rotation="90 0 0" scale="1212 1200 1"></a-image>
 
-    <a-entity id="archesPortal" position="125 0 0" rotation="0 -90 0" scale="5 5 0"
+    <a-entity id="archesPortal" position="250 0 0" rotation="0 -90 0" scale="5 5 0"
               link="href:../arches; title: Arches; image:../arches/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="canyonPortal" position="88 0 -88" rotation="0 -45 0" scale="5 5 0"
+    <a-entity id="canyonPortal" position="176 0 -176" rotation="0 -45 0" scale="5 5 0"
               link="href:../canyon; title: Canyon; image:../canyon/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="tutorialPortal" position="0 0 -125" rotation="0 0 0" scale="5 5 0"
+    <a-entity id="tutorialPortal" position="0 0 -250" rotation="0 0 0" scale="5 5 0"
               link="href:../tutorial/; title: Tutorial (unfinished); image:../tutorial/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="islandPortal" position="-88 0 -88" rotation="0 45 0" scale="5 5 0"
+    <a-entity id="islandPortal" position="-176 0 -176" rotation="0 45 0" scale="5 5 0"
               link="href:../island; title: Island; image:../island/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="cityPortal" position="-125 0 0" rotation="0 90 0" scale="5 5 0"
+    <a-entity id="cityPortal" position="-250 0 0" rotation="0 90 0" scale="5 5 0"
               link="href:../city; title: City; image:../city/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
 
-    <a-entity id="barrierMagePortal" position="-88 -20 88" rotation="0 135 0" scale="5 5 0"
+    <a-entity id="barrierMagePortal" position="-176 -30 176" rotation="0 135 0" scale="5 5 0"
               link="href:https://dougreeder.github.io/barrier-mage/; title: Barrier Mage; image:https://dougreeder.github.io/barrier-mage/assets/barrier-mage-equirect.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-<!--    <a-entity id="ginnungagapPortal" position="-88 -20 88" rotation="0 135 0" scale="5 5 0"-->
+<!--    <a-entity id="ginnungagapPortal" position="-176 -30 176" rotation="0 135 0" scale="5 5 0"-->
 <!--              link="href:../ginnungagap; title: Ginnungagap; image:../ginnungagap/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>-->
 
-    <a-entity id="atollPortal" position="0 -20 125" rotation="0 180 0" scale="5 5 0"
+    <a-entity id="atollPortal" position="0 -30 250" rotation="0 180 0" scale="5 5 0"
               link="href:https://dougreeder.github.io/aframe-atoll-terrain/example.html; title: Atoll; image:../assets/screenshot-aframe-atoll-terrain.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="charringtonPortal" position="88 -20 88" rotation="0 -135 0" scale="5 5 0"
+    <a-entity id="charringtonPortal" position="176 -30 176" rotation="0 -135 0" scale="5 5 0"
               link="href:https://dougreeder.github.io/webvr-tour/; title: Charrington Park; image:https://dougreeder.github.io/webvr-tour/CharringtonPark/CharringtonPark-CooperRoad.jpg; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <!--<a-entity id="argonPortal" position="0 -20 125" rotation="0 -180 0" scale="5 5 0"-->
+    <!--<a-entity id="argonPortal" position="0 -30 250" rotation="0 -180 0" scale="5 5 0"-->
               <!--link="href:http://ansible.uk/misc/eyeargon.html; title: Eye of Argon; on:hitstart; visualAspectEnabled:true"></a-entity>-->
 
     <a-entity class="powerup" position="0 -800 0" material="visible: false"
@@ -148,8 +147,6 @@
                   material="color:#ffce00" glow="c: 0.2; color: #feca05; scale:3.5"></a-entity>
     </a-entity>
 
-    <a-text id="prelaunchHelp" position="-25 17 25" rotation="0 -45 0" width="12" align="center" font="../assets/mozillavr.fnt" value=""></a-text>
-
     <a-entity id="armature" geometry="primitive: box; width: 2; height: 2; depth: 2" material="visible:false"
               bind__position="gliderPosition" bind__rotation.y="gliderRotationY" armature-tick-state
               aabb-collider="objects:.powerup,.star,[link]" >
@@ -181,6 +178,7 @@
                       material="normalMap:#steelGrip; npot:true; normalTextureRepeat:1 2; normalTextureOffset:107 0; metalness:0.8; roughness:0.4; sphericalEnvMap:#screenshot;"></a-entity>
         </a-entity>
         <a-entity button-controls></a-entity>
+        <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="../assets/mozillavr.fnt" value=""></a-text>
     </a-entity>
 </a-scene>
 <!-- Copyright © 2017-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0 -->

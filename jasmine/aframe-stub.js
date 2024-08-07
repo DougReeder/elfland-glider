@@ -1,5 +1,5 @@
 // aframe-stub.js - allows testing app code that uses A-Frame
-// Copyright © 2017-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017–2024 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 
 var elementParam = {};   // keyed by name
 
@@ -80,7 +80,7 @@ var THREE = {
     PlaneGeometry: function () {
         this.attributes = {position: {array: []}};
     },
-    PlaneBufferGeometry: function () {
+    BufferGeometry: function () {
         this.attributes = {position: {array: []}};
     },
     MeshBasicMaterial: function () {},
@@ -88,7 +88,7 @@ var THREE = {
 };
 THREE.Vector3.prototype.normalize = function () {};
 THREE.Vector3.prototype.dot = function (other) {return this;};
-THREE.PlaneBufferGeometry.prototype.rotateX = function () {};
+THREE.PlaneGeometry.prototype.rotateX = function () {};
 
 class MockElement {
     constructor(attributes) {
