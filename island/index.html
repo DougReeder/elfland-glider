@@ -85,12 +85,14 @@
         </a-entity>
         <a-entity id="body">
             <a-entity camera="far:3550; near:0.05" look-controls></a-entity>
-            <a-entity id="leftHand" hand-controls="hand: left; handModelStyle: lowPoly; color:#666"></a-entity>
-            <a-entity id="rightHand" hand-controls="hand: right; handModelStyle: lowPoly; color:#666"
+            <a-entity id="leftController" hand-controls="hand: left; handModelStyle: highPoly; color:#666"></a-entity>
+            <a-entity id="rightController" hand-controls="hand: right; handModelStyle: highPoly; color:#666"
                       gearvr-controls oculus-go-controls daydream-controls></a-entity>
             <a-entity id="controlStick" position="0 0.95 -0.4" rotation="0 0 90" visible="false"
                       geometry="primitive:cylinder; height:0.4; radius: 0.012; segmentsRadial:36;"
                       material="normalMap:#steelGrip; npot:true; normalTextureRepeat:1 2; normalTextureOffset:107 0; metalness:0.8; roughness:0.4; sphericalEnvMap:#screenshot;"></a-entity>
+            <a-entity id="leftHand" hand-tracking-controls="hand: left; modelColor: gray"></a-entity>
+            <a-entity id="rightHand" hand-tracking-controls="hand: right; modelColor: gray"></a-entity>
         </a-entity>
         <a-entity button-controls></a-entity>
         <a-text id="prelaunchHelp" position="0 0 -1" rotation="0 0 0" width="2" align="center" font="../assets/mozillavr.fnt" value="" visible="true"></a-text>

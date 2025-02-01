@@ -9,6 +9,8 @@ describe("state", function () {
         state = {
             gliderEl: new MockElement({rotation: {x: 0, y: 0, z: 0}}),
             cameraEl: new MockElement({rotation: {x: 0, y: 0, z: 0}}),
+            leftControllerEl: null,
+            rightControllerEl: null,
             leftHandEl: null,
             rightHandEl: null,
             controllerConnections: {},

@@ -43,7 +43,7 @@ Please rotate your device to landscape mode. &#x21B6;</div>`;
     <tr><td colspan="2"><b>Turn</b> your head left or right to look around without turning glider</td></tr>
     <tr><td colspan="2"><b>Tilt</b> your head up to climb (&amp; <b>slow down</b>)</td></tr>
     <tr><td colspan="2"><b>Tilt</b> your head down to dive (&amp; <b>speed up</b>)</td></tr>
-    <tr><td colspan="2"><b>Press</b> trigger, button or touchpad to launch</td></tr>
+    <tr><td colspan="2"><b>Pinch</b> fingers, or <b>Press</b> trigger, button or touchpad to launch</td></tr>
 </table>
 `;
         if (AFRAME.utils.device.isMobile()) {

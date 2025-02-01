@@ -1,5 +1,5 @@
 // state.js - state model for Elfland Glider
-// Copyright © 2017-2023 P. Douglas Reeder; Licensed under the GNU GPL-3.0
+// Copyright © 2017-2025 P. Douglas Reeder; Licensed under the GNU GPL-3.0
 //
 
 import './shim/requestIdleCallback'
@@ -18,6 +18,8 @@ AFRAME.registerState({
         armatureEl: null,
         gliderEl: null,
         cameraEl: null,
+        leftControllerEl: null,
+        rightControllerEl: null,
         leftHandEl: null,
         rightHandEl: null,
         controllerConnections: {},
@@ -28,7 +30,7 @@ AFRAME.registerState({
         controlStickEl: null,
         controlNeutralHeight: 0.95,
         controlMode: 'HEAD',   // or 'HANDS'
-        controlSubmode: 'NONE',   // or 'LEFT' or 'RIGHT'
+        controlSubmode: 'NONE',   // or 'LEFT_CONTROLLER' or 'RIGHT_CONTROLLER' or 'LEFT_HAND' or 'RIGHT_HAND'
         time: 0,
         difficulty: DIFFICULTY_MAGIC_WINDOW,
         gliderPosition: {x:-30, y:15, z:30},
@@ -50,7 +52,8 @@ AFRAME.registerState({
         debug: false   // no way to enable this yet
     },
 
-    nonBindedStateKeys: ['armatureEl', 'gliderEl', 'cameraEl', 'leftHandEl', 'rightHandEl',
+    nonBindedStateKeys: ['armatureEl', 'gliderEl', 'cameraEl',
+        'leftControllerEl', 'rightControllerEl', 'leftHandEl', 'rightHandEl',
         'controllerConnections', 'isAnyPressedLeft', 'xSetting', 'zSetting', 'controlStickEl',
         'controlNeutralHeight', 'controlMode', 'controlSubmode',
         'gliderPositionStart', 'gliderRotationYStart'],
@@ -250,17 +253,25 @@ AFRAME.registerState({
 
             // two-controller steering
 
-            state.leftHandEl = document.getElementById("leftHand");
-            state.rightHandEl = document.getElementById("rightHand");
+            state.leftControllerEl = document.getElementById("leftController");
+            state.rightControllerEl = document.getElementById("rightController");
             if (isDesktop()) {
-                state.leftHandEl.setAttribute('hand-controls', 'handModelStyle', 'highPoly');
-                state.rightHandEl.setAttribute('hand-controls', 'handModelStyle', 'highPoly');
+                state.leftControllerEl.setAttribute('hand-controls', 'handModelStyle', 'highPoly');
+                state.rightControllerEl.setAttribute('hand-controls', 'handModelStyle', 'highPoly');
             }
 
-            this.leftDownHandler = this.handHandler.bind(this, 'LEFT', 'DOWN', state);
-            this.leftUpHandler = this.handHandler.bind(this, 'LEFT', 'UP', state);
-            this.rightDownHandler = this.handHandler.bind(this, 'RIGHT', 'DOWN', state);
-            this.rightUpHandler = this.handHandler.bind(this, 'RIGHT', 'UP', state);
+            this.leftDownHandler = this.controllerHandler.bind(this, 'LEFT', 'DOWN', state);
+            this.leftUpHandler = this.controllerHandler.bind(this, 'LEFT', 'UP', state);
+            this.rightDownHandler = this.controllerHandler.bind(this, 'RIGHT', 'DOWN', state);
+            this.rightUpHandler = this.controllerHandler.bind(this, 'RIGHT', 'UP', state);
+
+            state.leftHandEl = document.getElementById('leftHand');
+            state.RightHandEl = document.getElementById('rightHand');
+
+            this.leftPinchStartedHandler = this.pinchHandler.bind(this, 'LEFT', 'STARTED', state);
+            this.leftPinchEndedHandler = this.pinchHandler.bind(this, 'LEFT', 'ENDED', state);
+            this.rightPinchStartedHandler = this.pinchHandler.bind(this, 'RIGHT', 'STARTED', state);
+            this.rightPinchEndedHandler = this.pinchHandler.bind(this, 'RIGHT', 'ENDED', state);
 
             state.controlStickEl = document.getElementById('controlStick');
             this.controlStickToNeutral(state);
@@ -276,7 +287,7 @@ AFRAME.registerState({
         },
         adjustControlMode: function (state) {
             const oldControlMode =  state.controlMode;
-            if (state.controllerConnections.leftHand || state.controllerConnections.rightHand) {
+            if (state.controllerConnections.leftController || state.controllerConnections.rightController) {
                 state.controlMode = 'HANDS';
             } else {
                 state.controlMode = 'HEAD';
@@ -284,26 +295,26 @@ AFRAME.registerState({
             if (state.controlMode !== oldControlMode) {
                 console.log("changed control mode from", oldControlMode, "to", state.controlMode);
                 if (state.controlMode === 'HANDS') {
-                    state.leftHandEl?.addEventListener('buttondown', this.leftDownHandler);
-                    state.leftHandEl?.addEventListener('buttonup', this.leftUpHandler);
-                    state.rightHandEl?.addEventListener('buttondown', this.rightDownHandler);
-                    state.rightHandEl?.addEventListener('buttonup', this.rightUpHandler);
+                    state.leftControllerEl?.addEventListener('buttondown', this.leftDownHandler);
+                    state.leftControllerEl?.addEventListener('buttonup', this.leftUpHandler);
+                    state.rightControllerEl?.addEventListener('buttondown', this.rightDownHandler);
+                    state.rightControllerEl?.addEventListener('buttonup', this.rightUpHandler);
 
                     this.controlStickToNeutral(state);
                     state.controlStickEl.object3D.visible = true;
                 } else if (state.controlMode === 'HEAD') {
-                    state.leftHandEl?.removeEventListener('buttondown', this.leftDownHandler);
-                    state.leftHandEl?.removeEventListener('buttonup', this.leftUpHandler);
-                    state.rightHandEl?.removeEventListener('buttondown', this.rightDownHandler);
-                    state.rightHandEl?.removeEventListener('buttonup', this.rightUpHandler);
+                    state.leftControllerEl?.removeEventListener('buttondown', this.leftDownHandler);
+                    state.leftControllerEl?.removeEventListener('buttonup', this.leftUpHandler);
+                    state.rightControllerEl?.removeEventListener('buttondown', this.rightDownHandler);
+                    state.rightControllerEl?.removeEventListener('buttonup', this.rightUpHandler);
 
                     state.controlStickEl.object3D.visible = false;
                 }
             }
         },
-        handHandler: function handHandler(handedness, upDown, state, evt) {
+        controllerHandler: function handHandler(handedness, upDown, state, evt) {
             const wasAnyPressedLeft = state.isAnyPressedLeft;
-            const trackedControlsLeft = state.leftHandEl?.components['tracked-controls'];
+            const trackedControlsLeft = state.leftControllerEl?.components['tracked-controls'];
             const buttonsLeft = trackedControlsLeft &&
                     trackedControlsLeft.controller &&
                     trackedControlsLeft.controller.gamepad &&
@@ -320,7 +331,7 @@ AFRAME.registerState({
             }
 
             const wasAnyPressedRight = state.isAnyPressedRight;
-            const trackedControlsRight = state.rightHandEl?.components['tracked-controls'];
+            const trackedControlsRight = state.rightControllerEl?.components['tracked-controls'];
             const buttonsRight = trackedControlsRight &&
                     trackedControlsRight.controller &&
                     trackedControlsRight.controller.gamepad &&
@@ -338,25 +349,29 @@ AFRAME.registerState({
 
             if (state.isAnyPressedLeft && ! wasAnyPressedLeft) {
                 switch (state.controlSubmode) {
-                    case 'LEFT':
+                    case 'LEFT_CONTROLLER':
                         state.controlSubmode = 'NONE';
                         break;
-                    case 'RIGHT':
+                    case 'RIGHT_CONTROLLER':
                     case 'NONE':
-                        state.controlSubmode = 'LEFT';
+                        state.controlSubmode = 'LEFT_CONTROLLER';
                         break;
                 }
             } else if (state.isAnyPressedRight && ! wasAnyPressedRight) {
                 switch (state.controlSubmode) {
-                    case 'RIGHT':
+                    case 'RIGHT_CONTROLLER':
                         state.controlSubmode = 'NONE';
                         break;
-                    case 'LEFT':
+                    case 'LEFT_CONTROLLER':
                     case 'NONE':
-                        state.controlSubmode = 'RIGHT';
+                        state.controlSubmode = 'RIGHT_CONTROLLER';
                         break;
                 }
             }
+            console.log("controlSubmode:", state.controlSubmode);
+        },
+        pinchHandler: function(handedness, beginEnd, state, evt) {
+
             console.log("controlSubmode:", state.controlSubmode);
         },
         controlStickToNeutral: function (state) {
@@ -482,22 +497,22 @@ AFRAME.registerState({
                     break;
                 case "HANDS":
                     let quaternion;
-                    const leftHandPos = state.leftHandEl?.getAttribute("position");
-                    const rightHandPos = state.rightHandEl?.getAttribute("position");
+                    const leftControllerPos = state.leftControllerEl?.getAttribute("position");
+                    const rightControllerPos = state.rightControllerEl?.getAttribute("position");
                     switch (state.controlSubmode) {
-                        case "LEFT":
-                            state.controlStickEl.object3D?.quaternion?.copy(state.leftHandEl.object3D.quaternion);
+                        case "LEFT_CONTROLLER":
+                            state.controlStickEl.object3D?.quaternion?.copy(state.leftControllerEl.object3D.quaternion);
                             state.controlStickEl.object3D.rotateX(-Math.PI/2);
                             quaternion = state.controlStickEl.object3D?.quaternion;
 
-                            state.controlStickEl.setAttribute('position', leftHandPos);
+                            state.controlStickEl.setAttribute('position', leftControllerPos);
                            break;
-                        case "RIGHT":
-                            state.controlStickEl.object3D?.quaternion?.copy(state.rightHandEl.object3D.quaternion);
+                        case "RIGHT_CONTROLLER":
+                            state.controlStickEl.object3D?.quaternion?.copy(state.rightControllerEl.object3D.quaternion);
                             state.controlStickEl.object3D.rotateX(-Math.PI/2);
                             quaternion = state.controlStickEl.object3D?.quaternion;
 
-                            state.controlStickEl.setAttribute('position', rightHandPos);
+                            state.controlStickEl.setAttribute('position', rightControllerPos);
                             break;
                         case "NONE":
                             this.quaternion.identity();
