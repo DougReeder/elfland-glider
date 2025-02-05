@@ -15,7 +15,7 @@ describe("state", function () {
             rightHandEl: null,
             controllerConnections: {},
             controlStickEl: null,
-            controlNeutralHeight: 0.95,
+            controlNeutralHeight: 1.15,
             controlMode: 'HEAD',
             controlSubmode: 'NONE',
             time: 5000,

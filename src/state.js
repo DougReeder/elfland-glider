@@ -13,6 +13,8 @@ const DIFFICULTY_KEYBOARD = 0.5;
 const POWERUP_BOOST = 16;
 const BAD_CRASH_SPEED = 30;
 const MAX_STICK_DISTANCE_SQ = 0.30 * 0.30;   // m^2
+const MAX_METER_PER_SEC = 0.5;
+const MAX_RAD_PER_SEC = 0.05 * 2 * Math.PI;
 
 AFRAME.registerState({
     initialState: {
@@ -29,7 +31,7 @@ AFRAME.registerState({
         xSetting: 0,
         zSetting: 0,
         controlStickEl: null,
-        controlNeutralHeight: 0.95,
+        controlNeutralHeight: 1.15,
         controlMode: 'HEAD',   // or 'HANDS'
         controlSubmode: 'NONE',   // or 'LEFT_CONTROLLER', 'RIGHT_CONTROLLER', 'LEFT_HAND' or 'RIGHT_HAND'
         time: 0,
@@ -303,7 +305,7 @@ AFRAME.registerState({
                     state.leftHandEl?.addEventListener('pinchstarted', this.leftPinchStartedHandler);
                     state.rightHandEl?.addEventListener('pinchstarted', this.rightPinchStartedHandler);
 
-                    this.controlStickToNeutral(state);
+                    state.controlSubmode = 'NONE';
                     state.controlStickEl.object3D.visible = true;
                 } else if (state.controlMode === 'HEAD') {
                     state.leftControllerEl?.removeEventListener('buttondown', this.leftDownHandler);
@@ -388,15 +390,20 @@ AFRAME.registerState({
                 }   // TODO: else play sad sound?
             } else {
                 state.controlMode = 'HANDS';
-                this.controlStickToNeutral(state);
+                state.controlSubmode = 'NONE';
             }
             console.info(`${evt.type} ${inputSource} controlSubmode is now`, state.controlSubmode);
         },
+
         controlStickToNeutral: function (state) {
             state.controlSubmode = 'NONE';
+            if (state.cameraEl) {
+                const cameraPos = state.cameraEl.object3D?.position;
+                if (cameraPos?.y > 0.50) {   // sanity check, camera might be at 0,0,0
+                    state.controlNeutralHeight = cameraPos.y - HUMAN_EYE_ELBOW_DISTANCE;
+                }
+            }
             if (state.controlStickEl) {
-                const cameraPos = state.cameraEl.getAttribute("position");
-                state.controlNeutralHeight = cameraPos.y - HUMAN_EYE_ELBOW_DISTANCE;
                 state.controlStickEl.setAttribute('position', {x: 0, y: state.controlNeutralHeight, z: -0.4});
                 state.controlStickEl.object3D.quaternion.set(0, 0, 0, 1);
                 state.xSetting = 0;
@@ -558,10 +565,14 @@ AFRAME.registerState({
                             }
                             break;
                         case "NONE":
+                            state.controlStickEl?.object3D?.position?.lerp?.(
+                              {x: 0, y: state.controlNeutralHeight, z: -0.4},
+                              MAX_METER_PER_SEC * action.timeDelta / 1000);
+
                             this.quaternion.identity();
-                            quaternion = this.quaternion;
-                            state.controlStickEl.object3D?.quaternion?.copy(quaternion)
-                            // TODO: slow decay to neutral?
+                            state.controlStickEl?.object3D?.quaternion?.rotateTowards(
+                                this.quaternion, MAX_RAD_PER_SEC * action.timeDelta / 1000);
+                            quaternion = state.controlStickEl?.object3D?.quaternion;
                             break;
                         default:
                             console.error(`unsupported controlSubmode:`, controlSubmode);
