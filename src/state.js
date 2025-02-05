@@ -6,12 +6,13 @@ import './shim/requestIdleCallback'
 import {goFullscreenLandscape, isDesktop, isMagicWindow, calcPosChange, pokeEnvironmentalSound} from './elfland-utils'
 
 const GRAVITY = 9.807;   // m/s^2
-const HUMAN_EYE_ELBOW_DISTANCE = 0.56;   // m
+const HUMAN_EYE_ELBOW_DISTANCE = 0.45;   // m
 const DIFFICULTY_VR = 0.75;
 const DIFFICULTY_MAGIC_WINDOW = 0.6;
 const DIFFICULTY_KEYBOARD = 0.5;
 const POWERUP_BOOST = 16;
 const BAD_CRASH_SPEED = 30;
+const MAX_STICK_DISTANCE_SQ = 0.30 * 0.30;   // m^2
 
 AFRAME.registerState({
     initialState: {
@@ -30,7 +31,7 @@ AFRAME.registerState({
         controlStickEl: null,
         controlNeutralHeight: 0.95,
         controlMode: 'HEAD',   // or 'HANDS'
-        controlSubmode: 'NONE',   // or 'LEFT_CONTROLLER' or 'RIGHT_CONTROLLER' or 'LEFT_HAND' or 'RIGHT_HAND'
+        controlSubmode: 'NONE',   // or 'LEFT_CONTROLLER', 'RIGHT_CONTROLLER', 'LEFT_HAND' or 'RIGHT_HAND'
         time: 0,
         difficulty: DIFFICULTY_MAGIC_WINDOW,
         gliderPosition: {x:-30, y:15, z:30},
@@ -54,7 +55,8 @@ AFRAME.registerState({
 
     nonBindedStateKeys: ['armatureEl', 'gliderEl', 'cameraEl',
         'leftControllerEl', 'rightControllerEl', 'leftHandEl', 'rightHandEl',
-        'controllerConnections', 'isAnyPressedLeft', 'xSetting', 'zSetting', 'controlStickEl',
+        'controllerConnections', 'isAnyPressedLeft', 'isAnyPressedRight',
+        'xSetting', 'zSetting', 'controlStickEl',
         'controlNeutralHeight', 'controlMode', 'controlSubmode',
         'gliderPositionStart', 'gliderRotationYStart'],
 
@@ -260,18 +262,16 @@ AFRAME.registerState({
                 state.rightControllerEl.setAttribute('hand-controls', 'handModelStyle', 'highPoly');
             }
 
-            this.leftDownHandler = this.controllerHandler.bind(this, 'LEFT', 'DOWN', state);
-            this.leftUpHandler = this.controllerHandler.bind(this, 'LEFT', 'UP', state);
-            this.rightDownHandler = this.controllerHandler.bind(this, 'RIGHT', 'DOWN', state);
-            this.rightUpHandler = this.controllerHandler.bind(this, 'RIGHT', 'UP', state);
+            this.leftDownHandler = this.buttonHandler.bind(this, 'LEFT', 'DOWN', state);
+            this.leftUpHandler = this.buttonHandler.bind(this, 'LEFT', 'UP', state);
+            this.rightDownHandler = this.buttonHandler.bind(this, 'RIGHT', 'DOWN', state);
+            this.rightUpHandler = this.buttonHandler.bind(this, 'RIGHT', 'UP', state);
 
             state.leftHandEl = document.getElementById('leftHand');
-            state.RightHandEl = document.getElementById('rightHand');
+            state.rightHandEl = document.getElementById('rightHand');
 
-            this.leftPinchStartedHandler = this.pinchHandler.bind(this, 'LEFT', 'STARTED', state);
-            this.leftPinchEndedHandler = this.pinchHandler.bind(this, 'LEFT', 'ENDED', state);
-            this.rightPinchStartedHandler = this.pinchHandler.bind(this, 'RIGHT', 'STARTED', state);
-            this.rightPinchEndedHandler = this.pinchHandler.bind(this, 'RIGHT', 'ENDED', state);
+            this.leftPinchStartedHandler = this.pinchStarted.bind(this, 'LEFT_HAND', state);
+            this.rightPinchStartedHandler = this.pinchStarted.bind(this, 'RIGHT_HAND', state);
 
             state.controlStickEl = document.getElementById('controlStick');
             this.controlStickToNeutral(state);
@@ -287,7 +287,8 @@ AFRAME.registerState({
         },
         adjustControlMode: function (state) {
             const oldControlMode =  state.controlMode;
-            if (state.controllerConnections.leftController || state.controllerConnections.rightController) {
+            if (state.controllerConnections.leftController || state.controllerConnections.rightController ||
+              state.controllerConnections.leftHand || state.controllerConnections.rightHand) {
                 state.controlMode = 'HANDS';
             } else {
                 state.controlMode = 'HEAD';
@@ -299,6 +300,8 @@ AFRAME.registerState({
                     state.leftControllerEl?.addEventListener('buttonup', this.leftUpHandler);
                     state.rightControllerEl?.addEventListener('buttondown', this.rightDownHandler);
                     state.rightControllerEl?.addEventListener('buttonup', this.rightUpHandler);
+                    state.leftHandEl?.addEventListener('pinchstarted', this.leftPinchStartedHandler);
+                    state.rightHandEl?.addEventListener('pinchstarted', this.rightPinchStartedHandler);
 
                     this.controlStickToNeutral(state);
                     state.controlStickEl.object3D.visible = true;
@@ -307,12 +310,14 @@ AFRAME.registerState({
                     state.leftControllerEl?.removeEventListener('buttonup', this.leftUpHandler);
                     state.rightControllerEl?.removeEventListener('buttondown', this.rightDownHandler);
                     state.rightControllerEl?.removeEventListener('buttonup', this.rightUpHandler);
+                    state.leftHandEl?.removeEventListener('pinchstarted', this.leftPinchStartedHandler);
+                    state.rightHandEl?.removeEventListener('pinchstarted', this.rightPinchStartedHandler);
 
                     state.controlStickEl.object3D.visible = false;
                 }
             }
         },
-        controllerHandler: function handHandler(handedness, upDown, state, evt) {
+        buttonHandler: function handHandler(handedness, upDown, state, evt) {
             const wasAnyPressedLeft = state.isAnyPressedLeft;
             const trackedControlsLeft = state.leftControllerEl?.components['tracked-controls'];
             const buttonsLeft = trackedControlsLeft &&
@@ -353,6 +358,8 @@ AFRAME.registerState({
                         state.controlSubmode = 'NONE';
                         break;
                     case 'RIGHT_CONTROLLER':
+                    case 'LEFT_HAND':
+                    case 'RIGHT_HAND':
                     case 'NONE':
                         state.controlSubmode = 'LEFT_CONTROLLER';
                         break;
@@ -363,16 +370,27 @@ AFRAME.registerState({
                         state.controlSubmode = 'NONE';
                         break;
                     case 'LEFT_CONTROLLER':
+                    case 'LEFT_HAND':
+                    case 'RIGHT_HAND':
                     case 'NONE':
                         state.controlSubmode = 'RIGHT_CONTROLLER';
                         break;
                 }
             }
-            console.log("controlSubmode:", state.controlSubmode);
+            console.log(`controllerHandler ${handedness} ${upDown} controlSubmode:`, state.controlSubmode);
         },
-        pinchHandler: function(handedness, beginEnd, state, evt) {
-
-            console.log("controlSubmode:", state.controlSubmode);
+        pinchStarted: function (inputSource, state, evt) {
+            if (state.controlSubmode !== inputSource) {
+                const stickPosition = state.controlStickEl?.object3D?.position;
+                if (stickPosition?.distanceToSquared?.(evt.detail?.position) <= MAX_STICK_DISTANCE_SQ) {
+                    state.controlMode = 'HANDS';
+                    state.controlSubmode = inputSource;
+                }   // TODO: else play sad sound?
+            } else {
+                state.controlMode = 'HANDS';
+                this.controlStickToNeutral(state);
+            }
+            console.info(`${evt.type} ${inputSource} controlSubmode is now`, state.controlSubmode);
         },
         controlStickToNeutral: function (state) {
             state.controlSubmode = 'NONE';
@@ -497,14 +515,13 @@ AFRAME.registerState({
                     break;
                 case "HANDS":
                     let quaternion;
-                    const leftControllerPos = state.leftControllerEl?.getAttribute("position");
-                    const rightControllerPos = state.rightControllerEl?.getAttribute("position");
                     switch (state.controlSubmode) {
                         case "LEFT_CONTROLLER":
                             state.controlStickEl.object3D?.quaternion?.copy(state.leftControllerEl.object3D.quaternion);
                             state.controlStickEl.object3D.rotateX(-Math.PI/2);
                             quaternion = state.controlStickEl.object3D?.quaternion;
 
+                            const leftControllerPos = state.leftControllerEl?.getAttribute("position");
                             state.controlStickEl.setAttribute('position', leftControllerPos);
                            break;
                         case "RIGHT_CONTROLLER":
@@ -512,7 +529,33 @@ AFRAME.registerState({
                             state.controlStickEl.object3D.rotateX(-Math.PI/2);
                             quaternion = state.controlStickEl.object3D?.quaternion;
 
+                            const rightControllerPos = state.rightControllerEl?.getAttribute("position");
                             state.controlStickEl.setAttribute('position', rightControllerPos);
+                            break;
+                        case "LEFT_HAND":
+                        case "RIGHT_HAND":
+                            let finger, sign;
+                            if ('LEFT_HAND' === state.controlSubmode) {
+                                finger = state.leftHandEl?.object3D.getObjectByName('middle-finger-phalanx-proximal') ||
+                                  state.leftHandEl?.object3D.getObjectByName('index-finger-phalanx-proximal');
+                                sign = -1;
+                            } else {
+                                finger = state.rightHandEl?.object3D.getObjectByName('middle-finger-phalanx-proximal') ||
+                                  state.rightHandEl?.object3D.getObjectByName('index-finger-phalanx-proximal');
+                                sign = 1;
+                            }
+                            if (finger?.quaternion?.isQuaternion && Number.isFinite(finger.quaternion.x)
+                              && Number.isFinite(finger.quaternion.y) && Number.isFinite(finger.quaternion.z)
+                              && Number.isFinite(finger.quaternion.w)) {
+                                state.controlStickEl.object3D?.quaternion?.copy(finger.quaternion);
+                                state.controlStickEl.object3D.rotateZ(sign * Math.PI/2);
+                                quaternion = state.controlStickEl.object3D?.quaternion;
+                            }
+                            if (Number.isFinite(finger?.position?.x) && Number.isFinite(finger?.position?.y)
+                                && Number.isFinite(finger?.position?.z)) {
+                                state.controlStickEl.object3D?.position?.copy(finger.position);
+                                state.controlStickEl.object3D.position.x -= sign * 0.04;
+                            }
                             break;
                         case "NONE":
                             this.quaternion.identity();
@@ -520,6 +563,8 @@ AFRAME.registerState({
                             state.controlStickEl.object3D?.quaternion?.copy(quaternion)
                             // TODO: slow decay to neutral?
                             break;
+                        default:
+                            console.error(`unsupported controlSubmode:`, controlSubmode);
                     }
 
                     this.euler.setFromQuaternion(quaternion, 'XZY');
