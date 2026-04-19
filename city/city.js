@@ -48,8 +48,8 @@ AFRAME.registerComponent('city', {
         buildingEls[0].setAttribute('y-proportion-material', 3.5);
         buildingEls[0].setAttribute('window-width', -0.5);
         buildingEls[0].setAttribute('window-height', 0.0);
-        buildingEls[0].setAttribute('wall-color', '#5A5550');   // dark gray
-        buildingEls[0].setAttribute('wall-src', '#concreteAggregate');
+        buildingEls[0].setAttribute('wall-color', '#4C4C4C');   // medium-dark gray
+        buildingEls[0].setAttribute('wall-src', '#rockBoulderBase');
         buildingEls[0].setAttribute('wall-zoom', 1.5);
         buildingEls[0].setAttribute('window-opacity', '0.9');
 
@@ -62,8 +62,8 @@ AFRAME.registerComponent('city', {
         buildingEls[1].setAttribute('y-proportion-material', 5.5);
         buildingEls[1].setAttribute('window-width', 0.95);
         buildingEls[1].setAttribute('window-height', 0.0);
-        buildingEls[1].setAttribute('wall-color', '#75706D');   // light gray
-        buildingEls[1].setAttribute('wall-src', '#concreteBlocks');
+        buildingEls[1].setAttribute('wall-color', '#555555');   // medium-dark gray
+        buildingEls[1].setAttribute('wall-src', '#gravelWithRubble');
         buildingEls[1].setAttribute('wall-zoom', 2.5);
         buildingEls[1].setAttribute('px', '#vr-ok-px');
         buildingEls[1].setAttribute('nx', '#vr-ok-nx');
@@ -159,7 +159,7 @@ AFRAME.registerComponent('city', {
         portalEl.setAttribute('id', 'nextQuestPortal');
         portalEl.setAttribute('position', this.randomIntersection());
         portalEl.setAttribute('rotation', '0 45 0');
-        portalEl.setAttribute('scale', '5 5 0');
+        portalEl.setAttribute('scale', '5 5 5');
         portalEl.setAttribute('link', 'href:../island/; title:Elfland; image:../island/screenshot.png; on:hitstart; visualAspectEnabled:true');
         sceneEl.appendChild(portalEl);
 

@@ -17,7 +17,7 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.core.min.js"></script>
-    <script src="https://aframe.io/releases/1.6.0/aframe.js"></script>
+    <script src="https://aframe.io/releases/1.7.1/aframe.js"></script>
     <script src="https://unpkg.com/aframe-button-controls@^1.1.0/aframe-button-controls.js"></script>
     <script src="https://unpkg.com/aframe-state-component@^7.1.1/dist/aframe-state-component.min.js"></script>
     <script src="https://unpkg.com/aframe-dial@^1.2.2/dist/dial.js"></script>
@@ -30,7 +30,7 @@
     </script>
 </head>
 <body>
-<a-scene yggdrasil background="color:#398bc5">
+<a-scene yggdrasil background="color:#398bc5" renderer="sortTransparentObjects: true">
     <a-assets>
         <img id="woodTexture" src="../assets/stabbur/textures/Stabbur_diffuse.png">
         <img id="treeFoliage" src="TexturesCom_Trees0096_masked_S.png">
@@ -49,35 +49,35 @@
             class="landscape"></a-torus-knot>
     <a-image src="#treeFoliage" position="0 888 0" rotation="90 0 0" scale="1212 1200 1"></a-image>
 
-    <a-entity id="archesPortal" position="250 0 0" rotation="0 -90 0" scale="5 5 0"
+    <a-entity id="archesPortal" position="250 0 0" rotation="0 -90 0" scale="5 5 5"
               link="href:../arches; title: Arches; image:../arches/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="canyonPortal" position="176 0 -176" rotation="0 -45 0" scale="5 5 0"
+    <a-entity id="canyonPortal" position="176 0 -176" rotation="0 -45 0" scale="5 5 5"
               link="href:../canyon; title: Canyon; image:../canyon/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="tutorialPortal" position="0 0 -250" rotation="0 0 0" scale="5 5 0"
+    <a-entity id="tutorialPortal" position="0 0 -250" rotation="0 0 0" scale="5 5 5"
               link="href:../tutorial/; title: Tutorial (unfinished); image:../tutorial/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="islandPortal" position="-176 0 -176" rotation="0 45 0" scale="5 5 0"
+    <a-entity id="islandPortal" position="-176 0 -176" rotation="0 45 0" scale="5 5 5"
               link="href:../island; title: Island; image:../island/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="cityPortal" position="-250 0 0" rotation="0 90 0" scale="5 5 0"
+    <a-entity id="cityPortal" position="-250 0 0" rotation="0 90 0" scale="5 5 5"
               link="href:../city; title: City; image:../city/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
 
-    <a-entity id="barrierMagePortal" position="-176 -30 176" rotation="0 135 0" scale="5 5 0"
+    <a-entity id="barrierMagePortal" position="-176 -30 176" rotation="0 135 0" scale="5 5 5"
               link="href:https://dougreeder.github.io/barrier-mage/; title: Barrier Mage; image:https://dougreeder.github.io/barrier-mage/assets/barrier-mage-equirect.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-<!--    <a-entity id="ginnungagapPortal" position="-176 -30 176" rotation="0 135 0" scale="5 5 0"-->
+<!--    <a-entity id="ginnungagapPortal" position="-176 -30 176" rotation="0 135 0" scale="5 5 5"-->
 <!--              link="href:../ginnungagap; title: Ginnungagap; image:../ginnungagap/screenshot.png; on:hitstart; visualAspectEnabled:true"></a-entity>-->
 
-    <a-entity id="atollPortal" position="0 -30 250" rotation="0 180 0" scale="5 5 0"
+    <a-entity id="atollPortal" position="0 -30 250" rotation="0 180 0" scale="5 5 5"
               link="href:https://dougreeder.github.io/aframe-atoll-terrain/example.html; title: Atoll; image:../assets/screenshot-aframe-atoll-terrain.png; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <a-entity id="charringtonPortal" position="176 -30 176" rotation="0 -135 0" scale="5 5 0"
+    <a-entity id="charringtonPortal" position="176 -30 176" rotation="0 -135 0" scale="5 5 5"
               link="href:https://dougreeder.github.io/webvr-tour/; title: Charrington Park; image:https://dougreeder.github.io/webvr-tour/CharringtonPark/CharringtonPark-CooperRoad.jpg; on:hitstart; visualAspectEnabled:true"></a-entity>
 
-    <!--<a-entity id="argonPortal" position="0 -30 250" rotation="0 -180 0" scale="5 5 0"-->
+    <!--<a-entity id="argonPortal" position="0 -30 250" rotation="0 -180 0" scale="5 5 5"-->
               <!--link="href:http://ansible.uk/misc/eyeargon.html; title: Eye of Argon; on:hitstart; visualAspectEnabled:true"></a-entity>-->
 
     <a-entity class="powerup" position="0 -800 0" material="visible: false"
@@ -85,7 +85,17 @@
         <a-icosahedron material="color:red" glow="c: 0.2; color: red; scale: 3.5"></a-icosahedron>
     </a-entity>
 
+    <a-entity class="powerup" position="0 -600 0" material="visible: false"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5">
+        <a-icosahedron material="color:red" glow="c: 0.2; color: red; scale: 3.5"></a-icosahedron>
+    </a-entity>
+
     <a-entity class="powerup" position="0 -400 0" material="visible: false"
+              geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5">
+        <a-icosahedron material="color:red" glow="c: 0.2; color: red; scale: 3.5"></a-icosahedron>
+    </a-entity>
+
+    <a-entity class="powerup" position="0 -200 0" material="visible: false"
               geometry="primitive:triangle; vertexA:-1.5 -1.5 -1.5; vertexB:1.5 -1.5 1.5; vertexC:1.5 1.5 -1.5">
         <a-icosahedron material="color:red" glow="c: 0.2; color: red; scale: 3.5"></a-icosahedron>
     </a-entity>
