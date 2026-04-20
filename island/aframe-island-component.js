@@ -78,7 +78,7 @@ AFRAME.registerComponent('island', {
         geometry.rotateX(-Math.PI / 2);
         var vertices = geometry.attributes.position.array;
         for (var i = 0, j = 0, l = vertices.length; i < l; i++, j += 3) {
-            vertices[j + 1] = this.terrainData[i] * 10;
+            vertices[j + 1] = this.terrainData[i];
         }
 
         // Create material.
@@ -96,20 +96,22 @@ function generateHeight(width, height) {
     let data = new Uint8Array(size);
     let perlin = new ImprovedNoise();
     let z = Math.random() * 100;
+    const initialQuality = (width + height) / 2 / 64;
 
     for (let i = 0; i < size; i++) {
         let x = i % width, y = ~~(i / width);
         if (x > 1 && x < width - 2 && y > 1 && y < height - 2) {   // away from the edges
             let d = 0;
             // generates smooth noisy terrain
-            for (let quality = 1; quality <= 25; quality *= 5) {
-                d += Math.abs(perlin.noise(x / quality, y / quality, z) * quality * 1.75);
+            let quality = initialQuality;
+            for (let i = 1; i <= 3; ++i, quality *= 5) {
+                d += Math.abs(perlin.noise(x / quality, y / quality, z) * 17.5 * quality / initialQuality);
             }
             // lowers the whole and flattens the bottom, so it's continuous with a sea or plain
-            if (d < 6) {
+            if (d < 60) {
                 d = 0;
             } else {
-                d -= 6;
+                d -= 60;
             }
             // avoids cliffs at the edge
             d *= Math.min(x*0.5, y*0.5, (width-x)*0.5, (height-y)*0.5, plateauEdge) / plateauEdge;
