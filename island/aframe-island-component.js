@@ -99,7 +99,7 @@ function generateHeight(width, height) {
 
     for (let i = 0; i < size; i++) {
         let x = i % width, y = ~~(i / width);
-        if (x > 0 && x < width - 1 && y > 0 && y < height - 1) {
+        if (x > 1 && x < width - 2 && y > 1 && y < height - 2) {   // away from the edges
             let d = 0;
             // generates smooth noisy terrain
             for (let quality = 1; quality <= 25; quality *= 5) {
@@ -107,9 +107,9 @@ function generateHeight(width, height) {
             }
             // lowers the whole and flattens the bottom, so it's continuous with a sea or plain
             if (d < 6) {
-              d = 0;
+                d = 0;
             } else {
-              d -= 6;
+                d -= 6;
             }
             // avoids cliffs at the edge
             d *= Math.min(x*0.5, y*0.5, (width-x)*0.5, (height-y)*0.5, plateauEdge) / plateauEdge;
@@ -158,13 +158,20 @@ function generateTexture(terrainData, width, height, color, colorShadow, colorSe
             vector3.z = (terrainData[j-width*2] || 0) - (terrainData[j+width*2] || 0);
             vector3.normalize();
             shade = vector3.dot(sun);
-            imageData[i] = (red + shade * redShadow) * (0.5 + terrainData[j] * 0.007) + ~~(Math.random() * 17 - 8);
-            imageData[i+1] = (green + shade * blueShadow) * (0.5 + terrainData[j] * 0.007) + ~~(Math.random() * 17 - 8);
-            imageData[i+2] = (blue + shade * greenShadow) * (0.5 + terrainData[j] * 0.007) + ~~(Math.random() * 17 - 8);
+            const brightnessChange = (Math.random() - 0.5) * 150;
+            imageData[i] = (red + brightnessChange + shade * redShadow) * (0.5 + terrainData[j] * 0.007) + (Math.random() * 51 - 25);
+            imageData[i+1] = (green + brightnessChange + shade * blueShadow) * (0.5 + terrainData[j] * 0.007) + (Math.random() * 51 - 25);
+            imageData[i+2] = (blue + brightnessChange + shade * greenShadow) * (0.5 + terrainData[j] * 0.007) + (Math.random() * 51 - 25);
         } else {
-            imageData[i] = redSea + ~~(Math.random() * 5 - 2);
-            imageData[i+1] = greenSea + ~~(Math.random() * 5 - 2);
-            imageData[i+2] = blueSea + ~~(Math.random() * 5 - 2);
+            if (j % width === 0 || j % width === width - 1 || j < width || j > (height-1) * width) {  // edge
+                imageData[i] = redSea;
+                imageData[i+1] = greenSea;
+                imageData[i+2] = blueSea;
+            } else {
+                imageData[i] = redSea + ~~(Math.random() * 9 - 4);
+                imageData[i + 1] = greenSea + ~~(Math.random() * 9 - 4);
+                imageData[i + 2] = blueSea + ~~(Math.random() * 9 - 4);
+            }
         }
     }
 
