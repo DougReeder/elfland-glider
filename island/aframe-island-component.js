@@ -92,7 +92,8 @@ AFRAME.registerComponent('island', {
 
 function generateHeight(width, height) {
     let size = width * height;
-    let plateauEdge = Math.max(width, height) / 8;
+    const referenceRadius = Math.max(width, height) / 2;
+    const PLATEAU_FACTOR = 2;
     let data = new Uint8Array(size);
     let perlin = new ImprovedNoise();
     let z = Math.random() * 100;
@@ -114,8 +115,14 @@ function generateHeight(width, height) {
                 d -= 60;
             }
             // avoids cliffs at the edge
-            d *= Math.min(x*0.5, y*0.5, (width-x)*0.5, (height-y)*0.5, plateauEdge) / plateauEdge;
-            //
+            const radius = Math.sqrt((x - width/2 - 0.5) * (x - width/2 - 0.5) + (y - height/2 - 0.5) * (y - height/2 - 0.5));
+            const radiusFactor = PLATEAU_FACTOR * 2 * Math.max(1 - radius/referenceRadius, 0);
+            const xLo = PLATEAU_FACTOR * (x-1)/referenceRadius;
+            const xHi = PLATEAU_FACTOR * Math.max((width-1-x)/referenceRadius, 0);
+            const yLo = PLATEAU_FACTOR * (y-1)/referenceRadius;
+            const yHi = PLATEAU_FACTOR * Math.max((height-1-y)/referenceRadius, 0);
+            d *= Math.min(radiusFactor, xLo, xHi, yLo, yHi, 1);
+
             data[i] = d;
         }
     }
